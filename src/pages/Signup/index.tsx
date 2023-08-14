@@ -5,30 +5,37 @@ import EnterMembersInfo from "./EnterMembersInfo";
 import SignUpComplete from "./SignUpComplete";
 
 const Signup = () => {
-  const initailizeState: { type: string } = { type: "terms" };
-  type signupStepName = { type: string };
-  const reducer = (state: signupStepName, action: signupStepName) => {
-    switch (action.type) {
-      case "terms":
-        return <Terms />;
-      default:
-        console.log("navigation error page");
-        return;
+  const signupReducer = (_: string, action: string): string => {
+    if (action === "terms") return "authEmail";
+    if (action === "authEmail") return "addMemberInfo";
+    if (action === "addMemberInfo") return "complete";
+    if (action === "complete") {
+      console.log("todo: block next step");
+      return "";
     }
+    if (action === "") {
+      console.log("todo: navigation error page");
+      return "";
+    }
+    return "";
   };
-  const [signupStep, dispatch] = useReducer(reducer, initailizeState);
+  const [signupStep, dispatch] = useReducer(signupReducer, "terms");
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    dispatch({ type: e.currentTarget.dataset.signupStep });
+    const type = e?.currentTarget.dataset.signupstep
+      ? e.currentTarget.dataset.signupstep
+      : "";
+    dispatch(type);
   };
   return (
     <div>
       <h1>Step</h1>
-      {signupStep === 1 && <Terms />}
-      {signupStep === 2 && <EmailCertification />}
-      {signupStep === 3 && <EnterMembersInfo />}
-      {signupStep === 4 && <SignUpComplete />}
-      <button data-signupStep={signupStep} onClick={handleClick}>
-        다음
+      {signupStep === "terms" && <Terms />}
+      {signupStep === "authEmail" && <EmailCertification />}
+      {signupStep === "addMemberInfo" && <EnterMembersInfo />}
+      {signupStep === "complete" && <SignUpComplete />}
+      <button data-signupstep={signupStep} onClick={handleClick}>
+        다음{signupStep}
       </button>
     </div>
   );
