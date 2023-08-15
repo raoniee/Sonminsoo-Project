@@ -1,9 +1,26 @@
 import { useState, useEffect } from "react";
+type Props = {
+  allChecked: boolean;
+  setAllChecked: (value: boolean) => void;
+};
 
-const Terms = () => {
-  const [checkList, setCheckList] = useState([""]);
+const Terms: React.FC<Props> = ({ allChecked, setAllChecked }) => {
   const [infoAgreement, setInfoAgreement] = useState(false);
   const [pledge, setPledge] = useState(false);
+  const handleAllCheck = () => {
+    if (infoAgreement && pledge) {
+      setAllChecked(true);
+    }
+    if (allChecked) {
+      setAllChecked(false);
+      setInfoAgreement(false);
+      setPledge(false);
+    } else {
+      setAllChecked(true);
+      setInfoAgreement(true);
+      setPledge(true);
+    }
+  };
 
   return (
     <div>
@@ -11,8 +28,9 @@ const Terms = () => {
       <h2>정의로운 손민수 이용을 위해 약관에 동의해주세요</h2>
       <input
         type="checkbox"
-        checked={checkList.length === 2 ? true : false}
-        // onClick={() => setIsAllChecked(!isAllChecked)}
+        defaultChecked={allChecked}
+        checked={infoAgreement && pledge}
+        onClick={handleAllCheck}
       />
       <span>전체동의</span>
       <input

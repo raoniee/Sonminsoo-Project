@@ -42,7 +42,14 @@ const EmailCertification: React.FC<Props> = ({ setemailAuthValidState }) => {
           onChange={(e) => setAuthValid(e.target.value)}
         />
 
-        <button onClick={() => setemailAuthValidState(true)}>인증하기</button>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            return setemailAuthValidState(false);
+          }}
+        >
+          인증하기
+        </button>
         <p>
           이메일 인증번호가 발송되지 않았나요?<span>재발송하기</span>
         </p>
