@@ -1,10 +1,12 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import Terms from "./Terms";
 import EmailCertification from "./EmailCertification";
 import EnterMembersInfo from "./EnterMembersInfo";
 import SignUpComplete from "./SignUpComplete";
 
 const Signup = () => {
+  const [emailAuthValidState, setemailAuthValidState] = useState(false);
+
   const signupReducer = (_: string, action: string): string => {
     if (action === "terms") return "authEmail";
     if (action === "authEmail") return "addMemberInfo";
@@ -34,7 +36,9 @@ const Signup = () => {
     <div>
       <h1>Step</h1>
       {signupStep === "terms" && <Terms />}
-      {signupStep === "authEmail" && <EmailCertification />}
+      {signupStep === "authEmail" && (
+        <EmailCertification setemailAuthValidState={setemailAuthValidState} />
+      )}
       {signupStep === "addMemberInfo" && <EnterMembersInfo />}
       {signupStep === "complete" && <SignUpComplete />}
       <button data-signupstep={signupStep} onClick={handleClick}>
