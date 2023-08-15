@@ -1,9 +1,19 @@
+import { useState } from "react";
+
 const Terms = () => {
+  const [isAllCheck, setIsAllCheck] = useState(false);
+
+  console.log("Check", isAllCheck);
+
   return (
     <div>
       <h1>이용약관 동의</h1>
       <h2>정의로운 손민수 이용을 위해 약관에 동의해주세요</h2>
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        checked={isAllCheck}
+        onClick={() => setIsAllCheck(!isAllCheck)}
+      />
       <span>전체동의</span>
       <input type="checkbox" />
       <span>개인정보 수집 및 이용 동의(필수)</span>&#8250;

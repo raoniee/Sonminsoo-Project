@@ -5,9 +5,16 @@ const EmailCertification = () => {
       <h2>정의로운 손민수 이용을 위해 약관에 동의해주세요</h2>
       <form>
         <label htmlFor="email">이메일을 입력해 주세요.</label>
+        <input type="text" id="email" placeholder="이메일을 입력해 주세요." />
         <label htmlFor="emailCertificaton">
           이메일 인증 번호를 입력해 주세요
         </label>
+        <input
+          type="text"
+          id="emailCertificaton"
+          placeholder="이메일 인증 번호를 입력해 주세요"
+        />
+
         <button
           onClick={() => {
             alert("인증번호를 입력해주세요");
