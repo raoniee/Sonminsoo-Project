@@ -25,6 +25,9 @@ const Signup = () => {
     const type = e?.currentTarget.dataset.signupstep
       ? e.currentTarget.dataset.signupstep
       : "";
+    if (type === "complete") {
+      console.log("todo:nav login page");
+    }
     dispatch(type);
   };
   return (
@@ -35,7 +38,7 @@ const Signup = () => {
       {signupStep === "addMemberInfo" && <EnterMembersInfo />}
       {signupStep === "complete" && <SignUpComplete />}
       <button data-signupstep={signupStep} onClick={handleClick}>
-        다음{signupStep}
+        다음
       </button>
     </div>
   );
