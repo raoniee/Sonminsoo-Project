@@ -28,7 +28,7 @@ type Config = {
 export function register(config?: Config) {
   if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
     // The URL constructor is available in all browsers that support SW.
-    const url = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : ""; //타스 값 추가
+    const url = process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "";
 
     const publicUrl = new URL(url, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
