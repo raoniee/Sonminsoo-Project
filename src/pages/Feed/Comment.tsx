@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import profile from "../../assets/images/svg/profile1.svg";
 import more from "../../assets/images/svg/ic-more-vertical-16.svg";
@@ -23,6 +23,7 @@ const CommentContent = styled.div`
 const ContentWrap = styled.div`
   display: flex;
   margin-bottom: 6px;
+  position: relative;
 `;
 const Nickname = styled.div`
   font-size: 14px;
@@ -46,14 +47,52 @@ const MoreBtn = styled.div`
   width: 16px;
   height: 16px;
   cursor: pointer;
+  position: absolute;
+  right: 0;
 `;
-const Line = styled.div`
-  background-color: #e2e2e2;
+
+const ReplyBtn = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 73px;
+  height: 75px;
+  border: 1px solid #d4dae1;
+  border-radius: 8px;
+  background-color: #fff;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: pointer;
+`;
+
+const Reply = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  border-bottom: 1px solid #d4dae1;
   width: 100%;
-  height: 6px;
-  margin-top: 22px;
+  text-align: center;
+  padding-bottom: 10px;
+`;
+const Delete = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  padding-top: 10px;
 `;
 const Comment = () => {
+  const [isReplyOpen, setIsReplyOpen] = useState<boolean>(false);
+  useEffect(() => {
+    const closeReply = () => setIsReplyOpen(false);
+    document.addEventListener("click", closeReply);
+
+    return () => {
+      document.removeEventListener("click", closeReply);
+    };
+  }, []);
+
   return (
     <>
       <CommentContainer>
@@ -62,15 +101,25 @@ const Comment = () => {
           <ContentWrap>
             <Nickname>아마추어 손민수</Nickname>
             <Time>10분 전</Time>
+            <MoreBtn
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsReplyOpen(!isReplyOpen);
+              }}
+            />
+            {isReplyOpen && (
+              <ReplyBtn onClick={(e) => e.stopPropagation()}>
+                <Reply>답글달기</Reply>
+                <Delete>삭제하기</Delete>
+              </ReplyBtn>
+            )}
           </ContentWrap>
           <CommentText>
             와아 ㅜㅜ 저도 이거 봤어요!! 꾹이가 리허설 할 때, 입은 연습복 정보도
             감사합니당!!
           </CommentText>
         </CommentContent>
-        <MoreBtn />
       </CommentContainer>
-      <Line />
       <CommentInput />
     </>
   );

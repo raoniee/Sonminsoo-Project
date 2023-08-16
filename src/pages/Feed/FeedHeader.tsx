@@ -12,7 +12,7 @@ const FeedHeaderContainer = styled.div`
   box-sizing: border-box;
   justify-content: space-between;
 `;
-const Profile = styled.img`
+const Profile = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 40px;
@@ -75,16 +75,24 @@ const MoreBtn = styled.div`
   background: url(${more}) no-repeat center center;
   cursor: pointer;
 `;
-
-const FeedHeader = () => {
+type FeedData = {
+  id: number;
+  author: string;
+  fandom_name: string;
+  profileImage: string;
+};
+type FeedHeaderProps = {
+  feedData: FeedData[];
+};
+const FeedHeader: React.FC<FeedHeaderProps> = ({ feedData }) => {
   return (
     <FeedHeaderContainer>
       <Profile />
       <HeaderContent>
-        <Nickname>정의로운 손민수</Nickname>
+        <Nickname>{feedData[0].author}</Nickname>
         <ContentWrap>
-          <FeedName>꾹이의 모든 것</FeedName>
-          <Time>10분 전</Time>
+          <FeedName>{feedData[0].fandom_name}</FeedName>ㅗ
+          <Time>10분전</Time>
         </ContentWrap>
       </HeaderContent>
       <MoreBtn />

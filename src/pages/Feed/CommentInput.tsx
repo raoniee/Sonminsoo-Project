@@ -13,8 +13,8 @@ const CommentInputBox = styled.input`
   border: none;
   margin: 16px 0 16px 16px;
   outline: none;
+  padding-left: 13px;
   &::placeholder {
-    padding: 13px;
     color: #6c7080;
     fontsize: 14px;
     font-weight: 500;
