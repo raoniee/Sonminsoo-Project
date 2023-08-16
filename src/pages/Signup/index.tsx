@@ -17,7 +17,9 @@ interface signupContextType {
   userInfo: userInfoType;
 }
 
-export const signupContext = createContext<signupContextType | null>(null);
+export const signupContext = createContext<signupContextType>(
+  {} as signupContextType
+);
 
 const Signup: React.FC = () => {
   const [signupStep, setSignupStep] = useState("terms");

@@ -9,14 +9,15 @@ const EnterMembersInfo = () => {
   //     navigation("/signup");
   //   }
   // }, []);
-  const useSignupContext = useContext(signupContext);
+  // const  useContext(signupContext);
+  const { email, setUserInfo, userInfo } = useContext(signupContext);
 
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.id);
     console.log(e.target.value);
     //@ts-ignore
     //TODO: prev 타입 에러 해결
-    useSignupContext?.setUserInfo((prev) => {
+    setUserInfo((prev) => {
       return {
         ...prev,
         [e.target.id]: e.target.value,
@@ -34,14 +35,14 @@ const EnterMembersInfo = () => {
           type="text"
           id="email"
           placeholder="이메일을 입력해 주세요"
-          value={useSignupContext?.email}
+          value={email}
         />
         <label htmlFor="password">비밀번호를 입력해 주세요</label>
         <input
           type="text"
           id="password"
           placeholder="비밀번호를 입력해 주세요"
-          value={useSignupContext?.userInfo.password}
+          value={userInfo.password}
           onChange={handleInfoChange}
         />
         <label htmlFor="passwordConfirm">비밀번호를 다시 입력해 주세요</label>
@@ -59,7 +60,7 @@ const EnterMembersInfo = () => {
           id="userName"
           placeholder="이름을 입력해 주세요."
           onChange={handleInfoChange}
-          value={useSignupContext?.userInfo.userName}
+          value={userInfo.userName}
         />
         <label htmlFor="birthDate">
           생년월일을 입력해 주세요 &#40;ex 991121&#41;
@@ -69,7 +70,7 @@ const EnterMembersInfo = () => {
           id="birthDate"
           placeholder="생년월일을 입력해 주세요 &#40;ex 991121&#41;"
           onChange={handleInfoChange}
-          value={useSignupContext?.userInfo.birthDate}
+          value={userInfo.birthDate}
         />
         <label htmlFor="phoneNumber">
           전화번호를 입력해 주세요 &#40;ex 01022222222&#41;
@@ -79,7 +80,7 @@ const EnterMembersInfo = () => {
           id="phoneNumber"
           placeholder="전화번호를 입력해 주세요 &#40;ex 01022222222&#41;"
           onChange={handleInfoChange}
-          value={useSignupContext?.userInfo.phoneNumber}
+          value={userInfo.phoneNumber}
         />
       </form>
     </div>
