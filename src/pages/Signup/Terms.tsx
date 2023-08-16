@@ -1,26 +1,30 @@
 import { useState, useEffect } from "react";
+import styled from "styled-components";
+import testSvg from "../../assets/images/svg/1801287.svg";
+
 type Props = {
   allChecked: boolean;
   setAllChecked: (value: boolean) => void;
 };
 
-const Terms: React.FC<Props> = ({ allChecked, setAllChecked }) => {
+const Terms = () => {
   const [infoAgreement, setInfoAgreement] = useState(false);
   const [pledge, setPledge] = useState(false);
-  const handleAllCheck = () => {
-    if (infoAgreement && pledge) {
-      setAllChecked(true);
-    }
-    if (allChecked) {
-      setAllChecked(false);
-      setInfoAgreement(false);
-      setPledge(false);
-    } else {
-      setAllChecked(true);
-      setInfoAgreement(true);
-      setPledge(true);
-    }
-  };
+
+  // const handleAllCheck = () => {
+  //   if (infoAgreement && pledge) {
+  //     setAllChecked(true);
+  //   }
+  //   if (allChecked) {
+  //     setAllChecked(false);
+  //     setInfoAgreement(false);
+  //     setPledge(false);
+  //   } else {
+  //     setAllChecked(true);
+  //     setInfoAgreement(true);
+  //     setPledge(true);
+  //   }
+  // };
 
   return (
     <div>
@@ -28,9 +32,9 @@ const Terms: React.FC<Props> = ({ allChecked, setAllChecked }) => {
       <h2>정의로운 손민수 이용을 위해 약관에 동의해주세요</h2>
       <input
         type="checkbox"
-        defaultChecked={allChecked}
-        checked={infoAgreement && pledge}
-        onClick={handleAllCheck}
+        // defaultChecked={allChecked}
+        // checked={infoAgreement && pledge}
+        // onClick={handleAllCheck}
       />
       <span>전체동의</span>
       <input

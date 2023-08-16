@@ -1,4 +1,10 @@
 const EnterMembersInfo = () => {
+  // useEffect(() => {
+  //   if (email === "") {
+  //     navigation("/signup");
+  //   }
+  // }, []);
+  // const navigation = useNavigate();
   return (
     <div>
       <h1>개인정보 입력하기</h1>
