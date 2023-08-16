@@ -1,25 +1,43 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, Children } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
+interface userInfoType {
+  password: string;
+  userName: string;
+  birthDate: string;
+  phoneNumber: string;
+}
 interface signupContextType {
   email: string;
   setEmail: (value: string) => void;
   setSignupStep: (value: string) => void;
+  setUserInfo: (value: userInfoType) => void;
+  userInfo: userInfoType;
 }
 
 export const signupContext = createContext<signupContextType | null>(null);
-const Signup = () => {
+
+const Signup: React.FC = () => {
   const [signupStep, setSignupStep] = useState("terms");
   const [email, setEmail] = useState("");
+  const [userInfo, setUserInfo] = useState<userInfoType>({
+    password: "",
+    userName: "",
+    birthDate: "",
+    phoneNumber: "",
+  });
   const navigation = useNavigate();
+  // const handleSignupClcik = ()=>{
 
+  // }
   const nextButton = () => {
     if (signupStep === "terms")
       return (
         <input
           type="button"
-          value="다음"
+          value="다음,emailCertification"
           onClick={() => {
             navigation("emailCertification");
             setSignupStep("emailCertification");
@@ -30,7 +48,7 @@ const Signup = () => {
       return (
         <input
           type="button"
-          value="다음"
+          value="다음,enterMembersInfo"
           onClick={() => {
             navigation("enterMembersInfo");
             setSignupStep("enterMembersInfo");
@@ -41,10 +59,22 @@ const Signup = () => {
       return (
         <input
           type="button"
-          value="다음"
+          value="회원가입 완료"
           onClick={() => {
-            navigation("signUpComplete");
-            setSignupStep("signUpComplete");
+            axios
+              .post(`http://146.56.143.108/auth/signup`, {
+                email,
+                password: userInfo.password,
+                userName: userInfo.userName,
+                birthDate: userInfo.birthDate,
+                phoneNumber: userInfo.phoneNumber,
+              })
+              .then((res) => {
+                console.log(res);
+                navigation("signUpComplete");
+                setSignupStep("signUpComplete");
+              })
+              .catch((e) => console.log(e));
           }}
         />
       );
@@ -52,7 +82,9 @@ const Signup = () => {
   };
 
   return (
-    <signupContext.Provider value={{ email, setEmail, setSignupStep }}>
+    <signupContext.Provider
+      value={{ email, setEmail, setSignupStep, setUserInfo, userInfo }}
+    >
       <div>
         header
         <Outlet />

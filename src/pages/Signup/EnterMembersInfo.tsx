@@ -1,10 +1,28 @@
+import { signupContext } from "./index";
+import React, { useState, useContext } from "react";
+import axios from "axios";
+
 const EnterMembersInfo = () => {
+  // const navigation = useNavigate();
   // useEffect(() => {
   //   if (email === "") {
   //     navigation("/signup");
   //   }
   // }, []);
-  // const navigation = useNavigate();
+  const useSignupContext = useContext(signupContext);
+
+  const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.id);
+    console.log(e.target.value);
+    //@ts-ignore
+    //TODO: prev 타입 에러 해결
+    useSignupContext?.setUserInfo((prev) => {
+      return {
+        ...prev,
+        [e.target.id]: e.target.value,
+      };
+    });
+  };
   return (
     <div>
       <h1>개인정보 입력하기</h1>
@@ -12,12 +30,19 @@ const EnterMembersInfo = () => {
       <h2>기본정보입력</h2>
       <form>
         <label htmlFor="email">이메일을 입력해 주세요.</label>
-        <input type="text" id="email" placeholder="이메일을 입력해 주세요" />
+        <input
+          type="text"
+          id="email"
+          placeholder="이메일을 입력해 주세요"
+          value={useSignupContext?.email}
+        />
         <label htmlFor="password">비밀번호를 입력해 주세요</label>
         <input
           type="text"
           id="password"
           placeholder="비밀번호를 입력해 주세요"
+          value={useSignupContext?.userInfo.password}
+          onChange={handleInfoChange}
         />
         <label htmlFor="passwordConfirm">비밀번호를 다시 입력해 주세요</label>
         <input
@@ -28,8 +53,14 @@ const EnterMembersInfo = () => {
         <h2>개인정보입력</h2>
       </form>
       <form>
-        <label htmlFor="name">이름을 입력해 주세요.</label>
-        <input type="text" id="name" placeholder="이름을 입력해 주세요." />
+        <label htmlFor="userName">이름을 입력해 주세요.</label>
+        <input
+          type="text"
+          id="userName"
+          placeholder="이름을 입력해 주세요."
+          onChange={handleInfoChange}
+          value={useSignupContext?.userInfo.userName}
+        />
         <label htmlFor="birthDate">
           생년월일을 입력해 주세요 &#40;ex 991121&#41;
         </label>
@@ -37,14 +68,18 @@ const EnterMembersInfo = () => {
           type="text"
           id="birthDate"
           placeholder="생년월일을 입력해 주세요 &#40;ex 991121&#41;"
+          onChange={handleInfoChange}
+          value={useSignupContext?.userInfo.birthDate}
         />
-        <label htmlFor="phone">
+        <label htmlFor="phoneNumber">
           전화번호를 입력해 주세요 &#40;ex 01022222222&#41;
         </label>
         <input
           type="text"
-          id="phone"
+          id="phoneNumber"
           placeholder="전화번호를 입력해 주세요 &#40;ex 01022222222&#41;"
+          onChange={handleInfoChange}
+          value={useSignupContext?.userInfo.phoneNumber}
         />
       </form>
     </div>

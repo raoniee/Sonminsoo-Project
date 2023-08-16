@@ -1,35 +1,37 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { signupContext } from "./index";
 
-type Props = {
-  setEmailAuthValidState: (value: boolean) => void;
-};
 const EmailCertification = () => {
-  const email = useRef(null);
   const [authValid, setAuthValid] = useState("");
+  const useSignupContext = useContext(signupContext);
+  console.log(useSignupContext, "useSignupContext");
 
-  // const handleEmailAuthClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-  //   e.preventDefault();
-  //   axios
-  //     .get(`http://146.56.143.108/auth/verificationCode?email=${email}`)
-  //     .then((res) => console.log("email res", res))
-  //     .catch((e) => console.log(e));
-  // };
-  // const handleEmailAuthVaildClick = (
-  //   e: React.MouseEvent<HTMLButtonElement>
-  // ) => {
-  //   e.preventDefault();
-  //   axios
-  //     .post(`http://146.56.143.108/auth/verificationCode`, {
-  //       email,
-  //       code: authValid,
-  //     })
-  //     .then((res) => {
-  //       console.log("email res", res);
-  //       // setEmailAuthValidState(true);
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
+  const handleEmailAuthClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    axios
+      .get(
+        `http://146.56.143.108/auth/verificationCode?email=${useSignupContext?.email}`
+      )
+      .then((res) => console.log("email res", res))
+      .catch((e) => console.log(e));
+  };
+  const handleEmailAuthVaildClick = (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    e.preventDefault();
+    axios
+      .post(`http://146.56.143.108/auth/verificationCode`, {
+        email: useSignupContext?.email,
+        code: authValid,
+      })
+      .then((res) => {
+        console.log("email res", res);
+        useSignupContext?.setSignupStep("emailCertification");
+        // setEmailAuthValidState(true);
+      })
+      .catch((e) => console.log(e));
+  };
 
   return (
     <div>
@@ -41,10 +43,10 @@ const EmailCertification = () => {
           type="text"
           id="email"
           placeholder="이메일을 입력해 주세요."
-          // defaultValue={email}
-          // onChange={(e) => }
+          value={useSignupContext?.email}
+          onChange={(e) => useSignupContext?.setEmail(e.target.value)}
         />
-        <button onClick={() => {}}>인증번호 발송 하기</button>
+        <button onClick={handleEmailAuthClick}>인증번호 발송 하기</button>
         <label htmlFor="emailCertificaton">
           이메일 인증 번호를 입력해 주세요
         </label>
@@ -56,7 +58,8 @@ const EmailCertification = () => {
           onChange={(e) => setAuthValid(e.target.value)}
         />
 
-        <button onClick={() => {}}>인증하기</button>
+        <button onClick={handleEmailAuthVaildClick}>인증하기</button>
+        {/* {() => useSignupContext?.setSignupStep("enterMembersInfo")} */}
         <p>
           이메일 인증번호가 발송되지 않았나요?<span>재발송하기</span>
         </p>

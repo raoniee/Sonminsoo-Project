@@ -39,13 +39,13 @@ const Terms = () => {
       <span>전체동의</span>
       <input
         type="checkbox"
-        checked={infoAgreement}
+        // checked={infoAgreement}
         onClick={() => setInfoAgreement(!infoAgreement)}
       />
       <span>개인정보 수집 및 이용 동의(필수)</span>&#8250;
       <input
         type="checkbox"
-        checked={pledge}
+        // checked={pledge}
         onClick={() => {
           setPledge(!pledge);
         }}

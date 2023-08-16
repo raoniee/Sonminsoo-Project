@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -38,7 +39,24 @@ const Login = () => {
           <Link to={"/"}>아이디 또는 비밀번호를 잊어버리셧나요?</Link>
         </p>
         <div>
-          <button>로그인</button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("id", email);
+              console.log("pw", password);
+              axios
+                .post(`http://146.56.143.108/auth/signin`, {
+                  email,
+                  password,
+                })
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((e) => console.log(e));
+            }}
+          >
+            로그인
+          </button>
         </div>
         <p>
           새로운 계정이 필요하신가요? <Link to={"/signup"}>Sign Up</Link>
