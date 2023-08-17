@@ -8,7 +8,6 @@ import CommentBtn from "./CommentBtn";
 import FeedText from "./FeedText";
 import Comment from "./Comment";
 import idol1 from "../../assets/images/png/idol1.png";
-import axios from "axios";
 
 const FeedImage = styled.div`
   width: 100%;
@@ -27,36 +26,9 @@ const Line = styled.div`
   height: 6px;
   margin-top: 22px;
 `;
-type FeedData = {
-  id: number;
-  author: string;
-  fandom_name: string;
-  profileImage: string;
-};
+
 const Feed: React.FC = () => {
   const [commentClicked, setCommentClicked] = useState<boolean>(false);
-  const [feedData, setFeedData] = useState<FeedData[]>([
-    {
-      id: 1,
-      author: "John Doe",
-      fandom_name: "Idol",
-      profileImage: "https://picsum.photos/40/40",
-    },
-  ]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/data/feedData.json"
-        );
-        setFeedData(response.data);
-      } catch (error) {
-        console.error("Error", error);
-      }
-    };
-    fetchData();
-  }, []);
 
   const commentOpen = () => {
     setCommentClicked(!commentClicked);
@@ -64,7 +36,7 @@ const Feed: React.FC = () => {
 
   return (
     <>
-      <FeedHeader feedData={feedData} />
+      <FeedHeader />
       <FeedImage />
       <ItemBox />
       <FeedText />
@@ -73,8 +45,8 @@ const Feed: React.FC = () => {
         <LikeBtn />
         <CommentBtn commentOpen={commentOpen} commentClicked={commentClicked} />
       </BtnWrap>
-      <Line />
       {commentClicked ? <Comment /> : null}
+      <Line />
     </>
   );
 };
