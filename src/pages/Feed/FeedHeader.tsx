@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import more from "../../assets/images/svg/ic-more-horizontal.svg";
 import profile1 from "../../assets/images/svg/profile1.svg";
 
@@ -75,23 +76,43 @@ const MoreBtn = styled.div`
   background: url(${more}) no-repeat center center;
   cursor: pointer;
 `;
-type FeedData = {
+type FeedHeaderData = {
   id: number;
-  author: string;
+  user_name: string;
   fandom_name: string;
   profileImage: string;
 };
-type FeedHeaderProps = {
-  feedData: FeedData[];
-};
-const FeedHeader: React.FC<FeedHeaderProps> = ({ feedData }) => {
+
+const FeedHeader: React.FC = () => {
+  const [feedHeaderData, setFeedHeaderData] = useState<FeedHeaderData[]>([
+    {
+      id: 1,
+      user_name: "정의로운 손민수",
+      fandom_name: "꾹이의 모든 것",
+      profileImage: "https://picsum.photos/40/40",
+    },
+  ]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/data/feedUserData.json"
+        );
+        setFeedHeaderData(response.data);
+      } catch (error) {
+        console.error("Error", error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <FeedHeaderContainer>
       <Profile />
       <HeaderContent>
-        <Nickname>{feedData[0].author}</Nickname>
+        <Nickname>{feedHeaderData[0].user_name}</Nickname>
         <ContentWrap>
-          <FeedName>{feedData[0].fandom_name}</FeedName>ㅗ
+          <FeedName>{feedHeaderData[0].fandom_name}</FeedName>
           <Time>10분전</Time>
         </ContentWrap>
       </HeaderContent>

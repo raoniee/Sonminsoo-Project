@@ -2,19 +2,24 @@ import React, { useState } from "react";
 import styled from "styled-components";
 const HashTags = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  margin-left: 16px;
 `;
 const Hash = styled.p`
   font-size: 15px;
   font-weight: 500;
   color: #6138f8;
-  margin-left: 10px;
-  &:first-child {
-    margin-left: 16px;
-  }
+  margin: 8px 0 0 10px;
   cursor: pointer;
 `;
 const HashTag = () => {
-  const [hashTag] = useState(["#우리애들절대지켜", "#ARMY", "#정전국"]);
+  const [hashTag] = useState([
+    "#우리애들절대지켜",
+    "#ARMY",
+    "#정전국",
+    "#유포리아",
+    "#비오는날리허설",
+  ]);
 
   return (
     <HashTags>

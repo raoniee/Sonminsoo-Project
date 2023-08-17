@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import edit from "../../assets/images/svg/ic-edit.svg";
-import search from "../../assets/images/svg/ic-search.svg";
 import setting from "../../assets/images/svg/ic-settings.svg";
 
 const Container = styled.div`
@@ -20,7 +19,7 @@ const Logo = styled.div`
 
 const Icons = styled.div`
   display: flex;
-  padding: 13px 16px;
+  padding: 13px 13px;
   > div:not(:last-child) {
     margin-right: 12px;
   }
@@ -43,7 +42,6 @@ const StatusBar = () => {
       <Logo>로고</Logo>
       <Icons>
         <Icon background={edit} />
-        <Icon background={search} />
         <Icon background={setting} />
       </Icons>
     </Container>

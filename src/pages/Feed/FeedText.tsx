@@ -5,7 +5,7 @@ const FeedText = styled.p`
   font-size: 15px;
   font-weight: 500;
   line-height: 140%;
-  margin: 30px 16px;
+  margin: 30px 16px 20px 16px;
   width: 239px;
 `;
 const More = styled.span`
