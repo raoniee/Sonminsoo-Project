@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -6,6 +6,12 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState(false);
+  const data = JSON.stringify({ email, password });
+  let loginResponse = axios.create({
+    baseURL: "/auth",
+    headers: { "Content-Type": "application/json" },
+    withCredentials: true,
+  });
 
   return (
     <div>
@@ -44,14 +50,9 @@ const Login = () => {
               e.preventDefault();
               console.log("id", email);
               console.log("pw", password);
-              axios
-                .post(`http://146.56.143.108/auth/signin`, {
-                  email,
-                  password,
-                })
-                .then((res) => {
-                  console.log(res);
-                })
+              loginResponse
+                .post("/signin", data)
+                .then((res) => console.log(res))
                 .catch((e) => console.log(e));
             }}
           >

@@ -1,6 +1,5 @@
-import { createContext, useState, useEffect, Children } from "react";
+import { createContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 interface userInfoType {
@@ -9,6 +8,7 @@ interface userInfoType {
   birthDate: string;
   phoneNumber: string;
 }
+
 interface signupContextType {
   email: string;
   setEmail: (value: string) => void;
