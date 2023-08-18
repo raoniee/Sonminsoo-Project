@@ -1,91 +1,98 @@
-import React, { useReducer, useState } from "react";
-import Terms from "./Terms";
-import EmailCertification from "./EmailCertification";
-import EnterMembersInfo from "./EnterMembersInfo";
-import SignUpComplete from "./SignUpComplete";
+import { createContext, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Signup = () => {
-  const [allChecked, setAllChecked] = useState(false);
-  const [emailAuthValidState, setemailAuthValidState] = useState(true);
+interface userInfoType {
+  password: string;
+  userName: string;
+  birthDate: string;
+  phoneNumber: string;
+}
 
-  const signupReducer = (_: string, action: string): string => {
-    if (action === "terms") return "authEmail";
-    if (action === "authEmail") return "addMemberInfo";
-    if (action === "addMemberInfo") return "complete";
-    if (action === "complete") {
-      console.log("todo: block next step");
-      return "";
-    }
-    if (action === "") {
-      console.log("todo: navigation error page");
-      return "";
-    }
-    return "";
+interface signupContextType {
+  email: string;
+  setEmail: (value: string) => void;
+  setSignupStep: (value: string) => void;
+  setUserInfo: (value: userInfoType) => void;
+  userInfo: userInfoType;
+}
+
+export const signupContext = createContext<signupContextType>(
+  {} as signupContextType
+);
+
+const Signup: React.FC = () => {
+  const [signupStep, setSignupStep] = useState("terms");
+  const [email, setEmail] = useState("");
+  const [userInfo, setUserInfo] = useState<userInfoType>({
+    password: "",
+    userName: "",
+    birthDate: "",
+    phoneNumber: "",
+  });
+  const navigation = useNavigate();
+  // const handleSignupClcik = ()=>{
+
+  // }
+  const nextButton = () => {
+    if (signupStep === "terms")
+      return (
+        <input
+          type="button"
+          value="다음,emailCertification"
+          onClick={() => {
+            navigation("emailCertification");
+            setSignupStep("emailCertification");
+          }}
+        />
+      );
+    if (signupStep === "emailCertification")
+      return (
+        <input
+          type="button"
+          value="다음,enterMembersInfo"
+          onClick={() => {
+            navigation("enterMembersInfo");
+            setSignupStep("enterMembersInfo");
+          }}
+        />
+      );
+    if (signupStep === "enterMembersInfo")
+      return (
+        <input
+          type="button"
+          value="회원가입 완료"
+          onClick={() => {
+            axios
+              .post(`http://146.56.143.108/auth/signup`, {
+                email,
+                password: userInfo.password,
+                userName: userInfo.userName,
+                birthDate: userInfo.birthDate,
+                phoneNumber: userInfo.phoneNumber,
+              })
+              .then((res) => {
+                console.log(res);
+                navigation("signUpComplete");
+                setSignupStep("signUpComplete");
+              })
+              .catch((e) => console.log(e));
+          }}
+        />
+      );
+    return;
   };
-  const [signupStep, dispatch] = useReducer(signupReducer, "terms");
 
-  const handleClick = (e: React.MouseEvent<HTMLInputElement>) => {
-    const type = e?.currentTarget.dataset.signupstep
-      ? e.currentTarget.dataset.signupstep
-      : "";
-
-    if (type === "complete") {
-      console.log("todo:nav login page");
-    }
-    dispatch(type);
-  };
   return (
-    <div>
-      <h1>Step</h1>
-      {signupStep === "terms" && (
-        <>
-          <Terms setAllChecked={setAllChecked} allChecked={allChecked} />
-          <input
-            type="button"
-            data-signupstep={signupStep}
-            onClick={handleClick}
-            value="다음"
-            disabled={!allChecked}
-          />
-        </>
-      )}
-      {signupStep === "authEmail" && (
-        <>
-          <EmailCertification setemailAuthValidState={setemailAuthValidState} />
-          <input
-            type="button"
-            data-signupstep={signupStep}
-            onClick={handleClick}
-            value="다음"
-            disabled={emailAuthValidState}
-          />
-        </>
-      )}
-      {signupStep === "addMemberInfo" && (
-        <>
-          <EnterMembersInfo />
-          <input
-            type="button"
-            data-signupstep={signupStep}
-            onClick={handleClick}
-            value="회원가입 완료"
-            disabled={emailAuthValidState}
-          />
-        </>
-      )}
-      {signupStep === "complete" && (
-        <>
-          <SignUpComplete />
-          <input
-            type="button"
-            data-signupstep={signupStep}
-            onClick={handleClick}
-            value="로그인 하러가기"
-            disabled={emailAuthValidState}
-          />
-        </>
-      )}
-    </div>
+    <signupContext.Provider
+      value={{ email, setEmail, setSignupStep, setUserInfo, userInfo }}
+    >
+      <div>
+        header
+        <Outlet />
+        {nextButton()}
+      </div>
+    </signupContext.Provider>
   );
 };
 export default Signup;
