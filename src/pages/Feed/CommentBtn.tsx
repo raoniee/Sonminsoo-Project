@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import comment from "../../assets/images/svg/ic-message-circle.svg";
 import commentActive from "../../assets/images/svg/ic-message-active.svg";
 type CommentBtnProps = {
@@ -30,10 +31,24 @@ const CommentBtn: React.FC<CommentBtnProps> = ({
   commentOpen,
   commentClicked,
 }) => {
+  const [commentNumber, setCommentNumber] = useState<number>();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/comment");
+        setCommentNumber(response.data.length);
+      } catch (error) {
+        console.error("Error", error);
+      }
+    };
+    fetchData();
+  }, [commentNumber]);
   return (
     <CommentBtnContainer>
       <CommentIcon commentClicked={commentClicked} onClick={commentOpen} />
-      <CommentNumber commentClicked={commentClicked}>2</CommentNumber>
+      <CommentNumber commentClicked={commentClicked}>
+        {commentNumber}
+      </CommentNumber>
     </CommentBtnContainer>
   );
 };

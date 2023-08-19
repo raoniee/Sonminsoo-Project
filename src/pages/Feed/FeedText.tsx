@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const FeedText = styled.p`
@@ -15,18 +15,28 @@ const More = styled.span`
   cursor: pointer;
   display: inline;
 `;
-const Text = () => {
+type FeedData = {
+  content: string;
+};
+type FeedTextProps = {
+  feedData: FeedData;
+};
+const Text: React.FC<FeedTextProps> = ({ feedData }) => {
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
   const textLimit: number = 50;
-  const [comment] = useState<string>(
-    "럽셒 울정꾸기 리허설 영상 ㅜㅜ 무대 올라왔을 때는 마냥 멋지고 좋았는데 ㅜㅜ 저때 비오고 난리 였대요.. ㅜㅜ애들 고생하는거에 맴찢 ㅜㅜㅜ"
-  );
-  const displayedComment = isShowMore ? comment : comment.slice(0, textLimit);
+  const [feedText, setFeedText] = useState<string>("");
 
+  const displayedComment = isShowMore ? feedText : feedText.slice(0, textLimit);
+
+  useEffect(() => {
+    if (feedData) {
+      setFeedText(feedData.content);
+    }
+  }, []);
   return (
     <FeedText>
       {displayedComment}
-      {comment.length > textLimit && (
+      {feedText.length > textLimit && (
         <More onClick={() => setIsShowMore(!isShowMore)}>
           {isShowMore ? "..." : "...더보기"}
         </More>

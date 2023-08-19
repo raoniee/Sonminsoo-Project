@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
-const Item = styled.div`
+import axios from "axios";
+const Item = styled.div<ImageProps>`
   width: 100px;
   height: 100px;
   border: 1px solid black;
@@ -9,10 +9,15 @@ const Item = styled.div`
   margin-top: 16px;
   margin-right: 10px;
   flex: 0 0 auto;
+  background-image: url(${(props) => props.imageUrl});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100px;
 `;
 const ItemWrap = styled.div`
   overflow: hidden;
   width: 390px;
+  cursor: pointer;
 `;
 const Items = styled.div`
   display: flex;
@@ -31,20 +36,47 @@ const Price = styled.p`
   font-size: 14px;
   font-weight: 700;
 `;
+type FeedItemType = {
+  itemImg: string;
+  itemName: string;
+  itemPrice: string;
+};
+
+type FeedType = {
+  feedItem: FeedItemType[];
+};
+type ImageProps = {
+  imageUrl: string;
+};
 
 const ItemBox = () => {
-  const [img] = useState([1, 2, 3, 4, 5, 6, 7]);
+  const [feedItems, setFeedItem] = useState<FeedType[]>([]);
+
+  useEffect(() => {
+    const fetchFeedItem = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:3001/feed");
+        setFeedItem(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchFeedItem();
+  }, []);
 
   return (
     <ItemWrap>
       <Items>
-        {img.map((_, index) => (
-          <div key={index}>
-            <Item></Item>
-            <ProductName>Product Name</ProductName>
-            <Price>Price</Price>
-          </div>
-        ))}
+        {feedItems.map((feed, feedIndex) =>
+          feed.feedItem?.map((item, itemIndex) => (
+            <div key={`${feedIndex}-${itemIndex}`}>
+              <Item imageUrl={item.itemImg} />
+              <ProductName>{item.itemName}</ProductName>
+              <Price>{item.itemPrice}</Price>
+            </div>
+          ))
+        )}
       </Items>
     </ItemWrap>
   );

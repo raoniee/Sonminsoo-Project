@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import more from "../../assets/images/svg/ic-more-horizontal.svg";
-import profile1 from "../../assets/images/svg/profile1.svg";
+import detailDate from "../../utils/time";
 
 const FeedHeaderContainer = styled.div`
-  widht: 100%;
+  width: 100%;
   height: 60px;
   padding: 10px 16px;
   display: flex;
@@ -13,13 +12,16 @@ const FeedHeaderContainer = styled.div`
   box-sizing: border-box;
   justify-content: space-between;
 `;
-const Profile = styled.div`
+const Profile = styled.div<ProfileProps>`
   width: 40px;
   height: 40px;
   border-radius: 40px;
   background-color: lightgray;
   cursor: pointer;
-  background-image: url(${profile1});
+  background-image: url(${(props) => props.imageUrl});
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+  background-position: center;
 `;
 const HeaderContent = styled.div`
   display: flex;
@@ -76,44 +78,32 @@ const MoreBtn = styled.div`
   background: url(${more}) no-repeat center center;
   cursor: pointer;
 `;
-type FeedHeaderData = {
+type FeedData = {
   id: number;
   user_name: string;
   fandom_name: string;
   profileImage: string;
+  created_at?: string;
 };
-
-const FeedHeader: React.FC = () => {
-  const [feedHeaderData, setFeedHeaderData] = useState<FeedHeaderData[]>([
-    {
-      id: 1,
-      user_name: "정의로운 손민수",
-      fandom_name: "꾹이의 모든 것",
-      profileImage: "https://picsum.photos/40/40",
-    },
-  ]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3000/data/feedUserData.json"
-        );
-        setFeedHeaderData(response.data);
-      } catch (error) {
-        console.error("Error", error);
-      }
-    };
-    fetchData();
-  }, []);
+type FeedHeaderProps = {
+  feedData: FeedData;
+};
+type ProfileProps = {
+  imageUrl: string;
+};
+const FeedHeader: React.FC<FeedHeaderProps> = ({ feedData }) => {
   return (
     <FeedHeaderContainer>
-      <Profile />
+      <Profile imageUrl={feedData.profileImage} />
       <HeaderContent>
-        <Nickname>{feedHeaderData[0].user_name}</Nickname>
+        <Nickname>{feedData.user_name}</Nickname>
         <ContentWrap>
-          <FeedName>{feedHeaderData[0].fandom_name}</FeedName>
-          <Time>10분전</Time>
+          <FeedName>{feedData.fandom_name}</FeedName>
+          <Time>
+            {feedData.created_at
+              ? detailDate(feedData.created_at)
+              : "시간 정보 없음"}
+          </Time>
         </ContentWrap>
       </HeaderContent>
       <MoreBtn />
