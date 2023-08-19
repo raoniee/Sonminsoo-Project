@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 const HashTags = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-left: 16px;
+  width: 305px;
+  margin-left: 6px;
 `;
 const Hash = styled.p`
   font-size: 15px;
@@ -12,15 +13,25 @@ const Hash = styled.p`
   margin: 8px 0 0 10px;
   cursor: pointer;
 `;
-const HashTag = () => {
-  const [hashTag] = useState([
+type FeedData = {
+  hashtag: string[];
+};
+type FeedHashTagProps = {
+  feedData: FeedData;
+};
+const HashTag: React.FC<FeedHashTagProps> = ({ feedData }) => {
+  const [hashTag, setHashTag] = useState<string[]>([
     "#우리애들절대지켜",
     "#ARMY",
     "#정전국",
     "#유포리아",
     "#비오는날리허설",
   ]);
-
+  useEffect(() => {
+    if (feedData) {
+      setHashTag(feedData.hashtag);
+    }
+  }, []);
   return (
     <HashTags>
       {hashTag.map((tag, index) => (
