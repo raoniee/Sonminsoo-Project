@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
-import { ChatProps, MyChat, OtherChat } from './ChatBubble';
-import IconButton, { BackButton } from './IconButton';
+import { ChatProps, MyChat, OtherChat } from '../../components/Chatting/ChatBubble';
+import IconButton, { BackButton } from '../../components/Chatting/IconButton';
 import ChatMember from './ChatMember';
 
 import { ReactComponent as IconImage } from "../../assets/images/svg/ic-image.svg";
