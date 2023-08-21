@@ -78,7 +78,7 @@ const ChatRoom = () => {
                     <BackButton />
                     <ChatTitle>A.R.M.Y</ChatTitle>
                     <LinkItem to="/chatting/chatmember">
-                        <IconButton iconName={iconMember} />
+                        <IconButton src={iconMember} />
                     </LinkItem>
                 </HeaderWrapper>
                 <ChatWrapper>

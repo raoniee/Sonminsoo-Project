@@ -83,7 +83,7 @@ const ChatMember = () => {
                 <BackButton />
                 <ChatTitle>채팅방 멤버 관리</ChatTitle>
                 
-                <IconButton iconName={iconSearch} />
+                <IconButton src={iconSearch} />
             </HeaderWrapper>
             <FilterWindow>
 
