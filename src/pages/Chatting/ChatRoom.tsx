@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 import { ChatProps, MyChat, OtherChat } from '../../components/Chatting/ChatBubble';
+import ChatHeader from '../../components/Chatting/ChatHeader';
 import IconButton, { BackButton } from '../../components/Chatting/IconButton';
 import ChatBar from '../../components/Chatting/ChatBar';
 import ChatMember from './ChatMember';
@@ -18,19 +19,6 @@ const LinkItem = styled(Link)`
         color: blue;
     }
 `
-
-
-export const HeaderWrapper = styled.div`
-    // background-color: blue;
-
-    width: 100%;
-    height: 50px;
-    padding-left: 16px;
-    padding-right: 16px;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-`;
 
 const ChatTitle = styled.div`
     width: 100%;
@@ -74,13 +62,13 @@ const ChatRoom = () => {
 
     return (
             <>
-                <HeaderWrapper>
+                <ChatHeader>
                     <BackButton />
                     <ChatTitle>A.R.M.Y</ChatTitle>
                     <LinkItem to="/chatting/chatmember">
                         <IconButton src={iconMember} />
                     </LinkItem>
-                </HeaderWrapper>
+                </ChatHeader>
                 <ChatWrapper>
                     <OtherChat 
                          id={chatDataOther.id}

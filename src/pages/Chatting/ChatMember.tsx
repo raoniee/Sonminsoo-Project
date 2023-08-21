@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { HeaderWrapper } from './ChatRoom';
+import ChatHeader from '../../components/Chatting/ChatHeader';
 import IconButton, { BackButton } from '../../components/Chatting/IconButton';
 import ChatUserInfo from '../../components/Chatting/ChatUserInfo';
 
@@ -79,12 +79,12 @@ const ChatMember = () => {
 
     return (
         <>
-            <HeaderWrapper>
+            <ChatHeader>
                 <BackButton />
                 <ChatTitle>채팅방 멤버 관리</ChatTitle>
                 
                 <IconButton src={iconSearch} />
-            </HeaderWrapper>
+            </ChatHeader>
             <FilterWindow>
 
             </FilterWindow>
