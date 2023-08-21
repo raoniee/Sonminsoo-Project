@@ -5,6 +5,7 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { Provider } from "react-redux";
 import store from "./redux/config/store";
 import "./styles/reset.css";
+import "./assets/fonts/font.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
