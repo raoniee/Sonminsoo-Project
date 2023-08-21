@@ -60,6 +60,8 @@ const ChatRoom = () => {
         createAt: new Date(),
     }
 
+    const ban: boolean = false;
+
     return (
             <>
                 <ChatHeader>
@@ -88,7 +90,7 @@ const ChatRoom = () => {
                         createAt={chatData.createAt}
                     />
                 </ChatWrapper>
-                <ChatBar />
+                <ChatBar ban={ban} />
             </>
             
     )
