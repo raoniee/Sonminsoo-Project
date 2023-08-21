@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import more from "../../assets/images/svg/ic-more-horizontal.svg";
 import detailDate from "../../utils/time";
 
 const FeedHeaderContainer = styled.div`
   width: 100%;
-  height: 60px;
-  padding: 10px 16px;
+  height: 72px;
+  padding: 16px;
   display: flex;
   align-items: center;
   box-sizing: border-box;
   justify-content: space-between;
 `;
-const Profile = styled.div<ProfileProps>`
+const Profile = styled.img<ProfileProps>`
   width: 40px;
   height: 40px;
   border-radius: 40px;
@@ -72,43 +72,51 @@ const Time = styled.div`
     transform: translateY(-50%);
   }
 `;
-const MoreBtn = styled.div`
+const MoreBtn = styled.img`
   width: 24px;
   height: 24px;
-  background: url(${more}) no-repeat center center;
   cursor: pointer;
 `;
-type FeedData = {
+
+type User = {
   id: number;
+  user_id: number;
+  profileImg: string;
   user_name: string;
   fandom_name: string;
-  profileImage: string;
-  created_at?: string;
 };
-type FeedHeaderProps = {
+type FeedData = {
+  id: number;
+  user: User;
+  created_at: string;
+};
+type FeedDataProps = {
   feedData: FeedData;
 };
 type ProfileProps = {
   imageUrl: string;
 };
-const FeedHeader: React.FC<FeedHeaderProps> = ({ feedData }) => {
+const FeedHeader: React.FC<FeedDataProps> = ({ feedData }) => {
   return (
     <FeedHeaderContainer>
-      <Profile imageUrl={feedData.profileImage} />
-      <HeaderContent>
-        <Nickname>{feedData.user_name}</Nickname>
-        <ContentWrap>
-          <FeedName>{feedData.fandom_name}</FeedName>
-          <Time>
-            {feedData.created_at
-              ? detailDate(feedData.created_at)
-              : "시간 정보 없음"}
-          </Time>
-        </ContentWrap>
-      </HeaderContent>
-      <MoreBtn />
+      {feedData && feedData.user ? (
+        <>
+          <Profile imageUrl={feedData.user.profileImg} />
+          <HeaderContent>
+            <Nickname>{feedData.user.user_name}</Nickname>
+            <ContentWrap>
+              <FeedName>{feedData.user.fandom_name}</FeedName>
+              <Time>
+                {feedData.created_at
+                  ? detailDate(feedData.created_at)
+                  : "시간 정보 없음"}
+              </Time>
+            </ContentWrap>
+          </HeaderContent>
+          <MoreBtn src={more} />
+        </>
+      ) : null}
     </FeedHeaderContainer>
   );
 };
-
 export default FeedHeader;

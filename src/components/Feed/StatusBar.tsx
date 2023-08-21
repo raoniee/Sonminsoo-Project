@@ -13,40 +13,31 @@ const Container = styled.div`
   margin-top: 0;
 `;
 
-const Logo = styled.div`
+const Logo = styled.img`
   width: 100px;
   height: 18px;
-  background: url(${logo}) no-repeat center center;
   margin: 16px;
 `;
 
 const Icons = styled.div`
   display: flex;
-  padding: 13px 13px;
-  // margin-right: 16px;
-  > div:not(:last-child) {
-    margin-right: 12px;
-  }
+  padding: 13px 16px;
 `;
 
-const Icon = styled.div<IconProps>`
+const Icon = styled.img`
   cursor: pointer;
   width: 24px;
   height: 24px;
-  background: ${({ background }) => `url(${background})`} no-repeat center
-    center;
-  background-size: contain;
+  margin-left: 12px;
 `;
-type IconProps = {
-  background?: string;
-};
+
 const StatusBar = () => {
   return (
     <Container>
-      <Logo></Logo>
+      <Logo src={logo}></Logo>
       <Icons>
-        <Icon background={edit} />
-        <Icon background={setting} />
+        <Icon src={edit} />
+        <Icon src={setting} />
       </Icons>
     </Container>
   );

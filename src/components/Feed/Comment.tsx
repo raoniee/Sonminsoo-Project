@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import CommentList from "./CommentList";
 import submit from "../../assets/images/svg/ic-navigation.svg";
+import CommentItem from "../Feed/CommentItem";
 
 const CommentInput = styled.form`
   display: flex;
@@ -37,40 +37,50 @@ const SendBtn = styled.button`
   background-position: center;
   background-size: 24px 24px;
 `;
+type Feed = {
+  id: number;
+  user: User;
+  feedImg: string;
+  content: string;
+  hashTag: string[];
+  created_at: string;
+  sonminsuItems: SonminsuItem[];
+  comments: Comment[];
+};
 
-type FeedCommentData = {
+type User = {
   id: number;
   user_id: number;
+  profileImg: string;
   user_name: string;
+  fandom_name: string;
+};
+
+type SonminsuItem = {
+  id: number;
+  itemImg: string;
+  title: string;
+  price: number;
+  url: string;
+};
+type Comment = {
+  id: number;
   feed_id: number;
+  user_id: number;
+  profileImg: string;
+  user_name: string;
   content: string;
   created_at: string;
+  replies?: Comment[];
 };
-const Comment: React.FC = () => {
-  const [commentInput, setCommentInput] = useState<string>("");
-  const [commentData, setCommentData] = useState<FeedCommentData[]>([
-    {
-      id: 1,
-      user_id: 111111,
-      user_name: "아마추어 손민수",
-      feed_id: 111,
-      content:
-        "와아 ㅜㅜ 저도 이거 봤어요!! 꾹이가 리허설 할 때, 입은 연습복 정보도 감사합니당!!",
-      created_at: "2023-08-16T14:30:00Z",
-    },
-  ]);
-  useEffect(() => {
-    fetchCommentData();
-  }, [commentData]);
 
-  const fetchCommentData = async () => {
-    try {
-      const commentResponse = await axios.get("http://localhost:3001/comment");
-      setCommentData(commentResponse.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+type FeedProps = {
+  feedData: Feed;
+};
+
+const Comment: React.FC<FeedProps> = ({ feedData }) => {
+  const [commentInput, setCommentInput] = useState<string>("");
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCommentInput(event.target.value);
   };
@@ -79,29 +89,43 @@ const Comment: React.FC = () => {
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
+    const newComment = {
+      id: new Date(),
+      profileImg: "https://dummyimage.com/#google_vignette40x40/000/fff.png",
+      user_name: "Anonymous",
+      content: commentInput,
+      created_at: new Date().toISOString(),
+    };
     try {
-      await axios.post("http://localhost:3001/comment", {
-        content: commentInput,
-        user_name: commentData[0].user_name,
-        created_at: new Date(),
+      const response = await axios.get(
+        `http://localhost:5000/feed/${feedData.id}`
+      );
+      const feed = response.data;
+
+      const updatedComments = [...feed.comments, newComment];
+      await axios.put(`http://localhost:5000/feed/${feedData.id}`, {
+        ...feed,
+        comments: updatedComments,
       });
+
       setCommentInput("");
-      fetchCommentData();
     } catch (error) {
       console.log(error);
     }
   };
-
   return (
     <>
-      <CommentList comments={commentData} />
+      {feedData.comments &&
+        feedData.comments.map((comment) => {
+          return <CommentItem key={comment.id} comment={comment} />;
+        })}
       <CommentInput onSubmit={handleSubmitComment}>
         <CommentInputBox
           placeholder="댓글을 입력해 주세요"
           onChange={handleInputChange}
           value={commentInput}
-        ></CommentInputBox>
-        <SendBtn type="submit"></SendBtn>
+        />
+        <SendBtn type="submit" />
       </CommentInput>
     </>
   );

@@ -14,6 +14,7 @@ const More = styled.span`
   font-weight: 500;
   cursor: pointer;
   display: inline;
+  line-height: 140%;
 `;
 type FeedData = {
   content: string;
@@ -38,7 +39,7 @@ const Text: React.FC<FeedTextProps> = ({ feedData }) => {
       {displayedComment}
       {feedText.length > textLimit && (
         <More onClick={() => setIsShowMore(!isShowMore)}>
-          {isShowMore ? "..." : "...더보기"}
+          {isShowMore ? "...접기" : "...더보기"}
         </More>
       )}
     </FeedText>

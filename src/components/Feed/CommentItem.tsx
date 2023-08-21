@@ -42,8 +42,7 @@ const CommentText = styled.div`
   color: #1d1b20;
   height: 38px;
 `;
-const MoreBtn = styled.div`
-  background: url(${more});
+const MoreBtn = styled.img`
   width: 16px;
   height: 16px;
   cursor: pointer;
@@ -71,6 +70,15 @@ const Delete = styled.div`
   font-size: 14px;
   font-weight: 400;
 `;
+type CommentData = {
+  id: number;
+  feed_id: number;
+  user_id: number;
+  profileImg: string;
+  user_name: string;
+  content: string;
+  created_at: string;
+};
 type FeedCommentData = {
   id: number;
   user_id: number;
@@ -78,11 +86,13 @@ type FeedCommentData = {
   feed_id: number;
   content: string;
   created_at: string;
+  comments?: CommentData[];
 };
+
 type CommentItemProps = {
-  comments: FeedCommentData;
+  comment: FeedCommentData;
 };
-const CommentItem: React.FC<CommentItemProps> = ({ comments }) => {
+const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
   const [openedModalId, setOpenedModalId] = useState<number | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -100,9 +110,11 @@ const CommentItem: React.FC<CommentItemProps> = ({ comments }) => {
     };
   }, []);
 
-  const handleDelete = async () => {
+  const handleDelete = async (feedId: number, commentId: number) => {
     try {
-      await axios.delete(`http://localhost:3001/comment/${comments.id}`);
+      await axios.delete(
+        `http://localhost:5000/feed/${feedId}/comments/${commentId}`
+      );
       alert("댓글이 삭제되었습니다.");
       setOpenedModalId(null);
     } catch (error) {
@@ -111,27 +123,34 @@ const CommentItem: React.FC<CommentItemProps> = ({ comments }) => {
     }
   };
   return (
-    <CommentContainer>
-      <Profile />
-      <CommentContent>
-        <ContentWrap>
-          <Nickname>{comments.user_name}</Nickname>
-          <Time>{detailDate(comments.created_at)}</Time>
-          <MoreBtn
-            onClick={(e) => {
-              e.stopPropagation();
-              setOpenedModalId(comments.id);
-            }}
-          />
-          {openedModalId === comments.id && (
-            <ReplyBtn ref={modalRef}>
-              <Delete onClick={handleDelete}>삭제하기</Delete>
-            </ReplyBtn>
-          )}
-        </ContentWrap>
-        <CommentText>{comments.content}</CommentText>
-      </CommentContent>
-    </CommentContainer>
+    <>
+      <CommentContainer>
+        <Profile />
+        <CommentContent>
+          <ContentWrap>
+            <Nickname>{comment.user_name}</Nickname>
+            <Time>{detailDate(comment.created_at)}</Time>
+            <MoreBtn
+            src={more}
+              onClick={(e) => {
+                e.stopPropagation();
+                setOpenedModalId(comment.id);
+              }}
+            />
+            {openedModalId === comment.id && (
+              <ReplyBtn ref={modalRef}>
+                <Delete
+                  onClick={() => handleDelete(comment.feed_id, comment.id)}
+                >
+                  삭제하기
+                </Delete>
+              </ReplyBtn>
+            )}
+          </ContentWrap>
+          <CommentText>{comment.content}</CommentText>
+        </CommentContent>
+      </CommentContainer>
+    </>
   );
 };
 
