@@ -2,24 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { ChatFandom } from '../../components/Chatting/ChatFandom';
 import { Link } from 'react-router-dom';
+import ChatHeader from '../../components/Chatting/ChatHeader';
 import FooterNavBar from '../../components/FooterNavBar';
 
 import { ReactComponent as logo } from '../../assets/images/svg/ic-logo.svg';
 
 
-
-export const ChatHeader = styled.div`
-    // background-color: gray;
-
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-
-    width: 390px;
-    height: 50px;
-    padding-left: 16px;
-    padding-right: 16px;
-`;
 
 const Logo = styled(logo)`
 
