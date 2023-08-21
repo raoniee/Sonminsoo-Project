@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import iconSend from '../../assets/images/svg/ic-send.svg';
 import { ReactComponent as IconImage } from "../../assets/images/svg/ic-image.svg";
@@ -59,6 +59,10 @@ const ChatInput = styled.input`
 
     color: #6C7080;
     font-size: 14px;
+
+    &:disabled {
+        background-color: #DDDFE1;
+    }
 `;
 
 const ChatInputButton = styled.button`
@@ -70,9 +74,28 @@ const ChatInputButton = styled.button`
     border-radius: 10px;
     background: #208DF1 url(${iconSend}) no-repeat center;
     cursor: pointer;
+
+    &:disabled {
+        background-color: #DDDFE1;
+        cursor: default;
+    }
 `;
 
-const ChatBar = () => {
+type Props = {
+    ban: boolean,
+}
+
+const ChatBar = ({ban}:Props) => {
+
+    const [placeHolder, SetPlaceHolder] = useState('채팅을 입력해 주세요');
+    
+    useEffect(() => {
+        if(ban) {
+            SetPlaceHolder('채팅정지 상태입니다');
+        } else {
+            SetPlaceHolder('채팅을 입력해 주세요');
+        }
+    }, [ban]);
 
     return (
         <ChatBaWrapper>
@@ -81,8 +104,8 @@ const ChatBar = () => {
                 <ChatIconCamera />
             </IconWrapper>
             <ChatInputWrapper>
-                <ChatInput placeholder="채팅을 입력해 주세요" />
-                <ChatInputButton />
+                <ChatInput placeholder={placeHolder} disabled={ban ? true : false} />
+                <ChatInputButton disabled={ban ? true : false} />
             </ChatInputWrapper>
         </ChatBaWrapper>
     )
