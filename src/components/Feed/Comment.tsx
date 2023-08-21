@@ -8,7 +8,12 @@ const CommentInput = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 15px 16px;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  width: 100%;
+  padding: 19px 16px;
+  z-index: 12;
 `;
 const CommentInputBox = styled.input`
   width: calc(100% - 50px);
@@ -76,10 +81,12 @@ type Comment = {
 
 type FeedProps = {
   feedData: Feed;
+  showModal: () => void;
 };
 
-const Comment: React.FC<FeedProps> = ({ feedData }) => {
+const Comment: React.FC<FeedProps> = ({ feedData, showModal }) => {
   const [commentInput, setCommentInput] = useState<string>("");
+  const [comments, setComments] = useState<Comment[]>(feedData.comments || []);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCommentInput(event.target.value);
@@ -90,8 +97,9 @@ const Comment: React.FC<FeedProps> = ({ feedData }) => {
   ) => {
     event.preventDefault();
     const newComment = {
-      id: new Date(),
-      profileImg: "https://dummyimage.com/#google_vignette40x40/000/fff.png",
+      id: new Date().getTime(),
+      profileImg:
+        "https://media.crocs.com/images/t_pdphero/f_auto%2Cq_auto/products/10010049_001_ALT100/crocs",
       user_name: "Anonymous",
       content: commentInput,
       created_at: new Date().toISOString(),
@@ -107,7 +115,7 @@ const Comment: React.FC<FeedProps> = ({ feedData }) => {
         ...feed,
         comments: updatedComments,
       });
-
+      setComments(updatedComments);
       setCommentInput("");
     } catch (error) {
       console.log(error);
@@ -115,10 +123,15 @@ const Comment: React.FC<FeedProps> = ({ feedData }) => {
   };
   return (
     <>
-      {feedData.comments &&
-        feedData.comments.map((comment) => {
-          return <CommentItem key={comment.id} comment={comment} />;
-        })}
+      {comments.map((comment) => {
+        return (
+          <CommentItem
+            key={comment.id}
+            comment={comment}
+            showModal={showModal}
+          />
+        );
+      })}
       <CommentInput onSubmit={handleSubmitComment}>
         <CommentInputBox
           placeholder="댓글을 입력해 주세요"

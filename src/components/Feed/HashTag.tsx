@@ -8,7 +8,7 @@ const HashTags = styled.div`
 `;
 const Hash = styled.p`
   font-size: 15px;
-  font-weight: 500;
+  font-family: "Pretendard-Medium";
   color: #6138f8;
   cursor: pointer;
   margin: 8px 10px 0 0;

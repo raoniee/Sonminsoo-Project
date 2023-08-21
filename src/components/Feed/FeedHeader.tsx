@@ -18,7 +18,7 @@ const Profile = styled.img<ProfileProps>`
   border-radius: 40px;
   background-color: lightgray;
   cursor: pointer;
-  background-image: url(${(props) => props.imageUrl});
+  background-image: url(${(props) => props.$imageUrl});
   background-repeat: no-repeat;
   background-size: 40px 40px;
   background-position: center;
@@ -33,7 +33,8 @@ const Nickname = styled.div`
   // height: 14px;
   font-size: 14px;
   display: inline-block;
-  font-weight: 700;
+  font-family: "Pretendard-Bold";
+
   margin-bottom: 6px;
   display: flex;
   cursor: pointer;
@@ -44,18 +45,14 @@ const ContentWrap = styled.div`
 `;
 const FeedName = styled.div`
   color: #666;
-  font-family: Pretendard;
   font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
+  font-family: "Pretendard-Medium";
   line-height: 100%;
 `;
 const Time = styled.div`
   color: #666;
-  font-family: Pretendard;
+  font-family: "Pretendard-Medium";
   font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
   line-height: 100%;
   margin-left: 10px;
   position: relative;
@@ -94,14 +91,14 @@ type FeedDataProps = {
   feedData: FeedData;
 };
 type ProfileProps = {
-  imageUrl: string;
+  $imageUrl: string;
 };
 const FeedHeader: React.FC<FeedDataProps> = ({ feedData }) => {
   return (
     <FeedHeaderContainer>
       {feedData && feedData.user ? (
         <>
-          <Profile imageUrl={feedData.user.profileImg} />
+          <Profile $imageUrl={feedData.user.profileImg} />
           <HeaderContent>
             <Nickname>{feedData.user.user_name}</Nickname>
             <ContentWrap>

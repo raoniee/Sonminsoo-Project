@@ -8,15 +8,18 @@ const Item = styled.div<ImageProps>`
   margin-top: 16px;
   margin-right: 10px;
   flex: 0 0 auto;
-  background-image: url(${(props) => props.imageUrl});
+  background-image: url(${(props) => props.$imageUrl});
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100px;
+  margin-bottom: 8px;
+
 `;
 const ItemWrap = styled.div`
   overflow: hidden;
   width: 390px;
   cursor: pointer;
+  
 `;
 const Items = styled.div`
   display: flex;
@@ -25,7 +28,7 @@ const Items = styled.div`
 `;
 const ProductName = styled.p`
   font-size: 15px;
-  font-weight: 500;
+  font-family: "Pretendard-Medium";
   margin-bottom: 5px;
   color: #1d1b20;
   width: 94px;
@@ -35,9 +38,9 @@ const ProductName = styled.p`
 `;
 const Price = styled.p`
   margin: 0;
+  font-family: "Pretendard-Bold";
   color: #6138f8;
   font-size: 14px;
-  font-weight: 700;
 `;
 const Won = styled.span`
   font-size: 12px;
@@ -83,7 +86,7 @@ type FeedProps = {
   feedData: Feed;
 };
 type ImageProps = {
-  imageUrl: string;
+  $imageUrl: string;
 };
 
 const ItemBox: React.FC<FeedProps> = ({ feedData }) => {
@@ -93,7 +96,7 @@ const ItemBox: React.FC<FeedProps> = ({ feedData }) => {
         {feedData.sonminsuItems &&
           feedData.sonminsuItems.map((item, itemIndex) => (
             <div key={`${itemIndex}`}>
-              <Item imageUrl={item.itemImg} />
+              <Item $imageUrl={item.itemImg} />
               <ProductName>{item.title}</ProductName>
               <Price>
                 {item.price}

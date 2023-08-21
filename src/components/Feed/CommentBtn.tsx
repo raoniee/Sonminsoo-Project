@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import comment from "../../assets/images/svg/ic-message-circle.svg";
 import commentActive from "../../assets/images/svg/ic-message-active.svg";
@@ -13,13 +13,14 @@ const CommentIcon = styled.div<CommentNumberProps>`
   width: 24px;
   height: 24px;
   background: url(${(props) =>
-    props.commentClicked ? commentActive : comment});
+    props.$commentClicked ? commentActive : comment});
   cursor: pointer;
 `;
 const CommentNumber = styled.span<CommentNumberProps>`
   font-size: 15px;
+  font-family: "Pretendard-Medium";
   margin-left: 3px;
-  color: ${(props) => (props.commentClicked ? "#208DF1" : "#6c7080")};
+  color: ${(props) => (props.$commentClicked ? "#208DF1" : "#6c7080")};
 `;
 type Feed = {
   id: number;
@@ -64,7 +65,7 @@ type CommentBtnProps = {
   feedData: Feed;
 };
 type CommentNumberProps = {
-  commentClicked: boolean;
+  $commentClicked: boolean;
 };
 const CommentBtn: React.FC<CommentBtnProps> = ({
   commentOpen,
@@ -73,8 +74,8 @@ const CommentBtn: React.FC<CommentBtnProps> = ({
 }) => {
   return (
     <CommentBtnContainer>
-      <CommentIcon commentClicked={commentClicked} onClick={commentOpen} />
-      <CommentNumber commentClicked={commentClicked}>
+      <CommentIcon $commentClicked={commentClicked} onClick={commentOpen} />
+      <CommentNumber $commentClicked={commentClicked}>
         {feedData?.comments?.length || 0}
       </CommentNumber>
     </CommentBtnContainer>

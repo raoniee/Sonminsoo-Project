@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import detailDate from "../../utils/time";
-import profile from "../../assets/images/svg/profile1.svg";
 import more from "../../assets/images/svg/ic-more-vertical-16.svg";
 
 const CommentContainer = styled.div`
@@ -10,8 +9,12 @@ const CommentContainer = styled.div`
   padding: 0px 16px;
   margin: 19px 0;
 `;
-const Profile = styled.div`
-  background: url(${profile});
+const Profile = styled.div<ProfileImgProps>`
+  background-image: url(${(props) => props.$profileUrl});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 50%;
   width: 40px;
   height: 40px;
   margin-right: 7px;
@@ -25,19 +28,20 @@ const ContentWrap = styled.div`
   position: relative;
 `;
 const Nickname = styled.div`
+  color: #1d1b20;
   font-size: 14px;
-  font-weight: 700;
+  font-family: "Pretendard-Bold";
   color: #1d1b20;
 `;
 const Time = styled.div`
   color: #6c7080;
   font-size: 13px;
-  font-weight: 500;
+  font-family: "Pretendard-Medium";
   margin-left: 6px;
 `;
 const CommentText = styled.div`
   font-size: 14px;
-  font-weight: 500;
+  font-family: "Pretendard-Medium";
   line-height: 135%;
   color: #1d1b20;
   height: 38px;
@@ -83,6 +87,7 @@ type FeedCommentData = {
   id: number;
   user_id: number;
   user_name: string;
+  profileImg: string;
   feed_id: number;
   content: string;
   created_at: string;
@@ -91,8 +96,12 @@ type FeedCommentData = {
 
 type CommentItemProps = {
   comment: FeedCommentData;
+  showModal: () => void;
 };
-const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
+type ProfileImgProps = {
+  $profileUrl: string;
+};
+const CommentItem: React.FC<CommentItemProps> = ({ comment,showModal }) => {
   const [openedModalId, setOpenedModalId] = useState<number | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -110,28 +119,28 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
     };
   }, []);
 
-  const handleDelete = async (feedId: number, commentId: number) => {
-    try {
-      await axios.delete(
-        `http://localhost:5000/feed/${feedId}/comments/${commentId}`
-      );
-      alert("댓글이 삭제되었습니다.");
-      setOpenedModalId(null);
-    } catch (error) {
-      console.error(error);
-      alert("댓글 삭제에 실패했습니다. 다시 시도해주세요.");
-    }
-  };
+  // const handleDelete = async (feedId: number, commentId: number) => {
+  //   // try {
+  //   //   await axios.delete(
+  //   //     `http://localhost:5000/feed/${feedId}/comments/${commentId}`
+  //   //   );
+  //   //   alert("댓글이 삭제되었습니다.");
+  //   //   setOpenedModalId(null);
+  //   // } catch (error) {
+  //   //   console.error(error);
+  //   //   alert("댓글 삭제에 실패했습니다. 다시 시도해주세요.");
+  //   // }
+  // };
   return (
     <>
       <CommentContainer>
-        <Profile />
+        <Profile $profileUrl={comment.profileImg} />
         <CommentContent>
           <ContentWrap>
             <Nickname>{comment.user_name}</Nickname>
             <Time>{detailDate(comment.created_at)}</Time>
             <MoreBtn
-            src={more}
+              src={more}
               onClick={(e) => {
                 e.stopPropagation();
                 setOpenedModalId(comment.id);
@@ -140,7 +149,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment }) => {
             {openedModalId === comment.id && (
               <ReplyBtn ref={modalRef}>
                 <Delete
-                  onClick={() => handleDelete(comment.feed_id, comment.id)}
+                  onClick={showModal}
                 >
                   삭제하기
                 </Delete>

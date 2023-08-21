@@ -16,6 +16,7 @@ const LikeNumber = styled.span`
   font-size: 15px;
   margin-left: 6px;
   color: #6c7080;
+  font-family: "Pretendard-Medium";
 `;
 const LikeBtn = () => {
   return (

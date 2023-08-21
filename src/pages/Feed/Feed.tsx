@@ -8,12 +8,14 @@ import LikeBtn from "../../components/Feed/LikeBtn";
 import CommentBtn from "../../components/Feed/CommentBtn";
 import FeedText from "../../components/Feed/FeedText";
 import Comment from "../../components/Feed/Comment";
+import FooterNavBar from "../../components/FooterNavBar";
+import CloseModal from "../../components/Feed/CloseModal";
 
 const FeedImage = styled.div<FeedImgProps>`
   width: 100%;
   height: 390px;
   cursor: pointer;
-  background-image: url(${(props) => props.feedUrl});
+  background-image: url(${(props) => props.$feedUrl});
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -28,6 +30,7 @@ const Line = styled.div`
   width: 100%;
   height: 6px;
 `;
+
 //  data type
 type Feed = {
   id: number;
@@ -65,16 +68,22 @@ type CommentType = {
   created_at: string;
 };
 type FeedData = Feed[];
+
 type FeedImgProps = {
-  feedUrl: string;
+  $feedUrl: string;
 };
 const Feed: React.FC = () => {
   const [openCommentId, setOpenCommentId] = useState<number | undefined>();
   const [feedData, setFeedData] = useState<FeedData>([]);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  const showModal = () => {
+    setModalOpen(true);
+  };
 
   const fetchData = async () => {
     try {
@@ -97,7 +106,7 @@ const Feed: React.FC = () => {
       {feedData?.map((feed) => (
         <React.Fragment key={feed.id}>
           <FeedHeader feedData={feed} />
-          <FeedImage feedUrl={feed.feedImg} />
+          <FeedImage $feedUrl={feed.feedImg} />
           <ItemBox feedData={feed} />
           <FeedText feedData={feed} />
           <HashTag feedData={feed} />
@@ -109,10 +118,14 @@ const Feed: React.FC = () => {
               feedData={feed}
             />
           </BtnWrap>
-          {openCommentId === feed.id && <Comment feedData={feed} />}
+          {openCommentId === feed.id && (
+            <Comment feedData={feed} showModal={showModal} />
+          )}
           <Line />
         </React.Fragment>
       ))}
+      {openCommentId === undefined && <FooterNavBar />}
+      {modalOpen && <CloseModal setModalOpen={setModalOpen} />}
     </>
   );
 };
