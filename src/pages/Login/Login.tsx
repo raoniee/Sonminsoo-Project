@@ -2,14 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../redux/config/rootReducer";
-import axios from "axios";
-// import { axiosPrivate } from "../../api/axios";
+import axios from "../../api/axios";
 
-const axiosPrivate = axios.create({
-  baseURL: `/api/v1`,
-  headers: { "Content-Type": "application/json" },
-  withCredentials: true,
-});
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -60,7 +54,7 @@ const Login = () => {
               e.preventDefault();
               console.log("id", email);
               console.log("pw", password);
-              axiosPrivate
+              axios
                 .post("/auth/sign-in", data)
                 .then(({ headers }) => {
                   dispatch(setToken(headers.authorization));
@@ -77,6 +71,14 @@ const Login = () => {
             }}
           >
             check redux
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              console.log(document.cookie, "cookie");
+            }}
+          >
+            check getCookie
           </button>
         </div>
         <p>

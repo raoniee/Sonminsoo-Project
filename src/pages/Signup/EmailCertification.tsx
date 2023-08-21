@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
 import { signupContext } from "./index";
+import axios from "../../api/axios";
 
 const EmailCertification = () => {
   const [authValid, setAuthValid] = useState("");
@@ -10,11 +10,15 @@ const EmailCertification = () => {
   const handleEmailAuthClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     axios
-      .get(
-        `http://146.56.143.108/auth/verificationCode?email=${useSignupContext?.email}`
-      )
+      .get(`/auth/verification-code?email=${useSignupContext?.email}`)
       .then((res) => console.log("email res", res))
       .catch((e) => console.log(e));
+    //   axios
+    //     .get(
+    //       `http://146.56.143.108/auth/verification-code?email=${useSignupContext?.email}`
+    //     )
+    //     .then((res) => console.log("email res", res))
+    //     .catch((e) => console.log(e));
   };
   const handleEmailAuthVaildClick = (
     e: React.MouseEvent<HTMLButtonElement>
