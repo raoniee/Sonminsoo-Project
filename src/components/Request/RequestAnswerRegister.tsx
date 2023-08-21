@@ -10,19 +10,24 @@ const Wrap = styled.div`
 `;
 const AnswerNumber = styled.p`
   font-size: 14px;
-  font-family: "Pretendard-Medium";
+  font-style: normal;
+  font-weight: 500;
   margin-bottom: 20px;
 `;
 const LinkContents = styled.div`
   margin-bottom: 20px;
 `;
 const LinkTitle = styled.p`
-  font-family: "Pretendard-ExtraBold";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
   margin-bottom: 6px;
 `;
 const LinkDesc = styled.p`
   color: rgba(29, 27, 32, 0.5);
-  font-family: "Pretendard-Medium";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
   margin-bottom: 16px;
 `;
 const LinkBox = styled.div`
@@ -40,11 +45,16 @@ const LinkRegister = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const LinkSVG = styled.img``;
+const LinkSVG = styled.div`
+  width: 24px;
+  height: 24px;
+  background: url(${link}) no-repeat;
+`;
 const LinkRegisterLabel = styled.p`
   color: #acb5c8;
   font-size: 14px;
-  font-family: "Pretendard-ExtraBold";
+  font-style: normal;
+  font-weight: 700;
 `;
 const LinkAttachItem = styled.div`
   width: 100px;
@@ -60,10 +70,13 @@ const AttachImg = styled.div`
   border: 1px solid #1d1b20;
   margin-bottom: 8px;
 `;
-const Delete = styled.img`
+const Delete = styled.div`
   position: absolute;
   top: 8px;
   right: 8px;
+  width: 20px;
+  height: 20px;
+  background: url(${x}) no-repeat;
 `;
 const AttachTitle = styled.p`
   font-size: 15px;
@@ -88,12 +101,12 @@ const RequestAnswerRegister: React.FC = () => {
         <LinkDesc>최대 9개의 링크 업로드 가능</LinkDesc>
         <LinkBox>
           <LinkRegister>
-            <LinkSVG src={link} />
+            <LinkSVG />
             <LinkRegisterLabel>링크등록</LinkRegisterLabel>
           </LinkRegister>
           {/* <LinkAttachItem>
             <AttachImg>
-              <Delete src={x}/>
+              <Delete />
             </AttachImg>
             <AttachTitle>moonchuld</AttachTitle>
             <AttachPrice>12000원</AttachPrice>
