@@ -114,11 +114,7 @@ const ChatBar = ({ban}:Props) => {
         }
     };
 
- 
-    useEffect(() => {
-        console.log(imageFile);
-    }, [imageFile]);
-        
+
     const UploadFileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fileList = e.target.files;
         if (fileList && fileList[0]) {
@@ -142,20 +138,14 @@ const ChatBar = ({ban}:Props) => {
         <ChatBaWrapper>
             <IconWrapper>
                 <ChatIconImage src={iconImage} onClick={FileUploadClick} />
-                <FileInput 
-                    type="file" 
-                    accept={acceptFormat}
-                    ref={fileInputRef} 
-                    // hidden
-                    onChange={UploadFileHandler}
-                />
-                <ChatIconImage src={iconCamera} onClick={FileUploadClick} />
                 <input 
                     type="file" 
                     accept={acceptFormat}
                     ref={fileInputRef} 
-                    hidden 
+                    onChange={UploadFileHandler}
+                    style={{display: 'none'}}
                 />
+                <ChatIconImage src={iconCamera} onClick={FileUploadClick} />
             </IconWrapper>
             <ChatInputWrapper>
                 <ChatInput placeholder={placeHolder} disabled={ban ? true : false} />
