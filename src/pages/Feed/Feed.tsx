@@ -30,7 +30,6 @@ const Line = styled.div`
   width: 100%;
   height: 6px;
 `;
-
 //  data type
 type Feed = {
   id: number;
