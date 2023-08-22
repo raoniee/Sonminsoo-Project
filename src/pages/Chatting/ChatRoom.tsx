@@ -22,22 +22,24 @@ const LinkItem = styled(Link)`
 
 const ChatTitle = styled.div`
     width: 100%;
+    height: 100%;
+
     font-size: 20px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+
 `;
 
 
-
-const ChatWrapper = styled.div`
-    // background-color: pink;    
-
+const ChatRoomWindow = styled.div`
     width: 100%;
-    min-height: calc(100% - 148px);
-    padding-left: 16px;
-    padding-right: 16px;
-    
-    box-sizing: border-box;
+    height: 100%;
+    padding: 70px 16px 98px;
 `;
+
+
+
 
 const ChatRoom = () => {
 
@@ -71,7 +73,7 @@ const ChatRoom = () => {
                         <IconButton src={iconMember} />
                     </LinkItem>
                 </ChatHeader>
-                <ChatWrapper>
+                <ChatRoomWindow>
                     <OtherChat 
                          id={chatDataOther.id}
                          fandomId={chatDataOther.fandomId}
@@ -89,7 +91,7 @@ const ChatRoom = () => {
                         readCount={chatData.readCount}
                         createAt={chatData.createAt}
                     />
-                </ChatWrapper>
+                </ChatRoomWindow>
                 <ChatBar ban={ban} />
             </>
             
