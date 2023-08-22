@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import edit from "../../assets/images/svg/ic-edit.svg";
-import setting from "../../assets/images/svg/ic-settings.svg";
-import logo from "../../assets/images/svg/logo.svg";
+import edit from "../assets/images/svg/ic-edit.svg";
+import setting from "../assets/images/svg/ic-settings.svg";
+import logo from "../assets/images/svg/logo.svg";
 
 const Container = styled.div`
   width: 100%;
