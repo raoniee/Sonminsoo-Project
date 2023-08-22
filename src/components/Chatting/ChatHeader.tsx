@@ -9,7 +9,9 @@ const ChatHeader = styled.div`
 
     display: flex;
     align-items: center;
-    box-sizing: border-box;
+
+    position: fixed;
+    top: 0;
 `;
 
 export default ChatHeader;
