@@ -16,13 +16,17 @@ import iconMypageInActive from '../assets/images/svg/ic-mypage-inactive.svg';
 
 
 const FooterNavBarWrapper = styled.div`
-    width: 390px;
+    width: 100%;
     height: 83px;
 
     border-top: 1px solid #A5A8B8;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    box-sizing: border-box;
+    background-color: white;
+
+    position: fixed;
+    bottom: 0;
+    z-index: 99;
 `;
 
 const TabIconWrapper = styled.div`
@@ -118,8 +122,8 @@ const IconWithText = ({text, pathname}: IconWithTextProps) => {
         width: 24px;
         height: 24px;
         background-image: url(${iconUrl});
-
-        
+        background-repeat: no-repeat;
+        background-position: center;
     `;
 
     const IconText = styled.p`
