@@ -5,19 +5,19 @@ import iconSend from '../../assets/images/svg/ic-send.svg';
 import iconImage from "../../assets/images/svg/ic-image.svg";
 import iconCamera from "../../assets/images/svg/ic-camera.svg";
 
-const ChatBaWrapper = styled.div`
+const ChatBarWrapper = styled.div`
     width: 100%;
     height: 98px;
 
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    padding-left: 16px;
-    padding-right: 16px;
-
-
+    padding: 0 16px;
     box-shadow: 0 -5px 5px -5px lightgray;
-    box-sizing: border-box;
+
+
     display: flex;
+    position: fixed;
+    bottom: 0;
 `;
 
 const IconWrapper = styled.div`
@@ -135,7 +135,7 @@ const ChatBar = ({ban}:Props) => {
 
 
     return (
-        <ChatBaWrapper>
+        <ChatBarWrapper>
             <IconWrapper>
                 <ChatIconImage src={iconImage} onClick={FileUploadClick} />
                 <input 
@@ -151,7 +151,7 @@ const ChatBar = ({ban}:Props) => {
                 <ChatInput placeholder={placeHolder} disabled={ban ? true : false} />
                 <ChatInputButton disabled={ban ? true : false} />
             </ChatInputWrapper>
-        </ChatBaWrapper>
+        </ChatBarWrapper>
     )
 }
 
