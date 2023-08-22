@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ChatFandom } from '../../components/Chatting/ChatFandom';
-import { Link } from 'react-router-dom';
 import ChatHeader from '../../components/Chatting/ChatHeader';
+import ChatFandom from '../../components/Chatting/ChatFandom';
+import { Link } from 'react-router-dom';
 import FooterNavBar from '../../components/FooterNavBar';
-
 import { ReactComponent as logo } from '../../assets/images/svg/ic-logo.svg';
 
 
@@ -14,11 +13,10 @@ const Logo = styled(logo)`
 `;
 
 const ChatListWindow = styled.div`
-    height: calc(100% - 133px);
+    width: 100%;
+    height: 100%;
 
-    margin-top: 6px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 56px 16px 80px;
 `;
 
 
@@ -67,7 +65,6 @@ const ChatList = () => {
             </ChatListWindow>
             <FooterNavBar />
         </>
-      
     )
 }
 
