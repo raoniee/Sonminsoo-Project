@@ -14,7 +14,7 @@ interface signupContextType {
   email: string;
   setEmail: (value: string) => void;
   setSignupStep: (value: string) => void;
-  setUserInfo: (value: userInfoType) => void;
+  setUserInfo: React.Dispatch<React.SetStateAction<userInfoType>>;
   userInfo: userInfoType;
 }
 

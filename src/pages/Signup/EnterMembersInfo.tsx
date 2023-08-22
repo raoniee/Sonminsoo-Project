@@ -52,8 +52,6 @@ const EnterMembersInfo = () => {
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.id);
     console.log(e.target.value);
-    //@ts-ignore
-    //TODO: prev 타입 에러 해결
     setUserInfo((prev) => {
       return {
         ...prev,
