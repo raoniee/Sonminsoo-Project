@@ -72,7 +72,7 @@ type fandomProps = {
     image: string,
 }
 
-export const ChatFandom = () => {
+const ChatFandom = () => {
     // const { id, title, memberCount, image } = fandomInfo;
     const title = "꾹이의 모든 것";
     const memberCount = 22;
@@ -92,3 +92,5 @@ export const ChatFandom = () => {
         </ChatFandomWrapper>
     )
 }
+
+export default ChatFandom;
