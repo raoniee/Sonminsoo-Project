@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import IconButton from './IconButton';
 import iconSend from '../../assets/images/svg/ic-send.svg';
-import { ReactComponent as IconImage } from "../../assets/images/svg/ic-image.svg";
-import { ReactComponent as IconCamera } from "../../assets/images/svg/ic-camera.svg";
+import iconImage from "../../assets/images/svg/ic-image.svg";
+import iconCamera from "../../assets/images/svg/ic-camera.svg";
 
 const ChatBaWrapper = styled.div`
     width: 100%;
@@ -25,12 +26,7 @@ const IconWrapper = styled.div`
     display: flex;
 `;
 
-const ChatIconImage = styled(IconImage)`
-    cursor: pointer;
-    margin-right: 16px;
-`;
-
-const ChatIconCamera = styled(IconCamera)`
+const ChatIconImage = styled(IconButton)`
     cursor: pointer;
     margin-right: 16px;
 `;
@@ -81,14 +77,23 @@ const ChatInputButton = styled.button`
     }
 `;
 
+
 type Props = {
-    ban: boolean,
+    ban: boolean;
 }
+
+type UploadImage = {
+    file: File;
+    thumbnail: string;
+    type: string;
+}
+
+
 
 const ChatBar = ({ban}:Props) => {
 
-    const [placeHolder, SetPlaceHolder] = useState('채팅을 입력해 주세요');
-    
+    // 채팅 정지 상태에 따른 채팅input placeholder 설정
+    const [placeHolder, SetPlaceHolder] = useState('채팅을 입력해 주세요');    
     useEffect(() => {
         if(ban) {
             SetPlaceHolder('채팅정지 상태입니다');
@@ -97,11 +102,60 @@ const ChatBar = ({ban}:Props) => {
         }
     }, [ban]);
 
+    
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [imageFile, setImageFile] = useState<UploadImage>();
+    
+
+    // 이미지 버튼에 input 연결
+    const FileUploadClick = (e: React.MouseEvent<HTMLImageElement>) => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+ 
+    useEffect(() => {
+        console.log(imageFile);
+    }, [imageFile]);
+        
+    const UploadFileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fileList = e.target.files;
+        if (fileList && fileList[0]) {
+            const url = URL.createObjectURL(fileList[0]);
+            setImageFile(
+                {
+                    file: fileList[0],
+                    thumbnail: url,
+                    type: fileList[0].type,
+                });
+            }
+    };
+    
+
+    // input 파일형식
+    const acceptFormat='image/jpg, image/jpeg, image/png';
+
+
+
     return (
         <ChatBaWrapper>
             <IconWrapper>
-                <ChatIconImage />
-                <ChatIconCamera />
+                <ChatIconImage src={iconImage} onClick={FileUploadClick} />
+                <FileInput 
+                    type="file" 
+                    accept={acceptFormat}
+                    ref={fileInputRef} 
+                    // hidden
+                    onChange={UploadFileHandler}
+                />
+                <ChatIconImage src={iconCamera} onClick={FileUploadClick} />
+                <input 
+                    type="file" 
+                    accept={acceptFormat}
+                    ref={fileInputRef} 
+                    hidden 
+                />
             </IconWrapper>
             <ChatInputWrapper>
                 <ChatInput placeholder={placeHolder} disabled={ban ? true : false} />
