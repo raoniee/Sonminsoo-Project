@@ -17,6 +17,16 @@ import {
   FeedWriteRouter,
   SearchItemRouter,
   MyFandomRouter,
+  SignupRouter,
+  ChattingRouter,
+  SonminsooRouter,
+  FeedRouter,
+  MyPageRouter,
+  SettingsRouter,
+  RequestRouter,
+  FeedWriteRouter,
+  SearchItemRouter,
+  MyFandomRouter,
 } from "./Routes";
 import Requests from "./pages/Request/Requests";
 
@@ -31,7 +41,7 @@ const Router = createBrowserRouter([
   },
   {
     path: "hotFandom",
-    element: <Main />, //타오르는 팬덤 컴포넌트
+    element: <HotFandom />, //타오르는 팬덤 컴포넌트
   },
   // { path: "login", element: <Login /> }, //로그인 컴포넌트
   {
