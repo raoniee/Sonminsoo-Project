@@ -1,10 +1,10 @@
-import Main from "../pages/Main";
+import SonminsooItem from "../pages/SonminsooItem";
+import SonminsooItemList from "../pages/SonminsooItem/SonminsooItemList";
 
 export const SonminsooRouter = {
   path: "minsooItem",
-  element: <Main />, //손민수템 컴포넌트
+  element: <SonminsooItem />, //손민수템 컴포넌트
   children: [
-    // { path: "details", element: <Terms /> }, //손민수템 상세보기
-    //   { path: "details", element: <Terms /> }, //손민수템 의뢰
+    { path: "", element: <SonminsooItemList /> }, //손민수템 상세보기
   ],
 };
