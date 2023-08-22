@@ -104,7 +104,6 @@ const IconWithText = ({text, pathname}: IconWithTextProps) => {
         break;
     }
 
-    console.log(iconUrl);
 
     const IconGroup = styled.div`
         width: 50px;
