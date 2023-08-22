@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
+import styled from "styled-components";
 
 interface userInfoType {
   password: string;
@@ -21,6 +22,38 @@ export const signupContext = createContext<signupContextType>(
   {} as signupContextType
 );
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: "Arial", sans-serif;
+`;
+
+const Header = styled.div`
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+`;
+
+const Button = styled.input`
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
 const Signup: React.FC = () => {
   const [signupStep, setSignupStep] = useState("terms");
   const [email, setEmail] = useState("");
@@ -31,13 +64,11 @@ const Signup: React.FC = () => {
     phoneNumber: "",
   });
   const navigation = useNavigate();
-  // const handleSignupClcik = ()=>{
 
-  // }
   const nextButton = () => {
     if (signupStep === "terms")
       return (
-        <input
+        <Button
           type="button"
           value="다음,emailCertification"
           onClick={() => {
@@ -48,7 +79,7 @@ const Signup: React.FC = () => {
       );
     if (signupStep === "emailCertification")
       return (
-        <input
+        <Button
           type="button"
           value="다음,enterMembersInfo"
           onClick={() => {
@@ -59,7 +90,7 @@ const Signup: React.FC = () => {
       );
     if (signupStep === "enterMembersInfo")
       return (
-        <input
+        <Button
           type="button"
           value="회원가입 완료"
           onClick={() => {
@@ -87,11 +118,11 @@ const Signup: React.FC = () => {
     <signupContext.Provider
       value={{ email, setEmail, setSignupStep, setUserInfo, userInfo }}
     >
-      <div>
-        header
+      <Container>
+        <Header>header</Header>
         <Outlet />
         {nextButton()}
-      </div>
+      </Container>
     </signupContext.Provider>
   );
 };

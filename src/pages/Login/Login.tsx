@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "../../redux/config/rootReducer";
+import axios from "axios";
+// import { axiosPrivate } from "../../api/axios";
 
+const axiosPrivate = axios.create({
+  baseURL: `/api/v1`,
+  headers: { "Content-Type": "application/json" },
+  withCredentials: true,
+});
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState(false);
+  const data = JSON.stringify({ email, password });
+  const dispatch = useDispatch();
+  const auth = useSelector((state: any) => {
+    return state.auth.accessToken;
+  });
+  useEffect(() => {
+    console.log("token!", auth);
+  }, []);
 
   return (
     <div>
@@ -38,7 +55,29 @@ const Login = () => {
           <Link to={"/"}>아이디 또는 비밀번호를 잊어버리셧나요?</Link>
         </p>
         <div>
-          <button>로그인</button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              console.log("id", email);
+              console.log("pw", password);
+              axiosPrivate
+                .post("/auth/sign-in", data)
+                .then(({ headers }) => {
+                  dispatch(setToken(headers.authorization));
+                })
+                .catch((e) => console.log(e));
+            }}
+          >
+            로그인
+          </button>
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              console.log(auth, "redux access token");
+            }}
+          >
+            check redux
+          </button>
         </div>
         <p>
           새로운 계정이 필요하신가요? <Link to={"/signup"}>Sign Up</Link>
