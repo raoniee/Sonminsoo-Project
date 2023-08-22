@@ -13,59 +13,17 @@ const ChatTitle = styled.div`
     font-weight: bold;
 `;
 
-const FilterWindow = styled.div`
-    height: 32px;
-
-    box-sizing: border-box;
-`;
 
 const MemberWindow = styled.div`
-    height: calc(100% - 50px);
-
-    padding-left: 16px;
-    padding-right: 16px;
-    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 82px 16px 0;
 `;
 
 
-const UserInfoWrapper = styled.div`
-    display: flex;
-    align-items: center;
-`;
 
 type MemberProps = {
     isBan: boolean,
-}
-
-const UserInfoWithButton = ({isBan}: MemberProps) => {
-
-
-    const BanButton = styled.button`
-        width: 103px;
-        height: 30px;
-
-        background: ${isBan ? '#FC1E6E' : '#EBEEF2'} ;
-        color: ${isBan ? '#FFFFFF' : '#83839F'};
-        font-weight: bold;
-        font-size: 14px;
-    
-        border: 0;
-        border-radius: 4px;
-        // box-sizing: border-box;
-        display: inline;
-        
-        cursor: pointer;
-    `;
-
-    const chatBanText: string = isBan ? '채팅정지 취소' : '채팅정지';
-
-
-    return (
-        <UserInfoWrapper>
-            <ChatUserInfo />
-            <BanButton>{chatBanText}</BanButton>
-        </UserInfoWrapper>
-    )
 }
 
 
@@ -85,16 +43,13 @@ const ChatMember = () => {
                 
                 <IconButton src={iconSearch} />
             </ChatHeader>
-            <FilterWindow>
-
-            </FilterWindow>
             <MemberWindow>
-                <UserInfoWithButton isBan={false} />
-                <UserInfoWithButton isBan={false} />
-                <UserInfoWithButton isBan={false} />
-                <UserInfoWithButton isBan={false} />
-                <UserInfoWithButton isBan={true} />
-                <UserInfoWithButton isBan={true} />
+                <ChatUserInfo $ban={false} />
+                <ChatUserInfo $ban={false} />
+                <ChatUserInfo $ban={false} />
+                <ChatUserInfo $ban={false} />
+                <ChatUserInfo $ban={true} />
+                <ChatUserInfo $ban={true} />
             </MemberWindow>
         </>
     )
