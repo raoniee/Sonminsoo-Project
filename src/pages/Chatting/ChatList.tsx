@@ -4,12 +4,11 @@ import ChatHeader from '../../components/Chatting/ChatHeader';
 import ChatFandom from '../../components/Chatting/ChatFandom';
 import { Link } from 'react-router-dom';
 import FooterNavBar from '../../components/FooterNavBar';
-import { ReactComponent as logo } from '../../assets/images/svg/ic-logo.svg';
+import logo from '../../assets/images/svg/ic-logo.svg';
 
 
 
-const Logo = styled(logo)`
-
+const Logo = styled.img`
 `;
 
 const ChatListWindow = styled.div`
@@ -21,7 +20,6 @@ const ChatListWindow = styled.div`
 
 
 const LinkItem = styled(Link)`
-    text-decoration: none;
     cursor: pointer;
 
     &:visited {
@@ -52,7 +50,7 @@ const ChatList = () => {
     return (
         <>
             <ChatHeader>
-                <Logo />
+                <Logo src={logo} />
             </ChatHeader>
             <ChatListWindow>
                 <LinkItem to="chatroom">
