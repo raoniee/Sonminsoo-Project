@@ -3,6 +3,7 @@ import axios from "axios";
 import CommentItem from "../Feed/CommentItem";
 import * as S from "../../pages/Feed/style";
 import useInput from "../../hooks/useInput";
+
 type Feed = {
   id: number;
   user: User;
