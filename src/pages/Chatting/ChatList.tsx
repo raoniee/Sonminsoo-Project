@@ -21,6 +21,7 @@ const ChatListWindow = styled.div`
 
 const LinkItem = styled(Link)`
     cursor: pointer;
+    color: black;
 
     &:visited {
         color: black;
