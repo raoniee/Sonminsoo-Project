@@ -3,11 +3,12 @@ import { Outlet } from "react-router-dom";
 import FooterNavBar from "../../components/FooterNavBar";
 import StatusBar from "./StatusBar";
 import { Link } from "react-router-dom";
+import BucketListModal from "../../components/BucketListModal";
 
 const SonminsooItemContainer = styled.div`
   width: 390px;
+
   margin: 0;
-  padding: 0;
 `;
 const LinkRequestList = styled(Link)`
   display: flex;
@@ -25,15 +26,18 @@ const LinkRequestList = styled(Link)`
 
 const SonminsooItem = () => {
   return (
-    <SonminsooItemContainer>
-      <StatusBar />
-      <LinkRequestList to="/">
-        <span>손민수템 의뢰 리스트</span>
-        <span>&gt;</span>
-      </LinkRequestList>
-      <Outlet />
-      <FooterNavBar />
-    </SonminsooItemContainer>
+    <>
+      <SonminsooItemContainer>
+        <StatusBar />
+        <LinkRequestList to="/requests">
+          <span>손민수템 의뢰 리스트</span>
+          <span>&gt;</span>
+        </LinkRequestList>
+        <Outlet />
+        <BucketListModal />
+        <FooterNavBar />
+      </SonminsooItemContainer>
+    </>
   );
 };
 
