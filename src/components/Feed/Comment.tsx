@@ -62,7 +62,7 @@ const Comment: React.FC<FeedCommentProps> = ({ feedData, showModal }) => {
       <S.CommentInput onSubmit={handleSubmitComment}>
         <S.CommentInputBox
           placeholder="댓글을 입력해 주세요"
-          onChange={handleInputChange}
+          onChange={commendHandler}
           value={commentInput}
         />
         <S.SendBtn type="submit" />
