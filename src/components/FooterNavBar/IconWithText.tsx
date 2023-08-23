@@ -31,7 +31,6 @@ const TabIcon = styled.div<{ $iconUrl: string }>`
   background-image: url(${(props) => props.$iconUrl});
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
 `;
 
 const IconText = styled.p<{ $active: boolean }>`
