@@ -7,6 +7,7 @@ import IconButton, { BackButton } from '../../components/Chatting/IconButton';
 import ChatBar from '../../components/Chatting/ChatBar';
 import ChatMember from './ChatMember';
 import iconMember from '../../assets/images/svg/ic-member.svg';
+import ChatGridImage from '../../components/Chatting/ChatGridImage';
 
 
 
@@ -91,6 +92,7 @@ const ChatRoom = () => {
                         readCount={chatData.readCount}
                         createAt={chatData.createAt}
                     />
+                    <ChatGridImage />
                 </ChatRoomWindow>
                 <ChatBar ban={ban} />
             </>
