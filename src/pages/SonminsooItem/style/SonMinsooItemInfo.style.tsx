@@ -1,11 +1,10 @@
 import { styled } from "styled-components";
 
 export const SonminsooItemInfoContainer = styled.div`
-  width: 109px;
+  width: 108px;
   height: 178px;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
   margin: 10px 0;
 `;
 export const TitleContainer = styled.div`
@@ -17,8 +16,8 @@ export const TitleContainer = styled.div`
   margin-bottom: 5px;
 `;
 export const ItemImage = styled.div<{ $url: string }>`
-  width: 109px;
-  height: 109px;
+  width: 108px;
+  height: 108px;
   border: 1px solid black;
   border-radius: 8px;
   background-image: url(${(props) => props.$url});

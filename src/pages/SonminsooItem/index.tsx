@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import BucketListModal from "../../components/BucketListModal";
 
 const SonminsooItemContainer = styled.div`
-  width: 390px;
-
-  margin: 0;
+  width: 100%;
 `;
 const LinkRequestList = styled(Link)`
   display: flex;

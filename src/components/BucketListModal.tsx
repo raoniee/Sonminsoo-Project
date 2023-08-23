@@ -7,7 +7,6 @@ const BucketListModalContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
@@ -18,14 +17,14 @@ const ModalContentContainer = styled.div`
   flex-direction: column;
   position: absolute;
   background-color: #ffffff;
-  width: 390px;
+  width: 100%;
   height: 304px;
   padding: 15px;
   bottom: 0;
   border-radius: 16px 16px 0px 0px;
 `;
 const BucketListTitle = styled.div`
-  margin: 30px auto;
+  margin: 15px auto;
   color: var(--grey-100-black, #1d1b20);
   font-family: Pretendard;
   font-size: 16px;
@@ -36,9 +35,8 @@ const BucketListTitle = styled.div`
 const BucketListsContainer = styled.div`
   display: flex;
   width: 100%;
-  height: 116px;
+  height: 100%;
   padding: 15px 0;
-  //   background: rgba(0, 0, 0, 0.1);
 `;
 const AddBucketList = styled.button`
   width: 358px;
@@ -57,7 +55,6 @@ const AddBucketList = styled.button`
 `;
 const BucketItemContainer = styled.div`
   width: 80px;
-  //   background: rgba(0, 0, 0, 0.3);
   margin-right: 10px;
 `;
 const BucketItemImage = styled.div`
@@ -71,6 +68,16 @@ const BucketItemImage = styled.div`
   background-position: center;
   background-size: cover;
 `;
+const BucketTitle = styled.div`
+  margin: 8px;
+  color: rgba(29, 27, 32, 0.8);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%; /* 14px */
+`;
 const BucketListModal = () => {
   return (
     <BucketListModalContainer>
@@ -79,12 +86,11 @@ const BucketListModal = () => {
         <BucketListsContainer>
           <BucketItemContainer>
             <BucketItemImage />
+            <BucketTitle>나의 버킷 리스트</BucketTitle>
           </BucketItemContainer>
           <BucketItemContainer>
             <BucketItemImage />
-          </BucketItemContainer>
-          <BucketItemContainer>
-            <BucketItemImage />
+            <BucketTitle>꾹이 손민수템</BucketTitle>
           </BucketItemContainer>
         </BucketListsContainer>
         <AddBucketList type="button">추가 하기</AddBucketList>
