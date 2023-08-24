@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import type { Fandom } from '../../types/chatting';
+import type { Fandom } from '../../types/chattingType';
 import logo from '../../assets/images/svg/ic-logo.svg';
 import ChatHeader from '../../components/Chatting/ChatHeader';
 import ChatFandom from '../../components/Chatting/ChatFandom';
