@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import type { Fandom } from '../../types/chatting';
+import logo from '../../assets/images/svg/ic-logo.svg';
 import ChatHeader from '../../components/Chatting/ChatHeader';
 import ChatFandom from '../../components/Chatting/ChatFandom';
-import { Link } from 'react-router-dom';
 import FooterNavBar from '../../components/FooterNavBar';
-import logo from '../../assets/images/svg/ic-logo.svg';
 
 
 
@@ -18,7 +20,6 @@ const ChatListWindow = styled.div`
     padding: 56px 16px 80px;
 `;
 
-
 const LinkItem = styled(Link)`
     cursor: pointer;
     color: black;
@@ -26,27 +27,28 @@ const LinkItem = styled(Link)`
     &:visited {
         color: black;
     }
-`
+`;
 
 
-type fandomProps = {
-    id: number,
-    title: string,
-    memberCount: number,
-    image: string,
-}
-
-const fandomMok: fandomProps = {
-    id: 1234,
-    title: "꾹이의 모든 것",
-    memberCount: 22,
-    image: '',
-}
-
-
+type FandomData = Fandom[];
 
 
 const ChatList = () => {
+
+    const [fandomData, setFandomData] = useState<FandomData>([]);
+
+    useEffect(() => {
+        getData();
+    }, []);
+    
+    const getData = async () => {
+        try {
+            const res = await axios.get('http://localhost:3001/fandom');
+            setFandomData(res.data);
+        } catch (err) {
+            console.log("Error", err);
+        }
+    }
 
     return (
         <>
@@ -54,13 +56,19 @@ const ChatList = () => {
                 <Logo src={logo} />
             </ChatHeader>
             <ChatListWindow>
-                <LinkItem to="chatroom">
-                    <ChatFandom />
-                </LinkItem>
-                <LinkItem to="chatroom">
-                    <ChatFandom />
-                </LinkItem>
-                <ChatFandom />
+                {fandomData?.map((fandom) => (
+                    <React.Fragment key={fandom.id}>
+                        <LinkItem to={`chatroom/${fandom.id}`}>
+                            <ChatFandom 
+                                id={fandom.id}
+                                title={fandom.title} 
+                                memberCount={fandom.memberCount} 
+                                image={fandom.image}
+                                createAt={fandom.createAt}
+                            />
+                        </LinkItem>
+                    </React.Fragment>
+                ))}
             </ChatListWindow>
             <FooterNavBar />
         </>
