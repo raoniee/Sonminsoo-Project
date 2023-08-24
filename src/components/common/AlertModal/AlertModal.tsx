@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from "react";
+<<<<<<< HEAD:src/components/CloseModal/index.tsx
 import styled from "styled-components";
 import * as S from "./style/index";
+=======
+import * as S from "./style/AlertModal.style";
+
+>>>>>>> 196d22e (Chore: 폴더 스타일 구조 변경):src/components/common/AlertModal/AlertModal.tsx
 type ModalProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
@@ -9,7 +14,7 @@ type ModalProps = {
   yesContent: string;
   yesClickHandler: React.MouseEventHandler<HTMLDivElement>;
 };
-const CloseModal: React.FC<ModalProps> = ({
+const AlertModal: React.FC<ModalProps> = ({
   setModalOpen,
   title,
   content,
@@ -55,4 +60,4 @@ const CloseModal: React.FC<ModalProps> = ({
   );
 };
 
-export default CloseModal;
+export default AlertModal;
