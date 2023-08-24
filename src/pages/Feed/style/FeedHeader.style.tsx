@@ -7,7 +7,6 @@ export const FeedHeaderContainer = styled.div`
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  justify-content: space-between;
 `;
 export const Profile = styled.img`
   width: 40px;
@@ -15,13 +14,12 @@ export const Profile = styled.img`
   border-radius: 40px;
   background-color: lightgray;
   cursor: pointer;
-
 `;
 export const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 7px;
-  width: 294px;
+  width: 100%;
 `;
 export const Nickname = styled.div`
   // height: 14px;
@@ -68,4 +66,3 @@ export const MoreBtn = styled.img`
   height: 24px;
   cursor: pointer;
 `;
-
