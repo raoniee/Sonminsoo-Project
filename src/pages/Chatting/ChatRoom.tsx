@@ -36,7 +36,7 @@ const ChatRoom = () => {
                 <S.ChatHeader>
                     <BackButton />
                     <S.ChatTitle>A.R.M.Y</S.ChatTitle>
-                    <S.LinkItem to="/chatting/chatmember">
+                    <S.LinkItem to="/chatting/chatmember/1">
                         <S.IconButton src={iconMember} />
                     </S.LinkItem>
                 </S.ChatHeader>
