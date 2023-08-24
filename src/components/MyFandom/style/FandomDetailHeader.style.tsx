@@ -5,31 +5,31 @@ import { ReactComponent as LfetArrow } from "../../../assets/images/svg/ic-arrow
 
 // 팬덤 헤더 컨테이너
 export const ContentHeaderContainer = styled.div`
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    //background-color: #f3f3b7;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  //background-color: #f3f3b7;
 `;
 
 // 헤더 마이 팬덤 텍스트 박스
 export const MyFandomHeaderBox = styled.div`
-    display: flex;
+  display: flex;
 `;
 
 // arrow Btn
 export const LeftArrowBtn = styled(LfetArrow)`
-    width: 24px;
-    height: 24px;
-    margin-left: 16px;
+  width: 24px;
+  height: 24px;
+  margin-left: 16px;
 `;
 
 // 오른쪽 아이콘 박스
 
 // ViewAllBtn 임포트
 export const CheckIconBtn = styled(CheckIcon)`
-    width: 24px;
-    height: 24px;
-    margin-right: 13px;
-    float: right;
+  width: 24px;
+  height: 24px;
+  margin-right: 13px;
+  float: right;
 `;

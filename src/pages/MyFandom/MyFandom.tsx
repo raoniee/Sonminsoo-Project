@@ -9,53 +9,53 @@ import MyFandomList from "../../components/MyFandom/MyFandomList";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 type Fandom = {
-    fandomName: string;
-    id: number;
-    lastChatTime: null;
-    memberLength: number;
-    rank: number;
-    image: string;
+  fandomName: string;
+  id: number;
+  lastChatTime: null;
+  memberLength: number;
+  rank: number;
+  image: string;
 };
 
 type FandomData = Fandom[];
 
 const MyFandom = () => {
-    const axiosPrivate = useAxiosPrivate();
-    const [data, setData] = useState<FandomData>([]);
+  const axiosPrivate = useAxiosPrivate();
+  const [data, setData] = useState<FandomData>([]);
 
-    const auth = useSelector((state: any) => {
-        return state.auth.accessToken;
-    });
+  const auth = useSelector((state: any) => {
+    return state.auth.accessToken;
+  });
 
-    console.log("auth:", auth);
+  console.log("auth:", auth);
 
-    useEffect(() => {
-        initDataGet();
-    }, []);
+  useEffect(() => {
+    initDataGet();
+  }, []);
 
-    const initDataGet = async () => {
-        try {
-            const res = await axiosPrivate.get("/users/fandoms");
-            console.log("get:", res.data.data);
-            setData(res.data.data);
-        } catch (error) {
-            console.error("Error", error);
-        }
-    };
+  const initDataGet = async () => {
+    try {
+      const res = await axiosPrivate.get("/users/fandoms");
+      console.log("get:", res.data.data);
+      setData(res.data.data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
 
-    return (
-        <S.Container>
-            <S.MyFandomHeaderBox>
-                <HomeHeader />
-                <FandomMenu />
-            </S.MyFandomHeaderBox>
-            <S.MyFandomListBox>
-                <ContentHeader />
-                {data.map((item) => (
-                    <MyFandomList key={item.id} item={item} />
-                ))}
-            </S.MyFandomListBox>
-        </S.Container>
-    );
+  return (
+    <S.Container>
+      <S.MyFandomHeaderBox>
+        <HomeHeader />
+        <FandomMenu />
+      </S.MyFandomHeaderBox>
+      <S.MyFandomListBox>
+        <ContentHeader />
+        {data.map((item) => (
+          <MyFandomList key={item.id} item={item} />
+        ))}
+      </S.MyFandomListBox>
+    </S.Container>
+  );
 };
 export default MyFandom;
