@@ -64,8 +64,10 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, showModal }) => {
         <S.CommentProfile src={comment.profileImg} />
         <S.CommentContent>
           <S.CommnetContentWrap>
-            <S.CommentNickname>{comment.user_name}</S.CommentNickname>
-            <S.CommentTime>{detailDate(comment.created_at)}</S.CommentTime>
+            <S.UserContenWrap>
+              <S.CommentNickname>{comment.user_name}</S.CommentNickname>
+              <S.CommentTime>{detailDate(comment.created_at)}</S.CommentTime>
+            </S.UserContenWrap>
             <S.CommentMoreBtn
               src={commentmore}
               onClick={(e) => {

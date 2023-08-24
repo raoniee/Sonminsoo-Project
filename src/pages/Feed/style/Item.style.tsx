@@ -12,9 +12,9 @@ export const Item = styled.img`
 `;
 export const ItemWrap = styled.div`
   overflow: hidden;
-  width: 390px;
+  width: 100%;
   cursor: pointer;
-  margin-left: 16px;
+  padding-left: 16px;
 `;
 export const Items = styled.div`
   display: flex;

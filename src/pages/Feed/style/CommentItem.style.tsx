@@ -12,12 +12,16 @@ export const CommentProfile = styled.img`
   margin-right: 7px;
 `;
 export const CommentContent = styled.div`
-  width: 300px;
+  width: 100%;
 `;
 export const CommnetContentWrap = styled.div`
   display: flex;
   margin-bottom: 6px;
-  position: relative;
+`;
+export const UserContenWrap = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
 `;
 export const CommentNickname = styled.div`
   color: #1d1b20;
@@ -42,8 +46,6 @@ export const CommentMoreBtn = styled.img`
   width: 16px;
   height: 16px;
   cursor: pointer;
-  position: absolute;
-  right: -7px;
 `;
 
 export const ReplyBtn = styled.div`

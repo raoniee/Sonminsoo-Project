@@ -3,7 +3,7 @@ import styled from "styled-components";
 import StatusBar from "../../components/StatusBar";
 
 const FeedContainer = styled.div`
-  width: 390px;
+  width: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
