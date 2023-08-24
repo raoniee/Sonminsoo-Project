@@ -1,4 +1,4 @@
-import SonminsooItem from "../pages/SonminsooItem";
+import SonminsooItem from "../pages/SonminsooItem/SonminsooItem";
 import SonminsooItemList from "../pages/SonminsooItem/SonminsooItemList";
 
 export const SonminsooRouter = {

@@ -1,26 +1,5 @@
-import { styled } from "styled-components";
 import SonMinsooItemInfo from "./SonMinsooItemInfo";
-import { useOutletContext } from "react-router-dom";
-
-const SonminsooItemListContainer = styled.div`
-  width: 358px;
-  margin: 21px auto 0 auto;
-  padding: 0;
-`;
-const SonminsooItemsContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  padding-bottom: 83px;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  overflow-y: scroll;
-  overflow-x: hidden;
-`;
-
-const SonminsooItemTitle = styled.div`
-  margin-bottom: 5px;
-`;
+import * as S from "./style/SonminsooItemList.style";
 
 const SonminsooItemList = () => {
   // const test = useOutletContext();
@@ -98,9 +77,9 @@ const SonminsooItemList = () => {
     },
   ];
   return (
-    <SonminsooItemListContainer>
-      <SonminsooItemTitle>손민수템</SonminsooItemTitle>
-      <SonminsooItemsContainer>
+    <S.SonminsooItemListContainer>
+      <S.SonminsooItemTitle>손민수템</S.SonminsooItemTitle>
+      <S.SonminsooItemsContainer>
         {testData.map((data, index) => {
           return (
             <SonMinsooItemInfo
@@ -113,8 +92,8 @@ const SonminsooItemList = () => {
             />
           );
         })}
-      </SonminsooItemsContainer>
-    </SonminsooItemListContainer>
+      </S.SonminsooItemsContainer>
+    </S.SonminsooItemListContainer>
   );
 };
 export default SonminsooItemList;

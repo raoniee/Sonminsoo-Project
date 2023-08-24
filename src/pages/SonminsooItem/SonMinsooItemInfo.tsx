@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "./style/SonMinsooItemInfo.style";
 import bookMark from "../../assets/images/svg/SonminsooItem/bookmarkIcon.svg";
 import activeBookMark from "../../assets/images/svg/SonminsooItem/activebookmarkIcon.svg";
 

@@ -3,7 +3,7 @@ import * as S from "../style/RequestWriterResponse.style";
 import more from "../../../assets/images/svg/ic-more-horizontal.svg";
 import select from "../../../assets/images/svg/ic-select.svg";
 import LinkAttachItem from "../LinkAttachItem";
-import CloseModal from "../../CloseModal";
+import MobileAlertModal from "../../common/AlertModal/MobileAlertModal";
 
 const RequestWriterResponse: React.FC = () => {
   const [hhh, setHHH] = useState(true);
@@ -38,7 +38,7 @@ const RequestWriterResponse: React.FC = () => {
         </S.ImgsBox>
       </S.Wrap>
       {/* {hhh && (
-        <CloseModal
+        <AlertModal
           title="채택하기"
           content="채택하시겠습니까?"
           yesContent="채택"
