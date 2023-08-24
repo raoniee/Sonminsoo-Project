@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import type { Fandom } from '../../types/chattingType';
 import ChatFandom from '../../components/Chatting/ChatFandom';
-import FooterNavBar from '../../components/FooterNavBar';
+import FooterNavBar from '../../components/common/FooterNavBar/FooterNavBar';
 import logo from '../../assets/images/svg/ic-logo.svg';
 import * as S from './styles/ChatList.style';
 

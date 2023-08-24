@@ -1,59 +1,28 @@
 import React from "react";
-import styled from "styled-components";
+import * as S from "./style/RequestLink.style";
 
-const Wrap = styled.div`
-  width: 100%;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  padding-left: 16px;
-  padding-top: 7px;
-  margin-top: 6px;
-`;
-const ListImg = styled.div`
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
-  background-color: gray;
-  margin-right: 15px;
-`;
-const LeftBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-`;
-const ListTitle = styled.p`
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-`;
-const ListInfo = styled.div`
-  display: flex;
-`;
-const ListUserName = styled.p`
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-  margin-right: 10px;
-`;
-const ListTime = styled.p`
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 500;
-`;
+type RequestListProps = {
+  title: string;
+  username: string;
+  date: string;
+};
 
-const RequestList: React.FC = () => {
+const RequestList: React.FC<RequestListProps> = ({ title, username, date }) => {
   return (
-    <Wrap>
-      <ListImg />
-      <LeftBox>
-        <ListTitle>제발 이것좀 찾아 주세요 ㅜㅜ</ListTitle>
-        <ListInfo>
-          <ListUserName>아마추어 손민수</ListUserName>
-          <ListTime>10분전</ListTime>
-        </ListInfo>
-      </LeftBox>
-    </Wrap>
+    <S.Wrap
+      onClick={() => {
+        //주소 정보를 props로 받아서 전달하기
+      }}
+    >
+      <S.ListImg />
+      <S.LeftBox>
+        <S.ListTitle>{title}</S.ListTitle>
+        <S.ListInfo>
+          <S.ListUserName>{username}</S.ListUserName>
+          <S.ListTime>{date}</S.ListTime>
+        </S.ListInfo>
+      </S.LeftBox>
+    </S.Wrap>
   );
 };
 
