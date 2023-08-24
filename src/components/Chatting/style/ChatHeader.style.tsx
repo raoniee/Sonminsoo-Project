@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
 
-const ChatHeader = styled.div`
+export const ChatHeader = styled.div`
     width: 100%;
     height: 50px;
     padding-left: 16px;
@@ -15,5 +14,3 @@ const ChatHeader = styled.div`
     top: 0;
     z-index: 99;
 `;
-
-export default ChatHeader;
