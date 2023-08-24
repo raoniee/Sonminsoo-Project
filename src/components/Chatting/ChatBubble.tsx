@@ -3,10 +3,8 @@ import styled from 'styled-components';
 
 
 const ChatBubbleWrapper = styled.div`
-    // background-color: white;
-
+    width: 100%;
     display: flex;
-
     margin-bottom: 30px;
 `;
 
@@ -15,9 +13,8 @@ const ChatProfileImage = styled.img`
 
     width: 40px;
     height: 40px;
-    border-radius: 70%;
-
     margin-right: 7px;
+    border-radius: 70%;
 `;
 
 const ChatBubbleWrapped = styled.div`
@@ -26,22 +23,18 @@ const ChatBubbleWrapped = styled.div`
 `;
 
 const ChatProfileName = styled.p`
-    margin: 0;
     margin-bottom: 6px;
 
     font-size: 14px;
     font-weight: bold;
-    
 `;
 
 const ChatBubble = styled.p`
     max-width: 272px;
-    margin: 0;
     margin-bottom: 8px;
     padding: 16px;
-    border-radius: 10px;
-    box-sizing: border-box;
 
+    border-radius: 10px;
     background-color: #CFE4FF;
     font-size: 14px;
 `;
@@ -49,8 +42,8 @@ const ChatBubble = styled.p`
 const ChatSubWrapper = styled.div`
     display: flex;
 `;
+
 const ChatTime = styled.p`
-    margin: 0;
     margin-right: 7px;
 
     font-size: 13px;
@@ -59,29 +52,29 @@ const ChatTime = styled.p`
 `;
 
 const ChatReadCount = styled.p`
-    margin: 0;
     font-size: 13px;
     color: #09EE65;
 `;
 
 
+
 const MyChatWrapper = styled.div`
-    // background-color: white;
-    
-    max-width: 272px;
+    width: 100%;
+    margin-bottom: 30px;
+
     display: flex;
     flex-direction: column;
-    float: right;
+    align-items: flex-end;
 `;
 
 const MyChatBubble = styled.p`
     background-color: #09EE65;
 
-    margin: 0;
+    max-width: 272px;
     margin-bottom: 8px;
     padding: 16px;
+
     border-radius: 10px;
-    box-sizing: border-box;
     font-size: 14px;
 `;
 
@@ -97,7 +90,6 @@ export type ChatProps = {
 
 
 export const MyChat = ({id, fandomId, author, content, readCount, createAt}: ChatProps) => {
-    console.log();
     return (
         <MyChatWrapper>
             <MyChatBubble>{content}</MyChatBubble>
