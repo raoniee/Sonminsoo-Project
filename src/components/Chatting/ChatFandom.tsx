@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as IconUser } from '../../assets/images/svg/ic_user.svg';
-import type { Fandom } from '../../types/chatting';
+import type { Fandom } from '../../types/chattingType';
 
 const ChatFandomWrapper = styled.div`
     display: flex;
