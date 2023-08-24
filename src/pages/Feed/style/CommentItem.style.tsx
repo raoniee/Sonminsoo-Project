@@ -17,6 +17,7 @@ export const CommentContent = styled.div`
 export const CommnetContentWrap = styled.div`
   display: flex;
   margin-bottom: 6px;
+  position: relative;
 `;
 export const UserContenWrap = styled.div`
   width: 100%;
@@ -63,6 +64,7 @@ export const ReplyBtn = styled.div`
   align-items: center;
   box-sizing: border-box;
   cursor: pointer;
+  position: absolute;
 `;
 export const Delete = styled.div`
   font-size: 14px;
