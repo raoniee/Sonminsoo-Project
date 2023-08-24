@@ -10,6 +10,7 @@ import {
   MyPageRouter,
   SettingsRouter,
   RequestRouter,
+  FeedWriteRouter,
 } from "./Routes";
 
 const Router = createBrowserRouter([
@@ -30,6 +31,8 @@ const Router = createBrowserRouter([
     path: "fandom/:fandomId",
     element: <Main />, //팬덤 상세보기 컴포넌트
   },
+  { path: "feedwrite", element: <Main /> },
+
   SignupRouter,
   ChattingRouter,
   SonminsooRouter,
@@ -37,6 +40,7 @@ const Router = createBrowserRouter([
   MyPageRouter,
   SettingsRouter,
   RequestRouter,
+  FeedWriteRouter,
 ]);
 
 export default Router;
