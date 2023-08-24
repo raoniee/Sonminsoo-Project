@@ -14,44 +14,32 @@ const ChatGridImage = ({ imageList }: Chat) => {
   };
 
   return (
-    <S.GridImageWrapper $isMe={$isMe}>
-      <S.GridImageContainer $imageCount={$imageCount}>
-        {imageList.map((image, index) => (
-          <S.GridImage
-            key={index}
-            src={image}
-            $imageCount={$imageCount}
-            onClick={openViewerHandler}
-          />
-        ))}
-        {/* <S.GridImage 
-                    src={require('../../assets/images/png/mini.png')}
-                    // src={$imgUrl}
-                    $imageCount={$imageCount} 
-                />
-                <S.GridImage 
-                    src={require('../../assets/images/png/mini.png')}
-                    // src={$imgUrl}
-                    $imageCount={$imageCount} 
-                />
-                <S.GridImage 
-                    src={require('../../assets/images/png/mini.png')}
-                    // src={$imgUrl}
-                    $imageCount={$imageCount} 
-                /> */}
+    <GridImageWrapper isMe={isMe}>
+      <GridImageContainer $imageCount={$imageCount}>
+        {/* <GridImage $imageCount={$imageCount} />
+                <GridImage $imageCount={$imageCount} /> */}
+        <GridImage
+          src={require("../../assets/images/png/mini.png")}
+          // src={$imgUrl}
+          $imageCount={$imageCount}
+        />
+        <S.GridImage
+          src={require("../../assets/images/png/mini.png")}
+          // src={$imgUrl}
+          $imageCount={$imageCount}
+        />
+        <S.GridImage
+          src={require("../../assets/images/png/mini.png")}
+          // src={$imgUrl}
+          $imageCount={$imageCount}
+        />
         {$imageCount > 3 && (
-          <S.ModalImage>
+          <ModalImage>
             <p>+{$imageCount > 3 && $imageCount - 3}개</p>
-          </S.ModalImage>
+          </ModalImage>
         )}
-        {isViewerOpen ? (
-          <ChatImageViewer
-            imageList={imageList}
-            setIsViewerOpen={setIsViewerOpen}
-          />
-        ) : null}
-      </S.GridImageContainer>
-    </S.GridImageWrapper>
+      </GridImageContainer>
+    </GridImageWrapper>
   );
 };
 
