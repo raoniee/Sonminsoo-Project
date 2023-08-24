@@ -1,15 +1,15 @@
-import iconHome from "../assets/images/svg/ic-home-active.svg";
-import iconHomeInActive from "../assets/images/svg/ic-home-inactive.svg";
-import iconFeed from "../assets/images/svg/ic-feed-active.svg";
-import iconFeedInActive from "../assets/images/svg/ic-feed-inactive.svg";
-import iconItem from "../assets/images/svg/ic-item-active.svg";
-import iconItemInActive from "../assets/images/svg/ic-item-inactive.svg";
-import iconChat from "../assets/images/svg/ic-chat-active.svg";
-import iconChatInActive from "../assets/images/svg/ic-chat-inactive.svg";
-import iconMypage from "../assets/images/svg/ic-mypage-active.svg";
-import iconMypageInActive from "../assets/images/svg/ic-mypage-inactive.svg";
+import iconHome from "../../assets/images/svg/ic-home-active.svg";
+import iconHomeInActive from "../../assets/images/svg/ic-home-inactive.svg";
+import iconFeed from "../../assets/images/svg/ic-feed-active.svg";
+import iconFeedInActive from "../../assets/images/svg/ic-feed-inactive.svg";
+import iconItem from "../../assets/images/svg/ic-item-active.svg";
+import iconItemInActive from "../../assets/images/svg/ic-item-inactive.svg";
+import iconChat from "../../assets/images/svg/ic-chat-active.svg";
+import iconChatInActive from "../../assets/images/svg/ic-chat-inactive.svg";
+import iconMypage from "../../assets/images/svg/ic-mypage-active.svg";
+import iconMypageInActive from "../../assets/images/svg/ic-mypage-inactive.svg";
 import { styled } from "styled-components";
-
+import * as S from "./style";
 type IconWithTextProps = {
   text: string;
   pathname: string;
@@ -98,10 +98,10 @@ const IconWithText = ({ text, pathname }: IconWithTextProps) => {
   `;
 
   return (
-    <IconGroup>
-      <TabIcon />
-      <IconText>{text}</IconText>
-    </IconGroup>
+    <S.IconGroup>
+      <S.TabIcon $iconUrl={$iconUrl} />
+      <S.IconText $active={$active}>{text}</S.IconText>
+    </S.IconGroup>
   );
 };
 export default IconWithText;
