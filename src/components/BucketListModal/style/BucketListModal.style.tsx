@@ -6,7 +6,6 @@ export const BucketListModalContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
@@ -36,8 +35,6 @@ export const BucketListsContainer = styled.div`
   display: flex;
   width: 100%;
   height: 116px;
-  padding: 15px 0;
-  //   background: rgba(0, 0, 0, 0.1);
 `;
 export const AddBucketList = styled.button`
   width: 358px;

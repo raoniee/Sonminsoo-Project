@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
 import * as S from "./style/index";
+
 type ModalProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
