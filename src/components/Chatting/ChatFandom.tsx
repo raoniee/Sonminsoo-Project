@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as IconUser } from '../../assets/images/svg/ic_user.svg';
-
+import type { Fandom } from '../../types/chatting';
 
 const ChatFandomWrapper = styled.div`
     display: flex;
@@ -38,7 +38,6 @@ const FandomWrapper = styled.div`
 `;
 
 const FandomTitle = styled.p`
-    margin: 0;
     margin-right: 10px;
 
     font-size: 16px;
@@ -53,30 +52,20 @@ const MemberIcon = styled(IconUser)`
 `;
 
 const FandomMember = styled.p`
-    margin: 0;
-
     font-size: 13px;
     vertical-align: bottom;
 `;
 
 const FandomActive = styled.p`
-    margin: 0;  
-
     font-size: 13px;
+    & span {
+        margin: 0 4px;
+        color: #EBEEF2;
+        font-size: 2px;
+    }
 `;
 
-type fandomProps = {
-    id: number,
-    title: string,
-    memberCount: number,
-    image: string,
-}
-
-const ChatFandom = () => {
-    // const { id, title, memberCount, image } = fandomInfo;
-    const title = "꾹이의 모든 것";
-    const memberCount = 22;
-    const time = "";
+const ChatFandom = ({id, title, memberCount, image, createAt}: Fandom ) => {
 
     return (
         <ChatFandomWrapper>
@@ -87,7 +76,7 @@ const ChatFandom = () => {
                     <MemberIcon />
                     <FandomMember>{memberCount}</FandomMember>       
                 </FandomWrapper>
-                <FandomActive>채팅활동 10분전</FandomActive>
+                <FandomActive>채팅활동<span>•</span>10분전</FandomActive>
             </ChatInfo>
         </ChatFandomWrapper>
     )
