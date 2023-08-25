@@ -4,9 +4,6 @@ import { useMemo, useState } from "react";
 import * as S from "./style/SonminsooItem.style";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import BucketListModal from "../../components/common/BucketListModal/BucketListModal";
-import Icon from "../../elements/Icon";
-import search from "../../assets/images/svg/SonminsooItem/ic-search.svg";
-import settings from "../../assets/images/svg/SonminsooItem/ic-settings.svg";
 
 type bucketList = {
   id: string;
@@ -32,24 +29,6 @@ const SonminsooItem = () => {
   return (
     <>
       <S.SonminsooItemContainer>
-        {useMemo(() => {
-          return (
-            <>
-              <HeaderBar
-                BackButton={false}
-                items={[
-                  <Icon src={search} key="search" />,
-                  <Icon src={settings} key="settings" />,
-                ]}
-              />
-              <S.LinkRequestList to="/requests">
-                <span>손민수템 의뢰 리스트</span>
-                <span>&gt;</span>
-              </S.LinkRequestList>
-            </>
-          );
-        }, [])}
-
         <Outlet context={{ setModalView, setBucketList }} />
         {modalView && (
           <BucketListModal
