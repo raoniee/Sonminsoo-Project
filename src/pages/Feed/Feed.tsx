@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {styled} from "styled-components";
 import * as S from "./style/Feed.style";
-import StatusBar from "../../components/StatusBar";
+import FeedHeaderBar from "../../components/Feed/FeedHeaderBar";
 import FeedHeader from "../../components/Feed/FeedHeader";
 import ItemBox from "../../components/Feed/Item";
 import HashTag from "../../components/Feed/HashTag";
@@ -89,7 +89,7 @@ const FeedIndex = () => {
   };
   return (
     <FeedContainer>
-      <StatusBar />
+      <FeedHeaderBar />
       {feedData?.map((feed) => (
         <React.Fragment key={feed.id}>
           <FeedHeader feedData={feed} />
