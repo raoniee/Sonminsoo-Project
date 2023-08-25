@@ -5,18 +5,15 @@ import WriteFandom from "./WriteFandom";
 import FeedWriteForm from "./FeedWriteForm";
 import FeedWriteLink from "./FeedWriteLink";
 import FeedWriteTarget from "./FeedWriteTarget";
-import idol2 from "../../assets/images/png/idol2.png";
+import idol1 from "../../assets/images/png/idol1.png";
+import * as S from './style/NewFeed.style';
 
-const FeedWriteImage = styled.img`
-  width: 100%;
-  height: 390px;
-`;
 
 const NewFeed = () => {
   return (
     <>
       <FeedHeaderWrite />
-      <FeedWriteImage src={idol2} />
+      <S.FeedWriteImage src={idol1} />
       <WriteFandom />
       <FeedWriteForm />
       <FeedWriteLink />

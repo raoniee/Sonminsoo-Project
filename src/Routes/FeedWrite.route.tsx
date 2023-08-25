@@ -1,4 +1,4 @@
-import FeedWrite from "../pages/FeedWrite";
+import FeedWrite from "../pages/FeedWrite/FeedWrite";
 import NewFeed from "../components/FeedWrite/NewFeed";
 
 export const FeedWriteRouter = {
