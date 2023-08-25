@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import background from "../../../assets/images/svg/SonminsooItem/requsetButtonBackground.svg";
 
 export const SonminsooItemContainer = styled.div`
   width: 100%;
-  margin-top: 60px;
 `;
 export const LinkRequestList = styled(Link)`
   display: flex;
@@ -14,7 +14,9 @@ export const LinkRequestList = styled(Link)`
   color: #fff;
   font-size: 16px;
   font-weight: bold;
-  background-color: cornflowerblue;
+  background-image: url(${background});
+  background-repeat: no-repeat;
+  background-size: cover;
   align-items: center;
   justify-content: space-between;
 `;

@@ -7,10 +7,15 @@ import BucketListModal from "../../components/common/BucketListModal/BucketListM
 import Icon from "../../elements/Icon";
 import search from "../../assets/images/svg/SonminsooItem/ic-search.svg";
 import settings from "../../assets/images/svg/SonminsooItem/ic-settings.svg";
+type bucketList = {
+  id: string;
+  img: string;
+  title: string;
+}[];
 
 const SonminsooItem = () => {
-  const [modalView, setModalView] = useState(true);
-  const data = [{ id: "1", img: "", title: "title" }];
+  const [modalView, setModalView] = useState(false);
+  const [bucketList, setBucketList] = useState<bucketList>([]);
   return (
     <>
       <S.SonminsooItemContainer>
@@ -22,12 +27,12 @@ const SonminsooItem = () => {
           <span>손민수템 의뢰 리스트</span>
           <span>&gt;</span>
         </S.LinkRequestList>
-        <Outlet />
+        <Outlet context={{ setModalView, setBucketList }} />
         {modalView && (
           <BucketListModal
             setModalOpen={setModalView}
             addClickHandler={() => {}}
-            bucketList={data}
+            bucketList={bucketList}
           />
         )}
         <FooterNavBar />

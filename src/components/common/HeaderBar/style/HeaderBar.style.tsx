@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
-export const Container = styled.div`
-  position: fixed;
+export const Container = styled.div<{ color?: string }>`
+  position: sticky;
   top: 0;
   width: 100%;
   height: 50px;
@@ -9,7 +9,7 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 0;
-  background-color: transparent;
+  background-color: ${(props) => (props.color ? props.color : "transparent")};
 `;
 
 export const Logo = styled.img`
