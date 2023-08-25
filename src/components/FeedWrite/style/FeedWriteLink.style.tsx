@@ -1,7 +1,8 @@
-import {styled} from "styled-components"
+import { styled } from "styled-components";
 
 export const FeedWriteLinkContainer = styled.div`
-  width: 100%;
+  width: 5000px;
+  overflow: hidden;
   height: 228px;
   display: flex;
   flex-direction: column;

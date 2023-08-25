@@ -1,13 +1,16 @@
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Link from "../../assets/images/svg/ic-link.svg";
 import closeBtn from "../../assets/images/svg/x.svg";
-import * as S from './style/FeedWriteLink.style';
+import * as S from "./style/FeedWriteLink.style";
 import clothes from "../../assets/images/png/clothes.png";
 import pants from "../../assets/images/png/pants.png";
 
+type FeedWriteProps = {
+  $updatePage: boolean;
+};
 
-
-const FeedWriteLink = () => {
+const FeedWriteLink: React.FC<FeedWriteProps> = ({ $updatePage }) => {
   return (
     <S.FeedWriteLinkContainer>
       <S.FeedLink>링크</S.FeedLink>
@@ -23,7 +26,7 @@ const FeedWriteLink = () => {
           <S.LinkItemPrice>
             12000<S.PriceWon>원</S.PriceWon>
           </S.LinkItemPrice>
-          <S.LinkCloseBtn src={closeBtn} />
+          {$updatePage ? null : <S.LinkCloseBtn src={closeBtn} />}
         </S.LinkItem>
         <S.LinkItem>
           <S.LinkItemImg src={pants}></S.LinkItemImg>
@@ -31,7 +34,15 @@ const FeedWriteLink = () => {
           <S.LinkItemPrice>
             12000<S.PriceWon>원</S.PriceWon>
           </S.LinkItemPrice>
-          <S.LinkCloseBtn src={closeBtn} />
+          {$updatePage ? null : <S.LinkCloseBtn src={closeBtn} />}
+        </S.LinkItem>
+        <S.LinkItem>
+          <S.LinkItemImg src={pants}></S.LinkItemImg>
+          <S.LinkItemName>비행사 우주곰우주곰</S.LinkItemName>
+          <S.LinkItemPrice>
+            12000<S.PriceWon>원</S.PriceWon>
+          </S.LinkItemPrice>
+          {$updatePage ? null : <S.LinkCloseBtn src={closeBtn} />}
         </S.LinkItem>
       </S.LinkItemBox>
     </S.FeedWriteLinkContainer>
