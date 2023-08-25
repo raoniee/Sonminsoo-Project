@@ -1,8 +1,7 @@
 import { styled } from "styled-components";
 
 export const FeedWriteLinkContainer = styled.div`
-  width: 5000px;
-  overflow: hidden;
+  width: 100%;
   height: 228px;
   display: flex;
   flex-direction: column;
@@ -24,6 +23,8 @@ export const MaxLinkText = styled.span`
 `;
 export const LinkItemBox = styled.div`
   display: flex;
+  width: 100%;
+  overflow: hidden;
 `;
 export const LinkButton = styled.button`
   width: 100px;
