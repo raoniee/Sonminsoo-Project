@@ -1,5 +1,7 @@
 import React from "react";
 import * as S from "../../pages/Feed/style";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 type Feed = {
   id: number;
@@ -43,21 +45,25 @@ type FeedProps = {
 };
 
 const ItemBox: React.FC<FeedProps> = ({ feedData }) => {
+  const swiperParams = {
+    slidesPerView: 3.5,
+    spaceBetween: 10,
+  };
   return (
     <S.ItemWrap>
-      <S.Items>
+      <Swiper {...swiperParams}>
         {feedData.sonminsuItems &&
           feedData.sonminsuItems.map((item, itemIndex) => (
-            <div key={`${itemIndex}`}>
+            <SwiperSlide key={`${itemIndex}`}>
               <S.Item src={item.itemImg} />
               <S.ProductName>{item.title}</S.ProductName>
               <S.Price>
                 {item.price}
                 <S.Won>원</S.Won>
               </S.Price>
-            </div>
+            </SwiperSlide>
           ))}
-      </S.Items>
+      </Swiper>
     </S.ItemWrap>
   );
 };

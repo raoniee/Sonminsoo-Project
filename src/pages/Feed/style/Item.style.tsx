@@ -14,6 +14,7 @@ export const ItemWrap = styled.div`
   overflow: hidden;
   width: 390px;
   cursor: pointer;
+  margin-left: 16px;
 `;
 export const Items = styled.div`
   display: flex;
