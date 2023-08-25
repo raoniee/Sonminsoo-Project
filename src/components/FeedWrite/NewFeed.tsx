@@ -12,10 +12,15 @@ import idol1 from "../../assets/images/png/idol1.png";
 const NewFeed = () => {
   const location = useLocation();
   const $updatePage = location.state.isUpdate;
+  const writeImg = location.state.selectedImage;
   return (
     <>
       <FeedHeaderWrite $updatePage={$updatePage} />
-      <S.FeedWriteImage src={idol1} />
+      {$updatePage ? (
+        <S.FeedWriteImage src={idol1} />
+      ) : (
+        <S.FeedWriteImage src={writeImg} />
+      )}
       <WriteFandom $updatePage={$updatePage} />
       <FeedWriteForm />
       <FeedWriteLink $updatePage={$updatePage} />
