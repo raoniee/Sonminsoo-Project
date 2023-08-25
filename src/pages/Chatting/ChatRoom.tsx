@@ -5,6 +5,7 @@ import ChatBar from '../../components/Chatting/ChatBar';
 import iconMember from '../../assets/images/svg/ic-member.svg';
 import ChatGridImage from '../../components/Chatting/ChatGridImage';
 import * as S from './styles/ChatRoom.style';
+import ChatImageViewer from '../../components/Chatting/ChatImageViewer';
 
 
 
@@ -61,6 +62,7 @@ const ChatRoom = () => {
                     <ChatGridImage />
                 </S.ChatRoomWindow>
                 <ChatBar ban={ban} />
+                <ChatImageViewer />
             </>
             
     )
