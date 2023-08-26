@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import * as S from "./style/FandomRanking.style";
 
 type FandomRankData = {
@@ -16,7 +16,6 @@ type FandomdataProps = {
 };
 
 const FandomRanking: React.FC<FandomdataProps> = ({ item }) => {
-    //  const [rankData, setRankData] = useState<FandomData | undefined>(undefined);
     console.log("dd", item);
 
     useEffect(() => {}, []);
