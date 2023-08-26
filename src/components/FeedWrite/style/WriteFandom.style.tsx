@@ -13,14 +13,12 @@ export const WritingFandomText = styled.p`
 `;
 export const WritingFandomBox = styled.div`
   width: 100%;
-  height: 50px;
+  // height: 50px;
   background-color: #f6f6f6;
-  border: 1px solid #e8e8e8;
+  // border: 1px solid #e8e8e8;
   border-radius: 8px;
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  margin: 16px 0;
+  // padding: 16px;
+  // margin: 16px 0;
 `;
 export const WritingFandomSelect = styled.p<{ $updatePage: boolean }>`
   font-family: "Pretendard-Medium";
