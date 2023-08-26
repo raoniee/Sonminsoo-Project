@@ -14,55 +14,11 @@ import Comment from "../../components/Feed/Comment";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import CloseModal from "../../components/Feed/CloseModal";
 import FeedDelete from "../../components/Feed/FeedDelete";
-
-const FeedContainer = styled.div`
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  padding-bottom: 77px;
-`;
-
-type Feed = {
-  id: number;
-  user: User;
-  feedImg: string;
-  content: string;
-  hashTag: string[];
-  created_at: string;
-  sonminsuItems: SonminsuItem[];
-  comments: CommentType[];
-};
-
-type User = {
-  id: number;
-  user_id: number;
-  profileImg: string;
-  user_name: string;
-  fandom_name: string;
-};
-
-type SonminsuItem = {
-  id: number;
-  itemImg: string;
-  title: string;
-  price: number;
-  url: string;
-};
-type CommentType = {
-  id: number;
-  feed_id: number;
-  user_id: number;
-  profileImg: string;
-  user_name: string;
-  content: string;
-  created_at: string;
-};
-type FeedData = Feed[];
+import { Feed } from "../../types/feed";
 
 const FeedIndex = () => {
   const [openCommentId, setOpenCommentId] = useState<number | undefined>();
-  const [feedData, setFeedData] = useState<FeedData>([]);
+  const [feedData, setFeedData] = useState<Feed[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isFeedDelete, setIsFeedDelete] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -92,7 +48,7 @@ const FeedIndex = () => {
     }
   };
   return (
-    <FeedContainer>
+    <S.FeedContainer>
       <FeedHeaderBar />
       {feedData?.map((feed) => (
         <React.Fragment key={feed.id}>
@@ -118,7 +74,7 @@ const FeedIndex = () => {
       {openCommentId === undefined && <FooterNavBar />}
       {modalOpen && <CloseModal setModalOpen={setModalOpen} />}
       {isFeedDelete && <FeedDelete setIsFeedDelete={setIsFeedDelete} />}
-    </FeedContainer>
+    </S.FeedContainer>
   );
 };
 
