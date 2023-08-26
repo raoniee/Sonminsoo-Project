@@ -10,17 +10,22 @@ const ChatGridImage = ({imageList}: Chat) => {
     const [isViewerOpen, setIsViewerOpen] = useState(false);
     const $imageCount = imageList.length;
     const $imgUrl = '';
-    const isMe: boolean = false;
+    const $isMe: boolean = false;
 
     const openViewerHandler = () => {
         setIsViewerOpen(true);
     }
 
     return (
-        <S.GridImageWrapper isMe={isMe}>
+        <S.GridImageWrapper $isMe={$isMe}>
             <S.GridImageContainer $imageCount={$imageCount} >
                 {imageList.map((image, index) => (
-                    <S.GridImage src={image} $imageCount={$imageCount} onClick={openViewerHandler} />
+                    <S.GridImage 
+                        key={index}
+                        src={image} 
+                        $imageCount={$imageCount} 
+                        onClick={openViewerHandler} 
+                    />
                 ))}
                 {/* <S.GridImage 
                     src={require('../../assets/images/png/mini.png')}
