@@ -14,14 +14,19 @@ import Comment from "../../components/Feed/Comment";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import CloseModal from "../../components/Feed/CloseModal";
 import FeedDelete from "../../components/Feed/FeedDelete";
+import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 import { Feed } from "../../types/feed";
 
 const FeedIndex = () => {
-  const [openCommentId, setOpenCommentId] = useState<number | undefined>();
+  const [openComment, setOpenComment] = useState<number | undefined>();
   const [feedData, setFeedData] = useState<Feed[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isFeedDelete, setIsFeedDelete] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -31,19 +36,16 @@ const FeedIndex = () => {
       console.error("Error", error);
     }
   };
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const showModal = () => {
     setModalOpen(true);
   };
 
   const toggleComment = (id: number) => {
-    if (openCommentId === id) {
-      setOpenCommentId(undefined);
+    if (openComment === id) {
+      setOpenComment(undefined);
     } else {
-      setOpenCommentId(id);
+      setOpenComment(id);
     }
   };
   return (
@@ -60,18 +62,29 @@ const FeedIndex = () => {
             <LikeBtn />
             <CommentBtn
               commentOpen={() => toggleComment(feed.id)}
-              commentClicked={openCommentId === feed.id}
+              commentClicked={openComment === feed.id}
               feedData={feed}
             />
           </S.BtnWrap>
-          {openCommentId === feed.id && (
+          {openComment === feed.id && (
             <Comment feedData={feed} showModal={showModal} />
           )}
           <S.Line />
         </React.Fragment>
       ))}
-      {openCommentId === undefined && <FooterNavBar />}
-      {modalOpen && <CloseModal setModalOpen={setModalOpen} />}
+      {openComment === undefined && <FooterNavBar />}
+      {modalOpen && (
+        <AppAlertModal
+          setModalOpen={setModalOpen}
+          title={"댓글 삭제"}
+          content={"댓글을 삭제하시겠습니까?"}
+          yesContent={"삭제"}
+          warning={true}
+          yesClickHandler={() => {
+            alert("삭제요청, 그리고 alert창 끄기");
+          }}
+        />
+      )}
       {isFeedDelete && <FeedDelete setIsFeedDelete={setIsFeedDelete} />}
     </S.FeedContainer>
   );
