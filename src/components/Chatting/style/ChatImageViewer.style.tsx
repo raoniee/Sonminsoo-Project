@@ -22,7 +22,6 @@ export const ImageViewerHeader = styled.div`
     width: 100%;
     height: 50px;
     padding: 0 16px;
-    // background: pink;
 
     display: flex;
     align-items: center;
@@ -47,6 +46,7 @@ export const Swiper = styled(OriginSwiper)`
     &.mySwiper {
         width: 100%;
         height: 53px;
+        box-sizing: border-box;
 
         .swiper-wrapper {
             display: flex;
@@ -54,6 +54,7 @@ export const Swiper = styled(OriginSwiper)`
         }
 
         .swiper-slide {
+            width: 40px;
             opacity: 0.4;
           }
 
@@ -72,14 +73,21 @@ export const SwiperSlide = styled(OriginSwiperSlide)`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-size: cover;
+    background-position: center;
+
+    img {
+        display: block;
+        object-fit: cover;
+    }
 `;
 
 export const ImageView = styled.img`
     width: 100%;
-    background: white;
 `;
 
-export const ImageViewerFooter = styled.div`
+export const ImageViewerThumbs = styled.div`
     width: 100%;
     height: 150px;
 
@@ -88,25 +96,23 @@ export const ImageViewerFooter = styled.div`
     align-items: center;
 `;
 
-export const ImageSliderList = styled.div`
+export const ImageThumbsList = styled.div`
     width: 100%;
     height: 53px;
     margin-top: 10px;
     margin-bottom: 10px;
-    display: flex;
+    // display: flex;
+    padding: 0 16px;
 `;
 
-export const ImageSliderListItem = styled.img`
-    width: 40px;
+export const ImageThumbsItem = styled.img`
+    width: 100%;
     height: 100%;
     border-radius: 4px;
     cursor: pointer;
-
-    display: block;
-    object-fit: cover;
 `;
 
-export const ImageSliderText = styled.p`
+export const ImageIndex = styled.p`
     color: #FFFFFF;
 
     & span {
