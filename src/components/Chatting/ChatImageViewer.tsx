@@ -11,8 +11,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
 
-
-const ChatImageViewer = ({imageList}: Chat) => {
+const ChatImageViewer = ({imageList, setIsViewerOpen}: Chat) => {
 
     // 사용할 모듈 등록
     SwiperCore.use([Keyboard, FreeMode, Navigation, Thumbs]);
@@ -45,7 +44,7 @@ const ChatImageViewer = ({imageList}: Chat) => {
     return (
         <S.ImageViewerContainer>
             <S.ImageViewerHeader>
-                <S.ImageButton src={iconX} />
+                <S.ImageButton src={iconX} onClick={() => setIsViewerOpen && setIsViewerOpen(false)} />
                 <S.HeaderText>뷰어</S.HeaderText>
             </S.ImageViewerHeader>
             <S.Swiper {...SwiperParams}>

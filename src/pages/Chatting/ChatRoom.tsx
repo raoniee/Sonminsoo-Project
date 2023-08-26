@@ -5,8 +5,6 @@ import ChatBar from '../../components/Chatting/ChatBar';
 import iconMember from '../../assets/images/svg/ic-member.svg';
 import ChatGridImage from '../../components/Chatting/ChatGridImage';
 import * as S from './styles/ChatRoom.style';
-import ChatImageViewer from '../../components/Chatting/ChatImageViewer';
-import { Chat } from '../../types/chattingType';
 
 
 
@@ -45,6 +43,7 @@ const ChatRoom = () => {
 
     const ban: boolean = false;
 
+
     return (
             <>
                 <S.ChatHeader>
@@ -72,10 +71,9 @@ const ChatRoom = () => {
                         readCount={chatData.readCount}
                         createAt={chatData.createAt}
                     />
-                    <ChatGridImage />
+                    <ChatGridImage imageList={imageMock} />
                 </S.ChatRoomWindow>
                 <ChatBar ban={ban} />
-                <ChatImageViewer imageList={imageMock} />
             </>
             
     )
