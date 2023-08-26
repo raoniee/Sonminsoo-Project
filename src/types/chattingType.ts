@@ -5,3 +5,7 @@ export type Fandom = {
     image: string;
     createAt: string;
 }
+
+export type Chat = {
+    imageList: string[];
+}
