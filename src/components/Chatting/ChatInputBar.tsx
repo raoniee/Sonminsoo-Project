@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import iconImage from "../../assets/images/svg/ic-image.svg";
 import iconCamera from "../../assets/images/svg/ic-camera.svg";
-import * as S from './style/ChatBar.style';
+import * as S from './style/ChatInputBar.style';
 
 
 type Props = {

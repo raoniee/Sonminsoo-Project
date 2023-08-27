@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChatProps, MyChat, OtherChat } from '../../components/Chatting/ChatBubble';
 import BackButton from '../../components/Chatting/BackButton';
-import ChatBar from '../../components/Chatting/ChatBar';
+import ChatBar from '../../components/Chatting/ChatInputBar';
 import iconMember from '../../assets/images/svg/ic-member.svg';
 import ChatGridImage from '../../components/Chatting/ChatGridImage';
 import * as S from './styles/ChatRoom.style';
