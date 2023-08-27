@@ -16,12 +16,19 @@ type sonminsooItemInfo = {
   imgUrl: string;
   originUrl: string;
   price: string;
+  groupName: string;
+  id: number;
+  imgUrl: string;
+  originUrl: string;
+  price: string;
   title: string;
 };
 const SonMinsooItemInfo = ({
   artistName,
+  groupName,
   id,
   imgUrl,
+  originUrl,
   price,
   title,
 }: sonminsooItemInfo) => {
@@ -33,20 +40,26 @@ const SonMinsooItemInfo = ({
     <S.SonminsooItemInfoContainer>
       <Link to={`details/${id}`}>
         <S.ItemImage $url={imgUrl} />
+      <Link to={`details/${id}`}>
+        <S.ItemImage $url={imgUrl} />
         <S.ArtistName>{artistName}</S.ArtistName>
       </Link>
       <S.TitleContainer>
         <Link to={`details/${id}`}>
+          {" "}
           <S.ItemTitle>{title}</S.ItemTitle>
         </Link>
         <S.bookMarkIcon
           $iconUrl={bookMark}
           onClick={() => {
             // setBucketList(bucket);
+            // setBucketList(bucket);
             setModalView(true);
           }}
         />
       </S.TitleContainer>
+      <Link to={`details/${id}`}>
+        <S.ItemPrice>{price}</S.ItemPrice>
       <Link to={`details/${id}`}>
         <S.ItemPrice>{price}</S.ItemPrice>
       </Link>
