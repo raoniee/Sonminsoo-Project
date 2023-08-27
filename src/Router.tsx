@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "./pages/Main";
-import Feed from "./pages/Feed";
+import Feed from "./pages/Feed/Feed";
 // import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
+import HotFandom from "./pages/HotFandom/HotFandom";
 
 import {
   SignupRouter,
@@ -12,12 +13,15 @@ import {
   MyPageRouter,
   SettingsRouter,
   RequestRouter,
+  FeedWriteRouter,
+  SearchItemRouter,
 } from "./Routes";
+import Requests from "./pages/Request/Requests";
 
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: <Home />,
   },
   {
     path: "home",
@@ -43,6 +47,8 @@ const Router = createBrowserRouter([
   MyPageRouter,
   SettingsRouter,
   RequestRouter,
+  FeedWriteRouter,
+  SearchItemRouter,
 ]);
 
 export default Router;

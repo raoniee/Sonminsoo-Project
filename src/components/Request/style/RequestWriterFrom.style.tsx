@@ -10,7 +10,6 @@ export const QuestionForm = styled.form`
 export const QuestionTitle = styled.div`
   height: 46px;
   display: flex;
-
   gap: 9px;
   border-bottom: 1px solid #b9bed7;
   padding: 9px;
@@ -35,7 +34,7 @@ export const QuestionDesc = styled.div`
   border-bottom: 1px solid #b9bed7;
 `;
 export const QuestionDescTextarea = styled.textarea`
-  border: 1px solid #363;
+  border: none;
   width: 100%;
   &::placeholder {
     position: absolute;

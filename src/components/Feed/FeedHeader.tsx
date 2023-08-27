@@ -1,25 +1,10 @@
 import React from "react";
 import more from "../../assets/images/svg/ic-more-horizontal.svg";
 import detailDate from "../../utils/time";
-import * as S from "../../pages/Feed/style";
+import * as S from "./style/FeedHeader.style";
+import { FeedDataProps } from "../../types/feed";
 
-type User = {
-  id: number;
-  user_id: number;
-  profileImg: string;
-  user_name: string;
-  fandom_name: string;
-};
-type FeedData = {
-  id: number;
-  user: User;
-  created_at: string;
-};
-type FeedDataProps = {
-  feedData: FeedData;
-};
-
-const FeedHeader: React.FC<FeedDataProps> = ({ feedData }) => {
+const FeedHeader: React.FC<FeedDataProps> = ({ feedData, setIsFeedDelete }) => {
   return (
     <S.FeedHeaderContainer>
       {feedData && feedData.user ? (
@@ -36,7 +21,7 @@ const FeedHeader: React.FC<FeedDataProps> = ({ feedData }) => {
               </S.Time>
             </S.ContentWrap>
           </S.HeaderContent>
-          <S.MoreBtn src={more} />
+          <S.MoreBtn src={more} onClick={() => setIsFeedDelete(true)} />
         </>
       ) : null}
     </S.FeedHeaderContainer>
