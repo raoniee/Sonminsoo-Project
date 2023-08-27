@@ -28,9 +28,10 @@ export const SonminsooItemsContainer = styled.div`
   display: flex;
   padding-bottom: 83px;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   overflow-y: scroll;
   overflow-x: hidden;
+  gap: 15px;
 `;
 
 export const SonminsooItemTitle = styled.div`

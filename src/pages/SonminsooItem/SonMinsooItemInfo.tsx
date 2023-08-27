@@ -10,18 +10,22 @@ type bucketList = {
   title: string;
 }[];
 type sonminsooItemInfo = {
-  imgURL: string;
   artistName: string;
+  groupName: string;
+  id: number;
+  imgUrl: string;
+  originUrl: string;
+  price: string;
   title: string;
-  bucket: bucketList;
-  price: number;
 };
 const SonMinsooItemInfo = ({
-  imgURL,
   artistName,
-  title,
-  bucket,
+  groupName,
+  id,
+  imgUrl,
+  originUrl,
   price,
+  title,
 }: sonminsooItemInfo) => {
   const { setModalView, setBucketList } = useOutletContext<{
     setModalView: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,25 +33,25 @@ const SonMinsooItemInfo = ({
   }>();
   return (
     <S.SonminsooItemInfoContainer>
-      <Link to={`details/${1}`}>
-        <S.ItemImage $url={imgURL} />
+      <Link to={`details/${id}`}>
+        <S.ItemImage $url={imgUrl} />
         <S.ArtistName>{artistName}</S.ArtistName>
       </Link>
       <S.TitleContainer>
-        <Link to={`details/${1}`}>
+        <Link to={`details/${id}`}>
           {" "}
           <S.ItemTitle>{title}</S.ItemTitle>
         </Link>
         <S.bookMarkIcon
           $iconUrl={bookMark}
           onClick={() => {
-            setBucketList(bucket);
+            // setBucketList(bucket);
             setModalView(true);
           }}
         />
       </S.TitleContainer>
-      <Link to={`details/${1}`}>
-        <S.ItemPrice>{price.toLocaleString()}원</S.ItemPrice>
+      <Link to={`details/${id}`}>
+        <S.ItemPrice>{price}</S.ItemPrice>
       </Link>
     </S.SonminsooItemInfoContainer>
   );
