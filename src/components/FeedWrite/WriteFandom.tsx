@@ -1,24 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Select from "react-select";
 import * as S from "./style/WriteFandom.style";
 import dropdown from "../../assets/images/svg/ic-arrow-down-14.svg";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 type FeedWriteProps = {
   $updatePage: boolean;
+  fandomOptions: OptionType[];
+  setSelectedFandom: (option: OptionType) => void;
 };
-
-const options = [
-  { value: "꾹이의 모든 것", label: "꾹이의 모든 것" },
-  { value: "카시오페아", label: "카시오페아" },
-  { value: "소녀시대짱짱", label: "소녀시대짱짱" },
-];
-
-const WriteFandom: React.FC<FeedWriteProps> = ({ $updatePage }) => {
-  const [selectedOption, setSelectedOption] = React.useState(null);
+type OptionType = {
+  value: string;
+  label: string;
+  id?: number;
+};
+const WriteFandom: React.FC<FeedWriteProps> = ({
+  $updatePage,
+  fandomOptions,
+  setSelectedFandom,
+}) => {
+  const axiosPrivate = useAxiosPrivate();
+  const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
   const handleOptionChange = (option: any) => {
     setSelectedOption(option);
+    if (option) {
+      setSelectedFandom(option);
+    }
   };
 
   return (
@@ -27,7 +36,7 @@ const WriteFandom: React.FC<FeedWriteProps> = ({ $updatePage }) => {
       <Select
         value={selectedOption}
         onChange={handleOptionChange}
-        options={options}
+        options={fandomOptions}
         styles={S.FandomStyles($updatePage)}
         placeholder="팬덤을 선택해주세요."
         isDisabled={$updatePage}

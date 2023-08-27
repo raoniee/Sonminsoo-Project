@@ -3,28 +3,16 @@ import detailDate from "../../utils/time";
 import * as S from "./style/CommentItem.style";
 import commentmore from "../../assets/images/svg/ic-more-vertical-16.svg";
 
-type CommentData = {
+type CommentType = {
   id: number;
-  feed_id: number;
-  user_id: number;
   profileImg: string;
-  user_name: string;
+  userName: string;
   content: string;
-  created_at: string;
-};
-type FeedCommentData = {
-  id: number;
-  user_id: number;
-  user_name: string;
-  profileImg: string;
-  feed_id: number;
-  content: string;
-  created_at: string;
-  comments?: CommentData[];
+  createdAt: string;
 };
 
 type CommentItemProps = {
-  comment: FeedCommentData;
+  comment: CommentType;
   showModal: () => void;
 };
 
@@ -65,8 +53,8 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, showModal }) => {
         <S.CommentContent>
           <S.CommnetContentWrap>
             <S.UserContenWrap>
-              <S.CommentNickname>{comment.user_name}</S.CommentNickname>
-              <S.CommentTime>{detailDate(comment.created_at)}</S.CommentTime>
+              <S.CommentNickname>{comment.userName}</S.CommentNickname>
+              <S.CommentTime>{detailDate(comment.createdAt)}</S.CommentTime>
             </S.UserContenWrap>
             <S.CommentMoreBtn
               src={commentmore}

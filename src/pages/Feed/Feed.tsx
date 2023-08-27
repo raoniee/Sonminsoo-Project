@@ -15,11 +15,11 @@ import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import CloseModal from "../../components/Feed/CloseModal";
 import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
-import { Feed } from "../../types/feed";
+import { Data } from "../../types/feed";
 
 const FeedIndex = () => {
   const [openComment, setOpenComment] = useState<number | undefined>();
-  const [feedData, setFeedData] = useState<Feed[]>([]);
+  const [feedData, setFeedData] = useState<Data[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isFeedDelete, setIsFeedDelete] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -27,11 +27,14 @@ const FeedIndex = () => {
   useEffect(() => {
     fetchData();
   }, []);
+  console.log(feedData);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/feed");
-      setFeedData(response.data);
+      const response = await axios.get(
+        "http://146.56.143.108/api/v1/feeds?page=1&perPage=2"
+      );
+      setFeedData(response.data.data);
     } catch (error) {
       console.error("Error", error);
     }
@@ -54,7 +57,7 @@ const FeedIndex = () => {
       {feedData?.map((feed) => (
         <React.Fragment key={feed.id}>
           <FeedHeader feedData={feed} setIsFeedDelete={setIsFeedDelete} />
-          <S.FeedImage src={feed.feedImg} />
+          <S.FeedImage src={feed.image} />
           <ItemBox feedData={feed} />
           <FeedText feedData={feed} />
           <HashTag feedData={feed} />
@@ -66,9 +69,7 @@ const FeedIndex = () => {
               feedData={feed}
             />
           </S.BtnWrap>
-          {openComment === feed.id && (
-            <Comment feedData={feed} showModal={showModal} />
-          )}
+          {openComment === feed.id && <Comment showModal={showModal} />}
           <S.Line />
         </React.Fragment>
       ))}
