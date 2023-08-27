@@ -4,31 +4,31 @@ import axios from "axios";
 import styled from "styled-components";
 
 const Container = styled.div`
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
   font-family: "Arial", sans-serif;
 `;
 
-const Title = styled.h1`
-  font-size: 24px;
-  color: #333;
+const Agreement = styled.h1`
+  font-size: 16px;
+  color: #6138f8;
   margin-bottom: 10px;
 `;
 
-const SubTitle = styled.h2`
-  font-size: 18px;
+const SubAgreement = styled.h2`
+  font-size: 24px;
   color: #555;
   margin-bottom: 15px;
 `;
 
-const Form = styled.form`
-  margin-bottom: 20px;
+const SubAgreement2 = styled.h1`
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 10px;
 `;
-
-const Label = styled.label`
-  display: block;
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 5px;
+const Form = styled.form`
+  margin-bottom: 10px;
 `;
 
 const Input = styled.input`
@@ -61,18 +61,18 @@ const EnterMembersInfo = () => {
   };
   return (
     <Container>
-      <Title>개인정보 입력하기</Title>
-      <SubTitle>정의로운 손민수 이용을 위해 약관에 동의해주세요</SubTitle>
-      <SubTitle>기본정보입력</SubTitle>
+      <Agreement>개인정보 입력하기</Agreement>
+      <SubAgreement>
+        정의로운 손민수 이용을 위해 아래의 정보를 입력해주세요
+      </SubAgreement>
+      <SubAgreement2>기본정보입력</SubAgreement2>
       <Form>
-        <Label htmlFor="email">이메일을 입력해 주세요.</Label>
         <Input
           type="text"
           id="email"
           placeholder="이메일을 입력해 주세요"
           value={email}
         />
-        <Label htmlFor="password">비밀번호를 입력해 주세요</Label>
         <Input
           type="text"
           id="password"
@@ -80,16 +80,14 @@ const EnterMembersInfo = () => {
           value={userInfo.password}
           onChange={handleInfoChange}
         />
-        <Label htmlFor="passwordConfirm">비밀번호를 다시 입력해 주세요</Label>
         <Input
           type="text"
           id="passwordConfirm"
           placeholder="비밀번호를 다시 입력해 주세요"
         />
-        <SubTitle>개인정보입력</SubTitle>
       </Form>
       <Form>
-        <Label htmlFor="userName">이름을 입력해 주세요.</Label>
+        <SubAgreement2>개인정보입력</SubAgreement2>
         <Input
           type="text"
           id="userName"
@@ -97,9 +95,6 @@ const EnterMembersInfo = () => {
           onChange={handleInfoChange}
           value={userInfo.userName}
         />
-        <Label htmlFor="birthDate">
-          생년월일을 입력해 주세요 &#40;ex 991121&#41;
-        </Label>
         <Input
           type="text"
           id="birthDate"
@@ -107,9 +102,6 @@ const EnterMembersInfo = () => {
           onChange={handleInfoChange}
           value={userInfo.birthDate}
         />
-        <Label htmlFor="phoneNumber">
-          전화번호를 입력해 주세요 &#40;ex 01022222222&#41;
-        </Label>
         <Input
           type="text"
           id="phoneNumber"

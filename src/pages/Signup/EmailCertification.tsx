@@ -6,19 +6,19 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 2em;
-  background-color: #f9f9f9;
 `;
 
-const Title = styled.h1`
+const Agreement = styled.h1`
+  font-size: 16px;
   color: #6138f8;
+  margin-bottom: 10px;
 `;
 
-const Subtitle = styled.h2`
+const SubAgreement = styled.h2`
+  font-size: 24px;
   color: #1d1b20;
-  max-width: 600px;
-  margin-bottom: 1em;
+  margin-bottom: 20px;
 `;
 
 const Form = styled.form`
@@ -103,29 +103,31 @@ const EmailCertification = () => {
 
   return (
     <Container>
-      <Title>본인인증하기</Title>
-      <Subtitle>정의로운 손민수 이용을 위해 약관에 동의해주세요</Subtitle>
+      <Agreement>본인인증하기</Agreement>
+      <SubAgreement>
+        정의로운 손민수 이용을 위해 약관에 동의해주세요
+      </SubAgreement>
       <Form>
-        <Label htmlFor="email">이메일을 입력해 주세요.</Label>
-        <Input
-          type="text"
-          id="email"
-          placeholder="이메일을 입력해 주세요."
-          value={useSignupContext?.email}
-          onChange={(e) => useSignupContext?.setEmail(e.target.value)}
-        />
-        <Button onClick={handleEmailAuthClick}>인증번호 발송 하기</Button>
-        <Label htmlFor="emailCertificaton">
-          이메일 인증 번호를 입력해 주세요
-        </Label>
-        <Input
-          type="text"
-          id="emailCertificaton"
-          placeholder="이메일 인증 번호를 입력해 주세요"
-          value={authValid}
-          onChange={(e) => setAuthValid(e.target.value)}
-        />
-        <Button onClick={handleEmailAuthVaildClick}>인증하기</Button>
+        <div>
+          <Input
+            type="text"
+            id="email"
+            placeholder="이메일을 입력해 주세요."
+            value={useSignupContext?.email}
+            onChange={(e) => useSignupContext?.setEmail(e.target.value)}
+          />
+          <Button onClick={handleEmailAuthClick}>인증번호발송</Button>
+        </div>
+        <div>
+          <Input
+            type="text"
+            id="emailCertificaton"
+            placeholder="이메일 인증 번호를 입력해 주세요"
+            value={authValid}
+            onChange={(e) => setAuthValid(e.target.value)}
+          />
+          <Button onClick={handleEmailAuthVaildClick}>인증하기</Button>
+        </div>
         <TextWithLink>
           이메일 인증번호가 발송되지 않았나요?<span>재발송하기</span>
         </TextWithLink>

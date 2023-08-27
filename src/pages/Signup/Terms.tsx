@@ -7,26 +7,33 @@ const Wrapper = styled.div`
   font-family: "Arial", sans-serif;
 `;
 
-const Title = styled.h1`
-  font-size: 24px;
-  color: #333;
+const Agreement = styled.h1`
+  font-size: 16px;
+  color: #6138f8;
   margin-bottom: 10px;
 `;
 
-const SubTitle = styled.h2`
-  font-size: 18px;
-  color: #555;
+const SubAgreement = styled.h2`
+  font-size: 24px;
+  color: #1d1b20;
   margin-bottom: 20px;
 `;
 
 const CheckboxLabel = styled.span`
   margin-left: 10px;
+  font-size: 16px;
   color: #666;
 `;
 
 const Checkbox = styled.input.attrs({ type: "checkbox" })`
   cursor: pointer;
   margin-right: 5px;
+`;
+
+const CheckboxDiv = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 23px;
 `;
 
 type Props = {
@@ -55,26 +62,36 @@ const Terms = () => {
 
   return (
     <Wrapper>
-      <Title>이용약관 동의</Title>
-      <SubTitle>정의로운 손민수 이용을 위해 약관에 동의해주세요</SubTitle>
+      <Agreement>이용약관 동의</Agreement>
+      <SubAgreement>
+        정의로운 손민수 이용을 위해 약관에 동의해주세요
+      </SubAgreement>
       <Checkbox
       // defaultChecked={allChecked}
       // checked={infoAgreement && pledge}
       // onClick={handleAllCheck}
       />
-      <CheckboxLabel>전체동의</CheckboxLabel>
-      <Checkbox
-        // checked={infoAgreement}
-        onClick={() => setInfoAgreement(!infoAgreement)}
-      />
-      <CheckboxLabel>개인정보 수집 및 이용 동의(필수)</CheckboxLabel>
-      <Checkbox
-        // checked={pledge}
-        onClick={() => {
-          setPledge(!pledge);
-        }}
-      />
-      <CheckboxLabel>정의로운 손민수 십계명 서약(필수)</CheckboxLabel>
+      <CheckboxDiv>
+        <CheckboxLabel>전체동의</CheckboxLabel>
+        <Checkbox
+          // checked={infoAgreement}
+          onClick={() => setInfoAgreement(!infoAgreement)}
+        />
+      </CheckboxDiv>
+      <CheckboxDiv>
+        <CheckboxLabel>개인정보 수집 및 이용 동의(필수)</CheckboxLabel>
+        <Checkbox
+          // checked={pledge}
+          onClick={() => {
+            setPledge(!pledge);
+          }}
+        />
+        {/* <Modal></Modal> */}
+      </CheckboxDiv>
+      <CheckboxDiv>
+        <CheckboxLabel>정의로운 손민수 십계명 서약(필수)</CheckboxLabel>
+        {/* <Modal></Modal> */}
+      </CheckboxDiv>
     </Wrapper>
   );
 };

@@ -33,7 +33,7 @@ const Container = styled.div`
 
 const Header = styled.div`
   font-size: 24px;
-  color: #333;
+  color: #6138f8;
   margin-bottom: 20px;
   font-weight: bold;
 `;

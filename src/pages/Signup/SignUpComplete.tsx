@@ -15,7 +15,7 @@ const CompletionMessage = styled.div`
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-size: 24px;
-  color: #333;
+  color: #6138f8;
   font-family: "Arial", sans-serif;
 `;
 
