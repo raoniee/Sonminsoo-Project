@@ -15,13 +15,14 @@ import {
   RequestRouter,
   FeedWriteRouter,
   SearchItemRouter,
+  MyFandomRouter,
 } from "./Routes";
 import Requests from "./pages/Request/Requests";
 
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Main />,
   },
   {
     path: "home",
@@ -49,6 +50,7 @@ const Router = createBrowserRouter([
   RequestRouter,
   FeedWriteRouter,
   SearchItemRouter,
+  MyFandomRouter,
 ]);
 
 export default Router;
