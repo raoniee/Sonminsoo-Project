@@ -26,9 +26,18 @@ export type DataArray = Data[];
 export type FeedDataProps = {
   feedData: Data;
   setIsFeedDelete: React.Dispatch<React.SetStateAction<boolean>>;
+  setFeedId: React.Dispatch<React.SetStateAction<number | undefined>>;
 };
 
-const FeedHeader: React.FC<FeedDataProps> = ({ feedData, setIsFeedDelete }) => {
+const FeedHeader: React.FC<FeedDataProps> = ({
+  feedData,
+  setIsFeedDelete,
+  setFeedId,
+}) => {
+  const handleMoreClick = () => {
+    setIsFeedDelete(true);
+    setFeedId(feedData.id);
+  };
   return (
     <S.FeedHeaderContainer>
       {feedData && feedData.author ? (
@@ -45,7 +54,7 @@ const FeedHeader: React.FC<FeedDataProps> = ({ feedData, setIsFeedDelete }) => {
               </S.Time>
             </S.ContentWrap>
           </S.HeaderContent>
-          <S.MoreBtn src={more} onClick={() => setIsFeedDelete(true)} />
+          <S.MoreBtn src={more} onClick={handleMoreClick} />
         </>
       ) : null}
     </S.FeedHeaderContainer>

@@ -31,6 +31,7 @@ const Comment: React.FC<FeedCommentProps> = ({
 }) => {
   const axiosPrivate = useAxiosPrivate();
   const [commentInput, setCommentInput] = useState<string>("");
+  const [commentList, setCommentList] = useState<CommentType[]>(comments);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCommentInput(event.target.value);
@@ -42,15 +43,16 @@ const Comment: React.FC<FeedCommentProps> = ({
         parentId: null,
         content: commentInput,
       });
-      console.log(response);
+      setCommentInput("");
+      setCommentList([...commentList, response.data.data]);
     } catch (error) {
       console.log("error", error);
     }
   };
   return (
     <>
-      {comments &&
-        comments.map((comment) => {
+      {commentList &&
+        commentList.map((comment) => {
           return (
             <CommentItem
               key={comment.id}

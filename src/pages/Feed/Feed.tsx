@@ -38,6 +38,8 @@ const FeedIndex = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isFeedDelete, setIsFeedDelete] = useState<boolean>(false);
   const [comments, setComments] = useState<CommentType[]>([]);
+  const [isLoadingComments, setIsLoadingComments] = useState(false);
+  const [feedId, setFeedId] = useState<number | undefined>();
   const [selectedCommentId, setSelectedCommentId] = useState<
     number | undefined
   >();
@@ -57,12 +59,15 @@ const FeedIndex = () => {
       console.error("Error", error);
     }
   };
-  const fetchComments = async (id: number) => {
+  const fetchComments = async (id?: number) => {
+    setIsLoadingComments(true);
     try {
       const response = await axios.get(`/comments/${id}`);
       setComments(response.data.data);
     } catch (error) {
       console.log("error", error);
+    } finally {
+      setIsLoadingComments(false);
     }
   };
   const toggleComment = (id: number) => {
@@ -91,7 +96,11 @@ const FeedIndex = () => {
       <FeedHeaderBar />
       {feedData?.map((feed) => (
         <React.Fragment key={feed.id}>
-          <FeedHeader feedData={feed} setIsFeedDelete={setIsFeedDelete} />
+          <FeedHeader
+            feedData={feed}
+            setIsFeedDelete={setIsFeedDelete}
+            setFeedId={setFeedId}
+          />
           <S.FeedImage src={feed.image} />
           <ItemBox feedData={feed} />
           <FeedText feedData={feed} />
@@ -104,7 +113,7 @@ const FeedIndex = () => {
               feedData={feed}
             />
           </S.BtnWrap>
-          {openComment === feed.id && (
+          {!isLoadingComments && openComment === feed.id && (
             <Comment
               showModal={showModal}
               comments={comments}
@@ -126,11 +135,18 @@ const FeedIndex = () => {
             if (selectedCommentId) {
               handleDelete(selectedCommentId);
               setSelectedCommentId(undefined);
+              setModalOpen(false);
             }
           }}
         />
       )}
-      {isFeedDelete && <FeedDelete setIsFeedDelete={setIsFeedDelete} />}
+      {isFeedDelete && (
+        <FeedDelete
+          setIsFeedDelete={setIsFeedDelete}
+          feedId={feedId}
+          onFeedDeleted={fetchFeedData}
+        />
+      )}
     </S.FeedContainer>
   );
 };

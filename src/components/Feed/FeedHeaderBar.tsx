@@ -21,7 +21,7 @@ const FeedHeaderBar = () => {
     const file = event.target.files?.[0];
     // Non-null assertion operators
     const imageUrl = URL.createObjectURL(file!);
-
+    console.log(imageUrl);
     if (file) {
       // 파일을 선택했을 때 수행할 작업
       setSelectedImage(imageUrl);
