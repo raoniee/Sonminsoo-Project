@@ -8,3 +8,4 @@ export * from "./Request.route";
 export * from "./FeedWrite.route";
 export * from "./MyFandom.route";
 export * from "./SearchItem.route";
+export * from "./Login.route";
