@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import * as S from "./style/FandomRanking.style";
+import { Button } from "../../elements/Button";
 
 type FandomRankData = {
     fandomName: string;
@@ -7,7 +8,7 @@ type FandomRankData = {
     lastChatTime: null;
     memberLength: number;
     rank: number;
-    thumbnailImgUrl: string;
+    image: string;
 };
 type FandomData = FandomRankData[];
 
@@ -23,7 +24,7 @@ const FandomRanking: React.FC<FandomdataProps> = ({ item }) => {
     return (
         <S.FandomRankingContainer key={item.id}>
             <S.RankingNumberText>{item.rank}</S.RankingNumberText>
-            <S.CircleImg />
+            <S.CircleImg src={item?.image} />
             <S.RnakingTextBox>
                 <S.FandomNameMemberBox>
                     <S.FandomNameText>{item.fandomName}</S.FandomNameText>

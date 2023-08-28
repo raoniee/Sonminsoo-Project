@@ -11,7 +11,7 @@ type Fandom = {
     lastChatTime: null;
     memberLength: number;
     rank: number;
-    thumbnailImgUrl: string;
+    image: string;
 };
 
 type FandomData = Fandom[];
