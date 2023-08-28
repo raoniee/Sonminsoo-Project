@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import "../../styles/reset.css";
 import axios from "axios";
 import { signupContext } from "./index";
 import styled from "styled-components";
+import PageHeader from "./PageHeader";
 
 const Container = styled.div`
   display: flex;
@@ -115,6 +115,7 @@ const EmailCertification = () => {
 
   return (
     <Container>
+      <PageHeader totalPages={3} currentPage={2} />
       <Agreement>본인인증하기</Agreement>
       <SubAgreement>
         정의로운 손민수 이용을 위해

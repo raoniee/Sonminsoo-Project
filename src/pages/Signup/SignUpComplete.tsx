@@ -1,10 +1,9 @@
 import React from "react";
 import { createContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import "../../styles/reset.css";
 import styled from "styled-components";
 
-const CompletionContainer = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,9 +23,9 @@ const CompletionMessage = styled.div`
 
 const SignUpComplete = () => {
   return (
-    <CompletionContainer>
+    <Container>
       <CompletionMessage>회원가입 완료되었습니다.</CompletionMessage>
-    </CompletionContainer>
+    </Container>
   );
 };
 

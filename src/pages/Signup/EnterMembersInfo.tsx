@@ -1,8 +1,8 @@
 import { signupContext } from "./index";
-import "../../styles/reset.css";
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import PageHeader from "./PageHeader";
 
 const Container = styled.div`
   display: flex;
@@ -62,6 +62,7 @@ const EnterMembersInfo = () => {
   };
   return (
     <Container>
+      <PageHeader totalPages={3} currentPage={3} />
       <Agreement>개인정보 입력하기</Agreement>
       <SubAgreement>
         정의로운 손민수 이용을 위해 <br />

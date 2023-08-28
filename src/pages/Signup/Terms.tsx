@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import "../../styles/reset.css";
 import styled from "styled-components";
 import testSvg from "../../assets/images/svg/1801287.svg";
+import checkIcon from "../../assets/images/svg/Exclude.svg";
+import { Link } from "react-router-dom";
+import PageHeader from "./PageHeader";
 
 const Container = styled.div`
   padding: 20px;
@@ -11,13 +13,13 @@ const Container = styled.div`
 const Agreement = styled.h1`
   font-size: 16px;
   color: #6138f8;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 `;
 
 const SubAgreement = styled.h2`
   font-size: 24px;
   color: #1d1b20;
-  margin-bottom: 20px;
+  margin-bottom: 37px;
 `;
 
 const CheckboxLabel = styled.span`
@@ -29,6 +31,16 @@ const CheckboxLabel = styled.span`
 const Checkbox = styled.input.attrs({ type: "checkbox" })`
   cursor: pointer;
   margin-right: 5px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  &:checked {
+    background-image: url(${checkIcon});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
 `;
 
 const CheckboxDiv = styled.div`
@@ -63,19 +75,15 @@ const Terms = () => {
 
   return (
     <Container>
+      {/* <PageHeader totalPages={3} currentPage={1} /> */}
       <Agreement>이용약관 동의</Agreement>
       <SubAgreement>
         정의로운 손민수 이용을 위해 <br /> 약관에 동의해주세요
       </SubAgreement>
-      <Checkbox
-      // defaultChecked={allChecked}
-      // checked={infoAgreement && pledge}
-      // onClick={handleAllCheck}
-      />
       <CheckboxDiv>
         <Checkbox
-          // checked={infoAgreement}
-          onClick={() => setInfoAgreement(!infoAgreement)}
+          checked={infoAgreement}
+          onChange={() => setInfoAgreement(!infoAgreement)}
         />
         <CheckboxLabel>전체동의</CheckboxLabel>
       </CheckboxDiv>
@@ -87,7 +95,9 @@ const Terms = () => {
           }}
         />
         <CheckboxLabel>개인정보 수집 및 이용 동의(필수)</CheckboxLabel>
-        {/* <Modal></Modal> */}
+        <button>
+          <Link to="/signupAgreement"></Link>
+        </button>
       </CheckboxDiv>
       <CheckboxDiv>
         <Checkbox
@@ -97,7 +107,9 @@ const Terms = () => {
           }}
         />
         <CheckboxLabel>정의로운 손민수 십계명 서약(필수)</CheckboxLabel>
-        {/* <Modal></Modal> */}
+        <button>
+          <Link to="/"></Link>
+        </button>
       </CheckboxDiv>
     </Container>
   );

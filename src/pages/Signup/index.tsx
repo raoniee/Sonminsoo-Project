@@ -1,6 +1,5 @@
 import { createContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import "../../styles/reset.css";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -30,13 +29,6 @@ const Container = styled.div`
   padding: 20px;
   background-color: #f9f9f9;
   font-family: "Arial", sans-serif;
-`;
-
-const Header = styled.div`
-  font-size: 24px;
-  color: #6138f8;
-  margin-bottom: 20px;
-  font-weight: bold;
 `;
 
 const Button = styled.input`
@@ -96,7 +88,7 @@ const Signup: React.FC = () => {
           value="회원가입 완료"
           onClick={() => {
             axios
-              .post(`http://146.56.143.108/auth/signup`, {
+              .post(`http://146.56.143.108/auth/sign-up`, {
                 email,
                 password: userInfo.password,
                 userName: userInfo.userName,
@@ -120,7 +112,6 @@ const Signup: React.FC = () => {
       value={{ email, setEmail, setSignupStep, setUserInfo, userInfo }}
     >
       <Container>
-        <Header>header</Header>
         <Outlet />
         {nextButton()}
       </Container>

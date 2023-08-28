@@ -1,6 +1,5 @@
 import { createContext, useContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import "../../styles/reset.css";
 import axios from "axios";
 import styled from "styled-components";
 

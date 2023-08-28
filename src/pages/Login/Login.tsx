@@ -99,14 +99,6 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            setPasswordType(!passwordType);
-          }}
-        >
-          password
-        </button>
         <p>
           <StyledLink to={"/"}>
             아이디 또는 비밀번호를 잊어버리셧나요?
@@ -121,14 +113,6 @@ const Login = () => {
           >
             로그인
           </StyledButton>
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              //... logging redux token
-            }}
-          >
-            check redux
-          </button>
         </div>
         <StyledP>
           새로운 계정이 필요하신가요?{" "}
