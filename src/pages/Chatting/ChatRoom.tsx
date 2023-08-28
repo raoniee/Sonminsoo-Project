@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChatProps, MyChat, OtherChat } from '../../components/Chatting/ChatBubble';
 import BackButton from '../../components/Chatting/BackButton';
-import ChatBar from '../../components/Chatting/ChatBar';
+import ChatInputBar from '../../components/Chatting/ChatInputBar';
 import iconMember from '../../assets/images/svg/ic-member.svg';
 import ChatGridImage from '../../components/Chatting/ChatGridImage';
 import * as S from './styles/ChatRoom.style';
@@ -41,7 +41,7 @@ const ChatRoom = () => {
         "https://play-lh.googleusercontent.com/4CyGC7CiaxkyDloyji4IMH07nTPUluhrlV1A0SJ-VkYbobIo--ndgJ1bikONNnr5zN0",
     ];
 
-    const ban: boolean = false;
+    const ban: boolean = true;
 
 
     return (
@@ -73,7 +73,7 @@ const ChatRoom = () => {
                     />
                     <ChatGridImage imageList={imageMock} />
                 </S.ChatRoomWindow>
-                <ChatBar ban={ban} />
+                <ChatInputBar ban={ban} />
             </>
             
     )
