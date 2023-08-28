@@ -9,4 +9,5 @@ export type Fandom = {
 export type Chat = {
     imageList: string[];
     setIsViewerOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+    startSlideIndex?: number;
 }
