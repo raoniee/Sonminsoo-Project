@@ -36,11 +36,12 @@ const SonminsooItemDetails = () => {
   const { id } = useParams();
   const [modalView, setModalView] = useState(false);
   const [productInfo, setProductInfo] = useState<productType>();
+  const [bucketList, setBucketList] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await api.get(`/sonminsu-items/${id}`);
-        console.log(data.data);
+        console.log(data.data, "fetched");
         setProductInfo(data.data);
       } catch (err) {
         console.error(err);
@@ -50,10 +51,10 @@ const SonminsooItemDetails = () => {
   }, []);
   const registBookMark = async () => {
     try {
-      const res = auth
-        ? await api.get("/users/buckets")
-        : alert("로그인해주세요");
-      console.log(res);
+      const { data } = await api.get("/users/buckets");
+      setModalView(() => true);
+      setBucketList(() => data.data);
+      console.log(data);
     } catch (err) {
       console.error(err);
     }
@@ -80,13 +81,13 @@ const SonminsooItemDetails = () => {
         <S.Title>{productInfo?.title}</S.Title>
         <S.Price>{productInfo?.price}</S.Price>
       </S.ContentContainer>
-      {/* {modalView && (
+      {modalView && (
         <BucketListModal
           setModalOpen={setModalView}
-          addClickHandler={() => {}}
-          bucketList={bucketListData}
+          itemId={productInfo?.id}
+          bucketList={bucketList}
         />
-      )} */}
+      )}
     </S.DetailContainer>
   );
 };
