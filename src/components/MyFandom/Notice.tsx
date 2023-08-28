@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../api/axios";
+import detailDate from "../../utils/time";
 
 import * as S from "./style/Notice.style";
 const Notice = () => {
@@ -18,6 +19,7 @@ const Notice = () => {
 
     const [data, setData] = useState<noticeType>();
     const [author, setAuthor] = useState<noticeAuthor>();
+
     console.log("작성사:", author);
     useEffect(() => {
         initDataGet();
@@ -44,7 +46,11 @@ const Notice = () => {
                         <S.NicknameText>{author?.nickName}</S.NicknameText>
                         <S.FandomNameTimeBox>
                             <S.NameTimeText>팬덤 이름</S.NameTimeText>
-                            <S.NameTimeText>10분전</S.NameTimeText>
+                            <S.NameTimeText>
+                                {data?.createdAt
+                                    ? detailDate(data?.createdAt)
+                                    : "시간 정보 없음"}
+                            </S.NameTimeText>
                         </S.FandomNameTimeBox>
                     </S.ProfileTextBox>
                     <S.ProfileIcon />
