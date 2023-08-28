@@ -18,7 +18,7 @@ type CommentType = {
 };
 type CommentItemProps = {
   comment: CommentType;
-  showModal: () => void;
+  showModal: (commentId: number) => void;
 };
 
 const CommentItem: React.FC<CommentItemProps> = ({ comment, showModal }) => {
@@ -72,7 +72,9 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, showModal }) => {
             />
             {openedModalId === comment.id && (
               <S.ReplyBtn ref={modalRef}>
-                <S.Delete onClick={showModal}>삭제하기</S.Delete>
+                <S.Delete onClick={() => showModal(comment.id)}>
+                  삭제하기
+                </S.Delete>
               </S.ReplyBtn>
             )}
           </S.CommnetContentWrap>

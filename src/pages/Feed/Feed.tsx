@@ -38,6 +38,9 @@ const FeedIndex = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isFeedDelete, setIsFeedDelete] = useState<boolean>(false);
   const [comments, setComments] = useState<CommentType[]>([]);
+  const [selectedCommentId, setSelectedCommentId] = useState<
+    number | undefined
+  >();
 
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
@@ -78,7 +81,8 @@ const FeedIndex = () => {
       alert("댓글 삭제 못함");
     }
   };
-  const showModal = () => {
+  const showModal = (commentId: number) => {
+    setSelectedCommentId(commentId);
     setModalOpen(true);
   };
 
@@ -119,7 +123,10 @@ const FeedIndex = () => {
           yesContent={"삭제"}
           warning={true}
           yesClickHandler={() => {
-            handleDelete(comments[0].id);
+            if (selectedCommentId) {
+              handleDelete(selectedCommentId);
+              setSelectedCommentId(undefined);
+            }
           }}
         />
       )}

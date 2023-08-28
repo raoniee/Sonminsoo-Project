@@ -19,7 +19,7 @@ type CommentType = {
   replies?: {};
 };
 type FeedCommentProps = {
-  showModal: () => void;
+  showModal: (commentId: number) => void;
   comments: CommentType[];
   feedId: number;
 };
