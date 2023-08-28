@@ -81,13 +81,13 @@ const SonminsooItemDetails = () => {
         <S.Title>{productInfo?.title}</S.Title>
         <S.Price>{productInfo?.price}</S.Price>
       </S.ContentContainer>
-      {modalView && (
+      {/* {modalView && (
         <BucketListModal
           setModalOpen={setModalView}
           itemId={productInfo?.id}
           bucketList={bucketList}
         />
-      )}
+      )} */}
     </S.DetailContainer>
   );
 };
