@@ -18,6 +18,7 @@ import {
     SearchItemRouter,
     MyFandomRouter,
 } from "./Routes";
+import Requests from "./pages/Request/Requests";
 
 const Router = createBrowserRouter([
     {
