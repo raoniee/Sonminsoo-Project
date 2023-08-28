@@ -1,51 +1,27 @@
 import { createContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import styled from "styled-components";
+import * as S from "./style/Signup.Style";
+import { Button } from "../../elements/Button";
 
-interface userInfoType {
+type userInfoType = {
   password: string;
   userName: string;
   birthDate: string;
   phoneNumber: string;
-}
+};
 
-interface signupContextType {
+type signupContextType = {
   email: string;
   setEmail: (value: string) => void;
   setSignupStep: (value: string) => void;
   setUserInfo: React.Dispatch<React.SetStateAction<userInfoType>>;
   userInfo: userInfoType;
-}
+};
 
 export const signupContext = createContext<signupContextType>(
   {} as signupContextType
 );
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #f9f9f9;
-  font-family: "Arial", sans-serif;
-`;
-
-const Button = styled.input`
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-  background-color: #6138f8;
-  color: white;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
 
 const Signup: React.FC = () => {
   const [signupStep, setSignupStep] = useState("terms");
@@ -62,29 +38,38 @@ const Signup: React.FC = () => {
     if (signupStep === "terms")
       return (
         <Button
-          type="button"
-          value="다음"
+          background="#6138F8"
+          border="none"
+          color="#fff"
           onClick={() => {
             navigation("emailCertification");
             setSignupStep("emailCertification");
           }}
-        />
+        >
+          다음
+        </Button>
       );
     if (signupStep === "emailCertification")
       return (
         <Button
-          type="button"
+          background="#6138F8"
+          border="none"
+          color="#fff"
           value="다음"
           onClick={() => {
             navigation("enterMembersInfo");
             setSignupStep("enterMembersInfo");
           }}
-        />
+        >
+          다음
+        </Button>
       );
     if (signupStep === "enterMembersInfo")
       return (
         <Button
-          type="button"
+          background="#6138F8"
+          border="none"
+          color="#fff"
           value="회원가입 완료"
           onClick={() => {
             axios
@@ -102,7 +87,9 @@ const Signup: React.FC = () => {
               })
               .catch((e) => console.log(e));
           }}
-        />
+        >
+          회원가입 완료
+        </Button>
       );
     return;
   };
@@ -111,10 +98,11 @@ const Signup: React.FC = () => {
     <signupContext.Provider
       value={{ email, setEmail, setSignupStep, setUserInfo, userInfo }}
     >
-      <Container>
+      {/* outletcontext로 수정 */}
+      <S.Container>
         <Outlet />
         {nextButton()}
-      </Container>
+      </S.Container>
     </signupContext.Provider>
   );
 };

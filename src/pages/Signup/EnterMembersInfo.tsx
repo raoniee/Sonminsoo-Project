@@ -1,4 +1,4 @@
-import { signupContext } from "./index";
+import { signupContext } from "./Signup";
 import React, { useState, useContext } from "react";
 import axios from "../../api/axios";
 import styled from "styled-components";

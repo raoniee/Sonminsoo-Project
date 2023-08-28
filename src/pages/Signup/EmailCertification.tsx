@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import axios from "../../api/axios";
-import { signupContext } from "./index";
+import { signupContext } from "./Signup";
 import styled from "styled-components";
 import PageHeader from "./PageHeader";
 
@@ -126,7 +126,9 @@ const EmailCertification = () => {
             id="email"
             placeholder="이메일을 입력해 주세요."
             value={useSignupContext?.email}
-            onChange={(e) => useSignupContext?.setEmail(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              useSignupContext?.setEmail(e.target.value)
+            }
           />
           <Button onClick={handleEmailAuthClick}>인증번호발송</Button>
         </div>
@@ -136,7 +138,9 @@ const EmailCertification = () => {
             id="emailCertificaton"
             placeholder="이메일 인증 번호를 입력해 주세요"
             value={authValid}
-            onChange={(e) => setAuthValid(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setAuthValid(e.target.value)
+            }
           />
           <Button onClick={handleEmailAuthVaildClick}>인증하기</Button>
         </div>

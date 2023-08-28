@@ -1,4 +1,4 @@
-import Signup from "../pages/Signup";
+import Signup from "../pages/Signup/Signup";
 import Terms from "../pages/Signup/Terms";
 import EmailCertification from "../pages/Signup/EmailCertification";
 import EnterMembersInfo from "../pages/Signup/EnterMembersInfo";
