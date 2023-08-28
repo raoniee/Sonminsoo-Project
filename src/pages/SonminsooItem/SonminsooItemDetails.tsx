@@ -105,16 +105,13 @@ const SonminsooItemDetails = () => {
         <S.Title>{productInfo?.title}</S.Title>
         <S.Price>{productInfo?.price}</S.Price>
       </S.ContentContainer>
-<<<<<<< HEAD
-=======
-      {modalView && (
+      {/* {modalView && (
         <BucketListModal
           setModalOpen={setModalView}
           itemId={productInfo?.id}
           bucketList={bucketList}
         />
-      )}
->>>>>>> 6950bff (Feat : 손민수템 상세보기 버킷 리스트 추가 기능 구현1)
+      )} */}
     </S.DetailContainer>
   );
 };
