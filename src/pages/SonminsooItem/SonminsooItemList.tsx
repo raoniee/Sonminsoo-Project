@@ -20,6 +20,7 @@ type sonminsooItemInfo = {
 
 const SonminsooItemList = () => {
   const [items, setItems] = useState<sonminsooItemInfo[]>([]);
+  const [searchView, setSearchView] = useState<boolean>(false);
   useEffect(() => {
     const getSonminsooItemList = async () => {
       try {
@@ -42,7 +43,14 @@ const SonminsooItemList = () => {
             <HeaderBar
               BackButton={false}
               items={[
-                <Icon key={"search"} src={search} />,
+                searchView && <S.SearchText key={"keyword"} />,
+                <Icon
+                  key={"search"}
+                  src={search}
+                  onClick={() => {
+                    setSearchView(!searchView);
+                  }}
+                />,
                 <Icon key={"settings"} src={settings} />,
               ]}
             />
@@ -52,7 +60,7 @@ const SonminsooItemList = () => {
             </S.LinkRequestList>
           </>
         );
-      }, [])}
+      }, [searchView])}
       <S.SonminsooItemListContainer>
         <S.SonminsooItemTitle>손민수템</S.SonminsooItemTitle>
 

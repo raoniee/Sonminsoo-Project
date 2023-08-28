@@ -37,3 +37,10 @@ export const SonminsooItemsContainer = styled.div`
 export const SonminsooItemTitle = styled.div`
   margin-bottom: 5px;
 `;
+export const SearchText = styled.input.attrs({ type: "text" })`
+  width: 100%;
+  height: 40px;
+  border: 1px solid #e8e8e8;
+  border-radius: 1px;
+  background-color: #f6f6f6;
+`;
