@@ -13,14 +13,16 @@ export const NumberOne = styled(NumberOneIcon)`
     height: 35px;
 `;
 
-export const PandomShadowCircle = styled.div`
+export const imgContainer = styled.div`
+    margin: auto;
+`;
+
+export const PandomShadowCircle = styled.img`
     width: 80px;
     height: 80px;
-    margin: auto;
     border-radius: 50%;
     border: solid black;
     box-shadow: 5px 5px;
-    background-color: white;
     box-sizing: border-box;
 `;
 

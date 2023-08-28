@@ -1,3 +1,4 @@
+import { ifError } from "assert";
 import * as S from "./style/HotFandomCircle.style";
 
 type FandomRankData = {
@@ -6,7 +7,7 @@ type FandomRankData = {
     lastChatTime: null;
     memberLength: number;
     rank: number;
-    thumbnailImgUrl: string;
+    image: string;
 };
 
 type HotFandomCircleProps = {
@@ -14,12 +15,14 @@ type HotFandomCircleProps = {
 };
 
 const HotFandomCircle: React.FC<HotFandomCircleProps> = ({ item }) => {
-    console.log("item:", item);
+    //  console.log("item:", item.thumbnailImgUrl);
     return (
         <S.PandomCircleContainer>
-            <S.PandomShadowCircle>
+            <S.imgContainer>
                 <S.NumberOne />
-            </S.PandomShadowCircle>
+                <S.PandomShadowCircle src={item?.image} />
+            </S.imgContainer>
+
             <S.PandomCircleName>{item && item.fandomName}</S.PandomCircleName>
         </S.PandomCircleContainer>
     );
