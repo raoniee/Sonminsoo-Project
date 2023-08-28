@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import * as S from "./style/MyFandom.style";
-
+import { Outlet } from "react-router-dom";
 import HomeHeader from "../../components/Home/HomeHeader";
 import FandomMenu from "../../components/MyFandom/FandomMenu";
 import ContentHeader from "../../components/MyFandom/ContentHeader";
