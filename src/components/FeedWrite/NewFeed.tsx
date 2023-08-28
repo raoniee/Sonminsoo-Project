@@ -126,6 +126,7 @@ const NewFeed = () => {
           공지피드
         </S.NoticeText>
       )}
+      {/* <LinkRegister /> */}
     </>
   );
 };

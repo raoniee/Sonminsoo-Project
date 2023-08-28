@@ -2,21 +2,27 @@ import React, { useState, useRef, useEffect } from "react";
 import detailDate from "../../utils/time";
 import * as S from "./style/CommentItem.style";
 import commentmore from "../../assets/images/svg/ic-more-vertical-16.svg";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 type CommentType = {
   id: number;
-  profileImg: string;
-  userName: string;
-  content: string;
+  feedId: number;
   createdAt: string;
+  content: string;
+  parent: number;
+  author: {
+    id: number;
+    image: string;
+    nickName: string;
+  };
 };
-
 type CommentItemProps = {
   comment: CommentType;
   showModal: () => void;
 };
 
 const CommentItem: React.FC<CommentItemProps> = ({ comment, showModal }) => {
+  const axiosPrivate = useAxiosPrivate();
   const [openedModalId, setOpenedModalId] = useState<number | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
@@ -46,14 +52,15 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, showModal }) => {
   //   //   alert("댓글 삭제에 실패했습니다. 다시 시도해주세요.");
   //   // }
   // };
+
   return (
     <>
       <S.CommentContainer>
-        <S.CommentProfile src={comment.profileImg} />
+        <S.CommentProfile src={comment.author.image} />
         <S.CommentContent>
           <S.CommnetContentWrap>
             <S.UserContenWrap>
-              <S.CommentNickname>{comment.userName}</S.CommentNickname>
+              <S.CommentNickname>{comment.author.nickName}</S.CommentNickname>
               <S.CommentTime>{detailDate(comment.createdAt)}</S.CommentTime>
             </S.UserContenWrap>
             <S.CommentMoreBtn

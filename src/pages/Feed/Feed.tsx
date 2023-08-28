@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styled from "styled-components";
 import * as S from "./style/Feed.style";
 import FeedHeaderBar from "../../components/Feed/FeedHeaderBar";
@@ -17,40 +18,70 @@ import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 import { Data } from "../../types/feed";
 
+type CommentType = {
+  id: number;
+  feedId: number;
+  createdAt: string;
+  content: string;
+  parent: number;
+  author: {
+    id: number;
+    image: string;
+    nickName: string;
+  };
+  replies?: {};
+};
+
 const FeedIndex = () => {
   const [openComment, setOpenComment] = useState<number | undefined>();
   const [feedData, setFeedData] = useState<Data[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isFeedDelete, setIsFeedDelete] = useState<boolean>(false);
+  const [comments, setComments] = useState<CommentType[]>([]);
+
+  const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchData();
+    fetchFeedData();
   }, []);
-  console.log(feedData);
 
-  const fetchData = async () => {
+  const fetchFeedData = async () => {
     try {
-      const response = await axios.get(
-        "http://146.56.143.108/api/v1/feeds?page=1&perPage=2"
-      );
+      const response = await axios.get("/feeds");
       setFeedData(response.data.data);
     } catch (error) {
       console.error("Error", error);
     }
   };
-
-  const showModal = () => {
-    setModalOpen(true);
+  const fetchComments = async (id: number) => {
+    try {
+      const response = await axios.get(`/comments/${id}`);
+      setComments(response.data.data);
+    } catch (error) {
+      console.log("error", error);
+    }
   };
-
   const toggleComment = (id: number) => {
     if (openComment === id) {
       setOpenComment(undefined);
     } else {
       setOpenComment(id);
+      fetchComments(id);
     }
   };
+  const handleDelete = async (id: number) => {
+    try {
+      await axiosPrivate.delete(`/users/comments/${id}`);
+    } catch (error) {
+      console.log("error", error);
+      alert("댓글 삭제 못함");
+    }
+  };
+  const showModal = () => {
+    setModalOpen(true);
+  };
+
   return (
     <S.FeedContainer>
       <FeedHeaderBar />
@@ -69,7 +100,13 @@ const FeedIndex = () => {
               feedData={feed}
             />
           </S.BtnWrap>
-          {openComment === feed.id && <Comment showModal={showModal} />}
+          {openComment === feed.id && (
+            <Comment
+              showModal={showModal}
+              comments={comments}
+              feedId={feed.id}
+            />
+          )}
           <S.Line />
         </React.Fragment>
       ))}
@@ -82,7 +119,7 @@ const FeedIndex = () => {
           yesContent={"삭제"}
           warning={true}
           yesClickHandler={() => {
-            alert("삭제요청, 그리고 alert창 끄기");
+            handleDelete(comments[0].id);
           }}
         />
       )}

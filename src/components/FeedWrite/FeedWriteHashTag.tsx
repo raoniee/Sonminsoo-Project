@@ -11,9 +11,6 @@ const FeedWriteHashTag: React.FC<FeedWriteHashTagProps> = ({
   hashTagInput,
   handleHashTagChange,
 }) => {
-  // #넣어입력하면 배열로 변환
-  const hashtagss = hashTagInput.match(/#\w+/g) || [];
-
   return (
     <S.WriteForm>
       <S.FeedWriteTags
