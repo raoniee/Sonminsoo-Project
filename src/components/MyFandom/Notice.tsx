@@ -43,9 +43,7 @@ const Notice = () => {
                     <S.ProfileTextBox>
                         <S.NicknameText>{author?.nickName}</S.NicknameText>
                         <S.FandomNameTimeBox>
-                            <S.NameTimeText>
-                                팬덤 이름은 다른데서 가져오는지?
-                            </S.NameTimeText>
+                            <S.NameTimeText>팬덤 이름</S.NameTimeText>
                             <S.NameTimeText>10분전</S.NameTimeText>
                         </S.FandomNameTimeBox>
                     </S.ProfileTextBox>
