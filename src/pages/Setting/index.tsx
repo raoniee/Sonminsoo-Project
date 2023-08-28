@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/reset.css";
 import axios from "axios";
 import styled from "styled-components";
@@ -37,7 +37,7 @@ const Header = styled.h1`
   color: #333;
 `;
 
-const Link = styled(Link)`
+const StyledLink = styled(Link)`
   display: block;
   margin: 15px 0;
   padding: 15px;
@@ -58,7 +58,7 @@ const Link = styled(Link)`
 `;
 
 const Setting: React.FC = () => {
-  const [resetPasswordStep, setResetPasswordStep] = useState("postid");
+  const [resetPasswordStep, setResetPasswordStep] = useState("putid");
   const [userInfo, setUserInfo] = useState<userInfoType>({
     password: "",
     userName: "",
@@ -70,7 +70,7 @@ const Setting: React.FC = () => {
   const nextButton = () => {
     if (resetPasswordStep === "ResetPasswordCerti")
       return (
-        <Button
+        <button
           type="button"
           value="다음"
           onClick={() => {
@@ -81,25 +81,25 @@ const Setting: React.FC = () => {
       );
     if (resetPasswordStep === "ResetNewPassword")
       return (
-        <Button
+        <button
           type="button"
           value="다음"
-          onClick={() => {
-            axios
-              .post(`http://146.56.143.108/auth/setting`, {
-                email,
-                password: userInfo.password,
-                userName: userInfo.userName,
-                birthDate: userInfo.birthDate,
-                phoneNumber: userInfo.phoneNumber,
-              })
-              .then((res) => {
-                console.log(res);
-                navigation("index");
-                setResetPasswordStep("index");
-              })
-              .catch((e) => console.log(e));
-          }}
+          // onClick={() => {
+          //   axios
+          //     .post(`http://146.56.143.108/auth/setting`, {
+          //       email,
+          //       password: userInfo.password,
+          //       userName: userInfo.userName,
+          //       birthDate: userInfo.birthDate,
+          //       phoneNumber: userInfo.phoneNumber,
+          //     })
+          //     .then((res) => {
+          //       console.log(res);
+          //       navigation("index");
+          //       setResetPasswordStep("index");
+          //     })
+          //     .catch((e) => console.log(e));
+          // }}
         />
       );
     return;
@@ -110,18 +110,18 @@ const Setting: React.FC = () => {
       value={{ resetPasswordStep, setResetPasswordStep, setUserInfo, userInfo }}
       <Container>
         <Header>설정</Header>
-        <Link to="/postId">
+        <StyledLink to="/postId">
           <h2>개인정보 수정</h2>
-        </Link>
-        <Link to="/resetPasswordCerti">
+        </StyledLink>
+        <StyledLink to="/resetPasswordCerti">
           <h2>비밀번호 재설정</h2>
-        </Link>
-        <Link to="/SonDecalogue">
+        </StyledLink>
+        <StyledLink to="/SonDecalogue">
           <h2>정의로운 손민수 십계명</h2>
-        </Link>
-        <Link to="/logout">
+        </StyledLink>
+        <StyledLink to="/logout">
           <h2>로그아웃</h2>
-        </Link>
+        </StyledLink>
       </Container>
     </resetContext.Provider>
   );
