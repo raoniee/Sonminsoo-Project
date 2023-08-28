@@ -8,13 +8,10 @@ import ChatImageViewer from './ChatImageViewer';
 const ChatGridImage = ({imageList}: Chat) => {
 
     const [isViewerOpen, setIsViewerOpen] = useState(false);
+    const [imageIndex, setImageIndex] = useState(0);
     const $imageCount = imageList.length;
     const $isMe: boolean = false;
     const imageThumbs: string[] = $imageCount >= 3 ? imageList.slice(0, 3) : imageList;
-
-    const openViewerHandler = () => {
-        setIsViewerOpen(true);
-    }
 
     return (
         <S.GridImageWrapper $isMe={$isMe}>
@@ -24,16 +21,28 @@ const ChatGridImage = ({imageList}: Chat) => {
                         key={index}
                         src={image} 
                         $imageCount={$imageCount} 
-                        onClick={openViewerHandler} 
+                        onClick={() => {
+                            setIsViewerOpen(true);
+                            setImageIndex(index);
+                        }}
                     />
                 ))}
                 {$imageCount > 3 && 
-                    <S.ModalImage onClick={openViewerHandler}>
+                    <S.ModalImage 
+                        onClick={() => {
+                            setIsViewerOpen(true);
+                            setImageIndex(2);
+                        }}
+                    >
                         <p>+{($imageCount > 3 && $imageCount - 3)}개</p>
                     </S.ModalImage>
                 }
                 {isViewerOpen ?
-                    <ChatImageViewer imageList={imageList} setIsViewerOpen={setIsViewerOpen} />
+                    <ChatImageViewer 
+                        imageList={imageList} 
+                        setIsViewerOpen={setIsViewerOpen} 
+                        startSlideIndex={imageIndex}
+                    />
                     : null
                 }
             </S.GridImageContainer>
