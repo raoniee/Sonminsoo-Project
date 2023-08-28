@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "../../styles/reset.css";
 import styled from "styled-components";
 import testSvg from "../../assets/images/svg/1801287.svg";
 import checkIcon from "../../assets/images/svg/Exclude.svg";
