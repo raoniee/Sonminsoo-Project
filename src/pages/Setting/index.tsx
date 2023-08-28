@@ -106,24 +106,24 @@ const Setting: React.FC = () => {
   };
 
   return (
-    <resetContext.Provider>
-      value={{ resetPasswordStep, setResetPasswordStep, setUserInfo, userInfo }}
-      <Container>
-        <Header>설정</Header>
-        <StyledLink to="/postId">
-          <h2>개인정보 수정</h2>
-        </StyledLink>
-        <StyledLink to="/resetPasswordCerti">
-          <h2>비밀번호 재설정</h2>
-        </StyledLink>
-        <StyledLink to="/SonDecalogue">
-          <h2>정의로운 손민수 십계명</h2>
-        </StyledLink>
-        <StyledLink to="/logout">
-          <h2>로그아웃</h2>
-        </StyledLink>
-      </Container>
-    </resetContext.Provider>
+    // <resetContext.Provider>
+    //   value={{ resetPasswordStep, setResetPasswordStep, setUserInfo, userInfo }}
+    <Container>
+      <Header>설정</Header>
+      <StyledLink to="/postId">
+        <h2>개인정보 수정</h2>
+      </StyledLink>
+      <StyledLink to="/resetPasswordCerti">
+        <h2>비밀번호 재설정</h2>
+      </StyledLink>
+      <StyledLink to="/SonDecalogue">
+        <h2>정의로운 손민수 십계명</h2>
+      </StyledLink>
+      <StyledLink to="/">
+        <h2>로그아웃</h2>
+      </StyledLink>
+    </Container>
+    // </resetContext.Provider>
   );
 };
 
