@@ -1,4 +1,7 @@
 import React from "react";
+import { createContext, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import "../../styles/reset.css";
 import styled from "styled-components";
 
 const CompletionContainer = styled.div`

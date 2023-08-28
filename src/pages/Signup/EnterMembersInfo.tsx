@@ -1,4 +1,5 @@
 import { signupContext } from "./index";
+import "../../styles/reset.css";
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import styled from "styled-components";
@@ -63,7 +64,8 @@ const EnterMembersInfo = () => {
     <Container>
       <Agreement>개인정보 입력하기</Agreement>
       <SubAgreement>
-        정의로운 손민수 이용을 위해 아래의 정보를 입력해주세요
+        정의로운 손민수 이용을 위해 <br />
+        아래의 정보를 입력해 주세요
       </SubAgreement>
       <SubAgreement2>기본정보입력</SubAgreement2>
       <Form>

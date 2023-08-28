@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import "../../styles/reset.css";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -45,7 +46,7 @@ const Button = styled.input`
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
-  background-color: #007bff;
+  background-color: #6138f8;
   color: white;
   transition: background-color 0.2s;
 
@@ -70,7 +71,7 @@ const Signup: React.FC = () => {
       return (
         <Button
           type="button"
-          value="다음,emailCertification"
+          value="다음"
           onClick={() => {
             navigation("emailCertification");
             setSignupStep("emailCertification");
@@ -81,7 +82,7 @@ const Signup: React.FC = () => {
       return (
         <Button
           type="button"
-          value="다음,enterMembersInfo"
+          value="다음"
           onClick={() => {
             navigation("enterMembersInfo");
             setSignupStep("enterMembersInfo");

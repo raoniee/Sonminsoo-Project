@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import "../../styles/reset.css";
 import axios from "axios";
 import { signupContext } from "./index";
 import styled from "styled-components";
@@ -33,8 +34,19 @@ const Label = styled.label`
   margin-bottom: 0.5em;
 `;
 
-const Input = styled.input`
+const InputEmail = styled.input`
   padding: 0.5em;
+  width: 50%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 1em;
+  font-size: 16px;
+  outline: none;
+`;
+
+const InputNum = styled.input`
+  padding: 0.5em;
+  width: 60%;
   border: 1px solid #ddd;
   border-radius: 4px;
   margin-bottom: 1em;
@@ -43,7 +55,7 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  background-color: #007bff;
+  background-color: #208df1;
   color: #fff;
   padding: 0.5em 1em;
   border: none;
@@ -59,7 +71,7 @@ const Button = styled.button`
 
 const TextWithLink = styled.p`
   color: #777;
-
+  font-size: 13px;
   span {
     color: #007bff;
     cursor: pointer;
@@ -105,11 +117,12 @@ const EmailCertification = () => {
     <Container>
       <Agreement>본인인증하기</Agreement>
       <SubAgreement>
-        정의로운 손민수 이용을 위해 약관에 동의해주세요
+        정의로운 손민수 이용을 위해
+        <br /> 이메일 인증을 해주세요
       </SubAgreement>
       <Form>
         <div>
-          <Input
+          <InputEmail
             type="text"
             id="email"
             placeholder="이메일을 입력해 주세요."
@@ -119,7 +132,7 @@ const EmailCertification = () => {
           <Button onClick={handleEmailAuthClick}>인증번호발송</Button>
         </div>
         <div>
-          <Input
+          <InputNum
             type="text"
             id="emailCertificaton"
             placeholder="이메일 인증 번호를 입력해 주세요"

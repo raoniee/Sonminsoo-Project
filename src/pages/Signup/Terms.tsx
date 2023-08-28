@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import "../../styles/reset.css";
 import styled from "styled-components";
 import testSvg from "../../assets/images/svg/1801287.svg";
 
-const Wrapper = styled.div`
+const Container = styled.div`
   padding: 20px;
   font-family: "Arial", sans-serif;
 `;
@@ -61,10 +62,10 @@ const Terms = () => {
   // };
 
   return (
-    <Wrapper>
+    <Container>
       <Agreement>이용약관 동의</Agreement>
       <SubAgreement>
-        정의로운 손민수 이용을 위해 약관에 동의해주세요
+        정의로운 손민수 이용을 위해 <br /> 약관에 동의해주세요
       </SubAgreement>
       <Checkbox
       // defaultChecked={allChecked}
@@ -72,27 +73,33 @@ const Terms = () => {
       // onClick={handleAllCheck}
       />
       <CheckboxDiv>
-        <CheckboxLabel>전체동의</CheckboxLabel>
         <Checkbox
           // checked={infoAgreement}
           onClick={() => setInfoAgreement(!infoAgreement)}
         />
+        <CheckboxLabel>전체동의</CheckboxLabel>
       </CheckboxDiv>
       <CheckboxDiv>
-        <CheckboxLabel>개인정보 수집 및 이용 동의(필수)</CheckboxLabel>
         <Checkbox
           // checked={pledge}
           onClick={() => {
             setPledge(!pledge);
           }}
         />
+        <CheckboxLabel>개인정보 수집 및 이용 동의(필수)</CheckboxLabel>
         {/* <Modal></Modal> */}
       </CheckboxDiv>
       <CheckboxDiv>
+        <Checkbox
+          // checked={pledge}
+          onClick={() => {
+            setPledge(!pledge);
+          }}
+        />
         <CheckboxLabel>정의로운 손민수 십계명 서약(필수)</CheckboxLabel>
         {/* <Modal></Modal> */}
       </CheckboxDiv>
-    </Wrapper>
+    </Container>
   );
 };
 export default Terms;
