@@ -1,14 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import * as S from "../common/AlertModal/style/AppAlertModal.style";
+import * as S from "./style/AppAlertModal.style";
 
 type ModalProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   title: string;
   content: string;
   warning?: boolean;
-  yesContent: string;
-  yesClickHandler: React.MouseEventHandler<HTMLDivElement>;
 };
+
 const AppAlertModal: React.FC<ModalProps> = ({
   setModalOpen,
   title,
