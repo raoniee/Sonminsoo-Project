@@ -26,6 +26,7 @@ const LikeBtn: React.FC<LikeBtnProps> = ({ feedId }) => {
       console.log("error", error);
     }
   };
+
   const toggleLike = async (feedId: number) => {
     if (token) {
       setLiked(!liked);
