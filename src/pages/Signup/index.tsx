@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../api/axios";
 import styled from "styled-components";
 
 interface userInfoType {
@@ -88,7 +88,7 @@ const Signup: React.FC = () => {
           value="회원가입 완료"
           onClick={() => {
             axios
-              .post(`http://146.56.143.108/auth/sign-up`, {
+              .post(`/auth/sign-up`, {
                 email,
                 password: userInfo.password,
                 userName: userInfo.userName,

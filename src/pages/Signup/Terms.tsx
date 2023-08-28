@@ -57,6 +57,7 @@ type Props = {
 const Terms = () => {
   const [infoAgreement, setInfoAgreement] = useState(false);
   const [pledge, setPledge] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   // const handleAllCheck = () => {
   //   if (infoAgreement && pledge) {

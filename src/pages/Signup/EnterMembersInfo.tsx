@@ -1,6 +1,6 @@
 import { signupContext } from "./index";
 import React, { useState, useContext } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import styled from "styled-components";
 import PageHeader from "./PageHeader";
 
@@ -29,10 +29,20 @@ const SubAgreement2 = styled.h1`
   margin-bottom: 10px;
 `;
 const Form = styled.form`
+  display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
 `;
 
 const Input = styled.input`
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+`;
+
+const Label = styled.label`
   width: 100%;
   padding: 8px;
   margin-bottom: 15px;
@@ -62,7 +72,7 @@ const EnterMembersInfo = () => {
   };
   return (
     <Container>
-      <PageHeader totalPages={3} currentPage={3} />
+      {/* <PageHeader totalPages={3} currentPage={3} /> */}
       <Agreement>개인정보 입력하기</Agreement>
       <SubAgreement>
         정의로운 손민수 이용을 위해 <br />
@@ -70,12 +80,9 @@ const EnterMembersInfo = () => {
       </SubAgreement>
       <SubAgreement2>기본정보입력</SubAgreement2>
       <Form>
-        <Input
-          type="text"
-          id="email"
-          placeholder="이메일을 입력해 주세요"
-          value={email}
-        />
+        <Label id="email">
+          {email ? email : "다시 이메일 요청을 해주세요"}
+        </Label>
         <Input
           type="text"
           id="password"

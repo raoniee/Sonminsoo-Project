@@ -99,7 +99,7 @@ const EmailCertification = () => {
   ) => {
     e.preventDefault();
     axios
-      .post(`http://146.56.143.108/auth/verificationCode`, {
+      .post(`auth/verification-code`, {
         email: useSignupContext?.email,
         code: authValid,
       })

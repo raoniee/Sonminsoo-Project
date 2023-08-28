@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../redux/config/rootReducer";
-import axios from "axios";
+import axios from "../../api/axios";
 import styled from "styled-components";
 // import { axiosPrivate } from "../../api/axios";
 
@@ -63,11 +63,6 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const axiosPrivate = axios.create({
-  baseURL: `/api/v1`,
-  headers: { "Content-Type": "application/json" },
-  withCredentials: true,
-});
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -108,7 +103,17 @@ const Login = () => {
           <StyledButton
             onClick={(e) => {
               e.preventDefault();
-              //... axios call
+              axios
+                .post("/auth/sign-in", {
+                  email,
+                  password,
+                })
+                .then((response) => {
+                  console.log(response);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             }}
           >
             로그인
