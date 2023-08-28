@@ -1,15 +1,51 @@
+import React, { useState, useEffect } from "react";
+import axios from "../../api/axios";
+
 import * as S from "./style/Notice.style";
 const Notice = () => {
+    type noticeType = {
+        author: noticeAuthor;
+        content: string;
+        createdAt: string;
+        id: number;
+    };
+
+    type noticeAuthor = {
+        id: number;
+        nickName: string;
+        image: string;
+    };
+
+    const [data, setData] = useState<noticeType>();
+    const [author, setAuthor] = useState<noticeAuthor>();
+    console.log("작성사:", author);
+    useEffect(() => {
+        initDataGet();
+    }, []);
+
+    const initDataGet = async () => {
+        try {
+            const res = await axios.get("fandom-announcements/4");
+            console.log("공지get:", res.data.data);
+            setData(res.data.data);
+            setAuthor(res.data.data.author);
+        } catch (error) {
+            console.error("Error", error);
+        }
+    };
+
     return (
         <S.NoticeContainer>
-            <S.NoticeHeaderBox>
+            <S.NoticeHeaderBox key={author?.id}>
                 <S.NoticeHeaderText>공지</S.NoticeHeaderText>
                 <S.ProfileBox>
-                    <S.ProfileImg />
+                    <S.ProfileImg src={author?.image} />
                     <S.ProfileTextBox>
-                        <S.NicknameText>정의로운 손민수</S.NicknameText>
+                        <S.NicknameText>{author?.nickName}</S.NicknameText>
                         <S.FandomNameTimeBox>
-                            <S.NameTimeText>꾹이의 모든 것</S.NameTimeText>
+                            <S.NameTimeText>
+                                팬덤 이름은 다른데서 가져오는지?
+                            </S.NameTimeText>
                             <S.NameTimeText>10분전</S.NameTimeText>
                         </S.FandomNameTimeBox>
                     </S.ProfileTextBox>
@@ -18,12 +54,7 @@ const Notice = () => {
             </S.NoticeHeaderBox>
 
             <S.NoticeTextBox>
-                <S.NoticeText>
-                    공지는 하나만 상위 고정할 수 있으며
-                    <br />긴 내용은 3줄까지만 허용
-                    <br />
-                    3줄이 넘어가고 글이 너무 길어서 더이상 표시 되지
-                </S.NoticeText>
+                <S.NoticeText>{data?.content}</S.NoticeText>
             </S.NoticeTextBox>
         </S.NoticeContainer>
     );
