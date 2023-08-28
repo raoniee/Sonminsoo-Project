@@ -1,51 +1,131 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as S from "../style/RequestWriterResponse.style";
 import more from "../../../assets/images/svg/ic-more-horizontal.svg";
 import select from "../../../assets/images/svg/ic-select.svg";
 import LinkAttachItem from "../LinkAttachItem";
 import AppAlertModal from "../../common/AlertModal/AppAlertModal";
 
-const RequestWriterResponse: React.FC = () => {
-  const [hhh, setHHH] = useState(true);
+type answerItmesType = {
+  id: number;
+  originUrl: string;
+  imgUrl: string;
+  price: string;
+  title: string;
+};
 
-  console.log(hhh);
+type RequestAnswerProps = {
+  answerUsername: string;
+  answerUserimg: string;
+  answerUserclearNum: number;
+  answerDate: string;
+  answerItems: answerItmesType[];
+};
+
+const RequestWriterResponse: React.FC<RequestAnswerProps> = ({
+  answerUsername,
+  answerUserimg,
+  answerUserclearNum,
+  answerDate,
+  answerItems,
+}) => {
+  const [moreClick, setMoreClick] = useState(false);
+  const [selectClick, setSeleteClick] = useState(false);
+  const [deleteClick, setDeleteClick] = useState(false);
+  const [result, setResult] = useState(true);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const clickOutside = (e: any) => {
+      if (!modalRef.current?.contains(e.target)) {
+        setMoreClick(false);
+      }
+    };
+    document.addEventListener("mousedown", clickOutside);
+    return () => {
+      document.removeEventListener("mousedown", clickOutside);
+    };
+  }, []);
 
   const click = () => {
-    console.log("eee");
+    setSeleteClick(false);
+    setResult(false);
+  };
+  const deleteclick = () => {
+    setDeleteClick(false);
   };
 
   return (
     <>
       <S.Wrap>
         <S.ProfileBox>
-          <S.ProfileImg />
+          <S.ProfileImg src={answerUserimg} />
           <S.ProfileInfo>
-            <S.UserName>정의로운 손민수</S.UserName>
+            <S.UserName>{answerUsername}</S.UserName>
             <S.ResponesInfo>
-              <S.ClearNumber>채택된 의뢰 20개</S.ClearNumber>
-              <S.Date>10분전</S.Date>
+              <S.ClearNumber>채택된 의뢰 {answerUserclearNum}개</S.ClearNumber>
+              <S.Date>{answerDate}</S.Date>
             </S.ResponesInfo>
           </S.ProfileInfo>
-          <S.More src={more} />
-          {/* <SS.elect src={select} /> */}
-          {/* <S.MoreModal>
-          <S.Selete>채택하기</S.Selete>
-          <S.Delete>삭제하기</S.Delete>
-        </S.MoreModal> */}
+          {result && (
+            <S.More
+              src={more}
+              onClick={() => {
+                setMoreClick(true);
+              }}
+            />
+          )}
+          {result && moreClick && (
+            <S.MoreModal ref={modalRef}>
+              <S.Selete
+                onClick={() => {
+                  setSeleteClick(true);
+                }}
+              >
+                채택하기
+              </S.Selete>
+              <S.Delete
+                onClick={() => {
+                  setDeleteClick(true);
+                }}
+              >
+                삭제하기
+              </S.Delete>
+            </S.MoreModal>
+          )}
+          {!result && <S.SeleteImg src={select} />}
         </S.ProfileBox>
         <S.ImgsBox>
-          <LinkAttachItem />
+          {answerItems &&
+            answerItems.map((item) => (
+              <LinkAttachItem
+                key={item.id}
+                deletevalue={false}
+                itemImg={item.imgUrl}
+                itemPrice={item.price}
+                itemName={item.title}
+              />
+            ))}
         </S.ImgsBox>
       </S.Wrap>
-      {/* {hhh && (
+      {selectClick && (
         <AppAlertModal
           title="채택하기"
           content="채택하시겠습니까?"
           yesContent="채택"
           yesClickHandler={click}
-          setModalOpen={setHHH}
+          setModalOpen={setSeleteClick}
         />
-      )} */}
+      )}
+      {deleteClick && (
+        <AppAlertModal
+          title="삭제하기"
+          content="삭제하시겠습니까?"
+          yesContent="삭제"
+          yesClickHandler={deleteclick}
+          setModalOpen={setDeleteClick}
+        />
+      )}
     </>
   );
 };

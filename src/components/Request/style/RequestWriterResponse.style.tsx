@@ -43,13 +43,14 @@ export const Date = styled.p`
   font-size: 13px;
 `;
 export const More = styled.img``;
-export const Select = styled.img`
+export const SeleteImg = styled.img`
   position: absolute;
   top: -20px;
   right: 0;
 `;
 export const ImgsBox = styled.div`
   display: flex;
+  gap: 10px;
 `;
 export const MoreModal = styled.div`
   position: absolute;
