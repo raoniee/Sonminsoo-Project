@@ -6,7 +6,7 @@ type FandomRankData = {
     lastChatTime: null;
     memberLength: number;
     rank: number;
-    thumbnailImgUrl: string;
+    image: string;
 };
 
 type FandomdataProps = {
@@ -16,7 +16,7 @@ type FandomdataProps = {
 const MyFandomList: React.FC<FandomdataProps> = ({ item }) => {
     return (
         <S.MyFandomListContainer key={item.id}>
-            <S.CircleImg />
+            <S.CircleImg src={item?.image} />
             <S.RnakingTextBox>
                 <S.FandomNameMemberBox>
                     <S.FandomNameText>{item.fandomName}</S.FandomNameText>
