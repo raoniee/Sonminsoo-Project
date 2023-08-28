@@ -52,7 +52,7 @@ const ChatImageViewer = ({imageList, setIsViewerOpen, startSlideIndex}: Chat) =>
                 {imageList.map((image, index) => (
                     
                     <S.SwiperSlide key={index}>
-                        <S.ImageView src={image}></S.ImageView>
+                        <S.ImageView src={image} />
                     </S.SwiperSlide>
                 ))}
             </S.Swiper>
