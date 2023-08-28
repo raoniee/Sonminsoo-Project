@@ -1,21 +1,55 @@
 import React from "react";
 import * as S from "../style/RequestNoWriterResponse.style";
 import LinkAttachItem from "../LinkAttachItem";
+import detailDate from "../../../utils/time";
 
-const RequestNoWriterResponse: React.FC = () => {
+type answerItmesType = {
+  id: number;
+  originUrl: string;
+  imgUrl: string;
+  price: string;
+  title: string;
+};
+
+type RequestAnswerProps = {
+  answerUsername: string;
+  answerUserimg: string;
+  answerUserclearNum: number;
+  answerDate: string;
+  answerItems: answerItmesType[];
+};
+
+const RequestNoWriterResponse: React.FC<RequestAnswerProps> = ({
+  answerUsername,
+  answerUserimg,
+  answerUserclearNum,
+  answerDate,
+  answerItems,
+}) => {
   return (
     <S.Wrap>
       <S.ProfileBox>
-        <S.ProfileImg />
+        <S.ProfileImg src={answerUserimg} />
         <S.ProfileInfo>
-          <S.UserName>정의로운 손민수</S.UserName>
+          <S.UserName>{answerUsername}</S.UserName>
           <S.ResponesInfo>
-            <S.ClearNumber>채택된 의뢰 20개</S.ClearNumber>
-            <S.Date>10분전</S.Date>
+            <S.ClearNumber>채택된 의뢰 {answerUserclearNum}개</S.ClearNumber>
+            <S.Date>{detailDate(answerDate)}</S.Date>
           </S.ResponesInfo>
         </S.ProfileInfo>
       </S.ProfileBox>
-      <S.ImgsBox>{/* <LinkAttachItem /> */}</S.ImgsBox>
+      <S.ImgsBox>
+        {answerItems &&
+          answerItems.map((item) => (
+            <LinkAttachItem
+              key={item.id}
+              deletevalue={false}
+              itemImg={item.imgUrl}
+              itemPrice={item.price}
+              itemName={item.title}
+            />
+          ))}
+      </S.ImgsBox>
     </S.Wrap>
   );
 };

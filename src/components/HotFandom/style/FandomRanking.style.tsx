@@ -20,7 +20,7 @@ export const RankingNumberText = styled.div`
     color: #6138f8;
 `;
 // 이미지 서클
-export const CircleImg = styled.div`
+export const CircleImg = styled.img`
     width: 56px;
     height: 56px;
     border-radius: 50%;

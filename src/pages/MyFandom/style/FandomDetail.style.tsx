@@ -2,6 +2,11 @@ import styled from "styled-components";
 
 // 홈 컨테이너
 export const Container = styled.div`
+    justify-content: space-between;
+
+    align-items: center;
+    margin: 0 auto;
+
     width: 100%;
     max-width: 390px;
     min-height: 844px;
@@ -17,9 +22,9 @@ export const HeaderBox = styled.div`
 `;
 
 //이미지
-export const Img = styled.div`
+export const Img = styled.img`
     height: 182px;
-    background-color: black;
+    width: 100%;
 `;
 
 export const FandomJoinBox = styled.div`
@@ -53,7 +58,7 @@ export const JoimBtn = styled.button`
     border: none;
     margin-top: 18px;
     font-size: 15px;
-
+    text-align: center;
     font-weight: 700;
 `;
 // 공지사항 임포트
