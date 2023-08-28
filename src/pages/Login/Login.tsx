@@ -14,6 +14,7 @@ const Login = () => {
   const auth = useSelector((state: any) => {
     return state.auth.accessToken;
   });
+  //TODO: 카카오 구글로그인 버튼 추가
   useEffect(() => {
     console.log("token!", auth);
   }, []);

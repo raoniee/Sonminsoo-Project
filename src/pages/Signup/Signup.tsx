@@ -23,7 +23,7 @@ export const signupContext = createContext<signupContextType>(
   {} as signupContextType
 );
 
-const Signup: React.FC = () => {
+const Signup = () => {
   const [signupStep, setSignupStep] = useState("terms");
   const [email, setEmail] = useState("");
   const [userInfo, setUserInfo] = useState<userInfoType>({
