@@ -1,46 +1,61 @@
-import styled from "styled-components";
-
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import * as S from "./style/MyFandom.style";
+import { Outlet } from "react-router-dom";
 import HomeHeader from "../../components/Home/HomeHeader";
 import FandomMenu from "../../components/MyFandom/FandomMenu";
 import ContentHeader from "../../components/MyFandom/ContentHeader";
 import MyFandomList from "../../components/MyFandom/MyFandomList";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
-//  팬덤 컨테이너
-const Container = styled.div`
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 390px;
-`;
+type Fandom = {
+  fandomName: string;
+  id: number;
+  lastChatTime: null;
+  memberLength: number;
+  rank: number;
+  image: string;
+};
 
-// 핫 팬덤 헤더박스
-const MyFandomHeaderBox = styled.div`
-    height: 280px;
-    background-color: #d5f033;
-`;
-
-// 마이팬덤 리스트 박스
-const MyFandomListBox = styled.div`
-    width: 100%;
-    max-width: 390px;
-`;
+type FandomData = Fandom[];
 
 const MyFandom = () => {
-    return (
-        <Container>
-            <MyFandomHeaderBox>
-                <HomeHeader />
-                <FandomMenu />
-            </MyFandomHeaderBox>
-            <MyFandomListBox>
-                <ContentHeader />
+  const axiosPrivate = useAxiosPrivate();
+  const [data, setData] = useState<FandomData>([]);
 
-                <MyFandomList />
-                <MyFandomList />
-                <MyFandomList />
-                <MyFandomList />
-            </MyFandomListBox>
-        </Container>
-    );
+  const auth = useSelector((state: any) => {
+    return state.auth.accessToken;
+  });
+
+  console.log("auth:", auth);
+
+  useEffect(() => {
+    initDataGet();
+  }, []);
+
+  const initDataGet = async () => {
+    try {
+      const res = await axiosPrivate.get("/users/fandoms");
+      console.log("get:", res.data.data);
+      setData(res.data.data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
+  return (
+    <S.Container>
+      <S.MyFandomHeaderBox>
+        <HomeHeader />
+        <FandomMenu />
+      </S.MyFandomHeaderBox>
+      <S.MyFandomListBox>
+        <ContentHeader />
+        {data.map((item) => (
+          <MyFandomList key={item.id} item={item} />
+        ))}
+      </S.MyFandomListBox>
+    </S.Container>
+  );
 };
 export default MyFandom;

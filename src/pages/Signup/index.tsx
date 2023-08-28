@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "../../api/axios";
+import styled from "styled-components";
 
 interface userInfoType {
   password: string;
@@ -13,13 +14,38 @@ interface signupContextType {
   email: string;
   setEmail: (value: string) => void;
   setSignupStep: (value: string) => void;
-  setUserInfo: (value: userInfoType) => void;
+  setUserInfo: React.Dispatch<React.SetStateAction<userInfoType>>;
   userInfo: userInfoType;
 }
 
 export const signupContext = createContext<signupContextType>(
   {} as signupContextType
 );
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-family: "Arial", sans-serif;
+`;
+
+const Button = styled.input`
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  background-color: #6138f8;
+  color: white;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
 
 const Signup: React.FC = () => {
   const [signupStep, setSignupStep] = useState("terms");
@@ -31,15 +57,13 @@ const Signup: React.FC = () => {
     phoneNumber: "",
   });
   const navigation = useNavigate();
-  // const handleSignupClcik = ()=>{
 
-  // }
   const nextButton = () => {
     if (signupStep === "terms")
       return (
-        <input
+        <Button
           type="button"
-          value="다음,emailCertification"
+          value="다음"
           onClick={() => {
             navigation("emailCertification");
             setSignupStep("emailCertification");
@@ -48,9 +72,9 @@ const Signup: React.FC = () => {
       );
     if (signupStep === "emailCertification")
       return (
-        <input
+        <Button
           type="button"
-          value="다음,enterMembersInfo"
+          value="다음"
           onClick={() => {
             navigation("enterMembersInfo");
             setSignupStep("enterMembersInfo");
@@ -59,12 +83,12 @@ const Signup: React.FC = () => {
       );
     if (signupStep === "enterMembersInfo")
       return (
-        <input
+        <Button
           type="button"
           value="회원가입 완료"
           onClick={() => {
             axios
-              .post(`http://146.56.143.108/auth/signup`, {
+              .post(`/auth/sign-up`, {
                 email,
                 password: userInfo.password,
                 userName: userInfo.userName,
@@ -87,11 +111,10 @@ const Signup: React.FC = () => {
     <signupContext.Provider
       value={{ email, setEmail, setSignupStep, setUserInfo, userInfo }}
     >
-      <div>
-        header
+      <Container>
         <Outlet />
         {nextButton()}
-      </div>
+      </Container>
     </signupContext.Provider>
   );
 };

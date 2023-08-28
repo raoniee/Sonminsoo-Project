@@ -1,81 +1,56 @@
-import styled from "styled-components";
-
+import * as S from "./style/FandomDetail.style";
+import React, { useState, useEffect } from "react";
+import axios from "../../api/axios";
 import FandomDetailHeader from "../../components/MyFandom/FandomDetailHeader";
 import Notice from "../../components/MyFandom/Notice";
 
-// 홈 컨테이너
-const Container = styled.div`
-    width: 100%;
-    max-width: 390px;
-    min-height: 844px;
-    height: 100%;
-    background-color: #f5f5f5;
-`;
+import { useParams } from "react-router-dom";
 
-//헤더박스
+type Fandom = {
+  fandomName: string;
+  id: number;
+  lastChatTime: null;
+  memberLength: number;
+  image: string;
+};
 
-const HeaderBox = styled.div`
-    height: 368px;
-    background-color: white;
-`;
-
-//이미지
-const Img = styled.div`
-    height: 182px;
-    background-color: black;
-`;
-
-const FandomJoinBox = styled.div`
-    margin-left: 16px;
-`;
-
-// 팬덤이름
-const FandomName = styled.div`
-    color: #1d1b20;
-    margin-top: 16px;
-    font-size: 20px;
-
-    font-weight: 700;
-`;
-//팬덤이름 멤버수
-const FandomMember = styled.div`
-    color: #1d1b20;
-    margin-top: 8px;
-    font-size: 14px;
-
-    font-weight: 500;
-`;
-
-// 팬덤 가입 버튼
-const JoimBtn = styled.button`
-    width: 358px;
-    height: 44px;
-    color: white;
-    background-color: #208df1;
-    border-radius: 8px;
-    border: none;
-    margin-top: 18px;
-    font-size: 15px;
-
-    font-weight: 700;
-`;
-// 공지사항 임포트
+type FandomData = Fandom;
 
 const FandomDetail = () => {
-    return (
-        <Container>
-            <HeaderBox>
-                <FandomDetailHeader />
-                <Img />
-                <FandomJoinBox>
-                    <FandomName>A.R.M.Y</FandomName>
-                    <FandomMember>멤버 22</FandomMember>
-                    <JoimBtn>팬덤 가입</JoimBtn>
-                </FandomJoinBox>
-            </HeaderBox>
+  const { fandomId } = useParams();
 
-            <Notice />
-        </Container>
-    );
+  const [data, setData] = useState<Fandom>();
+
+  useEffect(() => {
+    initDataGet();
+  }, []);
+
+  const initDataGet = async () => {
+    try {
+      const res = await axios.get("fandoms/4");
+      // `fandoms/${fandomId}`
+      console.log("get:", res.data.data);
+      setData(res.data.data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+  console.log("data:", data);
+
+  return (
+    <S.Container>
+      <S.HeaderBox>
+        <FandomDetailHeader />
+        <S.Img src={data?.image} alt="API Img" />
+        <S.FandomJoinBox>
+          <S.FandomName>{data?.fandomName}</S.FandomName>
+          <S.FandomMember>멤버 {data?.memberLength}</S.FandomMember>
+          <S.JoimBtn>팬덤 가입</S.JoimBtn>
+        </S.FandomJoinBox>
+      </S.HeaderBox>
+
+      <Notice />
+    </S.Container>
+  );
 };
 export default FandomDetail;

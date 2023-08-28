@@ -1,39 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import * as S from "./style/ChatUserInfo.style";
 
-const ChatUserInfo = () => {
+type MemberProps = {
+  $ban: boolean;
+};
 
-    const UserWrapper = styled.div`
-        width: 100%;
-        height: 70px;
-        display: flex;
-        align-items: center;
-    `;
+const ChatUserInfo = ({ $ban }: MemberProps) => {
+  const chatBanText: string = $ban ? "채팅정지 취소" : "채팅정지";
 
-    const UserImage = styled.div`
-        background-color: gray;
-
-        width: 56px;
-        height: 56px;
-        
-        margin-right: 15px;
-        border-radius: 70%;
-    `;
-
-    const UserName = styled.p`
-        margin: 0;
-
-        font-size: 16px;
-        font-weight: bold;
-    `;
-
-
-    return (
-        <UserWrapper>
-            <UserImage />
-            <UserName>아마추어 손민수</UserName>
-        </UserWrapper>
-    )
-}
+  return (
+    <S.UserInfoWrapper>
+      <S.UserWrapper>
+        <S.UserImage />
+        <S.UserName>아마추어 손민수</S.UserName>
+      </S.UserWrapper>
+      <S.BanButton $ban={$ban}>{chatBanText}</S.BanButton>
+    </S.UserInfoWrapper>
+  );
+};
 
 export default ChatUserInfo;
