@@ -7,6 +7,7 @@ import WriteFandom from "./WriteFandom";
 import FeedWriteHashTag from "./FeedWriteHashTag";
 import FeedWriteLink from "./FeedWriteLink";
 import FeedWriteTarget from "./FeedWriteTarget";
+import FeedWriteRegister from "./FeedWriteRegister";
 import * as S from "./style/NewFeed.style";
 import useInput from "../../hooks/useInput";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
@@ -26,6 +27,7 @@ const NewFeed = () => {
   const [artistInput, setArtistInput] = useState<string>("");
   const [fandomOptions, setFandomOptions] = useState([]);
   const [selectedFandom, setSelectedFandom] = useState<OptionType | null>(null);
+  const [linkModalClick, setLinkModalClick] = useState<boolean>(false);
 
   const location = useLocation();
 
@@ -73,7 +75,7 @@ const NewFeed = () => {
     }
     formData.forEach((value, key) => console.log(`${key}: ${value}`));
     try {
-      const response = await axiosPrivate.post("/users/feeds", formData, {
+      const response = await axiosPrivate.post("/users/fieeds", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
     } catch (error) {
@@ -106,7 +108,10 @@ const NewFeed = () => {
             hashTagInput={hashTagInput}
             handleHashTagChange={handleHashTagChange}
           />
-          <FeedWriteLink $updatePage={$updatePage} />
+          <FeedWriteLink
+            $updatePage={$updatePage}
+            setLinkModalClick={setLinkModalClick}
+          />
           <FeedWriteTarget
             $updatePage={$updatePage}
             grouptInput={groupInput}
@@ -126,7 +131,13 @@ const NewFeed = () => {
           공지피드
         </S.NoticeText>
       )}
-      {/* <LinkRegister /> */}
+      {linkModalClick && (
+        <FeedWriteRegister
+          groupName={groupInput}
+          artistName={artistInput}
+          setClick={setLinkModalClick}
+        />
+      )}
     </>
   );
 };

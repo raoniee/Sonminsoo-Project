@@ -10,9 +10,13 @@ import pants from "../../assets/images/png/pants.png";
 
 type FeedWriteProps = {
   $updatePage: boolean;
+  setLinkModalClick: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const FeedWriteLink: React.FC<FeedWriteProps> = ({ $updatePage }) => {
+const FeedWriteLink: React.FC<FeedWriteProps> = ({
+  $updatePage,
+  setLinkModalClick,
+}) => {
   const swiperParams = {
     slidesPerView: 3.5,
     spaceBetween: 12,
@@ -25,7 +29,11 @@ const FeedWriteLink: React.FC<FeedWriteProps> = ({ $updatePage }) => {
       <S.LinkItemBox>
         <Swiper {...swiperParams}>
           <SwiperSlide>
-            <S.LinkButton>
+            <S.LinkButton
+              onClick={() => {
+                setLinkModalClick(true);
+              }}
+            >
               <S.LinkImg src={Link} />
               <S.LinkText>링크 등록</S.LinkText>
             </S.LinkButton>
