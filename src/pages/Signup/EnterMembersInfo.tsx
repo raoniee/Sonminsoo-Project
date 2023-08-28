@@ -1,4 +1,5 @@
 import { signupContext } from "./index";
+import "../../styles/reset.css";
 import React, { useState, useContext } from "react";
 import axios from "../../api/axios";
 import styled from "styled-components";

@@ -63,6 +63,11 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const axiosPrivate = axios.create({
+  baseURL: `/api/v1`,
+  headers: { "Content-Type": "application/json" },
+  withCredentials: true,
+});
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
