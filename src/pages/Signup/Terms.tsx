@@ -33,7 +33,7 @@ const Checkbox = styled.input.attrs({ type: "checkbox" })`
   margin-right: 5px;
   width: 18px;
   height: 18px;
-  border: 1px solid #ccc;
+  border: 1px solid #ebeef2;
   border-radius: 2px;
   &:checked {
     background-image: url(${checkIcon});
