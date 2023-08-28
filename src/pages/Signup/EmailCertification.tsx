@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import axios from "axios";
+import axios from "../../api/axios";
 import { signupContext } from "./index";
 import styled from "styled-components";
 import PageHeader from "./PageHeader";
@@ -90,9 +90,7 @@ const EmailCertification = () => {
   const handleEmailAuthClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     axios
-      .get(
-        `http://146.56.143.108/auth/verificationCode?email=${useSignupContext?.email}`
-      )
+      .get(`/auth/verification-code?email=${useSignupContext?.email}`)
       .then((res) => console.log("email res", res))
       .catch((e) => console.log(e));
   };
@@ -115,7 +113,7 @@ const EmailCertification = () => {
 
   return (
     <Container>
-      <PageHeader totalPages={3} currentPage={2} />
+      {/* <PageHeader totalPages={3} currentPage={2} /> */}
       <Agreement>본인인증하기</Agreement>
       <SubAgreement>
         정의로운 손민수 이용을 위해
