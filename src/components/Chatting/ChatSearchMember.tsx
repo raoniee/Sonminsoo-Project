@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import BackButton from './BackButton';
-import { createBrowserHistory } from 'history';
 import type {ChatMember} from '../../types/chattingType';
 import ChatUserInfo from './ChatUserInfo';
+import iconArrow from '../../assets/images/svg/ic-arrow-left.svg';
 import * as S from './style/ChatSearchMember.style';
-
 
 
 
@@ -45,28 +43,11 @@ const ChatSearchMember = ({setOpenSearch}: SearchMember) => {
     
     const userFiltered = memberMock.filter((member) => member.userName.toUpperCase().includes(userInput));
 
-
-    useEffect(() => {
-
-        // 모달창 history 스택 쌓기
-        const history = createBrowserHistory();
-        window.history.pushState(null, "", window.location.href);
-
-        const event = history.listen((listener) => {
-        if (listener.action === "POP") {
-            window.history.pushState(null, "", window.location.href);
-            history.back();
-            setOpenSearch(false);
-        }});
-
-        return event;
-
-    }, []);
     
     return (
         <S.SearchMemberWrapper>
             <S.SearchHeader>
-                <BackButton />
+                <S.BackButtonIcon src={iconArrow} onClick={() => setOpenSearch(false)} />
                 <S.SearchInput 
                     type="text" 
                     placeholder='채팅방 멤버를 검색해주세요.' 
