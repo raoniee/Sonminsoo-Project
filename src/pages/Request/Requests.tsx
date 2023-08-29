@@ -8,6 +8,7 @@ import Icon from "../../elements/Icon";
 import { Link } from "react-router-dom";
 import axios from "../../api/axios";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
+import detailDate from "../../utils/time";
 
 type Requests = {
   title: string;
@@ -17,7 +18,7 @@ type Requests = {
     id: number;
     nickName: string;
   };
-  createAt: string;
+  createdAt: string;
 };
 
 const Requests: React.FC = () => {
@@ -31,13 +32,13 @@ const Requests: React.FC = () => {
     try {
       const response = await axios.get("/sonminsu-requests");
       setRequestData(response.data.data);
-      return console.log(response.data.data);
+      //return console.log(response.data.data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  console.log("dd", requestdata);
+  //console.log("dd", requestdata);
 
   return (
     <>
@@ -63,7 +64,7 @@ const Requests: React.FC = () => {
               img={request.image}
               title={request.title}
               username={request.user.nickName}
-              date="10분전"
+              date={detailDate(request.createdAt)}
               userid={request.user.id}
               requestid={request.id}
             />

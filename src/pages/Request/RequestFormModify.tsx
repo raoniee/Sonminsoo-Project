@@ -6,11 +6,51 @@ import x from "../../assets/images/svg/ic-x.svg";
 import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import { Link } from "react-router-dom";
 import axios, { axiosPrivate } from "../../api/axios";
-import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-const RequestForm: React.FC = () => {
+type RequestDescProps = {
+  image: string;
+  id: number;
+  title: string;
+  content: string;
+  answerCnt: number;
+  createdAt: string;
+  groupName: string;
+  artistName: string;
+  user: {
+    id: number;
+    nickName: string;
+    image: string;
+  };
+  answers: [
+    {
+      id: number;
+      createdAt: string;
+      user: {
+        id: number;
+        image: string;
+        nickName: string;
+        choosedCnt: number;
+      };
+      items: [
+        {
+          id: number;
+          originUrl: string;
+          imgUrl: string;
+          price: string;
+          title: string;
+        }
+      ];
+    }
+  ];
+};
+
+const RequestFormModify: React.FC = () => {
   const axiosPrivate = useAxiosPrivate();
+  const navigation = useNavigate();
+  let { requestId } = useParams();
 
   const [titleCount, setTitleCount] = useState(0);
   const [titleColor, setTitleColor] = useState(true);
@@ -20,17 +60,32 @@ const RequestForm: React.FC = () => {
   const [descValue, setDescValue] = useState("");
   const [groupCount, setGroupCount] = useState(0);
   const [groupColor, setGroupColor] = useState(true);
-  const [groupValue, setGroupValue] = useState("");
   const [artistCount, setArtistCount] = useState(0);
   const [artistColor, setArtistColor] = useState(true);
-  const [artistValue, setArtistValue] = useState("");
-  // 선택된 이미지의 URL을 저장하기 위한 상태
-  const [selectedImage, setSelectedImage] = useState<string | undefined>(
-    undefined
-  );
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const navigation = useNavigate();
+  const [requestdata, setRequestData] = useState<RequestDescProps>(Object);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axiosPrivate.get(
+        `/sonminsu-requests/${requestId}`
+      );
+      setRequestData(response.data.data);
+      setTitleValue(response.data.data.title);
+      setDescValue(response.data.data.content);
+      setTitleCount(response.data.data.title.length);
+      setDescCount(response.data.data.content.length);
+      setGroupCount(response.data.data.groupName.length);
+      setArtistCount(response.data.data.artistName.length);
+      //console.log(response.data.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleTitleInput = (e: any) => {
     setTitleCount(e.target.value.length);
@@ -50,63 +105,16 @@ const RequestForm: React.FC = () => {
     }
     setDescValue(e.target.value);
   };
-  const handleGroupInput = (e: any) => {
-    setGroupCount(e.target.value.length);
-    if (e.target.value.length >= 10) {
-      setGroupColor(false);
-    } else {
-      setGroupColor(true);
-    }
-    setGroupValue(e.target.value);
-  };
-  const handleArtistInput = (e: any) => {
-    setArtistCount(e.target.value.length);
-    if (e.target.value.length >= 10) {
-      setArtistColor(false);
-    } else {
-      setArtistColor(true);
-    }
-    setArtistValue(e.target.value);
-  };
-
-  const handleEditIconClick = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-
-    // Non-null assertion operators
-    const imageUrl = URL.createObjectURL(file!);
-
-    if (file) {
-      // 파일을 선택했을 때 수행할 작업
-      setSelectedImage(imageUrl);
-    }
-  };
-
-  const handleDeleteImg = () => {
-    setSelectedImage(undefined);
-  };
 
   const handelReuquestRegister = async () => {
-    const formData = new FormData();
-    formData.append("title", titleValue);
-    formData.append("content", descValue);
-    formData.append("groupName", groupValue);
-    formData.append("artistName", artistValue);
-    if (fileInputRef.current?.files?.[0]) {
-      formData.append("image", fileInputRef.current?.files?.[0]);
-    }
-
-    formData.forEach((value, key) => console.log(`${key}: ${value}`));
-
     try {
-      const reponse = await axiosPrivate.post("/sonminsu-requests", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const reponse = await axiosPrivate.patch(
+        `/sonminsu-requests/${requestdata.id}`,
+        {
+          title: titleValue,
+          content: descValue,
+        }
+      );
       navigation(`/requests/`);
     } catch (err) {
       console.log(err);
@@ -117,7 +125,7 @@ const RequestForm: React.FC = () => {
     <S.Wrap>
       <HeaderBar
         BackButton={true}
-        title="새 의뢰 작성하기"
+        title="의뢰 수정하기"
         items={[
           <S.RequestRegisterBTN onClick={handelReuquestRegister}>
             의뢰 등록
@@ -132,6 +140,7 @@ const RequestForm: React.FC = () => {
             onChange={handleTitleInput}
             placeholder="의뢰 제목을 입력해 주세요."
             maxLength={25}
+            defaultValue={requestdata.title}
           />
           <S.QuestionTitleLable color={titleColor}>
             {titleCount}/25자
@@ -143,6 +152,7 @@ const RequestForm: React.FC = () => {
             rows={18}
             placeholder="의뢰 내용을 입력해 주세요."
             maxLength={300}
+            defaultValue={requestdata.content}
           />
           <S.QuestionDescLabel color={descColor}>
             {descCount}/300자
@@ -150,11 +160,11 @@ const RequestForm: React.FC = () => {
         </S.QuestionDesc>
         <S.QuestionImg>
           <S.QuetionImgLabel>사진</S.QuetionImgLabel>
-          <S.QuetionImgSubLabel>
+          {/* <S.QuetionImgSubLabel>
             최대 1장의 사진 업로드 가능
-          </S.QuetionImgSubLabel>
+          </S.QuetionImgSubLabel> */}
           <S.ImgContents>
-            <S.QuestionImgBox onClick={handleEditIconClick}>
+            {/* <S.QuestionImgBox onClick={handleEditIconClick}>
               <input
                 type="file"
                 accept="image/*"
@@ -164,11 +174,10 @@ const RequestForm: React.FC = () => {
               />
               <S.ImgSVG src={img} />
               <S.ImgLabel>사진등록</S.ImgLabel>
-            </S.QuestionImgBox>
-            {selectedImage && (
+            </S.QuestionImgBox> */}
+            {requestdata.image && (
               <S.UploadImgBox>
-                <S.UploadImg src={selectedImage} />
-                <S.Delete src={x} onClick={handleDeleteImg} />
+                <S.UploadImg src={requestdata.image} />
               </S.UploadImgBox>
             )}
           </S.ImgContents>
@@ -178,17 +187,21 @@ const RequestForm: React.FC = () => {
           <S.QuestionSonBox>
             <S.QuestionGroupInputBox color={groupColor}>
               <S.QuestionGroupInput
-                onChange={handleGroupInput}
+                readOnly
+                // onChange={handleGroupInput}
                 placeholder="그룹명"
                 maxLength={10}
+                defaultValue={requestdata.groupName}
               />
               {groupCount}/10자
             </S.QuestionGroupInputBox>
             <S.QuestionArtistInputBox color={artistColor}>
               <S.QuestionArtistInput
-                onChange={handleArtistInput}
+                readOnly
+                // onChange={handleArtistInput}
                 placeholder="아티스트 이름"
                 maxLength={10}
+                defaultValue={requestdata.artistName}
               />
               {artistCount}/10자
             </S.QuestionArtistInputBox>
@@ -200,4 +213,4 @@ const RequestForm: React.FC = () => {
   );
 };
 
-export default RequestForm;
+export default RequestFormModify;

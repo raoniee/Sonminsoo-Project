@@ -7,6 +7,7 @@ type LinkItemType = {
   itemImg: string;
   itemPrice: string;
   itemName: string;
+  deleteclick?: () => void;
 };
 
 const LinkAttachItem: React.FC<LinkItemType> = ({
@@ -14,14 +15,13 @@ const LinkAttachItem: React.FC<LinkItemType> = ({
   itemImg,
   itemPrice,
   itemName,
+  deleteclick,
 }) => {
   return (
     <S.Wrap>
       <S.AttachImg src={itemImg} />
-      {deletevalue && <S.Delete src={x} />}
-      <S.AttachTitle>
-        {itemName.length < 7 ? itemName : itemName.substring(0, 7) + "..."}
-      </S.AttachTitle>
+      {deletevalue && <S.Delete src={x} onClick={deleteclick} />}
+      <S.AttachTitle>{itemName}</S.AttachTitle>
       <S.AttachPrice>{itemPrice}</S.AttachPrice>
     </S.Wrap>
   );
