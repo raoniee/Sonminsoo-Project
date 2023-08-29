@@ -17,7 +17,17 @@ import CloseModal from "../../components/Feed/CloseModal";
 import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 import { Data } from "../../types/feed";
-
+type SonminsuItemType = {
+  id: number;
+  originUrl: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  groupName: string;
+  artistName: string;
+  isInBucket: boolean;
+  createdAt: string;
+};
 type CommentType = {
   id: number;
   feedId: number;
@@ -40,7 +50,7 @@ const FeedIndex = () => {
   const [comments, setComments] = useState<CommentType[]>([]);
   const [isLoadingComments, setIsLoadingComments] = useState(false);
   const [feedId, setFeedId] = useState<number | undefined>();
-  const [sonminsuItem, setSonminsuItem] = useState([]);
+  const [sonminsuItem, setSonminsuItem] = useState<SonminsuItemType[]>([]);
   const [selectedCommentId, setSelectedCommentId] = useState<
     number | undefined
   >();
@@ -74,14 +84,16 @@ const FeedIndex = () => {
   const fetchItem = async () => {
     try {
       const response = await axiosPrivate.get(`/sonminsu-items`);
-      setSonminsuItem(response.data);
+      setSonminsuItem(response.data.data);
     } catch (error) {
       console.log("error", error);
     }
   };
-
+  const getItemFromResult = (sonIds: number[]): SonminsuItemType[] => {
+    return sonminsuItem.filter((item) => sonIds.includes(item.id));
+  };
   const toggleComment = (id: number) => {
-    console.log(feedData[0].sonminsuItems);
+    console.log(sonminsuItem);
     if (openComment === id) {
       setOpenComment(undefined);
     } else {
@@ -113,7 +125,9 @@ const FeedIndex = () => {
             setFeedId={setFeedId}
           />
           <S.FeedImage src={feed.image} />
-          <ItemBox feedData={feed} />
+          <ItemBox
+            items={getItemFromResult(feed.sonminsuItems.map((item) => item.id))}
+          />
           <FeedText feedData={feed} />
           <HashTag feedData={feed} />
           <S.BtnWrap>

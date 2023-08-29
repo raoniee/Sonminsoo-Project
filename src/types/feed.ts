@@ -11,10 +11,19 @@ export type Data = {
     id: number;
     fandomName: string;
   };
-  sonminsuItems: any[];
+  sonminsuItems: SonminsuItems[];
   image: string;
   tags: string[];
   comments: number;
+};
+export type SonminsuItems = {
+  id: number;
+  originUrl: string;
+  title: string;
+  price: number;
+  imgUrl: string;
+  groupName: string;
+  artistName: string;
 };
 export type DataArray = Data[];
 
