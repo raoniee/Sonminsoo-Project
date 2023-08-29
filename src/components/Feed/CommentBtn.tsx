@@ -1,8 +1,5 @@
 import React from "react";
-import styled from "styled-components";
 import * as S from "./style/CommentBtn.style";
-import comment from "../../assets/images/svg/ic-message-circle.svg";
-import commentActive from "../../assets/images/svg/ic-message-active.svg";
 import { CommentBtnProps } from "../../types/feed";
 
 const CommentBtn: React.FC<CommentBtnProps> = ({

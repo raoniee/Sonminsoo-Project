@@ -43,6 +43,7 @@ type CommentType = {
 };
 
 const FeedIndex = () => {
+  const axiosPrivate = useAxiosPrivate();
   const [openComment, setOpenComment] = useState<number | undefined>();
   const [feedData, setFeedData] = useState<Data[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -54,8 +55,6 @@ const FeedIndex = () => {
   const [selectedCommentId, setSelectedCommentId] = useState<
     number | undefined
   >();
-
-  const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
     fetchFeedData();
@@ -93,7 +92,6 @@ const FeedIndex = () => {
     return sonminsuItem.filter((item) => sonIds.includes(item.id));
   };
   const toggleComment = (id: number) => {
-    console.log(sonminsuItem);
     if (openComment === id) {
       setOpenComment(undefined);
     } else {
@@ -104,9 +102,11 @@ const FeedIndex = () => {
   const handleDelete = async (id: number) => {
     try {
       await axiosPrivate.delete(`/comments/${id}`);
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment.id !== id)
+      );
     } catch (error) {
       console.log("error", error);
-      alert("댓글 삭제 못함");
     }
   };
   const showModal = (commentId: number) => {
@@ -131,7 +131,7 @@ const FeedIndex = () => {
           <FeedText feedData={feed} />
           <HashTag feedData={feed} />
           <S.BtnWrap>
-            <LikeBtn />
+            <LikeBtn feedId={feed.id} />
             <CommentBtn
               commentOpen={() => toggleComment(feed.id)}
               commentClicked={openComment === feed.id}
