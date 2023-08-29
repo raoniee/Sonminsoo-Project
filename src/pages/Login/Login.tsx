@@ -5,6 +5,8 @@ import { setToken } from "../../redux/config/rootReducer";
 import axios from "../../api/axios";
 import * as S from "./style/Login.style";
 import { Button } from "../../elements/Button";
+import kakao from "../../assets/images/svg/kakaoTalk.svg";
+import google from "../../assets/images/png/google.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,8 +24,11 @@ const Login = () => {
 
   return (
     <S.Container>
-      <S.Title>안녕하세요</S.Title>
-      <S.Title>당장 손민수 입니다 :)</S.Title>
+      <S.Title>
+        안녕하세요
+        <br />
+        당장 손민수 입니다 :)
+      </S.Title>
       <S.StyledForm>
         <S.StyledInput
           type="text"
@@ -44,33 +49,48 @@ const Login = () => {
             setPassword(e.target.value)
           }
         />
+        <S.LinkContainer>
+          <Button
+            background="#EBEEF2"
+            border="none"
+            color="#6B6774"
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.preventDefault();
+              axios
+                .post("/auth/sign-in", {
+                  email,
+                  password,
+                })
+                .then((response) => {
+                  console.log(response);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            }}
+          >
+            로그인
+          </Button>
 
-        <Button
-          background=""
-          border=""
-          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-            e.preventDefault();
-            axios
-              .post("/auth/sign-in", {
-                email,
-                password,
-              })
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }}
-        >
-          로그인
-        </Button>
-
-        <S.P>
-          새로운 계정이 필요하신가요?
-          <S.LinkTag to={"/signup"}>Sign Up</S.LinkTag>
-        </S.P>
-        <S.P>빠르게 로그인하기</S.P>
+          <S.P>
+            <S.LinkTag to={"/signup"}>회원가입</S.LinkTag>
+          </S.P>
+        </S.LinkContainer>
+        <S.QuickLoginContainer>
+          <S.QuickLoginTitle>
+            <S.Hr />
+            <S.P>빠르게 로그인하기</S.P>
+            <S.Hr />
+          </S.QuickLoginTitle>
+          <S.QuickLoginIcons>
+            <S.LoginIcon src={google} />
+            <S.LoginIcon src={kakao} />
+          </S.QuickLoginIcons>
+          <S.P>
+            로그인 없이 한번 구경해 볼까요?
+            <S.LinkToHome to={"/"}>둘러보기</S.LinkToHome>
+          </S.P>
+        </S.QuickLoginContainer>
       </S.StyledForm>
     </S.Container>
   );

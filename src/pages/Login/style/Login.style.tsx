@@ -7,8 +7,9 @@ export const Container = styled.div`
   align-items: center;
   border-radius: 10px;
   width: 100%;
-  margin: 0 auto;
+  margin-top: 83px;
   padding: 16px;
+  gap: 20px;
 `;
 
 export const Title = styled.h2`
@@ -19,7 +20,13 @@ export const Title = styled.h2`
   font-weight: 700;
   line-height: 140%;
 `;
-
+export const LinkContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 30px 0;
+`;
 export const StyledForm = styled.form`
   width: 100%;
 `;
@@ -59,14 +66,55 @@ export const StyledButton = styled.button`
 `;
 
 export const P = styled.p`
+  width: 100%;
   text-align: center;
-  margin-bottom: 65px;
 `;
 
 export const LinkTag = styled(Link)`
   text-decoration: none;
-  color: #007bff;
-  &:hover {
-    text-decoration: underline;
-  }
+  color: #a4a4a9;
+  font-family: Pretendard;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+export const QuickLoginContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 38px;
+`;
+export const Hr = styled.hr`
+  width: 100px;
+  height: 1px;
+  border: 1px solid #bdbdbd;
+`;
+export const QuickLoginTitle = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+`;
+export const QuickLoginIcons = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin: 30px auto;
+`;
+export const LinkToHome = styled(Link)`
+  color: #208df1;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 10px;
+`;
+export const LoginIcon = styled.img`
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
 `;
