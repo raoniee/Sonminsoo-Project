@@ -17,8 +17,10 @@ type RequestDescProps = {
   id: number;
   title: string;
   content: string;
+  groupName: string;
+  artistName: string;
   answerCnt: number;
-  createAt: string;
+  createdAt: string;
   user: {
     id: number;
     nickName: string;
@@ -48,7 +50,7 @@ type RequestDescProps = {
 };
 
 const RequestDetailNoWriter: React.FC = () => {
-  let { params } = useParams();
+  let { requestId } = useParams();
   const axiosPrivate = useAxiosPrivate();
 
   const [requestdata, setRequestData] = useState<RequestDescProps>(Object);
@@ -60,9 +62,11 @@ const RequestDetailNoWriter: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosPrivate.get(`/sonminsu-requests/3`);
+      const response = await axiosPrivate.get(
+        `/sonminsu-requests/${requestId}`
+      );
       setRequestData(response.data.data);
-      console.log(response.data.data);
+      //console.log(response.data.data);
     } catch (err) {
       console.log(err);
     }
@@ -74,6 +78,8 @@ const RequestDetailNoWriter: React.FC = () => {
       <RequestDetaiNoWriterlHeader
         title={requestdata.title}
         username={requestdata.user?.nickName}
+        date={requestdata.createdAt}
+        id={requestdata.id}
       />
       <RequestDetailDesc desc={requestdata.content} img={requestdata.image} />
       <S.AnswerNumber>답변 {requestdata.answers?.length}개</S.AnswerNumber>
@@ -100,7 +106,13 @@ const RequestDetailNoWriter: React.FC = () => {
           답변 하기
         </Button>
       )}
-      {click && <RequestAnswerRegister />}
+      {click && (
+        <RequestLinkRegister
+          setClick={setClick}
+          groupName={requestdata.groupName}
+          artistName={requestdata.artistName}
+        />
+      )}
     </>
   );
 };

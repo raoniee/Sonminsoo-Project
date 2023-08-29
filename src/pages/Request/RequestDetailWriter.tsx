@@ -15,7 +15,9 @@ type RequestDescProps = {
   title: string;
   content: string;
   answerCnt: number;
-  createAt: string;
+  createdAt: string;
+  groupName: string;
+  artistName: string;
   user: {
     id: number;
     nickName: string;
@@ -45,7 +47,7 @@ type RequestDescProps = {
 };
 
 const RequestDetailWriter: React.FC = () => {
-  let { params } = useParams();
+  let { requestId } = useParams();
   const axiosPrivate = useAxiosPrivate();
 
   const [requestdata, setRequestData] = useState<RequestDescProps>(Object);
@@ -56,7 +58,9 @@ const RequestDetailWriter: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosPrivate.get(`/sonminsu-requests/4`);
+      const response = await axiosPrivate.get(
+        `/sonminsu-requests/${requestId}`
+      );
       setRequestData(response.data.data);
       console.log(response.data.data);
     } catch (err) {
@@ -70,9 +74,11 @@ const RequestDetailWriter: React.FC = () => {
       <RequestDetailWriterHeader
         title={requestdata.title}
         username={requestdata.user?.nickName}
+        date={requestdata.createdAt}
+        id={requestdata.id}
       />
       <RequestDetailDesc desc={requestdata.content} img={requestdata.image} />
-      <S.ResponseNumber>답변 {requestdata.answers?.length}개</S.ResponseNumber>
+      <S.ResponseNumber>답변 {requestdata.answerCnt}개</S.ResponseNumber>
       {requestdata.answers &&
         requestdata.answers.map((answer) => (
           <RequestWriterResponse
@@ -82,6 +88,7 @@ const RequestDetailWriter: React.FC = () => {
             answerUserclearNum={answer.user.choosedCnt}
             answerDate={answer.createdAt}
             answerItems={answer.items}
+            answerId={answer.id}
           />
         ))}
     </>
