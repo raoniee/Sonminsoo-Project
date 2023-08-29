@@ -20,7 +20,6 @@ const WriteFandom: React.FC<FeedWriteProps> = ({
   fandomOptions,
   setSelectedFandom,
 }) => {
-  const axiosPrivate = useAxiosPrivate();
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
   const handleOptionChange = (option: any) => {
@@ -29,7 +28,6 @@ const WriteFandom: React.FC<FeedWriteProps> = ({
       setSelectedFandom(option);
     }
   };
-
   return (
     <S.WritingFandom>
       <S.WritingFandomText>작성 팬덤</S.WritingFandomText>

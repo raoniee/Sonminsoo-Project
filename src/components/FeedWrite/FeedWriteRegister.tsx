@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as S from "./style/FeedWriteRegister.style";
 import close from "../../assets/images/svg/ic-x.svg";
-import LinkAttachItem from "../Request/LinkAttachItem";
+import LinkItem from "./LinkItem";
 import SkyBTN from "../Request/SkyBTN";
 import axios, { axiosPrivate } from "../../api/axios";
 import { useParams } from "react-router-dom";
@@ -10,6 +10,8 @@ type RegisterModalProps = {
   setClick: React.Dispatch<React.SetStateAction<boolean>>;
   groupName: string;
   artistName: string;
+  urlItem: itemtype[];
+  setUrlItem: React.Dispatch<React.SetStateAction<itemtype[]>>;
 };
 
 type itemtype = {
@@ -23,13 +25,14 @@ const FeedWriteRegister: React.FC<RegisterModalProps> = ({
   setClick,
   groupName,
   artistName,
+  urlItem,
+  setUrlItem,
 }) => {
   let { requestId } = useParams();
 
   const [urlValue, setUrlValue] = useState("");
   const [urlVaild, setUrlVaild] = useState(false);
   const [urlVaildNum, setUrlVaildNum] = useState(false);
-  const [urlItem, setUrlItem] = useState<itemtype[]>([]);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -65,7 +68,7 @@ const FeedWriteRegister: React.FC<RegisterModalProps> = ({
     }
 
     try {
-      const response = await axiosPrivate.post("/users/sonminsu-items", {
+      const response = await axiosPrivate.post("/sonminsu-items", {
         originUrl: urlValue,
         groupName: groupName,
         artistName: artistName,
@@ -86,18 +89,10 @@ const FeedWriteRegister: React.FC<RegisterModalProps> = ({
       return;
     }
 
-    try {
-      const response = await axiosPrivate.post(
-        `/users/sonminsu-answers/${requestId}`,
-        {
-          itemIds: urlItem.map((item) => item.id),
-        }
-      );
-      setClick(false);
-    } catch (err) {
-      console.log(err);
-    }
+    setClick(false);
+
     console.log(urlItem.map((item) => item.id));
+    console.log("urlItem", urlItem);
   };
 
   return (
@@ -131,7 +126,7 @@ const FeedWriteRegister: React.FC<RegisterModalProps> = ({
         )}
         <S.LinkAttachItemBox margintop={urlVaild || urlVaildNum}>
           {urlItem.map((item) => (
-            <LinkAttachItem
+            <LinkItem
               deletevalue={true}
               deleteclick={() => handleDeleteClick(item.id)}
               itemImg={item.imgUrl}

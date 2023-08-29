@@ -80,7 +80,7 @@ const FeedIndex = () => {
   };
   const handleDelete = async (id: number) => {
     try {
-      await axiosPrivate.delete(`/users/comments/${id}`);
+      await axiosPrivate.delete(`/comments/${id}`);
     } catch (error) {
       console.log("error", error);
       alert("댓글 삭제 못함");

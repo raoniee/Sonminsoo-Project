@@ -39,7 +39,7 @@ const Comment: React.FC<FeedCommentProps> = ({
 
   const submitComments = async (id: number) => {
     try {
-      const response = await axiosPrivate.post(`/users/comments/${id}`, {
+      const response = await axiosPrivate.post(`/comments/${id}`, {
         parentId: null,
         content: commentInput,
       });

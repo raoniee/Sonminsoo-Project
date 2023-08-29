@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import axios, { axiosPrivate } from "../../api/axios";
 import FeedHeaderWrite from "./FeedWriteHeader";
@@ -18,16 +18,26 @@ type OptionType = {
   label: string;
   id?: number;
 };
+
+type itemtype = {
+  id: number;
+  imgUrl: string;
+  title: string;
+  price: string;
+};
+
 const NewFeed = () => {
   const axiosPrivate = useAxiosPrivate();
+  const navigation = useNavigate();
   const [checked, setChecked] = useState<boolean>(false);
   const [contentInput, setContentInput] = useState<string>("");
   const [hashTagInput, handleHashTagChange] = useInput("");
   const [groupInput, setGroupInput] = useState<string>("");
   const [artistInput, setArtistInput] = useState<string>("");
   const [fandomOptions, setFandomOptions] = useState([]);
-  const [selectedFandom, setSelectedFandom] = useState<OptionType | null>(null);
+  const [selectedFandom, setSelectedFandom] = useState<OptionType | null>();
   const [linkModalClick, setLinkModalClick] = useState<boolean>(false);
+  const [urlItem, setUrlItem] = useState<itemtype[]>([]);
 
   const location = useLocation();
 
@@ -36,18 +46,18 @@ const NewFeed = () => {
   const selectImg = location.state?.imageObject;
   // #넣어입력하면 배열로 변환
   const hashtagss = hashTagInput.match(/#\w+/g) || [];
-
   useEffect(() => {
     fetchFandom();
   }, []);
 
+  const sonminsuItemArray = urlItem.map((item) => item.id);
   const handleContentInput = (e: any) => {
     setContentInput(e.target.value);
   };
 
   const fetchFandom = async () => {
     try {
-      const response = await axiosPrivate.get("/users/fandoms");
+      const response = await axiosPrivate.get("/fandoms");
       const fetchedFandoms = response.data.data.map((fandom: any) => ({
         value: fandom.fandomName,
         label: fandom.fandomName,
@@ -69,28 +79,35 @@ const NewFeed = () => {
     formData.append("groupName", groupInput);
     formData.append("artistName", artistInput);
     formData.append("fandomId", `${selectedFandom?.id}`);
-    // formData.append("sonminsuItems", );
+    // sonminsuItemArray.forEach((item) => {
+    //   formData.append("sonminsuItemArray", String(item));
+    // });
     if (selectImg) {
       formData.append("image", selectImg);
     }
+
     formData.forEach((value, key) => console.log(`${key}: ${value}`));
     try {
-      const response = await axiosPrivate.post("/users/fieeds", formData, {
+      const response = await axiosPrivate.post("/feeds", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
     } catch (error) {
       console.log("error", error);
       throw error;
     }
+    navigation("/feed");
   };
 
   return (
     <>
-      <FeedHeaderWrite $updatePage={$updatePage} />
+      <FeedHeaderWrite
+        $updatePage={$updatePage}
+        handleSubmitFeed={handleSubmitFeed}
+      />
       {$updatePage ? (
         <S.FeedWriteImage src={idol1} />
       ) : (
-        <S.FeedWriteImage src={writeImg} onClick={handleSubmitFeed} />
+        <S.FeedWriteImage src={writeImg} />
       )}
       <WriteFandom
         $updatePage={$updatePage}
@@ -111,6 +128,7 @@ const NewFeed = () => {
           <FeedWriteLink
             $updatePage={$updatePage}
             setLinkModalClick={setLinkModalClick}
+            urlItem={urlItem}
           />
           <FeedWriteTarget
             $updatePage={$updatePage}
@@ -136,6 +154,8 @@ const NewFeed = () => {
           groupName={groupInput}
           artistName={artistInput}
           setClick={setLinkModalClick}
+          urlItem={urlItem}
+          setUrlItem={setUrlItem}
         />
       )}
     </>

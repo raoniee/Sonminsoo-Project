@@ -37,7 +37,7 @@ const FeedDelete: React.FC<FeedDeleteProps> = ({
   const handleDeleteFeed = async () => {
     if (!feedId) return;
     try {
-      await axiosPrivate.delete(`/users/feeds/${feedId}`);
+      await axiosPrivate.delete(`/feeds/${feedId}`);
       setIsFeedDelete(false);
       onFeedDeleted();
     } catch (error) {
