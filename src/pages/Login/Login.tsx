@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../redux/config/rootReducer";
 import axios from "../../api/axios";
 import * as S from "./style/Login.style";
+import { Button } from "../../elements/Button";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,12 +22,14 @@ const Login = () => {
 
   return (
     <S.Container>
-      <S.Title>로그인</S.Title>
+      <S.Title>안녕하세요</S.Title>
+      <S.Title>당장 손민수 입니다 :)</S.Title>
       <S.StyledForm>
         <S.StyledInput
           type="text"
           id="email"
           placeholder="이메일을 입력해 주세요."
+          autoComplete="off"
           value={email}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEmail(e.target.value)
@@ -41,29 +44,28 @@ const Login = () => {
             setPassword(e.target.value)
           }
         />
-        <p>
-          <Link to={"/"}>아이디 또는 비밀번호를 잊어버리셧나요?</Link>
-        </p>
-        <div>
-          <S.StyledButton
-            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-              e.preventDefault();
-              axios
-                .post("/auth/sign-in", {
-                  email,
-                  password,
-                })
-                .then((response) => {
-                  console.log(response);
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }}
-          >
-            로그인
-          </S.StyledButton>
-        </div>
+
+        <Button
+          background=""
+          border=""
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+            e.preventDefault();
+            axios
+              .post("/auth/sign-in", {
+                email,
+                password,
+              })
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }}
+        >
+          로그인
+        </Button>
+
         <S.P>
           새로운 계정이 필요하신가요?
           <S.LinkTag to={"/signup"}>Sign Up</S.LinkTag>
