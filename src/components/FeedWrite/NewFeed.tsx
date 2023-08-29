@@ -29,7 +29,7 @@ type itemtype = {
 const NewFeed = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigation = useNavigate();
-  const [checked, setChecked] = useState<boolean>(false);
+  const [noticeChecked, setNoticeChecked] = useState<boolean>(false);
   const [contentInput, setContentInput] = useState<string>("");
   const [hashTagInput, handleHashTagChange] = useInput("");
   const [groupInput, setGroupInput] = useState<string>("");
@@ -79,9 +79,9 @@ const NewFeed = () => {
     formData.append("groupName", groupInput);
     formData.append("artistName", artistInput);
     formData.append("fandomId", `${selectedFandom?.id}`);
-    // sonminsuItemArray.forEach((item) => {
-    //   formData.append("sonminsuItemArray", String(item));
-    // });
+    sonminsuItemArray.forEach((item) => {
+      formData.append("sonminsuItems", String(item));
+    });
     if (selectImg) {
       formData.append("image", selectImg);
     }
@@ -119,7 +119,7 @@ const NewFeed = () => {
         value={contentInput}
         onChange={handleContentInput}
       />
-      {checked ? null : (
+      {noticeChecked ? null : (
         <>
           <FeedWriteHashTag
             hashTagInput={hashTagInput}
@@ -143,8 +143,8 @@ const NewFeed = () => {
         <S.NoticeText>
           <S.NoticeBtn
             type="checkbox"
-            checked={checked}
-            onChange={() => setChecked(!checked)}
+            checked={noticeChecked}
+            onChange={() => setNoticeChecked(!noticeChecked)}
           />
           공지피드
         </S.NoticeText>

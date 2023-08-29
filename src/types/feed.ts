@@ -1,7 +1,7 @@
 export type Data = {
   id: number;
   content: string;
-  createdAt: string; // 더 정확한 날짜 처리를 원한다면 Date 또는 string 대신 'Date' 타입을 사용하세요.
+  createdAt: string;
   author: {
     id: number;
     image: string;
@@ -11,7 +11,7 @@ export type Data = {
     id: number;
     fandomName: string;
   };
-  sonminsuItems: any[]; // sonminsuItems의 구체적인 항목을 모르므로 any[]로 지정했습니다. 필요에 따라서 수정하세요.
+  sonminsuItems: any[];
   image: string;
   tags: string[];
   comments: number;

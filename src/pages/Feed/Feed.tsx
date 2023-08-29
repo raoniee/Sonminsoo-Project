@@ -40,15 +40,16 @@ const FeedIndex = () => {
   const [comments, setComments] = useState<CommentType[]>([]);
   const [isLoadingComments, setIsLoadingComments] = useState(false);
   const [feedId, setFeedId] = useState<number | undefined>();
+  const [sonminsuItem, setSonminsuItem] = useState([]);
   const [selectedCommentId, setSelectedCommentId] = useState<
     number | undefined
   >();
 
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchFeedData();
+    fetchItem();
   }, []);
 
   const fetchFeedData = async () => {
@@ -70,7 +71,17 @@ const FeedIndex = () => {
       setIsLoadingComments(false);
     }
   };
+  const fetchItem = async () => {
+    try {
+      const response = await axiosPrivate.get(`/sonminsu-items`);
+      setSonminsuItem(response.data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   const toggleComment = (id: number) => {
+    console.log(feedData[0].sonminsuItems);
     if (openComment === id) {
       setOpenComment(undefined);
     } else {
