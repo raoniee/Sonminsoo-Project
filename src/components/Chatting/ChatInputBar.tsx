@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
+import { isBrowser } from 'react-device-detect';
 import iconImage from "../../assets/images/svg/ic-image.svg";
 import iconCamera from "../../assets/images/svg/ic-camera.svg";
 import * as S from './style/ChatInputBar.style';
 import WebAlertModal from './WebAlertModal';
+import AppAlertModal from './AppAlertModal';
 
 type Props = {
     ban: boolean;
@@ -17,22 +19,11 @@ type UploadImage = {
 
 const ChatInputBar = ({ban}:Props) => {
 
-    // 채팅 정지 상태에 따른 채팅input placeholder 설정
-    const fileInputRef = useRef<HTMLInputElement>(null);
     const [imageFile, setImageFile] = useState<File[]>();
-    const maxFileCount = 4;
+    const maxFileCount = 9;
     const [onAlert, setOnAlert] = useState<boolean>(false);
 
-    // input 파일형식
-    const acceptFormat='image/jpg, image/jpeg, image/png';
 
-
-    // 이미지 버튼에 input 연결
-    const FileUploadClick = (e: React.MouseEvent<HTMLImageElement>) => {
-        if (fileInputRef.current) {
-            fileInputRef.current.click();
-        }
-    };
 
     const UploadFileHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fileList = e.target.files;
@@ -44,6 +35,7 @@ const ChatInputBar = ({ban}:Props) => {
                 sendFileList?.push(fileList[i]);
             }
         
+            // 업로드할 이미지 개수가 maxFile 값보다 클 경우 slice
             if (fileList && fileList.length > maxFileCount) {
                 setOnAlert(true);
                 sendFileList = sendFileList.slice(0, maxFileCount);
@@ -53,25 +45,33 @@ const ChatInputBar = ({ban}:Props) => {
         }
     }; 
 
-    const FileValidation = () => {
-        
-    }
-
-
+    
     return (
         <>  
             <S.ChatBarWrapper>
                 <S.IconWrapper>
-                    <S.ChatIconImage src={iconImage} onClick={FileUploadClick} />
+                    <label htmlFor="imageFile">
+                        <S.ChatIconImage src={iconImage} />   
+                    </label>
                     <input 
+                        id="imageFile"
                         type="file" 
                         multiple
-                        accept={acceptFormat}
-                        ref={fileInputRef} 
+                        accept="image/*"
                         onChange={UploadFileHandler}
                         style={{display: 'none'}}
                     />
-                    <S.ChatIconImage src={iconCamera} onClick={FileUploadClick} />
+                    <label htmlFor="openCamera">
+                        <S.ChatIconImage src={iconCamera} />
+                    </label>
+                    <input
+                        id="openCamera"
+                        type="file" 
+                        accept="image/*"
+                        capture="environment"
+                        style={{display: 'none'}}
+                        onChange={UploadFileHandler}
+                    />
                 </S.IconWrapper>
                 <S.ChatInputWrapper>
                     <S.ChatInput 
@@ -82,11 +82,18 @@ const ChatInputBar = ({ban}:Props) => {
                 </S.ChatInputWrapper>
             </S.ChatBarWrapper>
             {onAlert ? 
-                <WebAlertModal
-                    setModalOpen={setOnAlert}
-                    title="알림"
-                    content={`이미지 파일은 최대 ${maxFileCount}개 까지 전송할 수 있습니다.`}
-                /> 
+                isBrowser ? 
+                    <WebAlertModal
+                        setModalOpen={setOnAlert}
+                        title="알림"
+                        content={`이미지 파일은 최대 ${maxFileCount}개 까지 전송할 수 있습니다.`}
+                    />
+                    :
+                    <AppAlertModal
+                        setModalOpen={setOnAlert}
+                        title="알림"
+                        content={`이미지 파일은 최대 ${maxFileCount}개 까지 전송할 수 있습니다.`}
+                    />
                 : null
             }
         </>
