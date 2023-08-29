@@ -26,7 +26,7 @@ import Requests from "./pages/Request/Requests";
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <Requests />,
+    element: <Main />,
   },
   {
     path: "home",
@@ -42,8 +42,8 @@ const Router = createBrowserRouter([
     element: <FandomDetail />, //팬덤 상세보기 컴포넌트
   },
   {
-    path: "fandom/:fandomId",
-    element: <Main />, //팬덤 상세보기 컴포넌트
+    path: "createfandom",
+    element: <CreateNewFandom />, //팬덤 상세보기 컴포넌트
   },
   SignupRouter,
   ChattingRouter,
@@ -55,8 +55,6 @@ const Router = createBrowserRouter([
   FeedWriteRouter,
   SearchItemRouter,
   MyFandomRouter,
-  LoginRouter,
-  InitInfoRouter,
 ]);
 
 export default Router;
