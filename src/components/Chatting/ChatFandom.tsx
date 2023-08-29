@@ -16,7 +16,7 @@ const ChatFandom = ({id, fandomName, memberLength, image, lastCreateTime}: Fando
                     <S.MemberIcon src={iconUser} />
                     <S.FandomMember>{memberLength}</S.FandomMember>       
                 </S.FandomWrapper>
-                <S.FandomActive>채팅활동<span>•</span>10분전</S.FandomActive>
+                <S.FandomActive>채팅활동<span>•</span>{lastCreateTime}</S.FandomActive>
             </S.ChatInfo>
         </S.ChatFandomWrapper>
     )
