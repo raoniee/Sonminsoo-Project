@@ -6,13 +6,12 @@ import PageHeader from "./PageHeader";
 
 const EmailCertification = () => {
   const [authValid, setAuthValid] = useState("");
-  const useSignupContext = useContext(signupContext);
-  console.log(useSignupContext, "useSignupContext");
-
+  const { email, setEmail, setSignupStep, setEmailCode } =
+    useContext(signupContext);
   const handleEmailAuthClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     axios
-      .get(`/auth/verification-code?email=${useSignupContext?.email}`)
+      .get(`/auth/verification-code?email=${email}`)
       .then((res) => console.log("email res", res))
       .catch((e) => console.log(e));
   };
@@ -22,12 +21,13 @@ const EmailCertification = () => {
     e.preventDefault();
     axios
       .post(`auth/verification-code`, {
-        email: useSignupContext?.email,
+        email: email,
         code: authValid,
       })
       .then((res) => {
         console.log("email res", res);
-        useSignupContext?.setSignupStep("emailCertification");
+        setEmailCode(authValid);
+        setSignupStep("emailCertification");
         // setEmailAuthValidState(true);
       })
       .catch((e) => console.log(e));
@@ -48,10 +48,11 @@ const EmailCertification = () => {
             type="text"
             id="email"
             placeholder="이메일을 입력해 주세요."
-            value={useSignupContext?.email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              useSignupContext?.setEmail(e.target.value)
-            }
+            value={email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setEmail(e.target.value);
+              console.log(email);
+            }}
           />
           <S.SendButton onClick={handleEmailAuthClick}>
             인증번호발송

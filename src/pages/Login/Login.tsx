@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../redux/config/rootReducer";
 import axios from "../../api/axios";
 import * as S from "./style/Login.style";
 import { Button } from "../../elements/Button";
+import passwordView from "../../assets/images/svg/passwordView.svg";
 import kakao from "../../assets/images/svg/kakaoTalk.svg";
 import google from "../../assets/images/png/google.png";
 
@@ -14,12 +15,14 @@ const Login = () => {
   const [passwordType, setPasswordType] = useState(false);
   const data = JSON.stringify({ email, password });
   const dispatch = useDispatch();
+  const navigation = useNavigate();
   const auth = useSelector((state: any) => {
     return state.auth.accessToken;
   });
   //TODO: 카카오 구글로그인 버튼 추가
   useEffect(() => {
     console.log("token!", auth);
+    if (auth) navigation("/home");
   }, []);
 
   return (
@@ -49,6 +52,10 @@ const Login = () => {
             setPassword(e.target.value)
           }
         />
+        <S.PasswordView
+          src={passwordView}
+          onClick={() => setPasswordType(!passwordType)}
+        />
         <S.LinkContainer>
           <Button
             background="#EBEEF2"
@@ -63,6 +70,12 @@ const Login = () => {
                 })
                 .then((response) => {
                   console.log(response);
+                  if (response.status === 204) {
+                    navigation("/initInfo");
+                  }
+                  if (response.status === 201) {
+                    navigation("/home");
+                  }
                 })
                 .catch((error) => {
                   console.log(error);
@@ -88,7 +101,7 @@ const Login = () => {
           </S.QuickLoginIcons>
           <S.P>
             로그인 없이 한번 구경해 볼까요?
-            <S.LinkToHome to={"/"}>둘러보기</S.LinkToHome>
+            <S.LinkToHome to={"/home"}>둘러보기</S.LinkToHome>
           </S.P>
         </S.QuickLoginContainer>
       </S.StyledForm>

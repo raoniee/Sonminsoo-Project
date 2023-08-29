@@ -18,6 +18,7 @@ import {
   SearchItemRouter,
   MyFandomRouter,
   LoginRouter,
+  InitInfoRouter,
 } from "./Routes";
 import Requests from "./pages/Request/Requests";
 
@@ -54,6 +55,7 @@ const Router = createBrowserRouter([
   SearchItemRouter,
   MyFandomRouter,
   LoginRouter,
+  InitInfoRouter,
 ]);
 
 export default Router;

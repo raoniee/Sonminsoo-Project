@@ -9,12 +9,16 @@ type userInfoType = {
   userName: string;
   birthDate: string;
   phoneNumber: string;
+  code: string;
+  email: string;
 };
 
 type signupContextType = {
   email: string;
+  emailCode: string;
   setEmail: (value: string) => void;
   setSignupStep: (value: string) => void;
+  setEmailCode: (value: string) => void;
   setUserInfo: React.Dispatch<React.SetStateAction<userInfoType>>;
   userInfo: userInfoType;
 };
@@ -26,11 +30,14 @@ export const signupContext = createContext<signupContextType>(
 const Signup = () => {
   const [signupStep, setSignupStep] = useState("terms");
   const [email, setEmail] = useState("");
+  const [emailCode, setEmailCode] = useState("");
   const [userInfo, setUserInfo] = useState<userInfoType>({
     password: "",
     userName: "",
     birthDate: "",
     phoneNumber: "",
+    code: "",
+    email: "",
   });
   const navigation = useNavigate();
 
@@ -72,13 +79,15 @@ const Signup = () => {
           color="#fff"
           value="회원가입 완료"
           onClick={() => {
+            console.log(userInfo, "info");
             axios
               .post(`/auth/sign-up`, {
-                email,
+                email: email,
                 password: userInfo.password,
                 userName: userInfo.userName,
                 birthDate: userInfo.birthDate,
                 phoneNumber: userInfo.phoneNumber,
+                code: emailCode,
               })
               .then((res) => {
                 console.log(res);
@@ -93,10 +102,19 @@ const Signup = () => {
       );
     return;
   };
-
+  console.log(email, "indexemail");
+  console.log(emailCode, "indexemailCode");
   return (
     <signupContext.Provider
-      value={{ email, setEmail, setSignupStep, setUserInfo, userInfo }}
+      value={{
+        email,
+        emailCode,
+        setEmail,
+        setSignupStep,
+        setUserInfo,
+        setEmailCode,
+        userInfo,
+      }}
     >
       {/* outletcontext로 수정 */}
       <S.Container>

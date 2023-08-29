@@ -42,7 +42,7 @@ export const StyledInput = styled.input.attrs({
   width: 100%;
   height: 50px;
   box-sizing: border-box;
-  color: #e8e8e8;
+  color: black;
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
@@ -117,4 +117,12 @@ export const LoginIcon = styled.img`
   cursor: pointer;
   width: 50px;
   height: 50px;
+`;
+export const PasswordView = styled.img`
+  cursor: pointer;
+  display: inline;
+  margin-left: -30px;
+  margin-bottom: -5px;
+  width: 20px;
+  height: 20px;
 `;
