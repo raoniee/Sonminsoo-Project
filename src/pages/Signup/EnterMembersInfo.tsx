@@ -82,6 +82,7 @@ const EnterMembersInfo = () => {
             value={userInfo.password}
             onChange={handleInfoChange}
             pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$"
+            required
           />
           <S.Input
             type="text"
@@ -92,6 +93,7 @@ const EnterMembersInfo = () => {
               setPasswordCheck(e.target.value)
             }
             pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$"
+            required
           />
           {userInfo.password !== passwordCheck && (
             <S.Warning>비밀번호가 일치하지 않습니다</S.Warning>
@@ -105,6 +107,7 @@ const EnterMembersInfo = () => {
             placeholder="이름을 입력해 주세요."
             onChange={handleInfoChange}
             value={userInfo.userName}
+            required
           />
           <S.Input
             type="text"
@@ -112,6 +115,7 @@ const EnterMembersInfo = () => {
             placeholder="생년월일을 입력해 주세요 &#40;ex 19991121&#41;"
             onChange={handleInfoChange}
             value={userInfo.birthDate}
+            required
           />
           <S.Input
             type="text"
@@ -119,6 +123,7 @@ const EnterMembersInfo = () => {
             placeholder="전화번호를 입력해 주세요 &#40;ex 01022222222&#41;"
             onChange={handleInfoChange}
             value={userInfo.phoneNumber}
+            required
           />
         </S.Form>
       </S.Container>
