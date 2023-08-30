@@ -5,10 +5,13 @@ import img from "../../assets/images/svg/ic-image-gray.svg";
 import x from "../../assets/images/svg/ic-x.svg";
 import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import { Link } from "react-router-dom";
-import axios, { axiosPrivate } from "../../api/axios";
+import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 const RequestForm: React.FC = () => {
+  const axiosPrivate = useAxiosPrivate();
+
   const [titleCount, setTitleCount] = useState(0);
   const [titleColor, setTitleColor] = useState(true);
   const [titleValue, setTitleValue] = useState("");
@@ -101,11 +104,9 @@ const RequestForm: React.FC = () => {
     formData.forEach((value, key) => console.log(`${key}: ${value}`));
 
     try {
-      const aaa = await axiosPrivate.post(
-        "/users/sonminsu-requests",
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
-      );
+      const reponse = await axiosPrivate.post("/sonminsu-requests", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       navigation(`/requests/`);
     } catch (err) {
       console.log(err);

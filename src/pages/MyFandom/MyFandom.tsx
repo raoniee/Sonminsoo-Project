@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux/es/hooks/useSelector";
 import * as S from "./style/MyFandom.style";
-import { Outlet } from "react-router-dom";
 import HomeHeader from "../../components/Home/HomeHeader";
 import FandomMenu from "../../components/MyFandom/FandomMenu";
 import ContentHeader from "../../components/MyFandom/ContentHeader";
 import MyFandomList from "../../components/MyFandom/MyFandomList";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+
+import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 
 type Fandom = {
     fandomName: string;
@@ -23,20 +23,13 @@ const MyFandom = () => {
     const axiosPrivate = useAxiosPrivate();
     const [data, setData] = useState<FandomData>([]);
 
-    const auth = useSelector((state: any) => {
-        return state.auth.accessToken;
-    });
-
-    console.log("auth:", auth);
-
     useEffect(() => {
         initDataGet();
     }, []);
 
     const initDataGet = async () => {
         try {
-            const res = await axiosPrivate.get("/users/fandoms");
-            console.log("get:", res.data.data);
+            const res = await axiosPrivate.get("/fandoms");
             setData(res.data.data);
         } catch (error) {
             console.error("Error", error);
@@ -44,18 +37,22 @@ const MyFandom = () => {
     };
 
     return (
-        <S.Container>
-            <S.MyFandomHeaderBox>
-                <HomeHeader />
-                <FandomMenu />
-            </S.MyFandomHeaderBox>
-            <S.MyFandomListBox>
-                <ContentHeader />
-                {data.map((item) => (
-                    <MyFandomList key={item.id} item={item} />
-                ))}
-            </S.MyFandomListBox>
-        </S.Container>
+        <>
+            <S.Container>
+                <S.MyFandomHeaderBox>
+                    {/* <S.FandomImg /> */}
+                    <HomeHeader />
+                    <FandomMenu />
+                </S.MyFandomHeaderBox>
+                <S.MyFandomListBox>
+                    <ContentHeader />
+                    {data.map((item) => (
+                        <MyFandomList key={item.id} item={item} />
+                    ))}
+                </S.MyFandomListBox>
+            </S.Container>
+            <FooterNavBar />
+        </>
     );
 };
 export default MyFandom;

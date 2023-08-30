@@ -4,8 +4,9 @@ import question from "../../../assets/images/svg/ic-question.svg";
 import more from "../../../assets/images/svg/ic-more-horizontal.svg";
 import RequestMoreModal from "./RequestMoreModal";
 import AppAlertModal from "../../common/AlertModal/AppAlertModal";
-import axios, { axiosPrivate } from "../../../api/axios";
+import axios from "../../../api/axios";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { useNavigate } from "react-router-dom";
 
 type RequestTitleProps = {
   title: string;
@@ -20,6 +21,9 @@ const RequestDetailWriterHeader: React.FC<RequestTitleProps> = ({
   date,
   id,
 }) => {
+  const axiosPrivate = useAxiosPrivate();
+  const navigation = useNavigate();
+
   const [moreclick, setMoreClick] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false);
   //const [deleteClick, setDeleteClick] = useState(false);
@@ -28,11 +32,12 @@ const RequestDetailWriterHeader: React.FC<RequestTitleProps> = ({
     setMoreClick(true);
   };
 
-  const click = async () => {
+  const deleteClick = async () => {
     setDeleteAlert(false);
 
     try {
       const response = await axiosPrivate.delete(`/sonminsu-requests/${id}`);
+      navigation(`/requests/`);
     } catch (err) {
       console.log(err);
     }
@@ -61,6 +66,7 @@ const RequestDetailWriterHeader: React.FC<RequestTitleProps> = ({
           deleteClick={() => {
             setDeleteAlert(true);
           }}
+          requestid={id}
         />
       )}
       {deleteAlert && (
@@ -68,7 +74,7 @@ const RequestDetailWriterHeader: React.FC<RequestTitleProps> = ({
           title="삭제하기"
           content="삭제하시겠습니까?"
           yesContent="삭제"
-          yesClickHandler={click}
+          yesClickHandler={deleteClick}
           setModalOpen={setDeleteAlert}
         />
       )}

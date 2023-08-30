@@ -1,14 +1,28 @@
-import React, { useContext } from "react";
-import { HomeContext } from "../../pages/Home/Home";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "./style/FandomCircle.style";
 
-const FandomCircle: React.FC = () => {
-    const homeData = useContext(HomeContext);
+type FandomRankData = {
+    fandomName: string;
+    id: number;
+    lastChatTime: null;
+    memberLength: number;
+    rank: number;
+    image: string;
+};
 
+type FandomdataProps = {
+    item: FandomRankData;
+};
+const FandomCircle: React.FC<FandomdataProps> = ({ item }) => {
+    const navigate = useNavigate();
+    const handleItemClick = () => {
+        navigate(`/fandom/${item.id}`);
+    };
     return (
         <S.FandomCircleContainer>
-            <S.FandomShadowCircle />
-            <S.FandomCircleName>A.R.M.Y</S.FandomCircleName>
+            <S.FandomShadowCircle src={item?.image} onClick={handleItemClick} />
+            <S.FandomCircleName>{item.fandomName}</S.FandomCircleName>
         </S.FandomCircleContainer>
     );
 };

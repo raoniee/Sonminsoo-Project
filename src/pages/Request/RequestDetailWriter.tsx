@@ -6,7 +6,7 @@ import RequestDetailWriterHeader from "../../components/Request/writer/RequestDe
 import RequestWriterResponse from "../../components/Request/writer/RequestWriterResponse";
 import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import { useParams } from "react-router-dom";
-import axios, { axiosPrivate } from "../../api/axios";
+import axios from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 type RequestDescProps = {
@@ -16,6 +16,8 @@ type RequestDescProps = {
   content: string;
   answerCnt: number;
   createdAt: string;
+  groupName: string;
+  artistName: string;
   user: {
     id: number;
     nickName: string;
@@ -25,6 +27,7 @@ type RequestDescProps = {
     {
       id: number;
       createdAt: string;
+      isChoosed: boolean;
       user: {
         id: number;
         image: string;
@@ -45,8 +48,7 @@ type RequestDescProps = {
 };
 
 const RequestDetailWriter: React.FC = () => {
-  let { params } = useParams();
-  const axiosPrivate = useAxiosPrivate();
+  let { requestId } = useParams();
 
   const [requestdata, setRequestData] = useState<RequestDescProps>(Object);
 
@@ -56,7 +58,7 @@ const RequestDetailWriter: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosPrivate.get(`/sonminsu-requests/4`);
+      const response = await axios.get(`/sonminsu-requests/${requestId}`);
       setRequestData(response.data.data);
       console.log(response.data.data);
     } catch (err) {
@@ -85,6 +87,7 @@ const RequestDetailWriter: React.FC = () => {
             answerDate={answer.createdAt}
             answerItems={answer.items}
             answerId={answer.id}
+            answerIsChoosed={answer.isChoosed}
           />
         ))}
     </>

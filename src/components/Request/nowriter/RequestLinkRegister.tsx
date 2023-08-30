@@ -3,7 +3,8 @@ import * as S from "../style/RequestLinkRegister.style";
 import close from "../../../assets/images/svg/ic-x.svg";
 import LinkAttachItem from "../LinkAttachItem";
 import SkyBTN from "../SkyBTN";
-import axios, { axiosPrivate } from "../../../api/axios";
+import { useParams } from "react-router-dom";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 type RegisterModalProps = {
   setClick: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,6 +24,9 @@ const RequestLinkRegister: React.FC<RegisterModalProps> = ({
   groupName,
   artistName,
 }) => {
+  let { requestId } = useParams();
+  const axiosPrivate = useAxiosPrivate();
+
   const [urlValue, setUrlValue] = useState("");
   const [urlVaild, setUrlVaild] = useState(false);
   const [urlVaildNum, setUrlVaildNum] = useState(false);
@@ -62,7 +66,7 @@ const RequestLinkRegister: React.FC<RegisterModalProps> = ({
     }
 
     try {
-      const response = await axiosPrivate.post("/users/sonminsu-items", {
+      const response = await axiosPrivate.post("/sonminsu-items", {
         originUrl: urlValue,
         groupName: groupName,
         artistName: artistName,
@@ -84,10 +88,14 @@ const RequestLinkRegister: React.FC<RegisterModalProps> = ({
     }
 
     try {
-      const response = await axiosPrivate.post("/users/sonminsu-answers/3", {
-        itemIds: urlItem.map((item) => item.id),
-      });
+      const response = await axiosPrivate.post(
+        `/sonminsu-answers/${requestId}`,
+        {
+          itemIds: urlItem.map((item) => item.id),
+        }
+      );
       setClick(false);
+      window.location.replace(`/requests/nowriter/${requestId}`);
     } catch (err) {
       console.log(err);
     }
