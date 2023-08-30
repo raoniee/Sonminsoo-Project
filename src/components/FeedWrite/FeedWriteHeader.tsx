@@ -10,23 +10,23 @@ type FeedWriteProps = {
   handleHeaderSubmit: () => void;
   isFormValid: boolean;
   updateFeed: any;
+  moveToFandom: () => void;
 };
 const FeedWriteHeader: React.FC<FeedWriteProps> = ({
   $updatePage,
   handleHeaderSubmit,
   isFormValid,
   updateFeed,
+  moveToFandom,
 }) => {
   const navigation = useNavigate();
-
+  const isFandom = () => {
+    moveToFandom();
+    navigation("/feed");
+  };
   return (
     <S.NewFeedHeader>
-      <S.FeedHeaderArrow
-        src={arrow}
-        onClick={() => {
-          navigation("/feed");
-        }}
-      />
+      <S.FeedHeaderArrow src={arrow} onClick={isFandom} />
       {$updatePage ? (
         <S.FeedHeaderText>피드 수정</S.FeedHeaderText>
       ) : (
@@ -34,7 +34,7 @@ const FeedWriteHeader: React.FC<FeedWriteProps> = ({
       )}
       <S.FeedHeaderCheck
         src={isFormValid ? allcheck : check}
-        onClick={updateFeed}
+        onClick={$updatePage ? updateFeed : handleHeaderSubmit}
       />
     </S.NewFeedHeader>
   );

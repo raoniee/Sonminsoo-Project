@@ -147,7 +147,11 @@ const NewFeed = () => {
       console.error("Errore", error);
     }
   };
-
+  const moveToFandom = () => {
+    if (fandomOptions.length === 0) {
+      navigation("/myfandom");
+    }
+  };
   const handleSubmitFeed = async () => {
     const formData = new FormData();
 
@@ -209,6 +213,7 @@ const NewFeed = () => {
         handleHeaderSubmit={handleHeaderSubmit}
         isFormValid={isFormValid}
         updateFeed={updateFeed}
+        moveToFandom={moveToFandom}
       />
       {$updatePage && feedData ? (
         <S.FeedWriteImage src={feedData.image} />
