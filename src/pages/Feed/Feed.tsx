@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
-import { useNavigate, Outlet } from "react-router-dom";
 import axios from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styled from "styled-components";
@@ -52,7 +51,6 @@ type SonminsuItemType = {
   title: string;
   price: number;
   imgUrl: string;
-  imgUrl: string;
   groupName: string;
   artistName: string;
   isInBucket: boolean;
@@ -74,7 +72,6 @@ type CommentType = {
 
 const FeedIndex = () => {
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
   const navigate = useNavigate();
   const [openComment, setOpenComment] = useState<number | undefined>();
   const [feedData, setFeedData] = useState<Data[]>([]);
@@ -154,12 +151,6 @@ const FeedIndex = () => {
             feedData={feed}
             setIsFeedDelete={setIsFeedDelete}
             setFeedId={setFeedId}
-          />
-          <S.FeedImage
-            src={feed.image}
-            onClick={() => {
-              navigate(`/feed/${feed.id}`);
-            }}
           />
           <S.FeedImage
             src={feed.image}

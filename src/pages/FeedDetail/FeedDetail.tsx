@@ -187,6 +187,7 @@ function FeedDetail() {
               showModal={showModal}
               comments={comments}
               feedId={feedItem.id}
+              fetchFeedData={fetchFeedData}
             />
           )}
           <S.Line />
