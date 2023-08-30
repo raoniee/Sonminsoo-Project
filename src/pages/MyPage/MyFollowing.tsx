@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
-import MyFollowerItem from "../../components/MyPage/MyFollowerItem";
 import * as S from "./style/MyFollow.style";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import MyFollowingItem from "../../components/MyPage/MyFollowingItem";
 import { useParams } from "react-router-dom";
 
 type MyFollowerAndFollowingType = {
@@ -12,10 +12,10 @@ type MyFollowerAndFollowingType = {
   isFollowing: boolean;
 };
 
-const MyFollower: React.FC = () => {
+const MyFollowing: React.FC = () => {
   let { userId } = useParams() as { userId: any };
   const axiosPrivate = useAxiosPrivate();
-  const [followerData, setFollowerData] = useState<
+  const [followingData, setFollowingData] = useState<
     MyFollowerAndFollowingType[]
   >([]);
 
@@ -25,8 +25,8 @@ const MyFollower: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axiosPrivate.get(`/followers/${userId}`); //유저 아이디 받아서 적기
-      setFollowerData(response.data.data);
+      const response = await axiosPrivate.get(`/following/${userId}`); //유저 아이디 받아서 적기
+      setFollowingData(response.data.data);
     } catch (err) {
       console.log(err);
     }
@@ -34,11 +34,11 @@ const MyFollower: React.FC = () => {
 
   return (
     <>
-      <HeaderBar BackButton={true} color="#fff" title="팔로워" />
+      <HeaderBar BackButton={true} color="#fff" title="팔로잉" />
       <S.Wrap>
-        {followerData &&
-          followerData.map((follower) => (
-            <MyFollowerItem
+        {followingData &&
+          followingData.map((follower) => (
+            <MyFollowingItem
               id={follower.id}
               nickName={follower.nickName}
               image={follower.image}
@@ -50,4 +50,4 @@ const MyFollower: React.FC = () => {
   );
 };
 
-export default MyFollower;
+export default MyFollowing;

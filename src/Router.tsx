@@ -22,11 +22,16 @@ import {
   InitInfoRouter,
 } from "./Routes";
 import Requests from "./pages/Request/Requests";
+import Missing from "./pages/Missing";
 
 const Router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+  },
+  {
+    path: "*",
+    element: <Missing />, //홈 화면 컴포넌트
   },
   {
     path: "home",

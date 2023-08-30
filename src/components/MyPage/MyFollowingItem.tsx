@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as S from "./style/MyFollowerItem.style";
+import * as S from "./style/MyFollowItem.style";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 type MyFollowerAndFollowingType = {
@@ -9,7 +9,7 @@ type MyFollowerAndFollowingType = {
   isFollowing: boolean;
 };
 
-const MyFollowerItem: React.FC<MyFollowerAndFollowingType> = ({
+const MyFollowingItem: React.FC<MyFollowerAndFollowingType> = ({
   id,
   nickName,
   image,
@@ -30,15 +30,15 @@ const MyFollowerItem: React.FC<MyFollowerAndFollowingType> = ({
 
   return (
     <S.Wrap>
-      <S.FollowerImg src={image} />
-      <S.FollowerName>{nickName}</S.FollowerName>
-      {!isFollowing && followValue && (
-        <S.FollowerBTN state={followValue} onClick={clickFollowBTN}>
-          팔로우
-        </S.FollowerBTN>
+      <S.FollowImg src={image} />
+      {<S.FollowName>{nickName}</S.FollowName>}
+      {isFollowing && (
+        <S.FollowBTN state={followValue} onClick={clickFollowBTN}>
+          {followValue ? "팔로잉" : "팔로우"}
+        </S.FollowBTN>
       )}
     </S.Wrap>
   );
 };
 
-export default MyFollowerItem;
+export default MyFollowingItem;
