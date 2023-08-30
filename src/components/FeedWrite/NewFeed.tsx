@@ -36,6 +36,7 @@ const NewFeed = () => {
   const [selectedFandom, setSelectedFandom] = useState<OptionType | null>();
   const [linkModalClick, setLinkModalClick] = useState<boolean>(false);
   const [urlItem, setUrlItem] = useState<itemtype[]>([]);
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
   const location = useLocation();
 
@@ -44,14 +45,45 @@ const NewFeed = () => {
   const selectImg = location.state?.imageObject;
   // #넣어입력하면 배열로 변환
   const hashtagss = hashTagInput.match(/#\w+/g) || [];
+
   useEffect(() => {
     fetchFandom();
   }, []);
 
+  useEffect(() => {
+    if (
+      contentInput.trim() !== "" &&
+      hashTagInput.trim() !== "" &&
+      groupInput.trim() !== "" &&
+      artistInput.trim() !== "" &&
+      selectedFandom &&
+      urlItem.length > 0
+    ) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [
+    contentInput,
+    hashTagInput,
+    groupInput,
+    artistInput,
+    selectedFandom,
+    urlItem,
+  ]);
+
+  const handleHeaderSubmit = () => {
+    if (isFormValid) {
+      if (noticeChecked) {
+        handleNoticeSubmit();
+      } else {
+        handleSubmitFeed();
+      }
+    }
+  };
   const sonminsuItemArray = urlItem.map((item) => item.id);
   const handleContentInput = (e: any) => {
     setContentInput(e.target.value);
-    console.log(hashtagss);
   };
 
   const fetchFandom = async () => {
@@ -96,12 +128,25 @@ const NewFeed = () => {
     }
     navigation("/feed");
   };
-
+  const handleNoticeSubmit = async () => {
+    try {
+      const response = await axiosPrivate.post(
+        `/fandom-announcements/${selectedFandom?.id}`,
+        {
+          content: contentInput,
+        }
+      );
+    } catch (error) {
+      console.log("error", error);
+    }
+    navigation("/feed");
+  };
   return (
     <>
       <FeedHeaderWrite
         $updatePage={$updatePage}
-        handleSubmitFeed={handleSubmitFeed}
+        handleHeaderSubmit={handleHeaderSubmit}
+        isFormValid={isFormValid}
       />
       {$updatePage ? (
         <S.FeedWriteImage src={idol1} />
