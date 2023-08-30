@@ -75,7 +75,10 @@ const NewFeed = () => {
   const selectImg = location.state?.imageObject;
   const feedId = location.state?.feedId;
   // #넣어입력하면 배열로 변환
-  const hashtagss = hashTagInput.match(/#\w+/g) || [];
+  const hashtagss =
+    hashTagInput
+      .match(/#([\uAC00-\uD7A3a-zA-Z\u3131-\u3163\u314F-\uD7A3]+)/g)
+      ?.map((tag) => tag.slice(1)) || [];
 
   useEffect(() => {
     fetchFandom();
@@ -121,6 +124,7 @@ const NewFeed = () => {
   const sonminsuItemArray = urlItem.map((item) => item.id);
   const handleContentInput = (e: any) => {
     setContentInput(e.target.value);
+    console.log(hashtagss);
   };
   const fetchFeedData = async () => {
     try {
@@ -161,7 +165,7 @@ const NewFeed = () => {
       formData.append("image", selectImg);
     }
 
-    // formData.forEach((value, key) => console.log(`${key}: ${value}`));
+    formData.forEach((value, key) => console.log(`${key}: ${value}`));
     try {
       const response = await axiosPrivate.post("/feeds", formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -185,12 +189,26 @@ const NewFeed = () => {
     }
     navigation("/feed");
   };
+  const updateFeed = async () => {
+    let data = {
+      content: contentInput,
+      hashTags: hashtagss,
+    };
+    try {
+      const response = await axiosPrivate.patch(`/feeds/${feedId}`, data);
+      navigation("/feed");
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
     <>
       <FeedHeaderWrite
         $updatePage={$updatePage}
         handleHeaderSubmit={handleHeaderSubmit}
         isFormValid={isFormValid}
+        updateFeed={updateFeed}
       />
       {$updatePage && feedData ? (
         <S.FeedWriteImage src={feedData.image} />
@@ -217,13 +235,15 @@ const NewFeed = () => {
             $updatePage={$updatePage}
             setLinkModalClick={setLinkModalClick}
             urlItem={urlItem}
+            feedData={feedData}
           />
           <FeedWriteTarget
             $updatePage={$updatePage}
-            grouptInput={groupInput}
+            groupInput={groupInput}
             setGroupInput={setGroupInput}
             artistInput={artistInput}
             setArtistInput={setArtistInput}
+            feedData={feedData}
           />
         </>
       )}
