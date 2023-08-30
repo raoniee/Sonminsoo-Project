@@ -22,11 +22,16 @@ import {
   InitInfoRouter,
 } from "./Routes";
 import Requests from "./pages/Request/Requests";
+import Missing from "./pages/Missing";
 
 const Router = createBrowserRouter([
   {
     path: "/",
-    element: <Requests />,
+    element: <Main />,
+  },
+  {
+    path: "*",
+    element: <Missing />, //홈 화면 컴포넌트
   },
   {
     path: "home",
@@ -42,8 +47,8 @@ const Router = createBrowserRouter([
     element: <FandomDetail />, //팬덤 상세보기 컴포넌트
   },
   {
-    path: "fandom/:fandomId",
-    element: <Main />, //팬덤 상세보기 컴포넌트
+    path: "createfandom",
+    element: <CreateNewFandom />, //팬덤 상세보기 컴포넌트
   },
   SignupRouter,
   ChattingRouter,
