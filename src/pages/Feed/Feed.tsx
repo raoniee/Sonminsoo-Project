@@ -16,6 +16,7 @@ import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import CloseModal from "../../components/Feed/CloseModal";
 import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
+import FeedDetail from "../FeedDetail/FeedDetail";
 export type Data = {
   id: number;
   content: string;
@@ -117,8 +118,22 @@ const FeedIndex = () => {
       console.log("error", error);
     }
   };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await axiosPrivate.delete(`/comments/${id}`);
+      fetchComments(openComment);
+      fetchFeedData();
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   const getItemFromResult = (sonIds: number[]): SonminsuItemType[] => {
     return sonminsuItem.filter((item) => sonIds.includes(item.id));
+  };
+  const showModal = (commentId: number) => {
+    setSelectedCommentId(commentId);
+    setModalOpen(true);
   };
   const toggleComment = (id: number) => {
     if (openComment === id) {
@@ -128,21 +143,6 @@ const FeedIndex = () => {
       fetchComments(id);
     }
   };
-  const handleDelete = async (id: number) => {
-    try {
-      await axiosPrivate.delete(`/comments/${id}`);
-      setComments((prevComments) =>
-        prevComments.filter((comment) => comment.id !== id)
-      );
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-  const showModal = (commentId: number) => {
-    setSelectedCommentId(commentId);
-    setModalOpen(true);
-  };
-
   return (
     <S.FeedContainer>
       <FeedHeaderBar />
@@ -177,6 +177,7 @@ const FeedIndex = () => {
               showModal={showModal}
               comments={comments}
               feedId={feed.id}
+              fetchFeedData={fetchFeedData}
             />
           )}
           <S.Line />

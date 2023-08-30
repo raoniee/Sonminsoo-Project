@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import FeedHeaderBar from "../../components/Feed/FeedHeaderBar";
+import { useParams } from "react-router-dom";
 import FeedHeader from "../../components/Feed/FeedHeader";
 import ItemBox from "../../components/Feed/Item";
 import HashTag from "../../components/Feed/HashTag";
@@ -75,7 +74,6 @@ function FeedDetail() {
   const { FeedId } = useParams();
   const [feedItem, setFeedItem] = useState<Data>();
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
   const [openComment, setOpenComment] = useState<number | undefined>();
   const [feedData, setFeedData] = useState<Data[]>([]);
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -92,7 +90,6 @@ function FeedDetail() {
     fetchFeedDetail();
     fetchItem();
     fetchFeedData();
-    console.log(FeedId);
   }, []);
   const fetchFeedDetail = async () => {
     try {
@@ -144,9 +141,7 @@ function FeedDetail() {
   const handleDelete = async (id: number) => {
     try {
       await axiosPrivate.delete(`/comments/${id}`);
-      setComments((prevComments) =>
-        prevComments.filter((comment) => comment.id !== id)
-      );
+      fetchComments(feedItem?.id);
     } catch (error) {
       console.log("error", error);
     }
@@ -187,6 +182,7 @@ function FeedDetail() {
               showModal={showModal}
               comments={comments}
               feedId={feedItem.id}
+              fetchFeedData={fetchFeedData}
             />
           )}
           <S.Line />
