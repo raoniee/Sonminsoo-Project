@@ -27,7 +27,7 @@ export const LinkItem = styled(Link)`
     }
 `
 
-export const ChatTitle = styled.div`
+export const ChatTitle = styled.p`
     width: 100%;
     height: 100%;
 
@@ -40,7 +40,6 @@ export const ChatTitle = styled.div`
 
 export const ChatRoomWindow = styled.div`
     width: 100%;
-    height: 100%;
     padding: 70px 16px 98px;
 `;
 
