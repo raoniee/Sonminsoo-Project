@@ -1,6 +1,7 @@
 import React from "react";
 import * as S from "./style/Item.style";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Link } from "react-router-dom";
 import "swiper/css";
 // import { FeedItemProps } from "../../types/feed";
 export type Data = {
@@ -28,7 +29,7 @@ export type SonminsuItems = {
   originUrl: string;
   title: string;
   price: number;
-  imageUrl: string;
+  imgUrl: string;
   groupName: string;
   artistName: string;
 };
@@ -41,14 +42,15 @@ const ItemBox: React.FC<FeedItemProps> = ({ items }) => {
     slidesPerView: 3.5,
     spaceBetween: 10,
   };
-
   return (
     <S.ItemWrap>
       <Swiper {...swiperParams}>
         {items &&
           items.map((item, itemIndex) => (
             <SwiperSlide key={`${itemIndex}`}>
-              <S.Item src={item.imageUrl} />
+              <Link to={item.originUrl}>
+                <S.Item src={item.imgUrl} />
+              </Link>
               <S.ProductName>{item.title}</S.ProductName>
               <S.Price>
                 {item.price}

@@ -15,6 +15,8 @@ export type Data = {
   image: string;
   tags: string[];
   comments: number;
+  groupName: string;
+  artistName: string;
 };
 export type SonminsuItems = {
   id: number;
