@@ -55,6 +55,8 @@ const Router = createBrowserRouter([
   FeedWriteRouter,
   SearchItemRouter,
   MyFandomRouter,
+  LoginRouter,
+  InitInfoRouter,
 ]);
 
 export default Router;
