@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import styled from "styled-components";
 import FeedHeaderWrite from "./FeedWriteHeader";
 import WriteFandom from "./WriteFandom";
 import FeedWriteHashTag from "./FeedWriteHashTag";
