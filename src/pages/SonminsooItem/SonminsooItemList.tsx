@@ -7,7 +7,8 @@ import Icon from "../../elements/Icon";
 import search from "../../assets/images/svg/SonminsooItem/ic-search.svg";
 import settings from "../../assets/images/svg/SonminsooItem/ic-settings.svg";
 import useInput from "../../hooks/useInput";
-import axios, { axiosPrivate } from "../../api/axios";
+import axios from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 type sonminsooItemInfo = {
   artistName: string;
@@ -23,6 +24,7 @@ const SonminsooItemList = () => {
   const [items, setItems] = useState<sonminsooItemInfo[]>([]);
   const [searchView, setSearchView] = useState<boolean>(false);
   const [keyword, setKeyword] = useInput();
+  const axiosPrivate = useAxiosPrivate();
 
   useEffect(() => {
     const getSonminsooItemList = async () => {
