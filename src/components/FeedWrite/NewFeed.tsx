@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import styled from "styled-components";
 import FeedHeaderWrite from "./FeedWriteHeader";
 import WriteFandom from "./WriteFandom";
 import FeedWriteHashTag from "./FeedWriteHashTag";
@@ -52,6 +51,7 @@ const NewFeed = () => {
   const sonminsuItemArray = urlItem.map((item) => item.id);
   const handleContentInput = (e: any) => {
     setContentInput(e.target.value);
+    console.log(hashtagss);
   };
 
   const fetchFandom = async () => {
@@ -85,7 +85,7 @@ const NewFeed = () => {
       formData.append("image", selectImg);
     }
 
-    formData.forEach((value, key) => console.log(`${key}: ${value}`));
+    // formData.forEach((value, key) => console.log(`${key}: ${value}`));
     try {
       const response = await axiosPrivate.post("/feeds", formData, {
         headers: { "Content-Type": "multipart/form-data" },
