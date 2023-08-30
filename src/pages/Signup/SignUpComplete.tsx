@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const SignUpComplete = () => {
   const navigation = useNavigate();
+  //TODO: 로그인하고 initinfo로 가기
   return (
     <>
       <S.Container>
