@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import axios from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import styled from "styled-components";
@@ -16,7 +17,6 @@ import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import CloseModal from "../../components/Feed/CloseModal";
 import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
-import FeedDetail from "../FeedDetail/FeedDetail";
 export type Data = {
   id: number;
   content: string;
@@ -52,6 +52,7 @@ type SonminsuItemType = {
   title: string;
   price: number;
   imgUrl: string;
+  imgUrl: string;
   groupName: string;
   artistName: string;
   isInBucket: boolean;
@@ -73,6 +74,7 @@ type CommentType = {
 
 const FeedIndex = () => {
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
   const navigate = useNavigate();
   const [openComment, setOpenComment] = useState<number | undefined>();
   const [feedData, setFeedData] = useState<Data[]>([]);
@@ -159,6 +161,12 @@ const FeedIndex = () => {
               navigate(`/feed/${feed.id}`);
             }}
           />
+          <S.FeedImage
+            src={feed.image}
+            onClick={() => {
+              navigate(`/feed/${feed.id}`);
+            }}
+          />
           <ItemBox
             items={getItemFromResult(feed.sonminsuItems.map((item) => item.id))}
           />
@@ -183,6 +191,7 @@ const FeedIndex = () => {
           <S.Line />
         </React.Fragment>
       ))}
+      <Outlet />
       <Outlet />
       {openComment === undefined && <FooterNavBar />}
       {modalOpen && (
