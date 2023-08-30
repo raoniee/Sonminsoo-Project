@@ -11,7 +11,35 @@ import * as S from "./style/NewFeed.style";
 import useInput from "../../hooks/useInput";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import idol1 from "../../assets/images/png/idol1.png";
-
+export type Data = {
+  id: number;
+  content: string;
+  createdAt: string;
+  author: {
+    id: number;
+    image: string;
+    nickName: string;
+  };
+  fandom: {
+    id: number;
+    fandomName: string;
+  };
+  sonminsuItems: SonminsuItems[];
+  image: string;
+  tags: string[];
+  comments: number;
+  groupName: string;
+  artistName: string;
+};
+export type SonminsuItems = {
+  id: number;
+  originUrl: string;
+  title: string;
+  price: number;
+  imgUrl: string;
+  groupName: string;
+  artistName: string;
+};
 type OptionType = {
   value: string;
   label: string;
@@ -28,6 +56,7 @@ type itemtype = {
 const NewFeed = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigation = useNavigate();
+  const [feedData, setFeedData] = useState<Data>();
   const [noticeChecked, setNoticeChecked] = useState<boolean>(false);
   const [contentInput, setContentInput] = useState<string>("");
   const [hashTagInput, handleHashTagChange] = useInput("");
@@ -44,11 +73,13 @@ const NewFeed = () => {
   const $updatePage = location.state?.isUpdate;
   const writeImg = location.state?.selectedImage;
   const selectImg = location.state?.imageObject;
+  const feedId = location.state?.feedId;
   // #넣어입력하면 배열로 변환
   const hashtagss = hashTagInput.match(/#\w+/g) || [];
 
   useEffect(() => {
     fetchFandom();
+    fetchFeedData();
   }, []);
 
   useEffect(() => {
@@ -91,7 +122,14 @@ const NewFeed = () => {
   const handleContentInput = (e: any) => {
     setContentInput(e.target.value);
   };
-
+  const fetchFeedData = async () => {
+    try {
+      const response = await axiosPrivate.get(`/feeds/${feedId}`);
+      setFeedData(response.data.data);
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   const fetchFandom = async () => {
     try {
       const response = await axiosPrivate.get("/fandoms");
@@ -154,8 +192,8 @@ const NewFeed = () => {
         handleHeaderSubmit={handleHeaderSubmit}
         isFormValid={isFormValid}
       />
-      {$updatePage ? (
-        <S.FeedWriteImage src={idol1} />
+      {$updatePage && feedData ? (
+        <S.FeedWriteImage src={feedData.image} />
       ) : (
         <S.FeedWriteImage src={writeImg} />
       )}
