@@ -5,10 +5,6 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import axios from "../../api/axios";
-import { useParams, useNavigate } from "react-router-dom";
-
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import axios from "../../api/axios";
 
 /////////// 팬덤 디테일 import ///////////
 /////////// 팬덤 디테일 import ///////////
@@ -28,6 +24,7 @@ import Comment from "../../components/Feed/Comment";
 import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 /////////// 팬덤 타입 ///////////
+/////////// 피드 import ///////////
 
 type Fandom = {
   fandomName: string;
