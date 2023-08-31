@@ -32,9 +32,26 @@ const FandomDetail: React.FC = () => {
   const [isSubscribe, setIsSubscribe] = useState(false);
   const [isEditingModalOpen, setIsEditingModalOpen] = useState(false);
 
-  useEffect(() => {
-    initDataGet();
-  }, []);
+    const initDataGet = async () => {
+        try {
+            const res = await axiosPrivate.get(`fandoms/${fandomId}`);
+            setData(res.data.data);
+            setIsAdmin(res.data.data.isAdmin);
+            setIsSubscribe(res.data.data.isSubscribe);
+        } catch (error) {
+            console.error("Error", error);
+        }
+    };
+    const handleJoinButtonClick = async () => {
+        try {
+            const res = await axiosPrivate.put(
+                `/fandoms/${fandomId}/subscribe`
+            );
+            initDataGet();
+        } catch (error) {
+            console.error("Error", error);
+        }
+    };
 
   const initDataGet = async () => {
     try {
@@ -65,42 +82,40 @@ const FandomDetail: React.FC = () => {
     }
   };
 
-  const handleUpdateButtonClick = () => {
-    setIsEditingModalOpen(true);
-  };
-
-  const closeEditingModal = () => {
-    setIsEditingModalOpen(false);
-  };
-  return (
-    <>
-      <S.Container>
-        {isEditingModalOpen && data?.id && (
-          <div className="modal">
-            <div className="modal-content">
-              <UpdateFandom
-                key={data?.id}
-                image={data?.image}
-                fandomName={data.fandomName || ""}
-              />
-            </div>
-          </div>
-        )}
-        <S.HeaderBox>
-          {/* 수정 */}
-          <HeaderBar BackButton={true} />
-          {/* 가입 전에는 화살표만 */}
-          {/* <HeaderBar BackButton={true} items={} /> 가입후에는 글쓰기 */}
-          {/* <HeaderBar BackButton={true} items={} /> 어드민은 글쓰기 햄버거 */}
-          <S.Img src={data?.image} alt="API Img" />
-          <S.FandomName>{data?.fandomName}</S.FandomName>
-          <S.FandomMember>멤버 {data?.memberLength}</S.FandomMember>{" "}
-          <S.FandomJoinBox>{renderJoinButton()}</S.FandomJoinBox>
-        </S.HeaderBox>
-        <Notice noticeId={fandomId} />
-      </S.Container>
-      <FooterNavBar />
-    </>
-  );
+    const closeEditingModal = () => {
+        setIsEditingModalOpen(false);
+    };
+    return (
+        <>
+            <S.Container>
+                {isEditingModalOpen && data?.id && (
+                    <div className="modal">
+                        <div className="modal-content">
+                            <UpdateFandom
+                                key={data?.id}
+                                image={data?.image}
+                                fandomName={data.fandomName || ""}
+                            />
+                        </div>
+                    </div>
+                )}
+                <S.HeaderBox>
+                    {/* 수정 */}
+                    <HeaderBar BackButton={true} />
+                    {/* 가입 전에는 화살표만 */}
+                    {/* <HeaderBar BackButton={true} items={} /> 가입후에는 글쓰기 */}
+                    {/* <HeaderBar BackButton={true} items={} /> 어드민은 글쓰기 햄버거 */}
+                    <S.Img src={data?.image} alt="API Img" />
+                    <S.FandomName>{data?.fandomName}</S.FandomName>
+                    <S.FandomMember>
+                        멤버 {data?.memberLength}
+                    </S.FandomMember>{" "}
+                    <S.FandomJoinBox>{renderJoinButton()}</S.FandomJoinBox>
+                </S.HeaderBox>
+                <Notice noticeId={fandomId} />
+            </S.Container>
+            <FooterNavBar />
+        </>
+    );
 };
 export default FandomDetail;
