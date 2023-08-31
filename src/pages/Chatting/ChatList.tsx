@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import type { Fandom } from '../../types/chattingType';
+import type { FandomType } from '../../types/chattingType';
 import ChatFandom from '../../components/Chatting/ChatFandom';
 import FooterNavBar from '../../components/common/FooterNavBar/FooterNavBar';
 import logo from '../../assets/images/svg/ic-logo.svg';
@@ -8,12 +8,11 @@ import { Socket } from 'socket.io-client';
 import { SocketContext } from '../../App';
 import { useOutletContext } from 'react-router';
 
-type FandomData = Fandom[];
 
 const ChatList = () => {
     const { roomList, setRoomList } = useOutletContext<{
-        roomList: FandomData;
-        setRoomList: React.Dispatch<React.SetStateAction<FandomData>>;
+        roomList: FandomType[];
+        setRoomList: React.Dispatch<React.SetStateAction<FandomType[]>>;
     }>();
 
     // const [roomList, setRoomList] = useState<FandomData>([]);
