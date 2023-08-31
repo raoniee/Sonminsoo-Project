@@ -1,17 +1,16 @@
 import * as S from "./style/FandomDetail.style";
 import React, { useState, useEffect } from "react";
-import axios from "../../api/axios";
-import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
+import Edit from "./../../assets/images/svg/ic-edit.svg";
 
+import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import Notice from "../../components/MyFandom/Notice";
-import { Button } from "../../elements/Button";
+import FandomDetailHeader from "../../components/MyFandom/FandomDetailHeader";
 import { useParams, useNavigate } from "react-router-dom";
 
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import FeedIndex from "../Feed/Feed";
+
 import UpdateFandom from "./UpdateFandom";
-import { styled } from "styled-components";
 
 type Fandom = {
     fandomName: string;
@@ -52,6 +51,7 @@ const FandomDetail: React.FC = () => {
             const res = await axiosPrivate.put(
                 `/fandoms/${fandomId}/subscribe`
             );
+            initDataGet();
         } catch (error) {
             console.error("Error", error);
         }
@@ -99,16 +99,17 @@ const FandomDetail: React.FC = () => {
                     </div>
                 )}
                 <S.HeaderBox>
+                    {/* 수정 */}
                     <HeaderBar BackButton={true} />
-
+                    {/* 가입 전에는 화살표만 */}
+                    {/* <HeaderBar BackButton={true} items={} /> 가입후에는 글쓰기 */}
+                    {/* <HeaderBar BackButton={true} items={} /> 어드민은 글쓰기 햄버거 */}
                     <S.Img src={data?.image} alt="API Img" />
-                    <S.FandomJoinBox>
-                        <S.FandomName>{data?.fandomName}</S.FandomName>
-                        <S.FandomMember>
-                            멤버 {data?.memberLength}
-                        </S.FandomMember>
-                        {renderJoinButton()}
-                    </S.FandomJoinBox>
+                    <S.FandomName>{data?.fandomName}</S.FandomName>
+                    <S.FandomMember>
+                        멤버 {data?.memberLength}
+                    </S.FandomMember>{" "}
+                    <S.FandomJoinBox>{renderJoinButton()}</S.FandomJoinBox>
                 </S.HeaderBox>
                 <Notice noticeId={fandomId} />
             </S.Container>
