@@ -23,7 +23,6 @@ import Comment from "../../components/Feed/Comment";
 import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 /////////// 팬덤 타입 ///////////
-/////////// 피드 import ///////////
 type Fandom = {
   fandomName: string;
   id: number;
