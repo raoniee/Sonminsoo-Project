@@ -117,7 +117,6 @@ const FeedIndex = () => {
     const ITEMS_PER_PAGE = 10;
 
     try {
-      setFeedData((prevData) => [...prevData, ...response.data.data]);
       const response = await axios.get(
         `/feeds?page=${page}&perPage=${ITEMS_PER_PAGE}`
       );
