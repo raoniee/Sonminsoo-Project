@@ -36,6 +36,8 @@ const RequestDetaiNoWriterlHeader: React.FC<RequestWriterTitleProps> = ({
     }
   };
 
+  console.log(bookmarkstate);
+
   return (
     <S.Wrap>
       <S.Left>
