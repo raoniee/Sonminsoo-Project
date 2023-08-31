@@ -14,7 +14,7 @@ export const UserWrapper = styled.div`
     align-items: center;
 `;
 
-export const UserImage = styled.div`
+export const UserImage = styled.img`
     background-color: gray;
     
     width: 56px;
