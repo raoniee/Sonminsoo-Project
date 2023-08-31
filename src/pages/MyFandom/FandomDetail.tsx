@@ -5,12 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import axios from "../../api/axios";
-import { useParams, useNavigate } from "react-router-dom";
 
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import axios from "../../api/axios";
-
-/////////// 팬덤 디테일 import ///////////
 /////////// 팬덤 디테일 import ///////////
 import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
