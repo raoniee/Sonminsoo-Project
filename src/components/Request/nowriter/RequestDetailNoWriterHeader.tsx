@@ -22,25 +22,6 @@ const RequestDetaiNoWriterlHeader: React.FC<RequestTitleProps> = ({
   const [pushpinvalue, setPushPinValue] = useState(true);
   const axiosPrivate = useAxiosPrivate();
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, [token]);
-
-  // const fetchData = async () => {
-  //   try {
-  //     if (token) {
-  //       //북마크 여부
-  //       const responsebookmark = await axiosPrivate.get(
-  //         `/sonminsu-requests/${id}`
-  //       );
-  //       setBookMarkData(responsebookmark.data.data.isBookmark);
-  //       console.log(responsebookmark.data.data.isBookmark);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   const clickPushPin = async () => {
     try {
       const response = await axiosPrivate.put(
@@ -69,7 +50,7 @@ const RequestDetaiNoWriterlHeader: React.FC<RequestTitleProps> = ({
       {token && (
         <S.Right>
           <S.PushPin
-            src={bookmarkstate ? pushginon : pushginoff}
+            src={bookmarkstate && pushpinvalue ? pushginon : pushginoff}
             onClick={clickPushPin}
           />
         </S.Right>
