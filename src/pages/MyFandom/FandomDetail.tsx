@@ -7,6 +7,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import axios from "../../api/axios";
 
 /////////// 팬덤 디테일 import ///////////
+/////////// 팬덤 디테일 import ///////////
 import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import Notice from "../../components/MyFandom/Notice";
@@ -23,6 +24,7 @@ import Comment from "../../components/Feed/Comment";
 import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 /////////// 팬덤 타입 ///////////
+
 type Fandom = {
   fandomName: string;
   id: number;
