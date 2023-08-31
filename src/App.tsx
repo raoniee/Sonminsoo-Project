@@ -14,18 +14,19 @@ const App = () => {
     const socket = useSocket();
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        axios
-            .get("/auth/auto-sign-in")
-            .then(({ headers }) => {
-                console.log(headers, "auto-sign-in");
-                dispatch(setToken(headers.authorization));
-            })
-            .catch((err) => {
-                // err.status==401 로그아웃
-                console.log(err, "auto sign-in failed");
-            });
-    }, []);
+  useEffect(() => {
+    axios
+      .get("/auth/auto-sign-in")
+      .then(({ headers }) => {
+        console.log(headers, "auto-sign-in");
+        dispatch(setToken(headers.authorization));
+      })
+      .catch((err) => {
+        // err.status==401 로그아웃
+        dispatch(setToken(""));
+        console.log(err, "auto sign-in failed");
+      });
+  }, []);
 
     return (
       <SocketContext.Provider value={socket}>
