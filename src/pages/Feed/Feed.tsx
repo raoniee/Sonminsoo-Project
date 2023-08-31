@@ -160,6 +160,7 @@ const FeedIndex = () => {
       fetchComments(id);
     }
   };
+
   return (
     <S.FeedContainer>
       <FeedHeaderBar />
