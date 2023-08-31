@@ -14,8 +14,6 @@ type Props = {
     roomId: number;
     message: string;
     setMessage: React.Dispatch<React.SetStateAction<string>>;
-    chatMessages: ChatProps[];
-    setChatMessages: React.Dispatch<React.SetStateAction<ChatProps[]>>;
 }
 
 type UploadImage = {
@@ -25,7 +23,7 @@ type UploadImage = {
 }
 
 
-const ChatInputBar = ({ban, roomId, message, setMessage, chatMessages, setChatMessages}:Props) => {
+const ChatInputBar = ({ban, roomId, message, setMessage}:Props) => {
     const socket = useContext<Socket | undefined>(SocketContext);
     const [imageFile, setImageFile] = useState<File[]>();
     const maxFileCount = 9;
@@ -57,15 +55,17 @@ const ChatInputBar = ({ban, roomId, message, setMessage, chatMessages, setChatMe
     }
 
     const sendMessageHandler = () => {
-        const sendMessage = {
-            room: roomId,
-            content: message,
-        };
-
-        if (socket) {
-            socket.emit("bias", sendMessage);
-            setMessage('');
-        }        
+        if (message.trimStart() !== "") {
+            const sendMessage = {
+                room: roomId,
+                content: message,
+            };
+    
+            if (socket) {
+                socket.emit("bias", sendMessage);
+                setMessage('');
+            }        
+        }
     }
 
     const sendMessageEnter = () => {
