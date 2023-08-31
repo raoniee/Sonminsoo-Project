@@ -17,6 +17,7 @@ const LikeBtn: React.FC<LikeBtnProps> = ({ feedId }) => {
   useEffect(() => {
     fetchLike();
   }, []);
+
   const fetchLike = async () => {
     try {
       const response = await axiosPrivate.get(`/feeds/${feedId}`);
@@ -34,10 +35,9 @@ const LikeBtn: React.FC<LikeBtnProps> = ({ feedId }) => {
         const response = await axiosPrivate.put(`/feeds/${feedId}/like`);
         setLiked(response.data.isLike);
         setLikeCount(response.data.likes);
+        fetchLike();
       } catch (error) {
         console.log("error", error);
-      } finally {
-        fetchLike();
       }
     }
   };

@@ -80,6 +80,7 @@ const FeedIndex = () => {
   const [isLoadingComments, setIsLoadingComments] = useState(false);
   const [feedId, setFeedId] = useState<number | undefined>();
   const [sonminsuItem, setSonminsuItem] = useState<SonminsuItemType[]>([]);
+  const [page, setPage] = useState<number>(1);
   const [selectedCommentId, setSelectedCommentId] = useState<
     number | undefined
   >();
@@ -87,18 +88,32 @@ const FeedIndex = () => {
   useEffect(() => {
     fetchFeedData();
     fetchItem();
-    getLoggedInUserId();
-  }, []);
+  }, [page]);
 
-  const user = useSelector((state: any) => state.user);
-  const getLoggedInUserId = () => {
-    return user ? user.id : null;
+  const ITEMS_PER_PAGE = 10;
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    )
+      return;
+    setPage((prev) => prev + 1);
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const fetchFeedData = async () => {
     try {
-      const response = await axios.get("/feeds");
-      setFeedData(response.data.data);
+      const response = await axios.get(
+        `/feeds?page=${page}&perPage=${ITEMS_PER_PAGE}`
+      );
+      setFeedData((prevData) => [...prevData, ...response.data.data]);
     } catch (error) {
       console.error("Error", error);
     }
@@ -112,6 +127,7 @@ const FeedIndex = () => {
       console.log("error", error);
     } finally {
       setIsLoadingComments(false);
+      fetchFeedData();
     }
   };
   const fetchItem = async () => {
@@ -128,6 +144,14 @@ const FeedIndex = () => {
       await axiosPrivate.delete(`/comments/${id}`);
       fetchComments(openComment);
       fetchFeedData();
+
+      setFeedData((prevData) =>
+        prevData.map((feed) =>
+          feed.id === openComment
+            ? { ...feed, comments: feed.comments - 1 }
+            : feed
+        )
+      );
     } catch (error) {
       console.log("error", error);
     }
@@ -140,7 +164,6 @@ const FeedIndex = () => {
     setModalOpen(true);
   };
   const toggleComment = (id: number) => {
-    console.log(user.id);
     if (openComment === id) {
       setOpenComment(undefined);
     } else {
@@ -151,8 +174,8 @@ const FeedIndex = () => {
   return (
     <S.FeedContainer>
       <FeedHeaderBar />
-      {feedData?.map((feed) => (
-        <React.Fragment key={feed.id}>
+      {feedData?.map((feed, index) => (
+        <React.Fragment key={`${feed.id}-${index}`}>
           <FeedHeader
             feedData={feed}
             setIsFeedDelete={setIsFeedDelete}

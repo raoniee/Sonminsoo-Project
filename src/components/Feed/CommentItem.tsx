@@ -39,7 +39,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, showModal }) => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [comment]);
+  }, []);
 
   return (
     <>
