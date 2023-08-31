@@ -81,7 +81,6 @@ const FeedIndex = () => {
   const [feedId, setFeedId] = useState<number | undefined>();
   const [sonminsuItem, setSonminsuItem] = useState<SonminsuItemType[]>([]);
   const [page, setPage] = useState<number>(1);
-  const [page, setPage] = useState<number>(1);
   const [selectedCommentId, setSelectedCommentId] = useState<
     number | undefined
   >();
@@ -118,9 +117,6 @@ const FeedIndex = () => {
     const ITEMS_PER_PAGE = 10;
 
     try {
-      const response = await axios.get(
-        `/feeds?page=${page}&perPage=${ITEMS_PER_PAGE}`
-      );
       setFeedData((prevData) => [...prevData, ...response.data.data]);
       const response = await axios.get(
         `/feeds?page=${page}&perPage=${ITEMS_PER_PAGE}`
@@ -186,8 +182,6 @@ const FeedIndex = () => {
   return (
     <S.FeedContainer>
       <FeedHeaderBar />
-      {feedData?.map((feed, index) => (
-        <React.Fragment key={`${feed.id}-${index}`}>
       {feedData?.map((feed, index) => (
         <React.Fragment key={`${feed.id}-${index}`}>
           <FeedHeader
