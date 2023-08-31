@@ -304,6 +304,10 @@ const FandomDetail: React.FC = () => {
                     {/* 가입 전에는 화살표만 */}
                     {/* <HeaderBar BackButton={true} items={} /> 가입후에는 글쓰기 */}
                     {/* <HeaderBar BackButton={true} items={} /> 어드민은 글쓰기 햄버거 */}
+<<<<<<< HEAD
+=======
+
+>>>>>>> fb476ed (feat: 좋아요 구현)
                     <S.Img src={data?.image} alt="API Img" />
                     <S.FandomName>{data?.fandomName}</S.FandomName>
                     <S.FandomMember>
