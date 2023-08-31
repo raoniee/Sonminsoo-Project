@@ -107,6 +107,13 @@ const FeedIndex = () => {
       return setPage((prev) => prev + 1);
   };
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const fetchFeedData = async () => {
     const ITEMS_PER_PAGE = 10;
 
