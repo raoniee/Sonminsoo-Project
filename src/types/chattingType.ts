@@ -20,7 +20,7 @@ export type ChatMemberType = {
     userName: string;
 }
 
-export type ChatProps = {
+export type ChatType = {
     author: {
         id: number;
         nickName: string;
