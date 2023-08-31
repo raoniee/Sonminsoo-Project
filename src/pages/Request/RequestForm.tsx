@@ -92,6 +92,8 @@ const RequestForm: React.FC = () => {
   };
 
   const handelReuquestRegister = async () => {
+    if (titleValue.trim() === "") {
+    }
     const formData = new FormData();
     formData.append("title", titleValue);
     formData.append("content", descValue);
