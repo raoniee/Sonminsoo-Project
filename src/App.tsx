@@ -23,7 +23,6 @@ const App = () => {
       })
       .catch((err) => {
         // err.status==401 로그아웃
-        dispatch(setToken(""));
         console.log(err, "auto sign-in failed");
       });
   }, []);
