@@ -98,7 +98,7 @@ const FeedWriteLink: React.FC<FeedWriteProps> = ({
                     <S.LinkItemName>{item.title}</S.LinkItemName>
                     <S.LinkItemPrice>
                       {item.price}
-                      <S.PriceWon>원</S.PriceWon>
+                      <S.PriceWon></S.PriceWon>
                     </S.LinkItemPrice>
                   </S.LinkItem>
                 </SwiperSlide>
