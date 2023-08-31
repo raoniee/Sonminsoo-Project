@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import more from "../../assets/images/svg/ic-more-horizontal.svg";
 import detailDate from "../../utils/time";
 import * as S from "./style/FeedHeader.style";
 
-// import { FeedDataProps } from "../../types/feed";
 export type Data = {
   id: number;
   content: string;
@@ -46,13 +46,27 @@ const FeedHeader: React.FC<FeedDataProps> = ({
   setIsFeedDelete,
   setFeedId,
 }) => {
+  const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const token = useSelector(({ auth }) => auth.accessToken);
+  const [userId, setUserId] = useState<number | undefined>();
+  useEffect(() => {
+    fetchUser();
+    console.log(userId);
+  }, []);
 
   const handleMoreClick = () => {
     if (token) {
       setIsFeedDelete(true);
       setFeedId(feedData.id);
+    }
+  };
+  const fetchUser = async () => {
+    try {
+      const response = await axiosPrivate.get("/profile");
+      setUserId(response.data.data.id);
+    } catch (error) {
+      console.log("error", error);
     }
   };
   return (
@@ -62,7 +76,7 @@ const FeedHeader: React.FC<FeedDataProps> = ({
           <S.Profile
             src={feedData.author.image}
             onClick={() => {
-              if (token) navigate(`/mypage/${feedData.id}`);
+              if (token) navigate(`/mypage/${feedData.author.id}`);
             }}
           />
           <S.HeaderContent>
@@ -76,7 +90,9 @@ const FeedHeader: React.FC<FeedDataProps> = ({
               </S.Time>
             </S.ContentWrap>
           </S.HeaderContent>
-          <S.MoreBtn src={more} onClick={handleMoreClick} />
+          {userId === feedData.author.id && (
+            <S.MoreBtn src={more} onClick={handleMoreClick} />
+          )}
         </>
       ) : null}
     </S.FeedHeaderContainer>

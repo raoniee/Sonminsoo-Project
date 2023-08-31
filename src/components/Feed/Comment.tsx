@@ -40,6 +40,9 @@ const Comment: React.FC<FeedCommentProps> = ({
   };
 
   const submitComments = async (id: number) => {
+    if (!commentInput.trim()) {
+      return;
+    }
     try {
       const response = await axiosPrivate.post(`/comments/${id}`, {
         parentId: null,
