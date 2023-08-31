@@ -162,6 +162,7 @@ const ChatRoom = () => {
                 </S.ChatRoomWindow>
                 <ChatInputBar 
                     ban={ban} 
+                    roomId={roomId}
                     message={message}
                     setMessage={setMessage}
                     chatMessages={chatMessages}
