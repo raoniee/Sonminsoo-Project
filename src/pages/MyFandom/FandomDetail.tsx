@@ -29,17 +29,7 @@ import Comment from "../../components/Feed/Comment";
 import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 /////////// 팬덤 타입 ///////////
-/////////// 피드 import ///////////
-import FeedHeader from "../../components/Feed/FeedHeader";
-import FeedText from "../../components/Feed/FeedText";
-import ItemBox from "../../components/Feed/Item";
-import HashTag from "../../components/Feed/HashTag";
-import LikeBtn from "../../components/Feed/LikeBtn";
-import CommentBtn from "../../components/Feed/CommentBtn";
-import Comment from "../../components/Feed/Comment";
-import FeedDelete from "../../components/Feed/FeedDelete";
-import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
-/////////// 팬덤 타입 ///////////
+
 type Fandom = {
   fandomName: string;
   id: number;
