@@ -81,6 +81,7 @@ const FeedIndex = () => {
   const [feedId, setFeedId] = useState<number | undefined>();
   const [sonminsuItem, setSonminsuItem] = useState<SonminsuItemType[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
   const [selectedCommentId, setSelectedCommentId] = useState<
     number | undefined
   >();
@@ -90,17 +91,7 @@ const FeedIndex = () => {
     fetchItem();
   }, [page]);
 
-  const ITEMS_PER_PAGE = 10;
-
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    )
-      return;
-    setPage((prev) => prev + 1);
-  };
-
+  // infinite scrolling
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -108,8 +99,22 @@ const FeedIndex = () => {
     };
   }, []);
 
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    )
+      return setPage((prev) => prev + 1);
+  };
+
   const fetchFeedData = async () => {
+    const ITEMS_PER_PAGE = 10;
+
     try {
+      const response = await axios.get(
+        `/feeds?page=${page}&perPage=${ITEMS_PER_PAGE}`
+      );
+      setFeedData((prevData) => [...prevData, ...response.data.data]);
       const response = await axios.get(
         `/feeds?page=${page}&perPage=${ITEMS_PER_PAGE}`
       );
@@ -174,6 +179,8 @@ const FeedIndex = () => {
   return (
     <S.FeedContainer>
       <FeedHeaderBar />
+      {feedData?.map((feed, index) => (
+        <React.Fragment key={`${feed.id}-${index}`}>
       {feedData?.map((feed, index) => (
         <React.Fragment key={`${feed.id}-${index}`}>
           <FeedHeader
