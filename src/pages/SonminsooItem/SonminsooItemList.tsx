@@ -53,7 +53,11 @@ const SonminsooItemList = () => {
             <HeaderBar
               BackButton={false}
               items={[
-                <Icon key={"search"} src={search} />,
+                <>
+                  <Link to={"/searchitem"}>
+                    <Icon key={"search"} src={search} />
+                  </Link>
+                </>,
                 <>
                   <Link to={"/settings"}>
                     <Icon key={"settings"} src={settings} />
@@ -63,7 +67,9 @@ const SonminsooItemList = () => {
             />
             <S.LinkRequestList to="/requests">
               <span>손민수템 의뢰 리스트</span>
-              <span>&gt;</span>
+              <span>
+                <S.NavImg />
+              </span>
             </S.LinkRequestList>
           </>
         );
