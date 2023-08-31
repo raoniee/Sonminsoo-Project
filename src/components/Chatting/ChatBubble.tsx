@@ -1,25 +1,9 @@
 import React, { useState } from 'react';
 import * as S from './style/ChatBubble.style';
 import detailDate from '../../utils/time';
+import { ChatType } from '../../types/chattingType';
 
 
-export type ChatProps = {
-    // id: number;
-    // fandomId: number;
-    // nickName: string;
-    // image: string;
-    // profileImage?: string;
-    author: {
-        id: number;
-        nickName: string;
-        image: string;
-    }
-    content: string;
-    readCount?: number;
-    createdAt: string;
-    $visibleProfile?: boolean;   
-    $visibleTime?: boolean;
-}
 
 const dateTime = (date: string) => {
     // return date.slice(11, 16);
@@ -27,7 +11,7 @@ const dateTime = (date: string) => {
 }
 
 
-export const MyChat = ({author, content, readCount, createdAt, $visibleTime}: ChatProps) => {
+export const MyChat = ({author, content, readCount, createdAt, $visibleTime}: ChatType) => {
     
     return (
         <S.MyChatWrapper>
@@ -40,7 +24,7 @@ export const MyChat = ({author, content, readCount, createdAt, $visibleTime}: Ch
     )
 }
 
-export const OtherChat = ({author, content, readCount, createdAt, $visibleProfile, $visibleTime}: ChatProps) => {
+export const OtherChat = ({author, content, readCount, createdAt, $visibleProfile, $visibleTime}: ChatType) => {
 
     return (
         <S.ChatBubbleWrapper>

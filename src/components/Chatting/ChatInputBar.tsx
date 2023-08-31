@@ -5,16 +5,10 @@ import iconCamera from "../../assets/images/svg/ic-camera.svg";
 import * as S from './style/ChatInputBar.style';
 import WebAlertModal from './WebAlertModal';
 import AppAlertModal from './AppAlertModal';
-import { ChatProps } from './ChatBubble';
 import { Socket } from 'socket.io-client';
 import { SocketContext } from '../../App';
+import { ChatInputType } from '../../types/chattingType';
 
-type Props = {
-    ban: boolean;
-    roomId: number;
-    message: string;
-    setMessage: React.Dispatch<React.SetStateAction<string>>;
-}
 
 type UploadImage = {
     file: File;
@@ -23,7 +17,7 @@ type UploadImage = {
 }
 
 
-const ChatInputBar = ({ban, roomId, message, setMessage}:Props) => {
+const ChatInputBar = ({ban, roomId, message, setMessage}:ChatInputType) => {
     const socket = useContext<Socket | undefined>(SocketContext);
     const [imageFile, setImageFile] = useState<File[]>();
     const maxFileCount = 9;
