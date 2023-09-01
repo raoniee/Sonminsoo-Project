@@ -43,6 +43,7 @@ const gridCombine = () => {
 }
 
 export const GridImageWrapper = styled.div`
+    margin-bottom: 8px;
     display: flex;
 `;
 
