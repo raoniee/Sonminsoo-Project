@@ -47,7 +47,6 @@ const SonminsooItemDetails = () => {
     const fetchData = async () => {
       try {
         const { data } = await api.get(`/sonminsu-items/${id}`);
-        console.log(data.data, "fetched");
         setProductInfo(data.data);
       } catch (err) {
         console.error(err);
@@ -74,24 +73,21 @@ const SonminsooItemDetails = () => {
                       `/sonminsu-items/${id}/buckets/${productInfo?.isInMyBucket.bucketId}`
                     )
                     .then((res) => {
-                      console.log(res);
-
                       setModalView(false);
                       window.location.reload();
                     })
                     .catch((err) => {
-                      console.log(err, "bucket item popErr");
+                      
                     })
                 : axiosPrivate
                     .get(`/buckets`)
                     .then(({ data }) => {
-                      console.log(data.data);
                       setSelectItem(Number(id));
                       setBucketList(data.data);
                       setModalView(true);
                     })
                     .catch((err) => {
-                      console.log(err, "get buckets");
+                      
                     });
             }}
           />,

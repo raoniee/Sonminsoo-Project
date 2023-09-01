@@ -61,23 +61,20 @@ const SonMinsooItemInfo = ({
               ? api
                   .put(`/sonminsu-items/${id}/buckets/${isInMyBucket.bucketId}`)
                   .then((res) => {
-                    console.log(res);
-
                     setModalView(false);
                   })
                   .catch((err) => {
-                    console.log(err, "bucket item popErr");
+                    
                   })
               : api
                   .get(`/buckets`)
                   .then(({ data }) => {
-                    console.log(data.data);
                     setSelectItem(id);
                     setBucketList(data.data);
                     setModalView(true);
                   })
                   .catch((err) => {
-                    console.log(err, "get buckets");
+                    
                   });
           }}
         />

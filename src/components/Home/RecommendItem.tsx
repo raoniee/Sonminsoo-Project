@@ -70,23 +70,20 @@ const RecommendItem: React.FC<RecommendItemProps> = ({
                       `/sonminsu-items/${item.id}/buckets/${item.isInMyBucket.bucketId}`
                     )
                     .then((res) => {
-                      console.log(res);
-
                       setModalView(false);
                     })
                     .catch((err) => {
-                      console.log(err, "bucket item popErr");
+                      
                     })
                 : api
                     .get(`/buckets`)
                     .then(({ data }) => {
-                      console.log(data.data);
                       setSelectItem(item.id);
                       setBucketList(data.data);
                       setModalView(true);
                     })
                     .catch((err) => {
-                      console.log(err, "get buckets");
+                      
                     });
             }}
           />

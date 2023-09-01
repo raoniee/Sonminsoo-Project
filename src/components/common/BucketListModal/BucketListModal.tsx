@@ -30,7 +30,6 @@ const BucketListModal: React.FC<ModalProps> = ({
       document.removeEventListener("mousedown", clickOutside);
     };
   }, []);
-  console.log(select, "select");
 
   return (
     <S.BucketListModalContainer>
@@ -57,11 +56,10 @@ const BucketListModal: React.FC<ModalProps> = ({
               const res = await axiosPrivate.put(
                 `/sonminsu-items/${itemId}/buckets/${select}`
               );
-              console.log(res);
               setModalOpen(false);
               window.location.reload();
             } catch (e) {
-              console.log(e, "err");
+
             }
           }}
         >

@@ -62,7 +62,7 @@ const RequestLinkRegister: React.FC<RegisterModalProps> = ({
       setUrlItem((oldArray) => [...oldArray, response.data.data]);
       setUrlValue("");
     } catch (err) {
-      console.log(err);
+      
     }
   };
 
@@ -85,9 +85,8 @@ const RequestLinkRegister: React.FC<RegisterModalProps> = ({
       setClick(false);
       window.location.replace(`/requests/nowriter/${requestId}`);
     } catch (err) {
-      console.log(err);
+      
     }
-    console.log(urlItem.map((item) => item.id));
   };
 
   return (

@@ -34,7 +34,7 @@ const RequestDetailWriterHeader: React.FC<RequestTitleProps> = ({
       const response = await axiosPrivate.delete(`/sonminsu-requests/${id}`);
       navigation(`/requests/`);
     } catch (err) {
-      console.log(err);
+      
     }
   };
 
