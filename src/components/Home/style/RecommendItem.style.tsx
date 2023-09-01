@@ -1,17 +1,14 @@
 import { styled } from "styled-components";
 
-import { ReactComponent as BookMarkIcon } from "../../../assets/images/svg/home/bookmarkIcon.svg";
-
 // 추천 아이템 컨테이너
 export const RecommendItemContainer = styled.div`
   height: 178px;
-  width: 109px;
+
   margin-bottom: 20px;
 `;
 
 // 추천 아이템 이미지
 export const RecommendItemImg = styled.img`
-  width: 109px;
   height: 109px;
   border-radius: 8px;
 `;
@@ -49,7 +46,7 @@ export const RecommendItemNameText = styled.div`
   width: 100px;
 `;
 // 추천 아이템 아이콘
-export const BookMarkIconSvg = styled(BookMarkIcon)`
+export const BookMarkIconSvg = styled.img`
   margin-left: 3px;
 `;
 
