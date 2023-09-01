@@ -6,6 +6,7 @@ export const DetailContainer = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 390px;
+  cursor: pointer;
 `;
 export const ContentContainer = styled.div`
   width: 100%;
