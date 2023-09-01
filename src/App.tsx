@@ -23,13 +23,13 @@ const App = () => {
       axios
         .get("/auth/auto-sign-in")
         .then((response) => {
-          if (response.status === 204) {
-            if (!pathname.includes("initInfo"))
-              window.location.href = "initInfo";
-          } else {
-            console.log(response.headers, "auto-sign-in");
-            dispatch(setToken(response.headers.authorization));
-          }
+          // if (response.status === 204) {
+          //   if (!pathname.includes("initInfo"))
+          //     window.location.href = "initInfo";
+          // } else {
+          console.log(response.headers, "auto-sign-in");
+          dispatch(setToken(response.headers.authorization));
+          // }
         })
         .catch((err) => {
           // err.status==401 로그아웃
