@@ -68,7 +68,7 @@ const SonMinsooItemInfo = ({
                   })
 <<<<<<< Updated upstream
                   .catch((err) => {
-                    console.log(err, "bucket item popErr");
+                    
                   })
 =======
                   .catch((err) => {})
@@ -76,7 +76,6 @@ const SonMinsooItemInfo = ({
               : api
                   .get(`/buckets`)
                   .then(({ data }) => {
-                    console.log(data.data);
                     setSelectItem(id);
                     setBucketList(data.data);
                     document.body.style.overflow = "hidden";
@@ -84,7 +83,7 @@ const SonMinsooItemInfo = ({
                   })
 <<<<<<< Updated upstream
                   .catch((err) => {
-                    console.log(err, "get buckets");
+                    
                   });
 =======
                   .catch((err) => {});
