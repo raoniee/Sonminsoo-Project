@@ -36,6 +36,7 @@ export const ArtistName = styled.div`
   border-radius: 4px;
   background: #dee9ff;
   line-height: 23px;
+  color: #208df1;
 `;
 
 export const ItemTitle = styled.div`

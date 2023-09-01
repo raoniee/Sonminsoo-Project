@@ -6,6 +6,7 @@ import axios from "../../api/axios";
 import * as S from "./style/Login.style";
 import { Button } from "../../elements/Button";
 import passwordView from "../../assets/images/svg/passwordView.svg";
+import passwordViewActive from "../../assets/images/svg/ic-eye.svg";
 import kakao from "../../assets/images/svg/kakaoTalk.svg";
 import google from "../../assets/images/png/google.png";
 
@@ -53,7 +54,7 @@ const Login = () => {
           }
         />
         <S.PasswordView
-          src={passwordView}
+          src={passwordType ? passwordViewActive : passwordView}
           onClick={() => setPasswordType(!passwordType)}
         />
         <S.LinkContainer>
