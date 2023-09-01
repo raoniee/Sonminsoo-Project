@@ -6,7 +6,7 @@ import logo from '../../assets/images/svg/ic-logo.svg';
 import * as S from './styles/ChatList.style';
 import { Socket } from 'socket.io-client';
 import { SocketContext } from '../../App';
-import { useOutletContext } from 'react-router';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 
 const ChatList = () => {
@@ -15,16 +15,15 @@ const ChatList = () => {
         setRoomList: React.Dispatch<React.SetStateAction<FandomType[]>>;
     }>();
 
-    // const [roomList, setRoomList] = useState<FandomData>([]);
-    const [room, setRoom] = useState<number>();
     const socket = useContext<Socket | undefined>(SocketContext);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
         
         if (socket) {
-            const initRoom = (v: any) => socket.emit("initRoom", v);
-            const setData = (v: any) => setRoomList(v);
+            const initRoom = (v: Socket) => socket.emit("initRoom", v);
+            const setData = (v: React.SetStateAction<FandomType[]>) => setRoomList(v);
 
             socket.on("rooms", initRoom);
             socket.on("roomInfo", setData);
@@ -41,7 +40,12 @@ const ChatList = () => {
     return (
         <>
             <S.ChatHeader>
-                <S.Logo src={logo} />
+                <S.Logo 
+                    src={logo} 
+                    onClick={() => {
+                        navigate("/home");
+                    }}
+                />
             </S.ChatHeader>
             <S.ChatListWindow>
                 {roomList?.map((fandom) => {
