@@ -46,7 +46,6 @@ export const ItemTitle = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: Pretendard;
   font-size: 15px;
   font-style: normal;
   font-weight: 500;
@@ -60,7 +59,6 @@ export const bookMarkIcon = styled.div<{ $iconUrl: string }>`
 `;
 export const ItemPrice = styled.div`
   color: #6138f8;
-  font-family: Pretendard;
   font-size: 15px;
   font-style: normal;
   font-weight: 700;
