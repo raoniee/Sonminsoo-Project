@@ -42,9 +42,8 @@ const gridCombine = () => {
     }`
 }
 
-export const GridImageWrapper = styled.div<{$isMe: boolean}>`
+export const GridImageWrapper = styled.div`
     display: flex;
-    justify-content: ${({$isMe}) => $isMe ? 'flex-end' : 'flex-start'}
 `;
 
 export const GridImageContainer = styled.div<{$imageCount: number}>`
