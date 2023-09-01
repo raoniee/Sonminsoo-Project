@@ -152,6 +152,7 @@ function FeedDetail() {
   };
   const showModal = (commentId: number) => {
     setSelectedCommentId(commentId);
+    document.body.style.overflow = "hidden";
     setModalOpen(true);
   };
 
@@ -202,6 +203,7 @@ function FeedDetail() {
                 if (selectedCommentId) {
                   handleDelete(selectedCommentId);
                   setSelectedCommentId(undefined);
+                  document.body.style.overflow = "unset";
                   setModalOpen(false);
                 }
               }}

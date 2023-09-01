@@ -73,6 +73,8 @@ const SonminsooItemDetails = () => {
                       `/sonminsu-items/${id}/buckets/${productInfo?.isInMyBucket.bucketId}`
                     )
                     .then((res) => {
+                      console.log(res);
+                      document.body.style.overflow = "unset";
                       setModalView(false);
                       window.location.reload();
                     })
@@ -84,6 +86,7 @@ const SonminsooItemDetails = () => {
                     .then(({ data }) => {
                       setSelectItem(Number(id));
                       setBucketList(data.data);
+                      document.body.style.overflow = "hidden";
                       setModalView(true);
                     })
                     .catch((err) => {
@@ -93,9 +96,11 @@ const SonminsooItemDetails = () => {
           />,
         ]}
       />
-      <S.Image 
+      <S.Image
         src={productInfo?.imgUrl}
-        onClick={() => productInfo?.originUrl && window.open(productInfo.originUrl)} 
+        onClick={() =>
+          productInfo?.originUrl && window.open(productInfo.originUrl)
+        }
       />
       <S.ContentContainer>
         <S.TagContainer>

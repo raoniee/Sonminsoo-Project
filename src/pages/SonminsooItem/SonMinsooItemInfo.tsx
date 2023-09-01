@@ -61,6 +61,8 @@ const SonMinsooItemInfo = ({
               ? api
                   .put(`/sonminsu-items/${id}/buckets/${isInMyBucket.bucketId}`)
                   .then((res) => {
+                    console.log(res);
+                    document.body.style.overflow = "unset";
                     setModalView(false);
                   })
                   .catch((err) => {
@@ -71,6 +73,7 @@ const SonMinsooItemInfo = ({
                   .then(({ data }) => {
                     setSelectItem(id);
                     setBucketList(data.data);
+                    document.body.style.overflow = "hidden";
                     setModalView(true);
                   })
                   .catch((err) => {

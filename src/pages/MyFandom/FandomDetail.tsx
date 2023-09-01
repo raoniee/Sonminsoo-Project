@@ -204,6 +204,7 @@ const FandomDetail: React.FC = () => {
 
   const showModal = (commentId: number) => {
     setSelectedCommentId(commentId);
+    document.body.style.overflow = "hidden";
     setModalOpen(true);
   };
   const toggleComment = (id: number) => {
@@ -322,6 +323,7 @@ const FandomDetail: React.FC = () => {
               if (selectedCommentId) {
                 handleDelete(selectedCommentId);
                 setSelectedCommentId(undefined);
+                document.body.style.overflow = "unset";
                 setModalOpen(false);
               }
             }}

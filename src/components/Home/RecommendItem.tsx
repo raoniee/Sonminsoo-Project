@@ -70,6 +70,8 @@ const RecommendItem: React.FC<RecommendItemProps> = ({
                       `/sonminsu-items/${item.id}/buckets/${item.isInMyBucket.bucketId}`
                     )
                     .then((res) => {
+                      console.log(res);
+                      document.body.style.overflow = "unset";
                       setModalView(false);
                     })
                     .catch((err) => {
@@ -78,6 +80,8 @@ const RecommendItem: React.FC<RecommendItemProps> = ({
                 : api
                     .get(`/buckets`)
                     .then(({ data }) => {
+                      console.log(data.data);
+                      document.body.style.overflow = "hidden";
                       setSelectItem(item.id);
                       setBucketList(data.data);
                       setModalView(true);
