@@ -39,7 +39,7 @@ const RecommendItemBoard = ({
 
   useEffect(() => {
     initDataGet();
-  }, []);
+  }, [token]);
 
   const initDataGet = async () => {
     try {
