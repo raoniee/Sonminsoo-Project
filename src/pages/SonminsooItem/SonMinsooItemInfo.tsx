@@ -64,10 +64,15 @@ const SonMinsooItemInfo = ({
                     console.log(res);
                     document.body.style.overflow = "unset";
                     setModalView(false);
+                    window.location.reload();
                   })
+<<<<<<< Updated upstream
                   .catch((err) => {
                     console.log(err, "bucket item popErr");
                   })
+=======
+                  .catch((err) => {})
+>>>>>>> Stashed changes
               : api
                   .get(`/buckets`)
                   .then(({ data }) => {
@@ -77,9 +82,13 @@ const SonMinsooItemInfo = ({
                     document.body.style.overflow = "hidden";
                     setModalView(true);
                   })
+<<<<<<< Updated upstream
                   .catch((err) => {
                     console.log(err, "get buckets");
                   });
+=======
+                  .catch((err) => {});
+>>>>>>> Stashed changes
           }}
         />
       </S.TitleContainer>
