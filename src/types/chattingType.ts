@@ -15,10 +15,6 @@ export type ChatImageType = {
     startSlideIndex?: number;
 }
 
-export type ChatMemberType = {
-    $ban: boolean;
-    userName: string;
-}
 
 export type ChatType = {
     author: {
@@ -26,7 +22,8 @@ export type ChatType = {
         nickName: string;
         image: string;
     }
-    content: string;
+    content?: string;
+    images?: string[];
     readCount?: number;
     createdAt: string;
     $visibleProfile?: boolean;   
@@ -38,4 +35,18 @@ export type ChatInputType = {
     roomId: number;
     message: string;
     setMessage: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export type MemberType = {
+    id: number;
+    isAdmin: boolean;
+    nickName: string;
+    image: string;
+    isJail: boolean;
+}
+
+export type UserInfoType = {
+    isAdmin: boolean;
+    userId: number;
+    isJail: boolean;
 }
