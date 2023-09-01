@@ -7,6 +7,10 @@ export const SonminsooItemInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px 0;
+
+  a:visited {
+    color: #208DF1;
+  }
 `;
 export const TitleContainer = styled.div`
   width: 100%;
@@ -35,6 +39,9 @@ export const ArtistName = styled.div`
   gap: 10px;
   border-radius: 4px;
   background: #dee9ff;
+  color: #208DF1;
+  font-weight: bold;
+  font-size: 12px;
   line-height: 23px;
 `;
 
