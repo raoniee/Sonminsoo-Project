@@ -66,13 +66,8 @@ const SonMinsooItemInfo = ({
                     setModalView(false);
                     window.location.reload();
                   })
-<<<<<<< Updated upstream
-                  .catch((err) => {
-                    
-                  })
-=======
+
                   .catch((err) => {})
->>>>>>> Stashed changes
               : api
                   .get(`/buckets`)
                   .then(({ data }) => {
@@ -81,13 +76,8 @@ const SonMinsooItemInfo = ({
                     document.body.style.overflow = "hidden";
                     setModalView(true);
                   })
-<<<<<<< Updated upstream
-                  .catch((err) => {
-                    
-                  });
-=======
+
                   .catch((err) => {});
->>>>>>> Stashed changes
           }}
         />
       </S.TitleContainer>
