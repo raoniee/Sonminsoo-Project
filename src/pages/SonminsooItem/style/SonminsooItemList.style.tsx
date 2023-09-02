@@ -40,8 +40,6 @@ export const SonminsooItemsContainer = styled.div`
   padding-bottom: 83px;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  overflow-y: scroll;
-  overflow-x: hidden;
   gap: 5px;
 `;
 
