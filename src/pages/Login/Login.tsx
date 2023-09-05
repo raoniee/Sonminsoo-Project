@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../redux/config/rootReducer";
 import axios from "../../api/axios";
@@ -9,6 +9,8 @@ import passwordView from "../../assets/images/svg/passwordView.svg";
 import passwordViewActive from "../../assets/images/svg/ic-eye.svg";
 import kakao from "../../assets/images/svg/kakaoTalk.svg";
 import google from "../../assets/images/png/google.png";
+import { kakaoSignInHandler } from "./Oauth.kakao";
+import { googleSignIngHandler } from "./Oauth.google";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,21 +24,6 @@ const Login = () => {
   useEffect(() => {
     if (auth) navigation("/home");
   }, [auth, navigation]);
-
-  const kakaoSignInHandler = () => {
-    const REST_API_KEY = "447f662d5d88aea44db745ae6b5214ca";
-    const REDIRECT_URI = "http://localhost:3000/login/kakao-callback";
-    const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt=login`;
-    window.location.href = link;
-  };
-
-  const googleSignIngHandler = () => {
-    const CLIENT_ID =
-      "107582580282-juunfb5j33sqrm5fmvaevgo4t1lkco25.apps.googleusercontent.com";
-    const REDIRECT_URI = "http://localhost:3000/login/google-callback";
-    const link = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=profile openid email&response_type=code`;
-    window.location.href = link;
-  };
 
   return (
     <S.Container>

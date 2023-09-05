@@ -4,6 +4,13 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../redux/config/rootReducer";
 
+export const googleSignIngHandler = () => {
+  const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  const REDIRECT_URI = `${process.env.REACT_APP_HOST}/login/google-callback`;
+  const link = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=profile openid email&response_type=code`;
+  window.location.href = link;
+};
+
 const OauthGoogle = () => {
   const location = useLocation();
   const navigate = useNavigate();
