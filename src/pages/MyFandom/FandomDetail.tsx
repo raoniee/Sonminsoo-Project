@@ -115,6 +115,8 @@ const FandomDetail: React.FC = () => {
     const [selectedCommentId, setSelectedCommentId] = useState<
         number | undefined
     >();
+
+    const [onAlert, setOnAlert] = useState<boolean>(false);
     /////////// 피드 스테이트 ///////////
 
     const initDataGet = async () => {
@@ -128,15 +130,29 @@ const FandomDetail: React.FC = () => {
         }
     };
     const handleJoinButtonClick = async () => {
-        try {
-            const res = await axiosPrivate.put(
-                `/fandoms/${fandomId}/subscribe`
-            );
-            initDataGet();
-        } catch (error) {
-            console.error("Error", error);
+        if (token) {
+            try {
+                const res = await axiosPrivate.put(
+                    `/fandoms/${fandomId}/subscribe`
+                );
+                initDataGet();
+            } catch (error) {
+                console.error("Error", error);
+            }
+        } else {
+            setOnAlert(true);
         }
     };
+
+    const handleLoginAlertClick = async () => {
+        setOnAlert(false);
+        navigate("/login");
+    };
+
+    //   const handleselectClick = async () => {
+    //     setOnAlert(false);
+    //     navigate("/login");
+    // };
 
     const handleRemoveButtonClick = async () => {
         var result = window.confirm("정말 이 팬덤을 떠날거야? ㅜㅜ ");
@@ -158,12 +174,32 @@ const FandomDetail: React.FC = () => {
     const renderJoinButton = () => {
         if (!isAdmin && !isSubscribe) {
             return (
-                <S.JoimBtn onClick={handleJoinButtonClick}>팬덤 가입</S.JoimBtn>
+                <S.JoimBtn onClick={handleJoinButtonClick}>
+                    팬덤 가입
+                    {onAlert && (
+                        <AppAlertModal
+                            title="로그인하기"
+                            content="로그인하시겠습니까?"
+                            yesContent="로그인"
+                            yesClickHandler={handleLoginAlertClick}
+                            setModalOpen={setOnAlert}
+                        />
+                    )}
+                </S.JoimBtn>
             );
         } else if (!isAdmin && isSubscribe) {
             return (
                 <S.JoimBtn onClick={handleRemoveButtonClick}>
                     팬덤 탈퇴
+                    {onAlert && (
+                        <AppAlertModal
+                            title="탈퇴하기"
+                            content="탈퇴하시겠습니까?"
+                            yesContent="탈퇴"
+                            yesClickHandler={handleRemoveButtonClick}
+                            setModalOpen={setOnAlert}
+                        />
+                    )}
                 </S.JoimBtn>
             );
         } else if (isAdmin) {
@@ -304,6 +340,7 @@ const FandomDetail: React.FC = () => {
                     </S.FandomMember>{" "}
                     <S.FandomJoinBox>{renderJoinButton()}</S.FandomJoinBox>
                 </S.HeaderBox>
+
                 <Notice noticeId={fandomId} />
 
                 {renderFeedData()}
