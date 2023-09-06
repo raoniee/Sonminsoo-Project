@@ -94,6 +94,7 @@ const MyPage: React.FC = () => {
 
   const clickFollowToggle = async () => {
     if (!token) {
+      document.body.style.overflow = "hidden";
       setClickFollow(true);
     }
     setFollowValue((prev) => !prev);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./style/Request.style";
 import RequestList from "../../components/Request/RequestList";
-import document from "../../assets/images/svg/ic-document.svg";
+import documenticon from "../../assets/images/svg/ic-document.svg";
 import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import edit from "../../assets/images/svg/ic-edit.svg";
 import Icon from "../../elements/Icon";
@@ -42,6 +42,7 @@ const Requests: React.FC = () => {
             src={edit}
             onClick={() => {
               if (!token) {
+                document.body.style.overflow = "hidden";
                 setClickForm(true);
               } else {
                 navigation(`/requests/form`);
@@ -54,7 +55,7 @@ const Requests: React.FC = () => {
       <S.Wrap>
         {requestdata.length === 0 ? (
           <S.NoRequest>
-            <S.NoRequestIcon src={document} />
+            <S.NoRequestIcon src={documenticon} />
             <S.NoRequestDesc>새 의뢰를 작성해주세요!</S.NoRequestDesc>
           </S.NoRequest>
         ) : (
