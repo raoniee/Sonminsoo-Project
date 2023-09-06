@@ -103,6 +103,7 @@ export type RequestAnswerProps = {
 
 export type LinkItemType = {
   deletevalue?: boolean;
+  itemId?: number;
   itemImg: string;
   itemPrice: string;
   itemName: string;

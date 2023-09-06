@@ -14,6 +14,7 @@ import { Button } from "../../elements/Button";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RequestDescType } from "../../types/request";
+import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 
 const RequestDetailNoWriter: React.FC = () => {
   const navigation = useNavigate();
@@ -25,6 +26,7 @@ const RequestDetailNoWriter: React.FC = () => {
   const [click, setClick] = useState(false);
   const [isSeleted, setIsSeleted] = useState(true);
   const [bookmarkdata, setBookMarkData] = useState<boolean>(false);
+  const [clickresponse, setClickResponse] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -84,9 +86,10 @@ const RequestDetailNoWriter: React.FC = () => {
             margin="0 auto 20px auto"
             onClick={() => {
               if (!token) {
-                navigation(`/login`);
+                setClickResponse(true);
+              } else {
+                setClick(true);
               }
-              setClick(true);
             }}
           >
             답변 하기
@@ -97,6 +100,17 @@ const RequestDetailNoWriter: React.FC = () => {
           setClick={setClick}
           groupName={requestdata.groupName}
           artistName={requestdata.artistName}
+        />
+      )}
+      {clickresponse && (
+        <AppAlertModal
+          title="로그인하기"
+          content="로그인하시겠습니까?"
+          yesContent="로그인"
+          yesClickHandler={() => {
+            navigation(`/login`);
+          }}
+          setModalOpen={setClickResponse}
         />
       )}
     </>

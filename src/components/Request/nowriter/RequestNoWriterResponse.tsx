@@ -43,6 +43,7 @@ const RequestNoWriterResponse: React.FC<RequestAnswerProps> = ({
               <LinkAttachItem
                 key={item.id}
                 deletevalue={false}
+                itemId={item.id}
                 itemImg={item.imgUrl}
                 itemPrice={item.price}
                 itemName={item.title}

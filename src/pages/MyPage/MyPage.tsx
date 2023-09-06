@@ -59,6 +59,7 @@ const MyPage: React.FC = () => {
 
   // 타인 페이지에서 팔로우 상태값
   const [followValue, setFollowValue] = useState(true);
+  const [clickfollow, setClickFollow] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -88,22 +89,18 @@ const MyPage: React.FC = () => {
       //feed
       const responsefeed = await axios.get(`/feeds/users/${userId}`);
       setFeedData(responsefeed.data.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   const clickFollowToggle = async () => {
     if (!token) {
-      navigation(`/login`);
+      setClickFollow(true);
     }
     setFollowValue((prev) => !prev);
 
     try {
       const response = await axiosPrivate.put(`/following/${userId}`);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   return (
@@ -235,6 +232,17 @@ const MyPage: React.FC = () => {
         <NewBucketRegister setModalOpen={setBucketModalValue} id={userId} />
       )}
       {menuModalValue && <MypageMenuModal setModalOpen={setMenuModalValue} />}
+      {clickfollow && (
+        <AppAlertModal
+          title="로그인하기"
+          content="로그인하시겠습니까?"
+          yesContent="로그인"
+          yesClickHandler={() => {
+            navigation(`/login`);
+          }}
+          setModalOpen={setClickFollow}
+        />
+      )}
       <S.Box></S.Box>
     </>
   );

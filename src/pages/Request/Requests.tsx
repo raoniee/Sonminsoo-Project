@@ -11,12 +11,14 @@ import detailDate from "../../utils/time";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RequestsType } from "../../types/request";
+import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 
 const Requests: React.FC = () => {
   const navigation = useNavigate();
   const token = useSelector(({ auth }) => auth.accessToken);
 
   const [requestdata, setRequestData] = useState<RequestsType[]>([]);
+  const [clickform, setClickForm] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -26,9 +28,7 @@ const Requests: React.FC = () => {
     try {
       const response = await axios.get("/sonminsu-requests");
       setRequestData(response.data.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   return (
@@ -42,7 +42,7 @@ const Requests: React.FC = () => {
             src={edit}
             onClick={() => {
               if (!token) {
-                navigation(`/login`);
+                setClickForm(true);
               } else {
                 navigation(`/requests/form`);
               }
@@ -71,6 +71,17 @@ const Requests: React.FC = () => {
           ))
         )}
       </S.Wrap>
+      {clickform && (
+        <AppAlertModal
+          title="로그인하기"
+          content="로그인하시겠습니까?"
+          yesContent="로그인"
+          yesClickHandler={() => {
+            navigation(`/login`);
+          }}
+          setModalOpen={setClickForm}
+        />
+      )}
       <FooterNavBar />
     </>
   );
