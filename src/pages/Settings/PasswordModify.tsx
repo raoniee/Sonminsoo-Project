@@ -71,23 +71,21 @@ const PasswordModify = () => {
                 onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                   e.preventDefault();
                   axiosPrivate
-                    .post("password", { password: newPassword })
+                    .put("password", { password: newPassword })
                     .then((res) => {
-                      // axios
-                      //   .delete(`/auth/sign-out`)
-                      //   .then((res) => {
-                      //     console.log(res, "로그아웃");
-                      //     dispatch(setToken(""));
-                      //     alert("새 비밀번호로 다시 로그인 해주세요");
-                      //     navigation("/login");
-                      // })
-                      // .catch((err) => {
-                      //   console.log(err);
-                      // });
+                      axios
+                        .delete(`/auth/sign-out`)
+                        .then((res) => {
+                          console.log(res, "로그아웃");
+                          dispatch(setToken(""));
+                          alert("새 비밀번호로 다시 로그인 해주세요");
+                          navigation("/login");
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
                     })
-                    .catch((err) => {
-                      
-                    });
+                    .catch((err) => {});
                 }}
               >
                 다음
@@ -133,9 +131,7 @@ const PasswordModify = () => {
                   .then((res) => {
                     setPassCheck(true);
                   })
-                  .catch((err) => {
-                    
-                  });
+                  .catch((err) => {});
               }}
             >
               다음
