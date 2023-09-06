@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import * as S from "./style/FandomRanking.style";
+import detailDate from "../../utils/time";
 
 type FandomRankData = {
     fandomName: string;
@@ -28,9 +29,14 @@ const FandomRanking: React.FC<FandomdataProps> = ({ item }) => {
                 <S.FandomNameMemberBox>
                     <S.FandomNameText>{item.fandomName}</S.FandomNameText>
                     <S.MamberIcon />
-                    <S.MemberQuantity>{item.memberLength}k</S.MemberQuantity>
+                    <S.MemberQuantity>{item.memberLength}</S.MemberQuantity>
                 </S.FandomNameMemberBox>
-                <S.ActivityTime>채팅활동 10분전</S.ActivityTime>
+                <S.ActivityTime>
+                    채팅활동{" "}
+                    {item?.lastChatTime
+                        ? detailDate(item?.lastChatTime)
+                        : "없음"}
+                </S.ActivityTime>
             </S.RnakingTextBox>
         </S.FandomRankingContainer>
     );
