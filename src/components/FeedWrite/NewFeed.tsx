@@ -135,9 +135,7 @@ const NewFeed = () => {
     try {
       const response = await axiosPrivate.get(`/feeds/${feedId}`);
       setFeedData(response.data.data);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
   const fetchFandom = async () => {
     try {
@@ -157,9 +155,7 @@ const NewFeed = () => {
     try {
       const response = await axiosPrivate.get(`/fandoms/${selectedFandom?.id}`);
       setIsFandomJang(response.data.isAdmin);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
   const updateFeed = async () => {
     let data = {
@@ -169,9 +165,7 @@ const NewFeed = () => {
     try {
       const response = await axiosPrivate.patch(`/feeds/${feedId}`, data);
       navigation("/feed");
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
   const moveToFandom = () => {
     if (fandomOptions.length === 0) {
@@ -212,9 +206,7 @@ const NewFeed = () => {
           content: contentInput,
         }
       );
-    } catch (error) {
-      
-    }
+    } catch (error) {}
     navigation("/feed");
   };
 
@@ -239,7 +231,7 @@ const NewFeed = () => {
         selectedFandom={selectedFandom}
       />
       <S.FeedWriteContent
-        placeholder="작성할 내용을 입력해 주세요.&#13;(정의로운 손민수 주의사항 내용 필요해 보임)"
+        placeholder="작성할 내용을 입력해 주세요."
         value={contentInput}
         onChange={handleContentInput}
       />
