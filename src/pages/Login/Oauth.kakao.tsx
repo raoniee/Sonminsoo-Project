@@ -22,7 +22,7 @@ const OauthKakao = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:5000/api/v1/auth/sign-in/kakao", {
+      .post("/api/v1/auth/sign-in/kakao", {
         code,
         domain,
       })
