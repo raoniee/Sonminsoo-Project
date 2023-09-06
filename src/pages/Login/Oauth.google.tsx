@@ -23,7 +23,7 @@ const OauthGoogle = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:5000/api/v1/auth/sign-in/google", {
+      .post("/auth/sign-in/google", {
         code,
         domain,
       })
