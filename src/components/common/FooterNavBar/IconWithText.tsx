@@ -71,6 +71,11 @@ const IconWithText = ({ text, pathname, onClick }: IconWithTextProps) => {
         $active = false;
       }
       break;
+    case "로그인":
+      $iconUrl = iconMypageInActive;
+      $active = false;
+
+      break;
   }
 
   return (
