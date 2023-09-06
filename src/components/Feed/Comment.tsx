@@ -49,9 +49,7 @@ const Comment: React.FC<FeedCommentProps> = ({
       });
       setCommentInput("");
       setCommentList([...commentList, response.data.data]);
-    } catch (error) {
-
-    }
+    } catch (error) {}
   };
 
   return (
@@ -74,7 +72,7 @@ const Comment: React.FC<FeedCommentProps> = ({
         />
         <S.SendBtn
           type="submit"
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             submitComments(feedId);
             fetchFeedData();

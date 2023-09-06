@@ -128,7 +128,7 @@ const FeedIndex = () => {
   };
   const fetchItem = async () => {
     try {
-      const response = await axiosPrivate.get(`/sonminsu-items`);
+      const response = await axios.get(`/sonminsu-items`);
       setSonminsuItem(response.data.data);
     } catch (error) {}
   };
