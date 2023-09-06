@@ -58,7 +58,7 @@ const Main = () => {
         .get("/auth/auto-sign-in")
         .then(({ headers }) => {
           dispatch(setToken(headers.authorization));
-          navigation("home");
+          navigation("/home");
         })
         .catch(({ response }) => {
           // err.status==401 로그아웃
@@ -69,7 +69,7 @@ const Main = () => {
                 dispatch(setToken(""));
               })
               .catch((error) => {
-                navigation("login");
+                navigation("/login");
               });
           }
         });
