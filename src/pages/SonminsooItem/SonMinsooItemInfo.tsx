@@ -31,11 +31,13 @@ const SonMinsooItemInfo = ({
   title,
   isInMyBucket,
 }: sonminsooItemInfo) => {
-  const { setModalView, setBucketList, setSelectItem } = useOutletContext<{
-    setModalView: React.Dispatch<React.SetStateAction<boolean>>;
-    setBucketList: React.Dispatch<React.SetStateAction<bucketList>>;
-    setSelectItem: React.Dispatch<React.SetStateAction<number>>;
-  }>();
+  const { setModalView, setBucketList, setSelectItem, setViewLoginAlert } =
+    useOutletContext<{
+      setModalView: React.Dispatch<React.SetStateAction<boolean>>;
+      setViewLoginAlert: React.Dispatch<React.SetStateAction<boolean>>;
+      setBucketList: React.Dispatch<React.SetStateAction<bucketList>>;
+      setSelectItem: React.Dispatch<React.SetStateAction<number>>;
+    }>();
 
   const axiosPrivate = useAxiosPrivate();
   const token = useGetToken();
@@ -54,7 +56,8 @@ const SonMinsooItemInfo = ({
           $iconUrl={!!isInMyBucket ? activeBookMark : bookMark}
           onClick={() => {
             if (!token) {
-              alert("로그인후 가능합니다.");
+              document.body.style.overflow = "hidden";
+              setViewLoginAlert(true);
               return;
             }
             !!isInMyBucket

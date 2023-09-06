@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import IconWithText from "./IconWithText";
 import * as S from "./style/FooterNavBar.style";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import useGetToken from "../../../hooks/useGetToken";
 
 const FooterNavBar = () => {
   const location = useLocation();
   const pathname = location.pathname;
 
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
   const navigation = useNavigate();
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
@@ -22,9 +22,7 @@ const FooterNavBar = () => {
     try {
       const response = await axiosPrivate.get("/profile");
       setUserData(response.data.data.id);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
   const [userdata, setUserData] = useState();
 
@@ -44,7 +42,7 @@ const FooterNavBar = () => {
           <IconWithText text="채팅방" pathname={pathname} />
         </S.LinkItem>
         <IconWithText
-          text="마이페이지"
+          text={token ? "마이페이지" : "로그인"}
           pathname={pathname}
           onClick={() => {
             if (token) {

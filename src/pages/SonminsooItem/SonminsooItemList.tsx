@@ -36,9 +36,7 @@ const SonminsooItemList = () => {
       try {
         const { data } = await api.get("/sonminsu-items?page=1&perPage=15");
         setItems(data.data);
-      } catch (err) {
-        
-      }
+      } catch (err) {}
     };
 
     getSonminsooItemList();
@@ -56,21 +54,23 @@ const SonminsooItemList = () => {
                   <Icon key={"search"} src={search} />
                 </Link>
               </>,
-              <>
-                <Link to={"/settings"}>
-                  <Icon key={"settings"} src={settings} />
-                </Link>
-              </>,
+              token && (
+                <>
+                  <Link to={"/settings"}>
+                    <Icon key={"settings"} src={settings} />
+                  </Link>
+                </>
+              ),
             ]}
           />
         );
       }, [])}
       <S.SonminsooListWrapper>
         <S.LinkRequestList to="/requests">
-              <span>손민수템 의뢰 리스트</span>
-              <span>
-                <S.NavImg />
-              </span>
+          <span>손민수템 의뢰 리스트</span>
+          <span>
+            <S.NavImg />
+          </span>
         </S.LinkRequestList>
         <S.SonminsooItemListContainer>
           <S.SonminsooItemTitle>손민수템</S.SonminsooItemTitle>
@@ -97,7 +97,6 @@ const SonminsooItemList = () => {
             )}
           </S.SonminsooItemsContainer>
         </S.SonminsooItemListContainer>
-
       </S.SonminsooListWrapper>
     </>
   );

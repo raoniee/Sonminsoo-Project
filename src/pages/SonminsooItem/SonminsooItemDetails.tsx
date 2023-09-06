@@ -11,6 +11,7 @@ import axios from "../../api/axios";
 import { useSelector } from "react-redux";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
+import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 type bucketList = {
   id: string;
   img: string;
@@ -42,6 +43,7 @@ const SonminsooItemDetails = () => {
   const navigation = useNavigate();
 
   const [productInfo, setProductInfo] = useState<productType>();
+  const [viewLoginAlert, setViewLoginAlert] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +67,7 @@ const SonminsooItemDetails = () => {
             key={"bookmark"}
             onClick={() => {
               if (!token) {
-                navigation("/login");
+                setViewLoginAlert(true);
               }
               !!productInfo?.isInMyBucket
                 ? axiosPrivate
@@ -106,6 +108,17 @@ const SonminsooItemDetails = () => {
         <S.Title>{productInfo?.title}</S.Title>
         <S.Price>{productInfo?.price}</S.Price>
       </S.ContentContainer>
+      {viewLoginAlert && (
+        <AppAlertModal
+          setModalOpen={setViewLoginAlert}
+          title="로그인하기"
+          content="로그인하시겠습니까?"
+          yesContent="로그인"
+          yesClickHandler={() => {
+            navigation("/login");
+          }}
+        />
+      )}
     </S.DetailContainer>
   );
 };
