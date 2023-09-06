@@ -86,6 +86,7 @@ const RequestDetailNoWriter: React.FC = () => {
             margin="0 auto 20px auto"
             onClick={() => {
               if (!token) {
+                document.body.style.overflow = "hidden";
                 setClickResponse(true);
               } else {
                 setClick(true);

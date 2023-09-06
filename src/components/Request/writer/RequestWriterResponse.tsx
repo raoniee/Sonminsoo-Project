@@ -110,6 +110,7 @@ const RequestWriterResponse: React.FC<RequestAnswerProps> = ({
             <S.MoreModal ref={modalRef}>
               <S.Selete
                 onClick={() => {
+                  document.body.style.overflow = "hidden";
                   setSeleteClick(true);
                 }}
               >
@@ -117,6 +118,7 @@ const RequestWriterResponse: React.FC<RequestAnswerProps> = ({
               </S.Selete>
               <S.Delete
                 onClick={() => {
+                  document.body.style.overflow = "hidden";
                   setDeleteClick(true);
                 }}
               >
