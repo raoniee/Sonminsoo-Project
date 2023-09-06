@@ -1,4 +1,3 @@
-import { type } from "os";
 import * as S from "./style/ContentHeader.style";
 import { useNavigate } from "react-router-dom";
 
