@@ -4,10 +4,12 @@ const rootReducer = createSlice({
   name: "auth",
   initialState: {
     accessToken: "",
+    checkIsSignIn: false,
   },
   reducers: {
     setToken: (state, action) => {
       state.accessToken = action.payload;
+      state.checkIsSignIn = true;
     },
   },
 });
