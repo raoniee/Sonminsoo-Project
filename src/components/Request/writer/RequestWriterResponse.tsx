@@ -40,9 +40,7 @@ const RequestWriterResponse: React.FC<RequestAnswerProps> = ({
     try {
       const response = await axios.get(`/sonminsu-requests/${requestId}`);
       setRequestData(response.data.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   useEffect(() => {
@@ -65,9 +63,7 @@ const RequestWriterResponse: React.FC<RequestAnswerProps> = ({
         `/sonminsu-answers/${answerId}/choose`
       );
       window.location.replace(`/requests/writer/${requestId}`);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   const handledeleteClick = async () => {
@@ -78,9 +74,7 @@ const RequestWriterResponse: React.FC<RequestAnswerProps> = ({
         `/sonminsu-answers/${answerId}`
       );
       window.location.replace(`/requests/writer/${requestId}`);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   return (
@@ -138,6 +132,7 @@ const RequestWriterResponse: React.FC<RequestAnswerProps> = ({
               <LinkAttachItem
                 key={item.id}
                 deletevalue={false}
+                itemId={item.id}
                 itemImg={item.imgUrl}
                 itemPrice={item.price}
                 itemName={item.title}
