@@ -19,6 +19,7 @@ export const ProfileImg = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 40px;
+  object-fit: cover;
 `;
 export const ProfileInfo = styled.div`
   display: flex;
