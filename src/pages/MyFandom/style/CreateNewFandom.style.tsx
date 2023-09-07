@@ -66,6 +66,8 @@ export const UploadImg = styled.img`
     height: 100%;
     border-radius: 8px;
     position: relative;
+    object-fit: cover;
+    object-position: top;
 `;
 
 //이미지 박스
