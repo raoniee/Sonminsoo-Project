@@ -4,6 +4,7 @@ import checkIcon from "../../../assets/images/svg/Exclude.svg";
 export const FeedWriteImage = styled.img`
   width: 100%;
   height: 390px;
+  object-fit: cover;
 `;
 export const NoticeBtn = styled.input.attrs({ type: "checkbox" })`
   width: 18px;
