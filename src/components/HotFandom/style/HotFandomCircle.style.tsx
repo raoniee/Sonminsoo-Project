@@ -29,6 +29,7 @@ export const PandomShadowCircle = styled.img`
     border: solid black;
     box-shadow: 5px 5px;
     box-sizing: border-box;
+    object-fit: cover;
 `;
 
 export const PandomCircleName = styled.p`
