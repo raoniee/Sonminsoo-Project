@@ -26,6 +26,8 @@ export const HeaderBox = styled.div`
 export const Img = styled.img`
   height: 182px;
   width: 100%;
+  object-fit: cover;
+  object-position: top;
 `;
 
 export const FandomJoinBox = styled.div`
