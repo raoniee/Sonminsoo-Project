@@ -83,6 +83,7 @@ export const FeedImage = styled.img`
   width: 100%;
   height: 390px;
   cursor: pointer;
+  object-fit: cover;
 `;
 export const BtnWrap = styled.div`
   display: flex;
