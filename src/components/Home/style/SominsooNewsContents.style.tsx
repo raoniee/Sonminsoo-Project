@@ -67,6 +67,7 @@ export const SonminsooNewsTimeText = styled.p`
 export const SonminsooNewsImg = styled.img`
   height: 153px;
   width: 100%;
+  object-fit: cover;
 `;
 // 손민수 내용 전체 박스
 export const SonminsooNewsArticleBox = styled.div`

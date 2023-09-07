@@ -8,6 +8,7 @@ export const Image = styled.img`
   width: 100%;
   height: 390px;
   cursor: pointer;
+  object-fit: cover;
 `;
 export const ContentContainer = styled.div`
   width: 100%;

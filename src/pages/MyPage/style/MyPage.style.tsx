@@ -178,6 +178,7 @@ export const FeedImg = styled.img`
   width: 100%;
   height: 128px;
   border: 1px solid #fff;
+  object-fit: cover;
 `;
 export const NoFeed = styled.div`
   text-align: center;

@@ -10,6 +10,7 @@ export const FollowerImg = styled.img`
   height: 56px;
   border-radius: 56px;
   margin-right: 15px;
+  object-fit: cover;
 `;
 export const FollowerName = styled.p`
   font-size: 16px;
