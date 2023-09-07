@@ -7,6 +7,7 @@ export const Wrap = styled.div`
 export const RequestDetailImg = styled.img`
   width: 100%;
   height: 390px;
+  object-fit: cover;
 `;
 export const RequestDetailDescText = styled.p`
   font-size: 15px;
