@@ -123,6 +123,7 @@ export const UploadImg = styled.img`
   width: 80px;
   height: 80px;
   border-radius: 8px;
+  object-fit: cover;
 `;
 export const Delete = styled.img`
   position: absolute;
