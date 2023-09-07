@@ -11,6 +11,7 @@ export const UserImg = styled.img`
   border-radius: 60px;
   margin-top: 14px;
   margin-bottom: 18px;
+  object-fit: cover;
 `;
 export const UserImgEditBTN = styled.p`
   font-size: 14px;
