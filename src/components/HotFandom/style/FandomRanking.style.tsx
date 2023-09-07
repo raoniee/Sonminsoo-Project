@@ -26,6 +26,7 @@ export const CircleImg = styled.img`
     border-radius: 50%;
     background-color: black;
     margin-left: 14px;
+    object-fit: cover;
 `;
 //텍스트박스
 export const RnakingTextBox = styled.div`
