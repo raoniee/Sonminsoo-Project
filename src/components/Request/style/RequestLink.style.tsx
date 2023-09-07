@@ -15,6 +15,7 @@ export const ListImg = styled.img`
   height: 56px;
   border-radius: 8px;
   margin-right: 15px;
+  object-fit: cover;
 `;
 export const LeftBox = styled.div`
   display: flex;
