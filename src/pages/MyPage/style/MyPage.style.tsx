@@ -11,6 +11,7 @@ export const Img = styled.img`
   height: 60px;
   border-radius: 60px;
   margin-right: 15px;
+  object-fit: cover;
 `;
 export const Introduce = styled.div`
   display: flex;
