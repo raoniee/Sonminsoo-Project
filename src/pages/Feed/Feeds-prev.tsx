@@ -1,5 +1,8 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, Outlet } from "react-router-dom";
+import axios from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import * as S from "./style/Feed.style";
 import FeedHeaderBar from "../../components/Feed/FeedHeaderBar";
 import FeedHeader from "../../components/Feed/FeedHeader";
 import ItemBox from "../../components/Feed/Item";
@@ -8,13 +11,9 @@ import LikeBtn from "../../components/Feed/LikeBtn";
 import CommentBtn from "../../components/Feed/CommentBtn";
 import FeedText from "../../components/Feed/FeedText";
 import Comment from "../../components/Feed/Comment";
-import FeedDetailHeaderBar from "../../components/Feed/FeedDetailHearder";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import FeedDelete from "../../components/Feed/FeedDelete";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
-import axios from "../../api/axios";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import * as S from "../Feed/style/Feed.style";
 
 export type Data = {
   id: number;
@@ -29,28 +28,27 @@ export type Data = {
     id: number;
     fandomName: string;
   };
-  sonminsuItems: SonminsuItem[];
-  groupName: string;
-  artistName: string;
+  sonminsuItems: SonminsuItems[];
   image: string;
   tags: string[];
   comments: number;
+  groupName: string;
+  artistName: string;
 };
-
-type SonminsuItem = {
+export type SonminsuItems = {
   id: number;
   originUrl: string;
-  imgUrl: string;
   title: string;
-  price: string | number;
-  groupName?: string;
-  artistName?: string;
+  price: number;
+  imgUrl: string;
+  groupName: string;
+  artistName: string;
 };
 type SonminsuItemType = {
   id: number;
   originUrl: string;
   title: string;
-  price: number | number;
+  price: number;
   imgUrl: string;
   groupName: string;
   artistName: string;
@@ -71,9 +69,7 @@ type CommentType = {
   replies?: {};
 };
 
-function FeedDetail() {
-  const { FeedId } = useParams();
-  const [feedItem, setFeedItem] = useState<Data>();
+const Feeds = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const [openComment, setOpenComment] = useState<number | undefined>();
@@ -84,26 +80,38 @@ function FeedDetail() {
   const [isLoadingComments, setIsLoadingComments] = useState(false);
   const [feedId, setFeedId] = useState<number | undefined>();
   const [sonminsuItem, setSonminsuItem] = useState<SonminsuItemType[]>([]);
+  const [page, setPage] = useState<number>(1);
   const [selectedCommentId, setSelectedCommentId] = useState<
     number | undefined
   >();
 
   useEffect(() => {
-    fetchFeedDetail();
-    fetchItem();
     fetchFeedData();
+    fetchItem();
+  }, [page]);
+  // infinite scrolling
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
-  const fetchFeedDetail = async () => {
-    try {
-      const response = await axios.get(`/feeds/${FeedId}`);
-      setFeedItem(response.data.data);
-    } catch (error) {}
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    )
+      return setPage((prev) => prev + 1);
   };
 
   const fetchFeedData = async () => {
+    const ITEMS_PER_PAGE = 10;
     try {
-      const response = await axios.get("/feeds");
-      setFeedData(response.data.data);
+      const response = await axios.get(
+        `/feeds?page=${page}&perPage=${ITEMS_PER_PAGE}`
+      );
+      setFeedData((prevData) => [...prevData, ...response.data.data]);
     } catch (error) {
       console.error("Error", error);
     }
@@ -124,9 +132,27 @@ function FeedDetail() {
       setSonminsuItem(response.data.data);
     } catch (error) {}
   };
+
+  const handleDelete = async (id: number) => {
+    try {
+      await axiosPrivate.delete(`/comments/${id}`);
+      fetchComments(openComment);
+      fetchFeedData();
+    } catch (error) {
+      alert("댓글 작성자가 아닙니다.");
+    }
+  };
+
   const getItemFromResult = (sonIds: number[]): SonminsuItemType[] => {
     return sonminsuItem.filter((item) => sonIds.includes(item.id));
   };
+
+  const showModal = (commentId: number) => {
+    setSelectedCommentId(commentId);
+    document.body.style.overflow = "hidden";
+    setModalOpen(true);
+  };
+
   const toggleComment = (id: number) => {
     if (openComment === id) {
       setOpenComment(undefined);
@@ -135,84 +161,75 @@ function FeedDetail() {
       fetchComments(id);
     }
   };
-  const handleDelete = async (id: number) => {
-    try {
-      await axiosPrivate.delete(`/comments/${id}`);
-      setComments((prevComments) =>
-        prevComments.filter((comment) => comment.id !== id)
-      );
-    } catch (error) {}
-  };
-  const showModal = (commentId: number) => {
-    setSelectedCommentId(commentId);
-    document.body.style.overflow = "hidden";
-    setModalOpen(true);
-  };
 
   return (
-    <>
-      {feedItem ? (
-        <S.FeedContainer>
-          <FeedDetailHeaderBar />
-          <FeedHeader
-            feedData={feedItem}
+    <S.FeedContainer>
+      <FeedHeaderBar />
+      {feedData?.map((feed, index) => (
+        <React.Fragment key={`${feed.id}-${index}`}>
+          {/* <FeedHeader
+            feedData={feed}
             setIsFeedDelete={setIsFeedDelete}
             setFeedId={setFeedId}
+          /> */}
+          <S.FeedImage
+            src={feed.image}
+            onClick={() => {
+              navigate(`/feed/${feed.id}`);
+            }}
           />
-          <S.FeedImage src={feedItem.image} />
           <ItemBox
-            items={getItemFromResult(
-              feedItem.sonminsuItems.map((item) => item.id)
-            )}
+            items={getItemFromResult(feed.sonminsuItems.map((item) => item.id))}
           />
-          <FeedText content={feedItem.content} />
-          <HashTag hashTags={feedItem.tags} />
+          <FeedText content={feed.content} />
+          <HashTag hashTags={feed.tags} />
           <S.BtnWrap>
-            <LikeBtn feedId={feedItem.id} />
+            <LikeBtn feedId={feed.id} />
             <CommentBtn
-              commentOpen={() => toggleComment(feedItem.id)}
-              commentClicked={openComment === feedItem.id}
-              feedData={feedItem}
+              commentOpen={() => toggleComment(feed.id)}
+              commentClicked={openComment === feed.id}
+              feedData={feed}
             />
           </S.BtnWrap>
-          {!isLoadingComments && openComment === feedItem?.id && (
+          {!isLoadingComments && openComment === feed.id && (
             <Comment
               showModal={showModal}
               comments={comments}
-              feedId={feedItem.id}
+              feedId={feed.id}
               fetchFeedData={fetchFeedData}
             />
           )}
           <S.Line />
-          {openComment === undefined && <FooterNavBar />}
-          {modalOpen && (
-            <AppAlertModal
-              setModalOpen={setModalOpen}
-              title={"댓글 삭제"}
-              content={"댓글을 삭제하시겠습니까?"}
-              yesContent={"삭제"}
-              warning={true}
-              yesClickHandler={() => {
-                if (selectedCommentId) {
-                  handleDelete(selectedCommentId);
-                  setSelectedCommentId(undefined);
-                  document.body.style.overflow = "unset";
-                  setModalOpen(false);
-                }
-              }}
-            />
-          )}
-          {isFeedDelete && (
-            <FeedDelete
-              setIsFeedDelete={setIsFeedDelete}
-              feedId={feedId}
-              onFeedDeleted={fetchFeedData}
-            />
-          )}
-        </S.FeedContainer>
-      ) : null}
-    </>
+        </React.Fragment>
+      ))}
+      <Outlet />
+      <FooterNavBar />
+      {modalOpen && (
+        <AppAlertModal
+          setModalOpen={setModalOpen}
+          title={"댓글 삭제"}
+          content={"댓글을 삭제하시겠습니까?"}
+          yesContent={"삭제"}
+          warning={true}
+          yesClickHandler={() => {
+            if (selectedCommentId) {
+              handleDelete(selectedCommentId);
+              setSelectedCommentId(undefined);
+              document.body.style.overflow = "unset";
+              setModalOpen(false);
+            }
+          }}
+        />
+      )}
+      {isFeedDelete && (
+        <FeedDelete
+          setIsFeedDelete={setIsFeedDelete}
+          feedId={feedId}
+          onFeedDeleted={fetchFeedData}
+        />
+      )}
+    </S.FeedContainer>
   );
-}
+};
 
-export default FeedDetail;
+export default Feeds;

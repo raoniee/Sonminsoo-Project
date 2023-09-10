@@ -1,4 +1,4 @@
-export type Data = {
+export type FeedType = {
   id: number;
   content: string;
   createdAt: string;
@@ -11,14 +11,17 @@ export type Data = {
     id: number;
     fandomName: string;
   };
-  sonminsuItems: SonminsuItems[];
+  sonminsuItems: SonminsuItem[];
   image: string;
   tags: string[];
   comments: number;
   groupName: string;
   artistName: string;
+  likes: number;
+  isLike: boolean;
 };
-export type SonminsuItems = {
+
+export type SonminsuItem = {
   id: number;
   originUrl: string;
   title: string;
@@ -27,32 +30,36 @@ export type SonminsuItems = {
   groupName: string;
   artistName: string;
 };
-export type DataArray = Data[];
 
-//props type
-export type FeedDataProps = {
-  feedData: Data;
-  setIsFeedDelete: React.Dispatch<React.SetStateAction<boolean>>;
+export type FeedAuthor = {
+  id: number;
+  image: string;
+  nickName: string;
 };
 
-export type FeedItemProps = {
-  feedData: Data;
+export type FeedFandom = {
+  fandomName: string;
+};
+
+export type FeedsType = FeedType[];
+
+export type FeedProps = {
+  feedData: FeedType;
+};
+
+export type FeedHeaderProps = {
+  feedId: number;
+  author: FeedAuthor;
+  fandom: FeedFandom;
+  createdAt: string;
+  setIsFeedDelete: React.Dispatch<React.SetStateAction<boolean>>;
+  setFeedId: React.Dispatch<React.SetStateAction<number | undefined>>;
 };
 
 export type FeedTextProps = {
-  feedData: {
-    content: string;
-  };
+  content: string;
 };
 
-export type FeedHashTagProps = {
-  feedData: {
-    tags: string[];
-  };
-};
-
-export type CommentBtnProps = {
-  commentOpen: () => void;
-  commentClicked: boolean;
-  feedData: Data;
+export type FeedHashTagsProps = {
+  hashTags: string[];
 };
