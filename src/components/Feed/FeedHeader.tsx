@@ -12,29 +12,23 @@ const FeedHeader: React.FC<FeedHeaderProps> = ({
   author,
   fandom,
   createdAt,
-  setIsFeedDelete,
-  setFeedId,
 }) => {
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
   const [userId, setUserId] = useState<number | undefined>();
   const token = useSelector(({ auth }) => auth.accessToken);
+
   useEffect(() => {
     fetchUser();
   }, []);
-  //TODO: 유저 정보 새로고침 시 다시 받아와야 하는지 체크
+
   const fetchUser = async () => {
     try {
       const response = await axiosPrivate.get("/profile");
       setUserId(response.data.data.id);
     } catch (error) {}
   };
-  const handleMoreClick = () => {
-    if (token) {
-      setIsFeedDelete(true);
-      setFeedId(feedId);
-    }
-  };
+
   return (
     <S.FeedHeaderContainer>
       <S.Profile
@@ -52,9 +46,7 @@ const FeedHeader: React.FC<FeedHeaderProps> = ({
           </S.Time>
         </S.ContentWrap>
       </S.HeaderContent>
-      {userId === author.id && (
-        <S.MoreBtn src={more} onClick={handleMoreClick} />
-      )}
+      {userId === author.id && <S.MoreBtn src={more} />}
     </S.FeedHeaderContainer>
   );
 };

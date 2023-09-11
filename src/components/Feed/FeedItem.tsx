@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FeedHeader from "./FeedHeader";
 import * as S from "../../pages/Feed/style/Feed.style";
+import ItemBox from "../../components/Feed/ItemBox";
+import FeedContent from "../Feed/FeedContent";
 import { FeedProps } from "../../types/feed";
 
 const FeedItem: React.FC<FeedProps> = ({ feedData }) => {
@@ -13,6 +15,7 @@ const FeedItem: React.FC<FeedProps> = ({ feedData }) => {
         createdAt={feedData.createdAt}
       />
       <S.FeedImage src={feedData.image} />
+      <FeedContent feedData={feedData} />
     </>
   );
 };
