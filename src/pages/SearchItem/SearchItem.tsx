@@ -3,18 +3,10 @@ import axios from "../../api/axios";
 import * as S from "./style/SearchItem.style";
 import SearchItemHeader from "../../components/SearchItem/SearchItemHeader";
 import MinsooItem from "../../components/SearchItem/MinsooItem";
-type minsooItemType = {
-  artistName: string;
-  groupName: string;
-  id: number;
-  imgUrl: string;
-  originUrl: string;
-  price: string | number;
-  title: string;
-};
+import { sonminsooItemInfo } from "../SonminsooItem/types/SonminsooItem.type";
 
 const SearchItem = () => {
-  const [minsooItem, setMinsooItem] = useState<minsooItemType[]>([]);
+  const [minsooItem, setMinsooItem] = useState<sonminsooItemInfo[]>([]);
   const [searchItem, setSearchItem] = useState("");
 
   useEffect(() => {
@@ -26,9 +18,7 @@ const SearchItem = () => {
         `/sonminsu-items/search?search=${encodeURIComponent(searchItem)}`
       );
       setMinsooItem(response.data.data);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   return (

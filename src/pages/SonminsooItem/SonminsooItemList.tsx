@@ -36,17 +36,17 @@ const SonminsooItemList = () => {
           <HeaderBar
             BackButton={false}
             items={[
-              <>
+              <React.Fragment key={"search"}>
                 <Link to={"/searchitem"}>
-                  <Icon key={"search"} src={search} />
+                  <Icon src={search} />
                 </Link>
-              </>,
+              </React.Fragment>,
               token && (
-                <>
+                <React.Fragment key={"settings"}>
                   <Link to={"/settings"}>
-                    <Icon key={"settings"} src={settings} />
+                    <Icon src={settings} />
                   </Link>
-                </>
+                </React.Fragment>
               ),
             ]}
           />
