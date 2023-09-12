@@ -5,15 +5,7 @@ import * as S from "./style/EnterMembersInfo.style";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { Button } from "../../elements/Button";
 import SignUpHeader3 from "../../components/SignUp/SignUpHeader3";
-
-type userInfoType = {
-  password: string;
-  userName: string;
-  birthDate: string;
-  phoneNumber: string;
-  code: string;
-  email: string;
-};
+import { userInfoType } from "./types/SignUp.type";
 
 const EnterMembersInfo = () => {
   const navigation = useNavigate();
@@ -131,7 +123,6 @@ const EnterMembersInfo = () => {
   }, [userInfo.phoneNumber]);
 
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
     setUserInfo((prev) => {
       return {
         ...prev,
@@ -250,7 +241,7 @@ const EnterMembersInfo = () => {
               })
               .then((res) => {
                 navigation("/signup/signUpComplete");
-              })
+              });
           }}
         >
           회원가입 완료

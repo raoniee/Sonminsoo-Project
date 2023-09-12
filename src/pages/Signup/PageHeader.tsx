@@ -1,6 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
+type PageHeaderProps = {
+  totalPages: number;
+  currentPage: number;
+};
+
+type PageNumberProps = {
+  $isActive: boolean;
+};
+
 const Header = styled.div`
   display: flex;
   align-items: center;
@@ -9,10 +18,6 @@ const Header = styled.div`
   font-size: 14px;
   margin-bottom: 28px;
 `;
-
-interface PageNumberProps {
-  $isActive: boolean;
-}
 
 const PageNumber = styled.span<PageNumberProps>`
   margin: 0 10px;
@@ -23,11 +28,6 @@ const PageNumber = styled.span<PageNumberProps>`
     text-decoration: underline;
   }
 `;
-
-interface PageHeaderProps {
-  totalPages: number;
-  currentPage: number;
-}
 
 const PageHeader: React.FC<PageHeaderProps> = ({ totalPages, currentPage }) => {
   const page = [1, 2, 3];

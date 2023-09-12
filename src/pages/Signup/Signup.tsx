@@ -1,15 +1,7 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import * as S from "./style/Signup.Style";
-
-type userInfoType = {
-  password: string;
-  userName: string;
-  birthDate: string;
-  phoneNumber: string;
-  code: string;
-  email: string;
-};
+import { userInfoType } from "./types/SignUp.type";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +15,6 @@ const Signup = () => {
     email: "",
   });
 
-  
   return (
     <S.Container>
       <Outlet
