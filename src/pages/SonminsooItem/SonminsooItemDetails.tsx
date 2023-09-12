@@ -12,24 +12,8 @@ import { useSelector } from "react-redux";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
-type bucketList = {
-  id: string;
-  img: string;
-  title: string;
-}[];
+import { bucketList, sonminsooItemInfo } from "./types/SonminsooItem.type";
 
-type productType = {
-  artistName: string;
-  groupName: string;
-  id: number;
-  imgUrl: string;
-  originUrl: string;
-  price: string;
-  title: string;
-  isInMyBucket?: {
-    bucketId: number;
-  };
-};
 const SonminsooItemDetails = () => {
   const token = useGetToken();
   const axiosPrivate = useAxiosPrivate();
@@ -42,7 +26,7 @@ const SonminsooItemDetails = () => {
   const { id } = useParams();
   const navigation = useNavigate();
 
-  const [productInfo, setProductInfo] = useState<productType>();
+  const [productInfo, setProductInfo] = useState<sonminsooItemInfo>();
   const [viewLoginAlert, setViewLoginAlert] = useState<boolean>(false);
 
   useEffect(() => {

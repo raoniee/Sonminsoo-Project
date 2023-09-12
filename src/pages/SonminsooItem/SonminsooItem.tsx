@@ -4,12 +4,7 @@ import * as S from "./style/SonminsooItem.style";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import BucketListModal from "../../components/common/BucketListModal/BucketListModal";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
-
-type bucketList = {
-  id: number;
-  img?: string;
-  bucketName: string;
-}[];
+import { bucketList } from "./types/SonminsooItem.type";
 
 const SonminsooItem = () => {
   const [modalView, setModalView] = useState(false);

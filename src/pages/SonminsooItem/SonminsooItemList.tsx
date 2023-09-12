@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import SonMinsooItemInfo from "./SonMinsooItemInfo";
 import EmptyItem from "./EmptyItem";
 import * as S from "./style/SonminsooItemList.style";
@@ -6,24 +6,11 @@ import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import Icon from "../../elements/Icon";
 import search from "../../assets/images/svg/SonminsooItem/ic-search.svg";
 import settings from "../../assets/images/svg/SonminsooItem/ic-settings.svg";
-import useInput from "../../hooks/useInput";
 import axios from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import { Link } from "react-router-dom";
-
-type sonminsooItemInfo = {
-  id: number;
-  originUrl: string;
-  imgUrl: string;
-  price: string;
-  title: string;
-  groupName: string;
-  artistName: string;
-  isInMyBucket?: {
-    bucketId: number;
-  };
-};
+import { sonminsooItemInfo } from "./types/SonminsooItem.type";
 
 const SonminsooItemList = () => {
   const [items, setItems] = useState<sonminsooItemInfo[]>([]);

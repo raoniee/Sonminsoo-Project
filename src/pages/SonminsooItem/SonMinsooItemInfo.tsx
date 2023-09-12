@@ -5,24 +5,9 @@ import { Link, useOutletContext } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import axios from "../../api/axios";
+import { bucketList } from "./types/SonminsooItem.type";
+import { sonminsooItemInfo } from "./types/SonminsooItem.type";
 
-type bucketList = {
-  id: string;
-  img?: string;
-  bucketName: string;
-}[];
-type sonminsooItemInfo = {
-  artistName: string;
-  groupName: string;
-  id: number;
-  imgUrl: string;
-  originUrl: string;
-  price: string;
-  title: string;
-  isInMyBucket?: {
-    bucketId: number;
-  };
-};
 const SonMinsooItemInfo = ({
   artistName,
   id,
