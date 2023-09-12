@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useTransition } from "react";
 import SonMinsooItemInfo from "./SonMinsooItemInfo";
 import EmptyItem from "./EmptyItem";
 import * as S from "./style/SonminsooItemList.style";
@@ -11,23 +11,35 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import { Link } from "react-router-dom";
 import { sonminsooItemInfo } from "./types/SonminsooItem.type";
+import useAuth from "../../hooks/useAuth";
 
 const SonminsooItemList = () => {
   const [items, setItems] = useState<sonminsooItemInfo[]>([]);
+  const [isPending, startTransition] = useTransition();
   const axiosPrivate = useAxiosPrivate();
   const token = useGetToken();
   const api = token ? axiosPrivate : axios;
+  const auth = useAuth();
+  console.log(auth, "auth");
 
-  useEffect(() => {
-    const getSonminsooItemList = async () => {
+  const getSonminsooItemList = async () => {
+    if (auth.checkIsSignIn) {
       try {
-        const { data } = await api.get("/sonminsu-items?page=1&perPage=15");
+        const { data } = await api.get("/sonminsu-items?page=1&perPage=25");
         setItems(data.data);
       } catch (err) {}
-    };
+    }
+  };
+  useEffect(() => {
+    startTransition(() => {
+      getSonminsooItemList();
+    });
+    // getSonminsooItemList();
+  }, [auth, axiosPrivate]);
 
-    getSonminsooItemList();
-  }, [token]);
+  // console.log(isPending, "ispending");
+  // console.log(auth, "auth");
+  // console.log(axiosPrivate, "axiosPrivate");
 
   return (
     <>
@@ -61,9 +73,8 @@ const SonminsooItemList = () => {
         </S.LinkRequestList>
         <S.SonminsooItemListContainer>
           <S.SonminsooItemTitle>손민수템</S.SonminsooItemTitle>
-
           <S.SonminsooItemsContainer>
-            {items.length === 0 ? (
+            {isPending || items.length === 0 ? (
               <EmptyItem />
             ) : (
               items.map((data) => {

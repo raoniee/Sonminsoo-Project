@@ -52,7 +52,7 @@ const SonMinsooItemInfo = ({
                     console.log(res);
                     document.body.style.overflow = "unset";
                     setModalView(false);
-                    window.location.reload();
+                    // window.location.reload();
                   })
 
                   .catch((err) => {})

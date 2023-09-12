@@ -29,15 +29,15 @@ const SonminsooItemDetails = () => {
   const [productInfo, setProductInfo] = useState<sonminsooItemInfo>();
   const [viewLoginAlert, setViewLoginAlert] = useState<boolean>(false);
 
+  const fetchData = async () => {
+    try {
+      const { data } = await api.get(`/sonminsu-items/${id}`);
+      setProductInfo(data.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await api.get(`/sonminsu-items/${id}`);
-        setProductInfo(data.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchData();
   }, [token]);
 
@@ -59,10 +59,10 @@ const SonminsooItemDetails = () => {
                       `/sonminsu-items/${id}/buckets/${productInfo?.isInMyBucket.bucketId}`
                     )
                     .then((res) => {
-                      console.log(res);
+                      console.log(res, "res!");
                       document.body.style.overflow = "unset";
                       setModalView(false);
-                      window.location.reload();
+                      fetchData();
                     })
                     .catch((err) => {})
                 : axiosPrivate
