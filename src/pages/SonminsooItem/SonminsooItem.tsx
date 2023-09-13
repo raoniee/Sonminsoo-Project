@@ -27,11 +27,12 @@ const SonminsooItem = () => {
   const getSonminsooItemList = async () => {
     if (auth.checkIsSignIn) {
       try {
-        const { data } = await api.get("/sonminsu-items?page=1&perPage=25");
+        const { data } = await api.get("/sonminsu-items?page=1&perPage=1");
         setSonminsooItems(data.data);
       } catch (err) {}
     }
   };
+
   useEffect(() => {
     startTransition(() => {
       getSonminsooItemList();
