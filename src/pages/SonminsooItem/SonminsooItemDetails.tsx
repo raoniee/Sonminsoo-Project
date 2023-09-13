@@ -15,24 +15,28 @@ import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
 import { bucketList, sonminsooItemInfo } from "./types/SonminsooItem.type";
 
 const SonminsooItemDetails = () => {
+  const [modalView, setModalView] = useState<boolean>(false);
+  const [bucketList, setBucketList] = useState<bucketList>([]);
+  const [selectItem, setSelectItem] = useState<number>();
   const token = useGetToken();
   const axiosPrivate = useAxiosPrivate();
   const api = token ? axiosPrivate : axios;
-  const { setModalView, setBucketList, setSelectItem } = useOutletContext<{
-    setModalView: React.Dispatch<React.SetStateAction<boolean>>;
-    setBucketList: React.Dispatch<React.SetStateAction<bucketList>>;
-    setSelectItem: React.Dispatch<React.SetStateAction<number>>;
-  }>();
+
   const { id } = useParams();
   const navigation = useNavigate();
 
   const [productInfo, setProductInfo] = useState<sonminsooItemInfo>();
   const [viewLoginAlert, setViewLoginAlert] = useState<boolean>(false);
 
+  let bucketListData = useMemo(() => {
+    return bucketList;
+  }, [bucketList]); //bucketList 데이터가 변경 될 때만 BucketListModal 렌더링
+
   const fetchData = async () => {
     try {
       const { data } = await api.get(`/sonminsu-items/${id}`);
       setProductInfo(data.data);
+      console.log("fetchData");
     } catch (err) {
       console.error(err);
     }
@@ -103,6 +107,18 @@ const SonminsooItemDetails = () => {
           }}
         />
       )}
+      {useMemo(() => {
+        return (
+          modalView && (
+            <BucketListModal
+              setModalOpen={setModalView}
+              itemId={selectItem}
+              bucketList={bucketListData}
+              fetchData={fetchData}
+            />
+          )
+        );
+      }, [selectItem, bucketListData, modalView])}
     </S.DetailContainer>
   );
 };
