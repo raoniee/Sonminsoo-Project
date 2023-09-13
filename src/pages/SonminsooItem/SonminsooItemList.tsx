@@ -9,33 +9,37 @@ import settings from "../../assets/images/svg/SonminsooItem/ic-settings.svg";
 import axios from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { sonminsooItemInfo } from "./types/SonminsooItem.type";
 import useAuth from "../../hooks/useAuth";
 
 const SonminsooItemList = () => {
-  const [items, setItems] = useState<sonminsooItemInfo[]>([]);
-  const [isPending, startTransition] = useTransition();
+  // const [items, setItems] = useState<sonminsooItemInfo[]>([]);
+  // const [isPending, startTransition] = useTransition();
   const axiosPrivate = useAxiosPrivate();
   const token = useGetToken();
   const api = token ? axiosPrivate : axios;
   const auth = useAuth();
   console.log(auth, "auth");
+  const { sonminsooItems, isItemPending } = useOutletContext<{
+    sonminsooItems: sonminsooItemInfo[];
+    isItemPending: boolean;
+  }>();
 
-  const getSonminsooItemList = async () => {
-    if (auth.checkIsSignIn) {
-      try {
-        const { data } = await api.get("/sonminsu-items?page=1&perPage=25");
-        setItems(data.data);
-      } catch (err) {}
-    }
-  };
-  useEffect(() => {
-    startTransition(() => {
-      getSonminsooItemList();
-    });
-    // getSonminsooItemList();
-  }, [auth, axiosPrivate]);
+  // const getSonminsooItemList = async () => {
+  //   if (auth.checkIsSignIn) {
+  //     try {
+  //       const { data } = await api.get("/sonminsu-items?page=1&perPage=25");
+  //       setItems(data.data);
+  //     } catch (err) {}
+  //   }
+  // };
+  // useEffect(() => {
+  //   startTransition(() => {
+  //     getSonminsooItemList();
+  //   });
+
+  // }, [auth, axiosPrivate]);
 
   // console.log(isPending, "ispending");
   // console.log(auth, "auth");
@@ -64,7 +68,43 @@ const SonminsooItemList = () => {
           />
         );
       }, [])}
-      <S.SonminsooListWrapper>
+      {useMemo(() => {
+        return (
+          <S.SonminsooListWrapper>
+            <S.LinkRequestList to="/requests">
+              <span>손민수템 의뢰 리스트</span>
+              <span>
+                <S.NavImg />
+              </span>
+            </S.LinkRequestList>
+            <S.SonminsooItemListContainer>
+              <S.SonminsooItemTitle>손민수템</S.SonminsooItemTitle>
+              <S.SonminsooItemsContainer>
+                {isItemPending || sonminsooItems.length === 0 ? (
+                  <EmptyItem />
+                ) : (
+                  sonminsooItems.map((data) => {
+                    return (
+                      <SonMinsooItemInfo
+                        key={data.id}
+                        groupName={data.groupName}
+                        id={data.id}
+                        originUrl={data.originUrl}
+                        imgUrl={data.imgUrl}
+                        artistName={data.artistName}
+                        title={data.title}
+                        price={data.price}
+                        isInMyBucket={data?.isInMyBucket}
+                      />
+                    );
+                  })
+                )}
+              </S.SonminsooItemsContainer>
+            </S.SonminsooItemListContainer>
+          </S.SonminsooListWrapper>
+        );
+      }, [isItemPending, sonminsooItems])}
+      {/* <S.SonminsooListWrapper>
         <S.LinkRequestList to="/requests">
           <span>손민수템 의뢰 리스트</span>
           <span>
@@ -74,10 +114,10 @@ const SonminsooItemList = () => {
         <S.SonminsooItemListContainer>
           <S.SonminsooItemTitle>손민수템</S.SonminsooItemTitle>
           <S.SonminsooItemsContainer>
-            {isPending || items.length === 0 ? (
+            {isItemPending || sonminsooItems.length === 0 ? (
               <EmptyItem />
             ) : (
-              items.map((data) => {
+              sonminsooItems.map((data) => {
                 return (
                   <SonMinsooItemInfo
                     key={data.id}
@@ -95,7 +135,7 @@ const SonminsooItemList = () => {
             )}
           </S.SonminsooItemsContainer>
         </S.SonminsooItemListContainer>
-      </S.SonminsooListWrapper>
+      </S.SonminsooListWrapper> */}
     </>
   );
 };

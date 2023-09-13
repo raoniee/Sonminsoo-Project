@@ -8,12 +8,14 @@ type ModalProps = {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   itemId?: number;
   bucketList: { id: number; img?: string; bucketName: string }[];
+  fetchData: () => Promise<void>;
 };
 
 const BucketListModal: React.FC<ModalProps> = ({
   bucketList,
   setModalOpen,
   itemId,
+  fetchData,
 }) => {
   const axiosPrivate = useAxiosPrivate();
   const modalRef = useRef<HTMLDivElement>(null);
@@ -60,10 +62,9 @@ const BucketListModal: React.FC<ModalProps> = ({
               console.log(res);
               document.body.style.overflow = "unset";
               setModalOpen(false);
-              window.location.reload();
-            } catch (e) {
-
-            }
+              // window.location.reload();
+              fetchData();
+            } catch (e) {}
           }}
         >
           추가 하기

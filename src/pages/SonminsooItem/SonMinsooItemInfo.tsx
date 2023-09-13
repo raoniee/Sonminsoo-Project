@@ -16,13 +16,19 @@ const SonMinsooItemInfo = ({
   title,
   isInMyBucket,
 }: sonminsooItemInfo) => {
-  const { setModalView, setBucketList, setSelectItem, setViewLoginAlert } =
-    useOutletContext<{
-      setModalView: React.Dispatch<React.SetStateAction<boolean>>;
-      setViewLoginAlert: React.Dispatch<React.SetStateAction<boolean>>;
-      setBucketList: React.Dispatch<React.SetStateAction<bucketList>>;
-      setSelectItem: React.Dispatch<React.SetStateAction<number>>;
-    }>();
+  const {
+    setModalView,
+    setBucketList,
+    setSelectItem,
+    setViewLoginAlert,
+    getSonminsooItemList,
+  } = useOutletContext<{
+    setModalView: React.Dispatch<React.SetStateAction<boolean>>;
+    setViewLoginAlert: React.Dispatch<React.SetStateAction<boolean>>;
+    setBucketList: React.Dispatch<React.SetStateAction<bucketList>>;
+    setSelectItem: React.Dispatch<React.SetStateAction<number>>;
+    getSonminsooItemList: () => Promise<void>;
+  }>();
 
   const axiosPrivate = useAxiosPrivate();
   const token = useGetToken();
@@ -53,6 +59,7 @@ const SonMinsooItemInfo = ({
                     document.body.style.overflow = "unset";
                     setModalView(false);
                     // window.location.reload();
+                    getSonminsooItemList();
                   })
 
                   .catch((err) => {})
