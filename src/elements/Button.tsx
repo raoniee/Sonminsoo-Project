@@ -4,19 +4,29 @@ export const Button = styled.button<{
   background: string;
   border: string;
   margin?: string;
+  padding?: string;
+  color?: string;
+  width?: string;
+  height?: string;
+  boxSizing?: string;
+  whiteSpace?: string;
 }>`
-  width: 100%;
-  height: 60px;
+  ${(props) => (props.width ? `width : ${props.width}` : "width: 100%;")};
+  ${(props) => (props.height ? `height : ${props.height}` : "height: 60px;")};
+  ${(props) => (props.boxSizing ? `box-sizing : ${props.boxSizing}` : "")};
+  ${(props) => (props.whiteSpace ? `white-space : ${props.whiteSpace}` : "")};
   border-radius: 8px;
   text-align: center;
-  margin: 0 auto;
+
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 100%; /* 16px */
   display: block;
-  ${(props) => (props.color ? `color : ${props.color}` : "")};
-  ${(props) => (props.border ? `border : ${props.border}` : "")};
-  ${(props) => (props.background ? `background : ${props.background}` : "")};
-  ${(props) => (props.margin ? `margin : ${props.margin}` : "0 auto")};
+  ${(props) => (props.color ? `color : ${props.color};` : "")};
+  ${(props) => (props.border ? `border : ${props.border};` : "")};
+  ${(props) => (props.background ? `background : ${props.background};` : "")};
+  ${(props) => (props.padding ? `padding : ${props.padding};` : "")};
+  ${(props) =>
+    props.margin ? `margin : ${props.margin};` : "margin: 0 auto;"};
 `;

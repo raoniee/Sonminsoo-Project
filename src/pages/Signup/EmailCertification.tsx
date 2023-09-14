@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import axios from "../../api/axios";
 import * as S from "./style/EmailCertification.style";
-import PageHeader from "./PageHeader";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { Button } from "../../elements/Button";
+import ThrottlingButton from "../../components/common/ThrottlingButton/ThrottlingButton";
 import SignUpHeader2 from "../../components/SignUp/SignUpHeader2";
 
 const EmailCertification = () => {
   const [authValid, setAuthValid] = useState<string>("");
-  const [sendValid, setSendValid] = useState<boolean>(false);
   const [emailValid, setEmailValid] = useState<boolean>(true);
   const [isAuthValid, setIsAuthValid] = useState<boolean>(false);
   const navigation = useNavigate();
@@ -18,10 +17,8 @@ const EmailCertification = () => {
     setEmail: (value: string) => void;
   }>();
 
-  const handleEmailAuthClick = async (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
+  const handleEmailAuthClick = useCallback(async () => {
+    console.log("handleEmailAuthClick");
     if (
       /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(
         email
@@ -31,25 +28,12 @@ const EmailCertification = () => {
     }
     setEmailValid(true);
 
-    //setSendValid(true);
     try {
       const reponse = await axios.get(`/auth/verification-code?email=${email}`);
-    } catch (err) {
-      
-    }
-    // axios
-    //   .get(`/auth/verification-code?email=${email}`)
-    //   .then((res) => {
-    //     console.log("email res", res);
-    //   })
-    //   .catch((e) => console.log(e));
-  };
-  const handleEmailAuthVaildClick = (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
-
-    axios
+    } catch (err) {}
+  }, [email]);
+  const handleEmailAuthVaildClick = useCallback(async () => {
+    await axios
       .post(`auth/verification-code`, {
         email: email,
         code: authValid,
@@ -57,8 +41,8 @@ const EmailCertification = () => {
       .then((res) => {
         setEmailCode(authValid);
         setIsAuthValid(true);
-      })
-  };
+      });
+  }, [authValid]);
 
   return (
     <S.ContainerWrapper>
@@ -81,9 +65,18 @@ const EmailCertification = () => {
                 setEmail(e.target.value);
               }}
             />
-            <S.SendButton onClick={handleEmailAuthClick}>
-              인증번호발송
-            </S.SendButton>
+            <ThrottlingButton
+              background="#208df1"
+              content="인증번호 발송"
+              width="fit-content"
+              height="50px"
+              border="none"
+              padding="0 16px"
+              whiteSpace="nowrap"
+              boxSizing="border-box"
+              color="#fff"
+              onClick={handleEmailAuthClick}
+            ></ThrottlingButton>
           </S.EmailContainer>
           {!emailValid && (
             <S.EmailVaildation>이메일 형식에 맞지 않습니다.</S.EmailVaildation>
@@ -98,9 +91,18 @@ const EmailCertification = () => {
                 setAuthValid(e.target.value)
               }
             />
-            <S.SendButton onClick={handleEmailAuthVaildClick}>
-              인증하기
-            </S.SendButton>
+            <ThrottlingButton
+              background="#208df1"
+              content="인증 하기"
+              width="fit-content"
+              height="50px"
+              border="none"
+              padding="0 16px"
+              whiteSpace="nowrap"
+              boxSizing="border-box"
+              color="#fff"
+              onClick={handleEmailAuthVaildClick}
+            ></ThrottlingButton>
           </S.EmailContainer>
           <S.TextWithLink>
             이메일 인증번호가 발송되지 않았나요?

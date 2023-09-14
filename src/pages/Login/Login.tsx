@@ -5,6 +5,7 @@ import { setToken } from "../../redux/config/rootReducer";
 import axios from "../../api/axios";
 import * as S from "./style/Login.style";
 import { Button } from "../../elements/Button";
+import ThrottlingButton from "../../components/common/ThrottlingButton/ThrottlingButton";
 import passwordView from "../../assets/images/svg/passwordView.svg";
 import passwordViewActive from "../../assets/images/svg/ic-eye.svg";
 import kakao from "../../assets/images/svg/kakaoTalk.svg";
@@ -60,13 +61,14 @@ const Login = () => {
         />
         <S.LinkContainer>
           {email.length > 7 && password.length > 7 ? (
-            <Button
+            <ThrottlingButton
               background="#6138F8"
               border="none"
               color="#fff"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-                e.preventDefault();
-                axios
+              content="로그인"
+              onClick={async () => {
+                console.log("click");
+                await axios
                   .post("/auth/sign-in", {
                     email,
                     password,
@@ -76,7 +78,6 @@ const Login = () => {
                       navigation("/initInfo");
                     }
                     if (response.status === 201) {
-                      //TODO: setToken
                       dispatch(setToken(response.headers.authorization));
                       navigation("/home");
                     }
@@ -85,9 +86,7 @@ const Login = () => {
                     alert("아이디 혹은 비밀번호를 확인해 주세요");
                   });
               }}
-            >
-              로그인
-            </Button>
+            />
           ) : (
             <Button
               background="#EBEEF2"
