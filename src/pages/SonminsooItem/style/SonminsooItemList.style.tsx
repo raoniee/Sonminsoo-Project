@@ -3,7 +3,6 @@ import { styled } from "styled-components";
 import background from "../../../assets/images/svg/SonminsooItem/requsetButtonBackground.svg";
 import navImg from "../../../assets/images/svg/icon-chevron-right.svg";
 
-
 export const SonminsooListWrapper = styled.div`
   width: 100%;
   padding: 0 16px;

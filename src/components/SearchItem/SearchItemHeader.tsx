@@ -3,10 +3,11 @@ import LeftArrow from "../../assets/images/svg/ic-arrow-left.svg";
 import Search from "../../assets/images/svg/ic-search.svg";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+
 type headerProps = {
   searchItem: string;
   setSearchItem: React.Dispatch<React.SetStateAction<string>>;
-  fetchItem: any;
+  fetchItem: () => Promise<void>;
 };
 
 const SearchItemHeader: React.FC<headerProps> = ({

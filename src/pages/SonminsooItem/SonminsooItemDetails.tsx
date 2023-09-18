@@ -12,48 +12,36 @@ import { useSelector } from "react-redux";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
-type bucketList = {
-  id: string;
-  img: string;
-  title: string;
-}[];
+import { bucketList, sonminsooItemInfo } from "./types/SonminsooItem.type";
 
-type productType = {
-  artistName: string;
-  groupName: string;
-  id: number;
-  imgUrl: string;
-  originUrl: string;
-  price: string;
-  title: string;
-  isInMyBucket?: {
-    bucketId: number;
-  };
-};
 const SonminsooItemDetails = () => {
+  const [modalView, setModalView] = useState<boolean>(false);
+  const [bucketList, setBucketList] = useState<bucketList>([]);
+  const [selectItem, setSelectItem] = useState<number>();
   const token = useGetToken();
   const axiosPrivate = useAxiosPrivate();
   const api = token ? axiosPrivate : axios;
-  const { setModalView, setBucketList, setSelectItem } = useOutletContext<{
-    setModalView: React.Dispatch<React.SetStateAction<boolean>>;
-    setBucketList: React.Dispatch<React.SetStateAction<bucketList>>;
-    setSelectItem: React.Dispatch<React.SetStateAction<number>>;
-  }>();
+
   const { id } = useParams();
   const navigation = useNavigate();
 
-  const [productInfo, setProductInfo] = useState<productType>();
+  const [productInfo, setProductInfo] = useState<sonminsooItemInfo>();
   const [viewLoginAlert, setViewLoginAlert] = useState<boolean>(false);
 
+  let bucketListData = useMemo(() => {
+    return bucketList;
+  }, [bucketList]); //bucketList 데이터가 변경 될 때만 BucketListModal 렌더링
+
+  const fetchData = async () => {
+    try {
+      const { data } = await api.get(`/sonminsu-items/${id}`);
+      setProductInfo(data.data);
+      console.log("fetchData");
+    } catch (err) {
+      console.error(err);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await api.get(`/sonminsu-items/${id}`);
-        setProductInfo(data.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchData();
   }, [token]);
 
@@ -75,10 +63,10 @@ const SonminsooItemDetails = () => {
                       `/sonminsu-items/${id}/buckets/${productInfo?.isInMyBucket.bucketId}`
                     )
                     .then((res) => {
-                      console.log(res);
+                      console.log(res, "res!");
                       document.body.style.overflow = "unset";
                       setModalView(false);
-                      window.location.reload();
+                      fetchData();
                     })
                     .catch((err) => {})
                 : axiosPrivate
@@ -119,6 +107,18 @@ const SonminsooItemDetails = () => {
           }}
         />
       )}
+      {useMemo(() => {
+        return (
+          modalView && (
+            <BucketListModal
+              setModalOpen={setModalView}
+              itemId={selectItem}
+              bucketList={bucketListData}
+              fetchData={fetchData}
+            />
+          )
+        );
+      }, [selectItem, bucketListData, modalView])}
     </S.DetailContainer>
   );
 };

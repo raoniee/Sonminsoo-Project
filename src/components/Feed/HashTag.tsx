@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import * as S from "./style/HashTag.style";
-import { FeedHashTagProps } from "../../types/feed";
+import { FeedHashTagsProps } from "../../types/feed";
 
-const HashTag: React.FC<FeedHashTagProps> = ({ feedData }) => {
-  const [hashTag, setHashTag] = useState<string[]>([]);
-  useEffect(() => {
-    if (feedData) {
-      setHashTag(feedData.tags);
-    }
-  }, []);
+const HashTag: React.FC<FeedHashTagsProps> = ({ hashTags }) => {
   return (
     <S.HashTags>
-      {hashTag &&
-        hashTag.map((tag, index) => <S.Hash key={index}>#{tag}</S.Hash>)}
+      {hashTags.length &&
+        hashTags.map((tag, index) => <S.Hash key={index}>#{tag}</S.Hash>)}
     </S.HashTags>
   );
 };

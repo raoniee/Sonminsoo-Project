@@ -5,24 +5,9 @@ import { Link, useOutletContext } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import axios from "../../api/axios";
+import { bucketList } from "./types/SonminsooItem.type";
+import { sonminsooItemInfo } from "./types/SonminsooItem.type";
 
-type bucketList = {
-  id: string;
-  img?: string;
-  bucketName: string;
-}[];
-type sonminsooItemInfo = {
-  artistName: string;
-  groupName: string;
-  id: number;
-  imgUrl: string;
-  originUrl: string;
-  price: string;
-  title: string;
-  isInMyBucket?: {
-    bucketId: number;
-  };
-};
 const SonMinsooItemInfo = ({
   artistName,
   id,
@@ -31,13 +16,19 @@ const SonMinsooItemInfo = ({
   title,
   isInMyBucket,
 }: sonminsooItemInfo) => {
-  const { setModalView, setBucketList, setSelectItem, setViewLoginAlert } =
-    useOutletContext<{
-      setModalView: React.Dispatch<React.SetStateAction<boolean>>;
-      setViewLoginAlert: React.Dispatch<React.SetStateAction<boolean>>;
-      setBucketList: React.Dispatch<React.SetStateAction<bucketList>>;
-      setSelectItem: React.Dispatch<React.SetStateAction<number>>;
-    }>();
+  const {
+    setModalView,
+    setBucketList,
+    setSelectItem,
+    setViewLoginAlert,
+    getSonminsooItemList,
+  } = useOutletContext<{
+    setModalView: React.Dispatch<React.SetStateAction<boolean>>;
+    setViewLoginAlert: React.Dispatch<React.SetStateAction<boolean>>;
+    setBucketList: React.Dispatch<React.SetStateAction<bucketList>>;
+    setSelectItem: React.Dispatch<React.SetStateAction<number>>;
+    getSonminsooItemList: () => Promise<void>;
+  }>();
 
   const axiosPrivate = useAxiosPrivate();
   const token = useGetToken();
@@ -67,7 +58,8 @@ const SonMinsooItemInfo = ({
                     console.log(res);
                     document.body.style.overflow = "unset";
                     setModalView(false);
-                    window.location.reload();
+                    // window.location.reload();
+                    getSonminsooItemList();
                   })
 
                   .catch((err) => {})

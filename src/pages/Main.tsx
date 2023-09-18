@@ -18,11 +18,13 @@ const MainView = styled.div`
   justify-content: center;
   gap: 20px;
 `;
+
 const Title = styled.div`
   width: 167px;
   height: 30px;
   background-image: url(${title});
 `;
+
 const ContentContainer = styled.div`
   width: 100%;
   display: flex;
@@ -30,6 +32,7 @@ const ContentContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 const DoubleQuotation = styled.span`
   color: #fff;
   text-align: center;
@@ -39,6 +42,7 @@ const DoubleQuotation = styled.span`
   font-weight: 700;
   line-height: 140%;
 `;
+
 const Content = styled.span`
   color: #fff;
   text-align: center;
@@ -48,6 +52,7 @@ const Content = styled.span`
   font-weight: 400;
   line-height: 140%; /* 33.6px */
 `;
+
 const Main = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
@@ -75,6 +80,7 @@ const Main = () => {
         });
     }, 2000);
   }, []);
+
   return (
     <MainView>
       <Title />

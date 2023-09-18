@@ -1,20 +1,24 @@
-import { useSelector } from "react-redux";
-import axios from "axios";
+import { useEffect } from "react";
+import useAuth from "./useAuth";
+import { axiosPrivate } from "../api/axios";
 
 const useAxiosPrivate = () => {
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const { accessToken } = useAuth();
 
-  const axiosPrivate = axios.create({
-    baseURL: `${process.env.REACT_APP_URL}/users`,
-    headers: { Authorization: "1", "Content-Type": "application/json" },
-    withCredentials: true,
-  });
+  useEffect(() => {
+    const requestIntercept = axiosPrivate.interceptors.request.use((config) => {
+      if (!config.headers["Authorization"] && accessToken) {
+        config.headers["Authorization"] = accessToken;
+        config.baseURL += "/users";
+      }
 
-  axiosPrivate.interceptors.request.use((config) => {
-    config.headers.Authorization = token;
+      return config;
+    });
 
-    return config;
-  });
+    return () => {
+      axiosPrivate.interceptors.request.eject(requestIntercept);
+    };
+  }, [accessToken]);
 
   return axiosPrivate;
 };

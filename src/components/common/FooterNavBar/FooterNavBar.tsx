@@ -32,7 +32,7 @@ const FooterNavBar = () => {
         <S.LinkItem to="/home">
           <IconWithText text="홈" pathname={pathname} />
         </S.LinkItem>
-        <S.LinkItem to="/feed">
+        <S.LinkItem to="/feeds">
           <IconWithText text="피드" pathname={pathname} />
         </S.LinkItem>
         <S.LinkItem to="/minsooItem">
