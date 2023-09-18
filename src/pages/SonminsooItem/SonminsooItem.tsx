@@ -30,7 +30,7 @@ const SonminsooItem = () => {
   const getSonminsooItemList = async () => {
     if (auth.checkIsSignIn) {
       try {
-        const { data } = await api.get("/sonminsu-items?page=1&perPage=1");
+        const { data } = await api.get("/sonminsu-items?page=1&perPage=12");
         setSonminsooItems(data.data);
       } catch (err) {}
     }
@@ -40,7 +40,7 @@ const SonminsooItem = () => {
     startTransition(() => {
       getSonminsooItemList();
     });
-  }, [auth, axiosPrivate]);
+  }, [auth.accessToken, axiosPrivate]);
 
   let bucketListData = useMemo(() => {
     return bucketList;
