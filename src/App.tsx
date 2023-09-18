@@ -8,6 +8,7 @@ import useSocket from "./hooks/useSocket";
 import { Socket } from "socket.io-client";
 import Main from "./pages/Main";
 import useAuth from "./hooks/useAuth";
+import reducer from "./Context/Reducer";
 
 type userInfo = {
   accessToken: string;
@@ -18,33 +19,6 @@ type userInfo = {
   nickName: string;
 };
 
-export const SocketContext = createContext<Socket | undefined>(undefined);
-export const UserInfoContext = createContext<
-  { state: userInfo; dispatch: React.Dispatch<any> } | undefined
->(undefined);
-
-const reducer = (state: any, action: any) => {
-  switch (action.type) {
-    case "AUTH":
-      console.log(state, "state");
-      console.log(action, "action");
-      return {
-        ...state,
-        accessToken: action.accessToken,
-        checkIsSignIn: true,
-      };
-    case "SET_USERINFO":
-      return {
-        ...state,
-        id: action.id,
-        image: action.image,
-        introduction: action.introduction,
-        nickName: action.nickName,
-      };
-    default:
-      return state;
-  }
-};
 const initialState = {
   accessToken: "",
   checkIsSignIn: false,
@@ -53,6 +27,11 @@ const initialState = {
   introduction: "",
   nickName: "",
 };
+
+export const SocketContext = createContext<Socket | undefined>(undefined);
+export const UserInfoContext = createContext<
+  { state: userInfo; dispatch: React.Dispatch<any> } | undefined
+>(undefined);
 
 const App = () => {
   const socket = useSocket();
