@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import styled from "styled-components";
 
 const TimeCount = styled.span`
@@ -12,11 +12,14 @@ const TimeCount = styled.span`
   font-weight: 500;
   line-height: 100%;
   display: inline;
-  position: relative;
-  right: 61px;
-  top: 20px;
+  position: absolute;
+  translate: -50px 20px;
 `;
-export const Timer = () => {
+export const Timer = ({
+  setSendCode,
+}: {
+  setSendCode: React.Dispatch<SetStateAction<boolean>>;
+}) => {
   const MINUTES_IN_MS = 5 * 60 * 1000;
   const INTERVAL = 1000;
   const [timeLeft, setTimeLeft] = useState<number>(MINUTES_IN_MS);
@@ -34,10 +37,12 @@ export const Timer = () => {
 
     if (timeLeft <= 0) {
       clearInterval(timer);
+      setSendCode(false);
     }
 
     return () => {
       clearInterval(timer);
+      setSendCode(false);
     };
   }, [timeLeft]);
 

@@ -1,8 +1,12 @@
 import { styled } from "styled-components";
 
+export const TimerContainer = styled.div`
+  width: 100%;
+  position: relative;
+`;
 
 export const ContainerWrapper = styled.div`
-  width: 100%;  
+  width: 100%;
   height: 100vh;
   padding: 57px 16px 41px;
 
@@ -16,7 +20,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 `;
 
 export const Agreement = styled.h1`

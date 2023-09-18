@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition, useContext } from "react";
 import * as S from "./style/SonminsooItem.style";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import BucketListModal from "../../components/common/BucketListModal/BucketListModal";
@@ -9,6 +9,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import axios from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
+import { UserInfoContext } from "../../App";
 
 const SonminsooItem = () => {
   const [sonminsooItems, setSonminsooItems] = useState<sonminsooItemInfo[]>([]);
@@ -23,7 +24,9 @@ const SonminsooItem = () => {
   const api = token ? axiosPrivate : axios;
   const auth = useAuth();
   const navigation = useNavigate();
+  // const dispatch = useContext(UserInfoContext);
 
+  // console.log(dispatch);
   const getSonminsooItemList = async () => {
     if (auth.checkIsSignIn) {
       try {

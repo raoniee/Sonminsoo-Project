@@ -5,11 +5,13 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { Button } from "../../elements/Button";
 import ThrottlingButton from "../../components/common/ThrottlingButton/ThrottlingButton";
 import SignUpHeader2 from "../../components/SignUp/SignUpHeader2";
+import { Timer } from "./Timer";
 
 const EmailCertification = () => {
   const [authValid, setAuthValid] = useState<string>("");
   const [emailValid, setEmailValid] = useState<boolean>(true);
   const [isAuthValid, setIsAuthValid] = useState<boolean>(false);
+  const [sendCode, setSendCode] = useState<boolean>(false);
   const navigation = useNavigate();
   const { email, setEmail, setEmailCode } = useOutletContext<{
     email: string;
@@ -30,18 +32,20 @@ const EmailCertification = () => {
 
     try {
       const reponse = await axios.get(`/auth/verification-code?email=${email}`);
-    } catch (err) {}
+      setSendCode(true);
+    } catch (err) {
+      console.error(err);
+    }
   }, [email]);
   const handleEmailAuthVaildClick = useCallback(async () => {
-    await axios
-      .post(`auth/verification-code`, {
+    try {
+      const res = await axios.post(`auth/verification-code`, {
         email: email,
         code: authValid,
-      })
-      .then((res) => {
-        setEmailCode(authValid);
-        setIsAuthValid(true);
       });
+      setEmailCode(authValid);
+      setIsAuthValid(true);
+    } catch (err) {}
   }, [authValid]);
 
   return (
@@ -76,21 +80,24 @@ const EmailCertification = () => {
               boxSizing="border-box"
               color="#fff"
               onClick={handleEmailAuthClick}
-            ></ThrottlingButton>
+            />
           </S.EmailContainer>
           {!emailValid && (
             <S.EmailVaildation>이메일 형식에 맞지 않습니다.</S.EmailVaildation>
           )}
           <S.EmailContainer>
-            <S.InputEmail
-              type="text"
-              id="emailCertificaton"
-              placeholder="이메일 인증 번호를 입력해 주세요"
-              value={authValid}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setAuthValid(e.target.value)
-              }
-            />
+            <S.TimerContainer>
+              <S.InputEmail
+                type="text"
+                id="emailCertificaton"
+                placeholder="인증 코드를 입력해 주세요"
+                value={authValid}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setAuthValid(e.target.value)
+                }
+              />
+              {sendCode && <Timer setSendCode={setSendCode} />}
+            </S.TimerContainer>
             <ThrottlingButton
               background="#208df1"
               content="인증 하기"
@@ -102,7 +109,7 @@ const EmailCertification = () => {
               boxSizing="border-box"
               color="#fff"
               onClick={handleEmailAuthVaildClick}
-            ></ThrottlingButton>
+            />
           </S.EmailContainer>
           <S.TextWithLink>
             이메일 인증번호가 발송되지 않았나요?
