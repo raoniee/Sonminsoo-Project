@@ -41,12 +41,7 @@ const SignUpAgreement = ({ onClick }: { onClick: any }) => {
           </S.Paragraph>
         </S.AgreementText>
       </S.AgreementBox>
-      <Button
-        background="#6138F8"
-        border="none"
-        onClick={onClick}
-        color="#FFF"
-      >
+      <Button background="#6138F8" border="none" onClick={onClick} color="#FFF">
         확인
       </Button>
     </S.Container>

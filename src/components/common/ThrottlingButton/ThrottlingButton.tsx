@@ -10,8 +10,8 @@ const ThrottlingButton = ({
   content,
   width,
   height,
-  boxSizing,
-  whiteSpace,
+  boxsizing,
+  whitespace,
   onClick,
 }: {
   background: string;
@@ -21,8 +21,8 @@ const ThrottlingButton = ({
   color?: string;
   width?: string;
   height?: string;
-  boxSizing?: string;
-  whiteSpace?: string;
+  boxsizing?: string;
+  whitespace?: string;
   content: string;
   onClick: () => void;
 }) => {
@@ -51,8 +51,8 @@ const ThrottlingButton = ({
       color={color ? color : undefined}
       width={width ? width : undefined}
       height={height ? height : undefined}
-      boxSizing={boxSizing ? boxSizing : undefined}
-      whiteSpace={whiteSpace ? whiteSpace : undefined}
+      boxsizing={boxsizing ? boxsizing : undefined}
+      whitespace={whitespace ? whitespace : undefined}
       onClick={handleClick}
     >
       {content}

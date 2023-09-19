@@ -3,9 +3,9 @@ import axios from "../../api/axios";
 import * as S from "./style/EmailCertification.style";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { Button } from "../../elements/Button";
-import ThrottlingButton from "../../components/common/ThrottlingButton/ThrottlingButton";
-import SignUpHeader2 from "../../components/SignUp/SignUpHeader2";
-import { Timer } from "./Timer";
+import ThrottlingButton from "../common/ThrottlingButton/ThrottlingButton";
+import SignUpHeader2 from "./SignUpHeader2";
+import { Timer } from "../common/Timer";
 
 const EmailCertification = () => {
   const [authValid, setAuthValid] = useState<string>("");
@@ -20,7 +20,9 @@ const EmailCertification = () => {
   }>();
 
   const handleEmailAuthClick = useCallback(async () => {
-    console.log("handleEmailAuthClick");
+    // TODO:dependency 안먹는거 해결하기
+    // console.log("handleEmailAuthClick", email);
+
     if (
       /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(
         email
@@ -76,8 +78,8 @@ const EmailCertification = () => {
               height="50px"
               border="none"
               padding="0 16px"
-              whiteSpace="nowrap"
-              boxSizing="border-box"
+              whitespace="nowrap"
+              boxsizing="border-box"
               color="#fff"
               onClick={handleEmailAuthClick}
             />
@@ -105,8 +107,8 @@ const EmailCertification = () => {
               height="50px"
               border="none"
               padding="0 16px"
-              whiteSpace="nowrap"
-              boxSizing="border-box"
+              whitespace="nowrap"
+              boxsizing="border-box"
               color="#fff"
               onClick={handleEmailAuthVaildClick}
             />

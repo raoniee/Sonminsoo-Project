@@ -8,13 +8,13 @@ export const Button = styled.button<{
   color?: string;
   width?: string;
   height?: string;
-  boxSizing?: string;
-  whiteSpace?: string;
+  boxsizing?: string;
+  whitespace?: string;
 }>`
   ${(props) => (props.width ? `width : ${props.width}` : "width: 100%;")};
   ${(props) => (props.height ? `height : ${props.height}` : "height: 60px;")};
-  ${(props) => (props.boxSizing ? `box-sizing : ${props.boxSizing}` : "")};
-  ${(props) => (props.whiteSpace ? `white-space : ${props.whiteSpace}` : "")};
+  ${(props) => (props.boxsizing ? `box-sizing : ${props.boxsizing}` : "")};
+  ${(props) => (props.whitespace ? `white-space : ${props.whitespace}` : "")};
   border-radius: 8px;
   text-align: center;
 

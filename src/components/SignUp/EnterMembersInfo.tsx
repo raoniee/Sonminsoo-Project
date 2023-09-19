@@ -5,7 +5,7 @@ import * as S from "./style/EnterMembersInfo.style";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { Button } from "../../elements/Button";
 import SignUpHeader3 from "../../components/SignUp/SignUpHeader3";
-import { userInfoType } from "./types/SignUp.type";
+import { userInfoType } from "../../pages/Signup/types/SignUp.type";
 
 const EnterMembersInfo = () => {
   const navigation = useNavigate();
@@ -123,7 +123,7 @@ const EnterMembersInfo = () => {
   }, [userInfo.phoneNumber]);
 
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInfo((prev) => {
+    setUserInfo((prev: userInfoType) => {
       return {
         ...prev,
         [e.target.id]: e.target.value,

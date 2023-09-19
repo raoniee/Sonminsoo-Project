@@ -1,6 +1,6 @@
 import SonminsooItem from "../pages/SonminsooItem/SonminsooItem";
-import SonminsooItemList from "../pages/SonminsooItem/SonminsooItemList";
-import SonminsooItemDetails from "../pages/SonminsooItem/SonminsooItemDetails";
+import SonminsooItemList from "../components/SonminsooItem/SonminsooItemList";
+import SonminsooItemDetails from "../components/SonminsooItem/SonminsooItemDetails";
 
 export const SonminsooRouter = {
   path: "minsooItem",
