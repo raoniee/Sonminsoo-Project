@@ -26,7 +26,7 @@ const ThrottlingButton = ({
   content: string;
   onClick: () => void;
 }) => {
-  console.log("throttling Button");
+  console.log(content + "throttling Button");
   let timerId: NodeJS.Timeout | undefined;
 
   const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {

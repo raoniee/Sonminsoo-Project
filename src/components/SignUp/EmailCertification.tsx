@@ -19,10 +19,12 @@ const EmailCertification = () => {
     setEmail: (value: string) => void;
   }>();
 
+  console.log(email, "email");
   const handleEmailAuthClick = useCallback(async () => {
     // TODO:dependency 안먹는거 해결하기
-    // console.log("handleEmailAuthClick", email);
-
+    // dependency 안먹는게 아니라 함수 재생성이 안됨
+    console.log("handleEmailAuthClick", email);
+    // console.log("handleEmailAuthClick");
     if (
       /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/.test(
         email
@@ -39,7 +41,9 @@ const EmailCertification = () => {
       console.error(err);
     }
   }, [email]);
+
   const handleEmailAuthVaildClick = useCallback(async () => {
+    console.log("authValid");
     try {
       const res = await axios.post(`auth/verification-code`, {
         email: email,
