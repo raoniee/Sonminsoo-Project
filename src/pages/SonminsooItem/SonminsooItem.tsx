@@ -4,7 +4,10 @@ import * as S from "./style/SonminsooItem.style";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import BucketListModal from "../../components/common/BucketListModal/BucketListModal";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
-import { bucketList, sonminsooItemInfo } from "./types/SonminsooItem.type";
+import {
+  bucketList,
+  sonminsooItemInfo,
+} from "../../components/SonminsooItem/types/SonminsooItem.type";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import axios from "../../api/axios";
@@ -44,52 +47,50 @@ const SonminsooItem = () => {
   }, [bucketList]); //bucketList 데이터가 변경 될 때만 BucketListModal 렌더링
 
   return (
-    <>
-      <S.SonminsooItemContainer>
-        <Outlet
-          context={{
-            setModalView,
-            setBucketList,
-            setSelectItem,
-            setViewLoginAlert,
-            sonminsooItems,
-            setSonminsooItems,
-            isItemPending,
-            getSonminsooItemList,
-          }}
-        />
-        {useMemo(() => {
-          return (
-            modalView && (
-              <BucketListModal
-                setModalOpen={setModalView}
-                itemId={selectItem}
-                bucketList={bucketListData}
-                fetchData={getSonminsooItemList}
-              />
-            )
-          );
-        }, [selectItem, bucketListData, modalView])}
-        {useMemo(() => {
-          return (
-            viewLoginAlert && (
-              <AppAlertModal
-                setModalOpen={setViewLoginAlert}
-                title="로그인하기"
-                content="로그인하시겠습니까?"
-                yesContent="로그인"
-                yesClickHandler={() => {
-                  navigation("/login");
-                }}
-              />
-            )
-          );
-        }, [viewLoginAlert])}
-        {useMemo(() => {
-          return <FooterNavBar />;
-        }, [])}
-      </S.SonminsooItemContainer>
-    </>
+    <S.SonminsooItemContainer>
+      <Outlet
+        context={{
+          setModalView,
+          setBucketList,
+          setSelectItem,
+          setViewLoginAlert,
+          sonminsooItems,
+          setSonminsooItems,
+          isItemPending,
+          getSonminsooItemList,
+        }}
+      />
+      {useMemo(() => {
+        return (
+          modalView && (
+            <BucketListModal
+              setModalOpen={setModalView}
+              itemId={selectItem}
+              bucketList={bucketListData}
+              fetchData={getSonminsooItemList}
+            />
+          )
+        );
+      }, [selectItem, bucketListData, modalView])}
+      {useMemo(() => {
+        return (
+          viewLoginAlert && (
+            <AppAlertModal
+              setModalOpen={setViewLoginAlert}
+              title="로그인하기"
+              content="로그인하시겠습니까?"
+              yesContent="로그인"
+              yesClickHandler={() => {
+                navigation("/login");
+              }}
+            />
+          )
+        );
+      }, [viewLoginAlert])}
+      {useMemo(() => {
+        return <FooterNavBar />;
+      }, [])}
+    </S.SonminsooItemContainer>
   );
 };
 

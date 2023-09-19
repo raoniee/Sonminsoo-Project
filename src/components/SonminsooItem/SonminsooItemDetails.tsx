@@ -1,15 +1,15 @@
 import { useMemo, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as S from "./style/SonminsooItemDetails.style";
-import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
+import HeaderBar from "../common/HeaderBar/HeaderBar";
 import Icon from "../../elements/Icon";
 import bookmark from "../../assets/images/svg/SonminsooItem/bookmarkIcon.svg";
 import activeBookmark from "../../assets/images/svg/SonminsooItem/activebookmarkIcon.svg";
-import BucketListModal from "../../components/common/BucketListModal/BucketListModal";
+import BucketListModal from "../common/BucketListModal/BucketListModal";
 import axios from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
-import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
+import AppAlertModal from "../common/AlertModal/AppAlertModal";
 import { bucketList, sonminsooItemInfo } from "./types/SonminsooItem.type";
 
 const SonminsooItemDetails = () => {

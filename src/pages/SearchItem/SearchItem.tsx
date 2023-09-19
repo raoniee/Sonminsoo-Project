@@ -3,7 +3,7 @@ import axios from "../../api/axios";
 import * as S from "./style/SearchItem.style";
 import SearchItemHeader from "../../components/SearchItem/SearchItemHeader";
 import MinsooItem from "../../components/SearchItem/MinsooItem";
-import { sonminsooItemInfo } from "../SonminsooItem/types/SonminsooItem.type";
+import { sonminsooItemInfo } from "../../components/SonminsooItem/types/SonminsooItem.type";
 
 const SearchItem = () => {
   const [minsooItem, setMinsooItem] = useState<sonminsooItemInfo[]>([]);

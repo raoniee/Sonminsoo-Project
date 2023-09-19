@@ -5,8 +5,8 @@ import { Link, useOutletContext } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import axios from "../../api/axios";
-import { bucketList } from "./types/SonminsooItem.type";
-import { sonminsooItemInfo } from "./types/SonminsooItem.type";
+import { bucketList } from "../../components/SonminsooItem/types/SonminsooItem.type";
+import { sonminsooItemInfo } from "../../components/SonminsooItem/types/SonminsooItem.type";
 
 const SonMinsooItemInfo = ({
   artistName,

@@ -12,7 +12,7 @@ import BucketListModal from "../../components/common/BucketListModal/BucketListM
 import useGetToken from "../../hooks/useGetToken";
 import axios, { axiosPrivate } from "../../api/axios";
 
-import { sonminsooItemInfo } from "../SonminsooItem/types/SonminsooItem.type";
+import { sonminsooItemInfo } from "../../components/SonminsooItem/types/SonminsooItem.type";
 type bucketList = {
   id: number;
   img?: string;
