@@ -1,17 +1,16 @@
 import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import * as S from "./style/PasswordModify.style";
 import { Button } from "../../elements/Button";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import { useDispatch } from "react-redux";
-import { setToken } from "../../redux/config/rootReducer";
+import { UserInfoContext } from "../../App";
 
 const PasswordModify = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigation = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useContext(UserInfoContext);
   const [password, setPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [newPasswordCheck, setNewPasswordCheck] = useState<string>("");
@@ -77,7 +76,10 @@ const PasswordModify = () => {
                         .delete(`/auth/sign-out`)
                         .then((res) => {
                           console.log(res, "로그아웃");
-                          dispatch(setToken(""));
+                          dispatch?.dispatch({
+                            type: "AUTH",
+                            accessToken: "",
+                          });
                           alert("새 비밀번호로 다시 로그인 해주세요");
                           navigation("/login");
                         })

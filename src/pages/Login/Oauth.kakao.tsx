@@ -1,8 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setToken } from "../../redux/config/rootReducer";
+import { useContext, useEffect } from "react";
+import { UserInfoContext } from "../../App";
 
 export const kakaoSignInHandler = () => {
   const KAKAO_KEY = process.env.REACT_APP_KAKAO_KEY;
@@ -14,7 +13,7 @@ export const kakaoSignInHandler = () => {
 const OauthKakao = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useContext(UserInfoContext);
 
   const code = location.search.replace(/\?code=/i, "");
 
@@ -27,7 +26,10 @@ const OauthKakao = () => {
         domain,
       })
       .then((res) => {
-        dispatch(setToken(res.headers.authorization));
+        dispatch?.dispatch({
+          type: "AUTH",
+          accessToken: res.headers.authorization,
+        });
         navigate("/home");
       })
       .catch(() => navigate("/login"));

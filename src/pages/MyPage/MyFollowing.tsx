@@ -4,7 +4,7 @@ import * as S from "./style/MyFollow.style";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import MyFollowingItem from "../../components/MyPage/MyFollowingItem";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import useGetToken from "../../hooks/useGetToken";
 
 type MyFollowerAndFollowingType = {
   id: number;
@@ -16,7 +16,7 @@ type MyFollowerAndFollowingType = {
 const MyFollowing: React.FC = () => {
   let { userId } = useParams() as { userId: any };
   const axiosPrivate = useAxiosPrivate();
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
   const [followingData, setFollowingData] = useState<
     MyFollowerAndFollowingType[]
   >([]);
@@ -29,9 +29,7 @@ const MyFollowing: React.FC = () => {
     try {
       const response = await axiosPrivate.get(`/following/${userId}`);
       setFollowingData(response.data.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   return (

@@ -9,13 +9,13 @@ import axios from "../../api/axios";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import detailDate from "../../utils/time";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { RequestsType } from "../../types/request";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
+import useGetToken from "../../hooks/useGetToken";
 
 const Requests: React.FC = () => {
   const navigation = useNavigate();
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
 
   const [requestdata, setRequestData] = useState<RequestsType[]>([]);
   const [clickform, setClickForm] = useState(false);

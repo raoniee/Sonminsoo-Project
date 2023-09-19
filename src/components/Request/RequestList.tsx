@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./style/RequestLink.style";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { RequestListProps } from "../../types/request";
+import useGetToken from "../../hooks/useGetToken";
 
 const RequestList: React.FC<RequestListProps> = ({
   img,
@@ -15,7 +15,7 @@ const RequestList: React.FC<RequestListProps> = ({
 }) => {
   const axiosPrivate = useAxiosPrivate();
   const navigation = useNavigate();
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
 
   const [userdata, setUserData] = useState();
 
@@ -29,9 +29,7 @@ const RequestList: React.FC<RequestListProps> = ({
     try {
       const response = await axiosPrivate.get("/profile");
       setUserData(response.data.data.id);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   return (

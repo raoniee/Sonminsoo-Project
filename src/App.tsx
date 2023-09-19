@@ -2,8 +2,6 @@ import { createContext, useEffect, useReducer } from "react";
 import Router from "./Router";
 import { RouterProvider } from "react-router-dom";
 import axios from "./api/axios";
-import { useDispatch } from "react-redux";
-import { setToken } from "./redux/config/rootReducer";
 import useSocket from "./hooks/useSocket";
 import { Socket } from "socket.io-client";
 import Main from "./pages/Main";
@@ -35,7 +33,6 @@ export const UserInfoContext = createContext<
 
 const App = () => {
   const socket = useSocket();
-  // const dispatch = useDispatch();
   const [state, dispatch] = useReducer(reducer, initialState);
   const { checkIsSignIn } = useAuth();
 
@@ -52,7 +49,6 @@ const App = () => {
           dispatch(dispatch({ type: "AUTH", accessToken: "" }));
         }
       };
-
       tryAutoSignIn();
     }
   }, [checkIsSignIn, dispatch]);

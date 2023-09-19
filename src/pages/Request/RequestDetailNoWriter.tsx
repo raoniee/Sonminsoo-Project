@@ -12,13 +12,13 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import RequestLinkRegister from "../../components/Request/nowriter/RequestLinkRegister";
 import { Button } from "../../elements/Button";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { RequestDescType } from "../../types/request";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
+import useGetToken from "../../hooks/useGetToken";
 
 const RequestDetailNoWriter: React.FC = () => {
   const navigation = useNavigate();
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
   let { requestId } = useParams();
   const axiosPrivate = useAxiosPrivate();
 

@@ -3,7 +3,7 @@ import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import MyRequestItem from "../../components/MyPage/MyRequestItem";
 import * as S from "./style/MyRequest.style";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { useSelector } from "react-redux";
+import useGetToken from "../../hooks/useGetToken";
 
 type MyRequestType = {
   image: string;
@@ -18,7 +18,7 @@ type MyRequestType = {
 
 const MyReqeust: React.FC = () => {
   const axiosPrivate = useAxiosPrivate();
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
 
   //메뉴 상태
   const [myMenu, setMyMenu] = useState(true);
@@ -49,9 +49,7 @@ const MyReqeust: React.FC = () => {
         `/sonminsu-requests?done=true`
       );
       setClearData(responseclear.data.data);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   const clickMy = () => {

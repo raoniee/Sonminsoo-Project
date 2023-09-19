@@ -1,8 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setToken } from "../../redux/config/rootReducer";
+import { useContext, useEffect } from "react";
+import { UserInfoContext } from "../../App";
 
 export const googleSignIngHandler = () => {
   const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -14,7 +13,7 @@ export const googleSignIngHandler = () => {
 const OauthGoogle = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useContext(UserInfoContext);
 
   const url = new URLSearchParams(location.search);
   const code = url.get("code");
@@ -28,7 +27,10 @@ const OauthGoogle = () => {
         domain,
       })
       .then((res) => {
-        dispatch(setToken(res.headers.authorization));
+        dispatch?.dispatch({
+          type: "AUTH",
+          accessToken: res.headers.authorization,
+        });
         navigate("/home");
       })
       .catch(() => navigate("/login"));

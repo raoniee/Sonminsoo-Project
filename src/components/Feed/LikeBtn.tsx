@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import * as S from "./style/LikeBtn.style";
 import heart from "../../assets/images/svg/ic-heart.svg";
 import fillheart from "../../assets/images/svg/fillheart.svg";
+import useGetToken from "../../hooks/useGetToken";
 type LikeBtnProps = {
   feedId: number;
 };
 
 const LikeBtn: React.FC<LikeBtnProps> = ({ feedId }) => {
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
   const [likeCount, setLikeCount] = useState<number>(0);
   const [liked, setLiked] = useState(false);
   const axiosPrivate = useAxiosPrivate();
@@ -23,9 +23,7 @@ const LikeBtn: React.FC<LikeBtnProps> = ({ feedId }) => {
       const response = await axiosPrivate.get(`/feeds/${feedId}`);
       setLikeCount(response.data.data.likes);
       setLiked(response.data.data.isLike);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
   const toggleLike = async (feedId: number) => {
     if (token) {
@@ -36,7 +34,6 @@ const LikeBtn: React.FC<LikeBtnProps> = ({ feedId }) => {
         setLiked(response.data.isLike);
         setLikeCount(response.data.likes);
       } catch (error) {
-        
       } finally {
         fetchLike();
       }

@@ -1,7 +1,7 @@
 import * as S from "./style/SominsooNewsContents.style";
 
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+
 import detailDate from "../../utils/time";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useParams, useNavigate } from "react-router-dom";
@@ -49,7 +49,6 @@ const SonminsooNewsContents: React.FC<NewsProps> = ({ item }) => {
       setLiked(response.data.isLike);
       setLikeCount(response.data.likes);
     } catch (error) {
-      
     } finally {
       fetchLike();
     }
@@ -59,9 +58,7 @@ const SonminsooNewsContents: React.FC<NewsProps> = ({ item }) => {
       const response = await axiosPrivate.get(`/feeds/${item.id}`);
       setLikeCount(response.data.data.likes);
       setLiked(response.data.data.isLike);
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   };
 
   const navigate = useNavigate();

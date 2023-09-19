@@ -5,8 +5,8 @@ import pushginoff from "../../../assets/images/svg/ic-pushpin.svg";
 import pushginon from "../../../assets/images/svg/ic-pushpin-on.svg";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { RequestWriterTitleProps } from "../../../types/request";
+import useGetToken from "../../../hooks/useGetToken";
 
 const RequestDetaiNoWriterlHeader: React.FC<RequestWriterTitleProps> = ({
   title,
@@ -18,7 +18,7 @@ const RequestDetaiNoWriterlHeader: React.FC<RequestWriterTitleProps> = ({
   bookmarkdata,
 }) => {
   const navigation = useNavigate();
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
 
   //const [bookmarkdata, setBookMarkData] = useState("");
   //const [pushpinvalue, setPushPinValue] = useState(bookmarkstate);
@@ -30,9 +30,7 @@ const RequestDetaiNoWriterlHeader: React.FC<RequestWriterTitleProps> = ({
         `/sonminsu-requests/${id}/bookmarks`
       );
       setBookMarkData((prev) => !prev);
-    } catch (err) {
-      
-    }
+    } catch (err) {}
   };
 
   return (

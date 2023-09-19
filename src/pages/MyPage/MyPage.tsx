@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import MyBucketList from "../../components/MyPage/MyBucketList";
 import MypageMenuModal from "../../components/MyPage/MypageMenuModal";
-import { useSelector } from "react-redux";
+import useGetToken from "../../hooks/useGetToken";
 
 type UserData = {
   id: number;
@@ -43,7 +43,7 @@ const MyPage: React.FC = () => {
   let { userId } = useParams() as { userId: any };
   const axiosPrivate = useAxiosPrivate();
   const navigation = useNavigate();
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
 
   //get 데이터
   const [userdata, setUserData] = useState<UserData>();

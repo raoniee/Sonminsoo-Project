@@ -1,14 +1,13 @@
-import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
+import { UserInfoContext } from "../../App";
 import { Button } from "../../elements/Button";
 import useInput from "../../hooks/useInput";
-import { setToken } from "../../redux/config/rootReducer";
 import * as S from "./style/InitInfo.style";
 
 const InitInfo = () => {
-  const dispatch = useDispatch();
+  const dispatch = useContext(UserInfoContext);
   const navigation = useNavigate();
   const [nickName, setNickName] = useInput("");
   const [introduction, setIntroduction] = useInput("");
@@ -95,9 +94,12 @@ const InitInfo = () => {
                 headers: { "Content-Type": "multipart/form-data" },
               })
               .then((response) => {
-                dispatch(setToken(response.headers.authorization));
+                dispatch?.dispatch({
+                  type: "AUTH",
+                  accessToken: response.headers.authorization,
+                });
                 navigation("/home");
-              })
+              });
           }}
         >
           완료
