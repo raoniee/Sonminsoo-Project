@@ -10,7 +10,10 @@ import axios from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import AppAlertModal from "../common/AlertModal/AppAlertModal";
-import { bucketList, sonminsooItemInfo } from "./types/SonminsooItem.type";
+import {
+  bucketList,
+  sonminsooItemInfo,
+} from "../../pages/SonminsooItem/types/SonminsooItem.type";
 
 const SonminsooItemDetails = () => {
   const [modalView, setModalView] = useState<boolean>(false);

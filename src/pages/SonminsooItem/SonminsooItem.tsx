@@ -4,10 +4,7 @@ import * as S from "./style/SonminsooItem.style";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import BucketListModal from "../../components/common/BucketListModal/BucketListModal";
 import AppAlertModal from "../../components/common/AlertModal/AppAlertModal";
-import {
-  bucketList,
-  sonminsooItemInfo,
-} from "../../components/SonminsooItem/types/SonminsooItem.type";
+import { bucketList, sonminsooItemInfo } from "./types/SonminsooItem.type";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
 import axios from "../../api/axios";

@@ -18,7 +18,7 @@ import useGetToken from "../../hooks/useGetToken";
 import { Link, useOutletContext } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import SonMinsooItemInfo from "./SonMinsooItemInfo";
-import { sonminsooItemInfo } from "./types/SonminsooItem.type";
+import { sonminsooItemInfo } from "../../pages/SonminsooItem/types/SonminsooItem.type";
 
 const SonminsooItemList = () => {
   const token = useGetToken();
