@@ -1,14 +1,14 @@
 import React, { useState, useRef } from "react";
-import { useSelector } from "react-redux";
 import edit from "../../assets/images/svg/ic-edit.svg";
 import setting from "../../assets/images/svg/ic-settings.svg";
 import logo from "../../assets/images/svg/logo.svg";
 import * as S from "./style/FeedHeaderBar.style";
 import { useNavigate } from "react-router-dom";
+import useGetToken from "../../hooks/useGetToken";
 
 const FeedHeaderBar = () => {
   const navigate = useNavigate();
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   // 선택된 이미지의 URL을 저장하기 위한 상태

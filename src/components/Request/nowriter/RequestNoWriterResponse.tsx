@@ -3,7 +3,6 @@ import * as S from "../style/RequestNoWriterResponse.style";
 import LinkAttachItem from "../LinkAttachItem";
 import detailDate from "../../../utils/time";
 import select from "../../../assets/images/svg/ic-select.svg";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { RequestAnswerProps } from "../../../types/request";
 
@@ -17,7 +16,6 @@ const RequestNoWriterResponse: React.FC<RequestAnswerProps> = ({
   answerIsChoosed,
 }) => {
   const navigation = useNavigate();
-  const token = useSelector(({ auth }) => auth.accessToken);
 
   const clickProfile = () => {
     navigation(`/mypage/${answeruserid}`);

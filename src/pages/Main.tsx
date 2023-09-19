@@ -1,12 +1,10 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { Outlet } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
-import { setToken } from "../redux/config/rootReducer";
 import background from "../assets/images/svg/Main/Background.svg";
 import title from "../assets/images/svg/Main/title.svg";
 import styled from "styled-components";
+import { UserInfoContext } from "../App";
 
 const MainView = styled.div`
   width: 100%;
@@ -54,15 +52,18 @@ const Content = styled.span`
 `;
 
 const Main = () => {
-  const dispatch = useDispatch();
   const navigation = useNavigate();
+  const dispatch = useContext(UserInfoContext);
 
   useEffect(() => {
     setTimeout(() => {
       axios
         .get("/auth/auto-sign-in")
         .then(({ headers }) => {
-          dispatch(setToken(headers.authorization));
+          dispatch?.dispatch({
+            type: "AUTH",
+            accessToken: headers.authorization,
+          });
           navigation("/home");
         })
         .catch(({ response }) => {
@@ -71,7 +72,10 @@ const Main = () => {
             axios
               .delete("/auth/sign-out")
               .then((response) => {
-                dispatch(setToken(""));
+                dispatch?.dispatch({
+                  type: "AUTH",
+                  accessToken: "",
+                });
               })
               .catch((error) => {
                 navigation("/login");

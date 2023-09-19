@@ -3,16 +3,16 @@ import * as S from "./style/SignUpComplete.style";
 import complete from "../../assets/images/svg/complete.svg";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import axios from "../../api/axios";
-import { useDispatch } from "react-redux";
-import { setToken } from "../../redux/config/rootReducer";
+import { useContext } from "react";
+import { UserInfoContext } from "../../App";
 
 const SignUpComplete = () => {
+  const dispatch = useContext(UserInfoContext);
   const navigation = useNavigate();
   const { email, password } = useOutletContext<{
     email: string;
     password: string;
   }>();
-  const dispatch = useDispatch();
 
   return (
     <S.ContainerWrapper>
@@ -37,14 +37,14 @@ const SignUpComplete = () => {
                 navigation("/initInfo");
               }
               if (response.status === 201) {
-                //TODO: setToken
-                dispatch(setToken(response.headers.authorization));
+                dispatch?.dispatch({
+                  type: "AUTH",
+                  accessToken: response.headers.authorization,
+                });
                 navigation("/home");
               }
             })
-            .catch((error) => {
-              
-            });
+            .catch((error) => {});
         }}
       >
         로그인 하러가기

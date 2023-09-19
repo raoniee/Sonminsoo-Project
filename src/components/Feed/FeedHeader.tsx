@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import more from "../../assets/images/svg/ic-more-horizontal.svg";
 import detailDate from "../../utils/time";
 import * as S from "./style/FeedHeader.style";
 import { FeedHeaderProps } from "../../types/feed";
+import useGetToken from "../../hooks/useGetToken";
 
 const FeedHeader: React.FC<FeedHeaderProps> = ({
   feedId,
@@ -18,7 +18,7 @@ const FeedHeader: React.FC<FeedHeaderProps> = ({
   const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
   const [userId, setUserId] = useState<number | undefined>();
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
   useEffect(() => {
     fetchUser();
   }, []);

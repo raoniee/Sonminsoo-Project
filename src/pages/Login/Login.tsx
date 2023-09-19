@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "../../redux/config/rootReducer";
 import axios from "../../api/axios";
 import * as S from "./style/Login.style";
 import { Button } from "../../elements/Button";
@@ -12,19 +10,19 @@ import kakao from "../../assets/images/svg/kakaoTalk.svg";
 import google from "../../assets/images/png/google.png";
 import { kakaoSignInHandler } from "./Oauth.kakao";
 import { googleSignIngHandler } from "./Oauth.google";
+import { UserInfoContext } from "../../App";
+import useGetToken from "../../hooks/useGetToken";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useContext(UserInfoContext);
   const navigation = useNavigate();
-  const auth = useSelector((state: any) => {
-    return state.auth.accessToken;
-  });
+  const token = useGetToken();
   useEffect(() => {
-    if (auth) navigation("/home");
-  }, [auth, navigation]);
+    if (token) navigation("/home");
+  }, [token]);
 
   return (
     <S.Container>
@@ -78,7 +76,10 @@ const Login = () => {
                       navigation("/initInfo");
                     }
                     if (response.status === 201) {
-                      dispatch(setToken(response.headers.authorization));
+                      dispatch?.dispatch({
+                        type: "AUTH",
+                        accessToken: response.headers.authorization,
+                      });
                       navigation("/home");
                     }
                   })

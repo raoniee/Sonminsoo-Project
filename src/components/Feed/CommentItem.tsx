@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
 import detailDate from "../../utils/time";
 import * as S from "./style/CommentItem.style";
 import commentmore from "../../assets/images/svg/ic-more-vertical-16.svg";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useGetToken from "../../hooks/useGetToken";
 
 type CommentType = {
   id: number;
@@ -25,7 +25,7 @@ type CommentItemProps = {
 const CommentItem: React.FC<CommentItemProps> = ({ comment, showModal }) => {
   const [openedModalId, setOpenedModalId] = useState<number | null>(null);
   const modalRef = useRef<HTMLDivElement | null>(null);
-  const token = useSelector(({ auth }) => auth.accessToken);
+  const token = useGetToken();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
