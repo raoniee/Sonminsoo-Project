@@ -13,14 +13,14 @@ const Check = styled.img`
   width: 12px;
   height: 12px;
 `;
-const Number = styled.div<{ ative: boolean }>`
+const Number = styled.div<{ active: boolean }>`
   width: 20px;
   height: 20px;
   border-radius: 50%;
   text-align: center;
   line-height: 20px;
-  color: ${(props) => (props.ative ? "#fff" : "#B0B0B0")};
-  background: ${(props) => (props.ative ? "#6138F8" : "#EBEEF2")};
+  color: ${(props) => (props.active ? "#fff" : "#B0B0B0")};
+  background: ${(props) => (props.active ? "#6138F8" : "#EBEEF2")};
   padding-top: 1px;
 `;
 const LineBlue = styled.div`
@@ -37,13 +37,13 @@ const LineGray = styled.div`
 const SignUpHeader2 = () => {
   return (
     <Wrap>
-      <Number ative={true}>
+      <Number active={true}>
         <Check src={check} />
       </Number>
       <LineBlue></LineBlue>
-      <Number ative={true}>2</Number>
+      <Number active={true}>2</Number>
       <LineGray></LineGray>
-      <Number ative={false}>3</Number>
+      <Number active={false}>3</Number>
     </Wrap>
   );
 };

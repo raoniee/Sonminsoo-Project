@@ -1,4 +1,6 @@
-const reducer = (state: any, action: any) => {
+import { userInfo, actionType } from "../types/contextUserInfo";
+
+const reducer = (state: userInfo, action: actionType): userInfo => {
   switch (action.type) {
     case "AUTH":
       console.log(state, "state");

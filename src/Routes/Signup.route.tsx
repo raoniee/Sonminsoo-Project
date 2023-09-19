@@ -1,8 +1,8 @@
+import EmailCertification from "../components/SignUp/EmailCertification";
+import EnterMembersInfo from "../components/SignUp/EnterMembersInfo";
+import SignUpComplete from "../components/SignUp/SignUpComplete";
+import Terms from "../components/SignUp/Terms";
 import Signup from "../pages/Signup/Signup";
-import Terms from "../pages/Signup/Terms";
-import EmailCertification from "../pages/Signup/EmailCertification";
-import EnterMembersInfo from "../pages/Signup/EnterMembersInfo";
-import SignUpComplete from "../pages/Signup/SignUpComplete";
 
 export const SignupRouter = {
   path: "signup",

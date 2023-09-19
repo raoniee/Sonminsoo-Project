@@ -7,15 +7,7 @@ import { Socket } from "socket.io-client";
 import Main from "./pages/Main";
 import useAuth from "./hooks/useAuth";
 import reducer from "./Context/Reducer";
-
-type userInfo = {
-  accessToken: string;
-  checkIsSignIn: boolean;
-  id: number;
-  image: string;
-  introduction: string;
-  nickName: string;
-};
+import { userInfo } from "./types/contextUserInfo";
 
 const initialState = {
   accessToken: "",
@@ -34,6 +26,7 @@ export const UserInfoContext = createContext<
 const App = () => {
   const socket = useSocket();
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const { checkIsSignIn } = useAuth();
 
   useEffect(() => {
@@ -46,7 +39,7 @@ const App = () => {
           console.log(res);
           dispatch({ type: "AUTH", accessToken: res.headers.authorization });
         } catch {
-          dispatch(dispatch({ type: "AUTH", accessToken: "" }));
+          dispatch({ type: "AUTH", accessToken: "" });
         }
       };
       tryAutoSignIn();
