@@ -26,21 +26,24 @@ const ThrottlingButton = ({
   content: string;
   onClick: () => void;
 }) => {
-  console.log("throttling Button");
+  // console.log(content + "throttling Button");
   let timerId: NodeJS.Timeout | undefined;
 
-  const handleClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    console.log("onClick");
-    if (timerId) {
-      return;
-    }
-    onClick();
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      console.log("onClick");
+      if (timerId) {
+        return;
+      }
+      onClick();
 
-    timerId = setTimeout(() => {
-      timerId = undefined;
-    }, 2000);
-  }, []);
+      timerId = setTimeout(() => {
+        timerId = undefined;
+      }, 2000);
+    },
+    [onClick]
+  );
 
   return (
     <Button
@@ -64,3 +67,5 @@ export default React.memo(
   ThrottlingButton,
   (prevProps, nextProps) => prevProps.onClick === nextProps.onClick
 );
+
+// export default ThrottlingButton;
