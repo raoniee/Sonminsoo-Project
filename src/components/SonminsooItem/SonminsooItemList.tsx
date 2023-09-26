@@ -3,7 +3,7 @@ import React, {
   useMemo,
   useRef,
   useState,
-  useTransition,
+  useCallback,
 } from "react";
 
 import EmptyItem from "./EmptyItem";
@@ -19,51 +19,69 @@ import { Link, useOutletContext } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import SonMinsooItemInfo from "./SonMinsooItemInfo";
 import { sonminsooItemInfo } from "../../pages/SonminsooItem/types/SonminsooItem.type";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
 const SonminsooItemList = () => {
   const token = useGetToken();
+  let count = 9;
 
-  const { sonminsooItems, isItemPending } = useOutletContext<{
-    sonminsooItems: sonminsooItemInfo[];
-    isItemPending: boolean;
-  }>();
+  const { sonminsooItems, isItemPending, setSonminsooItems } =
+    useOutletContext<{
+      sonminsooItems: sonminsooItemInfo[];
+      setSonminsooItems: React.Dispatch<
+        React.SetStateAction<sonminsooItemInfo[]>
+      >;
+      isItemPending: boolean;
+    }>();
+  const axiosPrivate = useAxiosPrivate();
+  const api = token ? axiosPrivate : axios;
+  const [isLoaded, setIsLoaded] = useState(false);
+  let timerId: NodeJS.Timeout | undefined;
 
-  let options = {
-    root: null, // 타켓 요소가 "어디에" 들어왔을때 콜백함수를 실행할 것인지 결정합니다. null이면 viewport가 root로 지정됩니다.
-    //root: document.querySelector('#scrollArea'), => 특정 요소를 선택할 수도 있습니다.
-    rootMargin: "0px", // root에 마진값을 주어 범위를 확장 가능합니다.
-    threshold: 1, // 타겟 요소가 얼마나 들어왔을때 백함수를 실행할 것인지 결정합니다. 1이면 타겟 요소 전체가 들어와야 합니다.
-  };
+  const onIntersect: IntersectionObserverCallback = useCallback(
+    async ([entry], observer) => {
+      if (!!timerId) {
+        console.log("return");
+        return;
+      }
+      if (isLoaded) {
+        console.log("true");
+      }
+      timerId = setTimeout(() => {
+        timerId = undefined;
+      }, 500);
 
-  //  관측되었을 경우 실행할 콜백함수입니다.
-  let callback = () => {
-    console.log("관측되었습니다.");
-  };
+      console.log("timerId", timerId);
+      if (entry.isIntersecting && !isLoaded) {
+        console.log("start");
+        observer.unobserve(entry.target);
 
-  // observer를 선언합니다.
-  // 첫 번째 인자로 관측되었을 경우 실행할 콜백함수를 넣습니다.
-  // 두 번째 인자로 관측에 대한 옵션을 지정합니다.
-  let observer = new IntersectionObserver(callback, options);
+        setIsLoaded(() => true);
+        try {
+          count += 6;
+          const { data } = await api.get(
+            `/sonminsu-items?page=1&perPage=${count}`
+          );
+          console.log("setItem!", count);
+          setSonminsooItems(data.data);
+          setIsLoaded(() => false);
+        } catch (err) {
+          setIsLoaded(() => false);
+        }
 
-  //  타겟 요소를 지정합니다.
-  // React에서는 useRef를 활용하여 DOM을 선택합니다.
-  const infiniteScrollRef = useRef<HTMLDivElement>(null);
-  const [isPageEnd, setIsPageEnd] = useState<boolean>(false);
-  useEffect(() => {
-    if (!infiniteScrollRef.current) return;
+        observer.observe(entry.target);
+      }
+    },
+    []
+  );
 
-    observer.observe(infiniteScrollRef.current);
-
-    console.log(
-      infiniteScrollRef.current.scrollHeight,
-      "infiniteScrollRef.current"
-    );
-    // return () => observer.unobserve(infiniteScrollRef.current);
-  }, []);
-
-  // observer.observe(target); // ✅ 타겟 요소 관측 시작
-  // observer.unobserve(target); // ✅ 타겟 요소 관측 종료
-
+  //현재 대상 및 option을 props로 전달
+  const { setTarget } = useIntersectionObserver({
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.3,
+    onIntersect,
+  });
   return (
     <>
       {useMemo(() => {
@@ -98,7 +116,7 @@ const SonminsooItemList = () => {
             </S.LinkRequestList>
             <S.SonminsooItemListContainer>
               <S.SonminsooItemTitle>손민수템</S.SonminsooItemTitle>
-              <S.SonminsooItemsContainer ref={infiniteScrollRef}>
+              <S.SonminsooItemsContainer>
                 {isItemPending || sonminsooItems.length === 0 ? (
                   <EmptyItem />
                 ) : (
@@ -119,42 +137,12 @@ const SonminsooItemList = () => {
                   })
                 )}
               </S.SonminsooItemsContainer>
+
+              <div ref={setTarget} />
             </S.SonminsooItemListContainer>
           </S.SonminsooListWrapper>
         );
       }, [isItemPending, sonminsooItems])}
-      {/* <S.SonminsooListWrapper>
-        <S.LinkRequestList to="/requests">
-          <span>손민수템 의뢰 리스트</span>
-          <span>
-            <S.NavImg />
-          </span>
-        </S.LinkRequestList>
-        <S.SonminsooItemListContainer>
-          <S.SonminsooItemTitle>손민수템</S.SonminsooItemTitle>
-          <S.SonminsooItemsContainer>
-            {isItemPending || sonminsooItems.length === 0 ? (
-              <EmptyItem />
-            ) : (
-              sonminsooItems.map((data) => {
-                return (
-                  <SonMinsooItemInfo
-                    key={data.id}
-                    groupName={data.groupName}
-                    id={data.id}
-                    originUrl={data.originUrl}
-                    imgUrl={data.imgUrl}
-                    artistName={data.artistName}
-                    title={data.title}
-                    price={data.price}
-                    isInMyBucket={data?.isInMyBucket}
-                  />
-                );
-              })
-            )}
-          </S.SonminsooItemsContainer>
-        </S.SonminsooItemListContainer>
-      </S.SonminsooListWrapper> */}
     </>
   );
 };
