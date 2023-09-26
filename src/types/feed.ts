@@ -30,6 +30,17 @@ export type SonminsuItem = {
   groupName: string;
   artistName: string;
 };
+export type SonminsooItemType = {
+  id: number;
+  originUrl: string;
+  title: string;
+  price: number;
+  imgUrl: string;
+  groupName: string;
+  artistName: string;
+  isInBucket: boolean;
+  createdAt: string;
+};
 
 export type FeedAuthor = {
   id: number;
@@ -52,8 +63,6 @@ export type FeedHeaderProps = {
   author: FeedAuthor;
   fandom: FeedFandom;
   createdAt: string;
-  setIsFeedDelete: React.Dispatch<React.SetStateAction<boolean>>;
-  setFeedId: React.Dispatch<React.SetStateAction<number | undefined>>;
 };
 
 export type FeedTextProps = {
@@ -62,4 +71,25 @@ export type FeedTextProps = {
 
 export type FeedHashTagsProps = {
   hashTags: string[];
+};
+export type FeedItemProps = {
+  feedItems: number[];
+};
+
+export type CommentBoxProps = {
+  feedId: number;
+  comments: number;
+};
+export type CommentType = {
+  id: number;
+  feedId: number;
+  createdAt: string;
+  content: string;
+  parent: number;
+  author: {
+    id: number;
+    image: string;
+    nickName: string;
+  };
+  replies?: {};
 };

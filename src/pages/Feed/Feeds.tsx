@@ -20,7 +20,7 @@ const Feeds = () => {
       };
       fetchData();
     }
-  }, [auth.accessToken, axiosPrivate]);
+  }, [auth.checkIsSignIn, axiosPrivate]);
 
   return (
     <S.FeedContainer>

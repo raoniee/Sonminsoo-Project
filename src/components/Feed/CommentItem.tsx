@@ -2,21 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 import detailDate from "../../utils/time";
 import * as S from "./style/CommentItem.style";
 import commentmore from "../../assets/images/svg/ic-more-vertical-16.svg";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useGetToken from "../../hooks/useGetToken";
+import { CommentType } from "../../types/feed";
 
-type CommentType = {
-  id: number;
-  feedId: number;
-  createdAt: string;
-  content: string;
-  parent: number;
-  author: {
-    id: number;
-    image: string;
-    nickName: string;
-  };
-};
 type CommentItemProps = {
   comment: CommentType;
   showModal: (commentId: number) => void;
