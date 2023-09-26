@@ -34,19 +34,19 @@ type SonminsuItem = {
 export type CommentBtnProps = {
   commentOpen: () => void;
   commentClicked: boolean;
-  feedData: Data;
+  comments: number;
 };
 
 const CommentBtn: React.FC<CommentBtnProps> = ({
   commentOpen,
   commentClicked,
-  feedData,
+  comments,
 }) => {
   return (
     <S.CommentBtnContainer>
       <S.CommentIcon $commentClicked={commentClicked} onClick={commentOpen} />
       <S.CommentNumber $commentClicked={commentClicked}>
-        {feedData?.comments}
+        {comments}
       </S.CommentNumber>
     </S.CommentBtnContainer>
   );

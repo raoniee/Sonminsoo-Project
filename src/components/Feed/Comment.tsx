@@ -1,61 +1,48 @@
-import React, { useState, useEffect } from "react";
-import axios from "../../api/axios";
+import React, { useState } from "react";
 import CommentItem from "../Feed/CommentItem";
 import * as S from "./style/Comment.style";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { CommentType } from "../../types/feed";
 
-type CommentType = {
-  id: number;
-  feedId: number;
-  createdAt: string;
-  content: string;
-  parent: number;
-  author: {
-    id: number;
-    image: string;
-    nickName: string;
-  };
-  replies?: {};
-};
 type FeedCommentProps = {
   showModal: (commentId: number) => void;
-  comments: CommentType[];
+  commentsData: CommentType[];
   feedId: number;
-  fetchFeedData: () => Promise<void>;
 };
 
 const Comment: React.FC<FeedCommentProps> = ({
-  comments,
+  commentsData,
   showModal,
   feedId,
-  fetchFeedData,
 }) => {
   const axiosPrivate = useAxiosPrivate();
   const [commentInput, setCommentInput] = useState<string>("");
-  const [commentList, setCommentList] = useState<CommentType[]>(comments);
+  const [commentList, setCommentList] = useState<CommentType[]>([]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCommentInput(event.target.value);
   };
 
-  const submitComments = async (id: number) => {
+  const submitComments = async (feedId: number) => {
     if (!commentInput.trim()) {
       return;
     }
     try {
-      const response = await axiosPrivate.post(`/comments/${id}`, {
+      const response = await axiosPrivate.post(`/comments/${feedId}`, {
         parentId: null,
         content: commentInput,
       });
       setCommentInput("");
       setCommentList([...commentList, response.data.data]);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
-      {commentList &&
-        commentList.map((comment) => {
+      {commentsData &&
+        commentsData.map((comment) => {
           return (
             <CommentItem
               key={comment.id}
@@ -75,7 +62,6 @@ const Comment: React.FC<FeedCommentProps> = ({
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             submitComments(feedId);
-            fetchFeedData();
           }}
         />
       </S.CommentInput>

@@ -1,6 +1,8 @@
 import React from "react";
+
 import FeedHeader from "./FeedHeader";
 import FeedContent from "./FeedContent";
+import CommentBox from "./CommentBox";
 import * as S from "../../pages/Feed/style/Feed.style";
 import { FeedProps } from "../../types/feed";
 
@@ -15,6 +17,7 @@ const FeedItem: React.FC<FeedProps> = ({ feedData }) => {
       />
       <S.FeedImage src={feedData.image} />
       <FeedContent feedData={feedData} />
+      <CommentBox feedId={feedData.id} comments={feedData.comments} />
     </>
   );
 };

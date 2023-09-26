@@ -75,3 +75,21 @@ export type FeedHashTagsProps = {
 export type FeedItemProps = {
   feedItems: number[];
 };
+
+export type CommentBoxProps = {
+  feedId: number;
+  comments: number;
+};
+export type CommentType = {
+  id: number;
+  feedId: number;
+  createdAt: string;
+  content: string;
+  parent: number;
+  author: {
+    id: number;
+    image: string;
+    nickName: string;
+  };
+  replies?: {};
+};
