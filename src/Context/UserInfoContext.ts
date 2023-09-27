@@ -1,6 +1,11 @@
-import { createContext } from "react";
-import { userInfo } from "../types/contextUserInfo";
+import React, { createContext } from "react";
+import { actionType, userInfo } from "../types/contextUserInfo";
 
-export const UserInfoContext = createContext<
-  { state: userInfo; dispatch: React.Dispatch<any> } | undefined
+type userInfoDispatch = React.Dispatch<actionType>;
+
+export const userInfoStateContext = createContext<userInfo | undefined>(
+  undefined
+);
+export const userInfoDispatchContext = createContext<
+  userInfoDispatch | undefined
 >(undefined);

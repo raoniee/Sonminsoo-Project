@@ -4,7 +4,7 @@ import axios from "../api/axios";
 import background from "../assets/images/svg/Main/Background.svg";
 import title from "../assets/images/svg/Main/title.svg";
 import styled from "styled-components";
-import { UserInfoContext } from "../Context/UserInfoContext";
+import { useUserInfoDispatch } from "../hooks/useUserInfo";
 
 const MainView = styled.div`
   width: 100%;
@@ -53,14 +53,14 @@ const Content = styled.span`
 
 const Main = () => {
   const navigation = useNavigate();
-  const dispatch = useContext(UserInfoContext);
+  const dispatch = useUserInfoDispatch();
 
   useEffect(() => {
     setTimeout(() => {
       axios
         .get("/auth/auto-sign-in")
         .then(({ headers }) => {
-          dispatch?.dispatch({
+          dispatch({
             type: "AUTH",
             accessToken: headers.authorization,
           });
@@ -72,7 +72,7 @@ const Main = () => {
             axios
               .delete("/auth/sign-out")
               .then((response) => {
-                dispatch?.dispatch({
+                dispatch({
                   type: "AUTH",
                   accessToken: "",
                 });

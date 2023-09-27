@@ -2,12 +2,11 @@ import HeaderBar from "../../components/common/HeaderBar/HeaderBar";
 import * as S from "./style/SettingList.style";
 import axios from "../../api/axios";
 import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
-import { UserInfoContext } from "../../Context/UserInfoContext";
+import { useUserInfoDispatch } from "../../hooks/useUserInfo";
 
 const SettingList = () => {
   const navigation = useNavigate();
-  const dispatch = useContext(UserInfoContext);
+  const dispatch = useUserInfoDispatch();
 
   return (
     <>
@@ -26,7 +25,7 @@ const SettingList = () => {
           onClick={async () => {
             try {
               await axios.delete(`/auth/sign-out`);
-              dispatch?.dispatch({
+              dispatch({
                 type: "AUTH",
                 accessToken: "",
               });

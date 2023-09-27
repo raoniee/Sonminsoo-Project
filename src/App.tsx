@@ -1,18 +1,16 @@
-import { useEffect, useReducer } from "react";
+import { useEffect } from "react";
 import Router from "./Router";
 import { RouterProvider } from "react-router-dom";
 import axios from "./api/axios";
 import useSocket from "./hooks/useSocket";
 import Main from "./pages/Main";
 import useAuth from "./hooks/useAuth";
-import reducer from "./Context/Reducer";
-import { INITUSERINFO } from "./constant/UserInfoInitialState";
 import { SocketContext } from "./Context/SocketContext";
-import { UserInfoContext } from "./Context/UserInfoContext";
+import { useUserInfoDispatch } from "./hooks/useUserInfo";
 
 const App = () => {
   const socket = useSocket();
-  const [state, dispatch] = useReducer(reducer, INITUSERINFO);
+  const dispatch = useUserInfoDispatch();
   const { accessToken, checkIsSignIn } = useAuth();
 
   useEffect(() => {
@@ -31,14 +29,12 @@ const App = () => {
       };
       tryAutoSignIn();
     }
-  }, [accessToken, checkIsSignIn]);
+  }, [accessToken, checkIsSignIn, dispatch]);
 
   return (
-    <UserInfoContext.Provider value={{ state, dispatch }}>
-      <SocketContext.Provider value={socket}>
-        <RouterProvider router={Router} fallbackElement={<Main />} />
-      </SocketContext.Provider>
-    </UserInfoContext.Provider>
+    <SocketContext.Provider value={socket}>
+      <RouterProvider router={Router} fallbackElement={<Main />} />
+    </SocketContext.Provider>
   );
 };
 

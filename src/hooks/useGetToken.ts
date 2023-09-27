@@ -1,13 +1,8 @@
-import { useContext, useMemo } from "react";
-import { UserInfoContext } from "../Context/UserInfoContext";
+import { useUserInfoState } from "./useUserInfo";
 
 const useGetToken = () => {
-  const dispatch = useContext(UserInfoContext);
+  const userInfo = useUserInfoState();
 
-  const returnValue = useMemo(() => {
-    return dispatch?.state.accessToken;
-  }, [dispatch?.state.accessToken]);
-
-  return returnValue;
+  return userInfo.accessToken;
 };
 export default useGetToken;

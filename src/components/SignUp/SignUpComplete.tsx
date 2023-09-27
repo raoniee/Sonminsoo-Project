@@ -3,11 +3,10 @@ import * as S from "./style/SignUpComplete.style";
 import complete from "../../assets/images/svg/complete.svg";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import axios from "../../api/axios";
-import { useContext } from "react";
-import { UserInfoContext } from "../../Context/UserInfoContext";
+import { useUserInfoDispatch } from "../../hooks/useUserInfo";
 
 const SignUpComplete = () => {
-  const dispatch = useContext(UserInfoContext);
+  const dispatch = useUserInfoDispatch();
   const navigation = useNavigate();
   const { email, password } = useOutletContext<{
     email: string;
@@ -37,7 +36,7 @@ const SignUpComplete = () => {
                 navigation("/initInfo");
               }
               if (response.status === 201) {
-                dispatch?.dispatch({
+                dispatch({
                   type: "AUTH",
                   accessToken: response.headers.authorization,
                 });

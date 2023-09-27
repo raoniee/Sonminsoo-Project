@@ -5,12 +5,12 @@ import React, { useContext, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import { UserInfoContext } from "../../Context/UserInfoContext";
+import { useUserInfoDispatch } from "../../hooks/useUserInfo";
 
 const PasswordModify = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigation = useNavigate();
-  const dispatch = useContext(UserInfoContext);
+  const dispatch = useUserInfoDispatch();
   const [password, setPassword] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [newPasswordCheck, setNewPasswordCheck] = useState<string>("");
@@ -76,7 +76,7 @@ const PasswordModify = () => {
                         .delete(`/auth/sign-out`)
                         .then((res) => {
                           console.log(res, "로그아웃");
-                          dispatch?.dispatch({
+                          dispatch({
                             type: "AUTH",
                             accessToken: "",
                           });
