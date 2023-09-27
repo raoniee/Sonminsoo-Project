@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import * as S from "./style/Home.style";
 
@@ -12,25 +12,37 @@ import BucketListModal from "../../components/common/BucketListModal/BucketListM
 import useGetToken from "../../hooks/useGetToken";
 import axios, { axiosPrivate } from "../../api/axios";
 import { sonminsooItemInfo } from "../SonminsooItem/types/SonminsooItem.type";
-type bucketList = {
-  id: number;
-  img?: string;
-  bucketName: string;
-}[];
+import { Fandoms } from "./types/Home.type";
+import { bucketList } from "../../components/common/BucketListModal/types/BucketListModal.type";
+
 const Home: React.FC = () => {
   const [modalView, setModalView] = useState(false);
   const [bucketList, setBucketList] = useState<bucketList>([]);
   const [selectItem, setSelectItem] = useState<number>();
+  const [fandomsData, setfandomsData] = useState<Fandoms>([]);
+  const [sonminsoosData, setsonminsoosData] = useState<sonminsooItemInfo[]>([]);
 
   const token = useGetToken();
   const api = token ? axiosPrivate : axios;
-  const [data, setData] = useState<sonminsooItemInfo[]>([]);
 
-  const initDataGet = async () => {
+  useEffect(() => {
+    token && fandomsDataGet();
+  }, [token]);
+
+  const fandomsDataGet = async () => {
+    try {
+      const res = await axiosPrivate.get("/fandoms");
+      setfandomsData(res.data.data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
+  const sonminsuDataGet = async () => {
     //TODO: 혜정님 RecommendItemBoard의 initDataGet를 여기서 선언해주고 props로 내려서 RecommendItemBoard에서 사용해주세요
     try {
       const res = await api.get("/sonminsu-items");
-      setData(res.data.data);
+      setsonminsoosData(res.data.data);
     } catch (error) {
       console.error("Error", error);
     }
@@ -42,7 +54,7 @@ const Home: React.FC = () => {
       <S.HomeContainer>
         <S.HomeBgContainer>
           <HomeHeader />
-          <MyFandomBoard />
+          <MyFandomBoard fandoms={fandomsData} />
         </S.HomeBgContainer>
         <S.HomeBgFlowerContainer>
           <SonminsooNewsBoard />
@@ -59,7 +71,7 @@ const Home: React.FC = () => {
           setModalOpen={setModalView}
           bucketList={bucketList}
           itemId={selectItem}
-          fetchData={initDataGet}
+          fetchData={sonminsuDataGet}
         />
       )}
     </S.Container>
