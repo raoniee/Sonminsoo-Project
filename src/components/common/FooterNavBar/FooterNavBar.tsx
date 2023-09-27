@@ -45,11 +45,7 @@ const FooterNavBar = () => {
           text={token ? "마이페이지" : "로그인"}
           pathname={pathname}
           onClick={() => {
-            if (token) {
-              navigation(`/mypage/${userdata}`);
-            } else {
-              navigation(`/login`);
-            }
+            navigation(token ? `/mypage/${userdata}` : `/login`);
           }}
         />
       </S.TabIconWrapper>
