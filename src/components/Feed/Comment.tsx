@@ -8,16 +8,18 @@ type FeedCommentProps = {
   showModal: (commentId: number) => void;
   commentsData: CommentType[];
   feedId: number;
+  addNewComment: (comment: CommentType) => void;
 };
 
 const Comment: React.FC<FeedCommentProps> = ({
   commentsData,
   showModal,
   feedId,
+  addNewComment,
 }) => {
   const axiosPrivate = useAxiosPrivate();
   const [commentInput, setCommentInput] = useState<string>("");
-  const [commentList, setCommentList] = useState<CommentType[]>([]);
+  const [commentList, setCommentList] = useState<CommentType[]>(commentsData);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCommentInput(event.target.value);
@@ -34,6 +36,7 @@ const Comment: React.FC<FeedCommentProps> = ({
       });
       setCommentInput("");
       setCommentList([...commentList, response.data.data]);
+      addNewComment(response.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -41,8 +44,8 @@ const Comment: React.FC<FeedCommentProps> = ({
 
   return (
     <>
-      {commentsData &&
-        commentsData.map((comment) => {
+      {commentList &&
+        commentList.map((comment) => {
           return (
             <CommentItem
               key={comment.id}

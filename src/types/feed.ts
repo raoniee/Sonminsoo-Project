@@ -80,8 +80,13 @@ export type FeedItemProps = {
 export type CommentBoxProps = {
   feedId: number;
   comments: number;
-  showModal: (commentId: number) => void;
 };
+export type CommentBtnProps = {
+  commentOpen: () => void;
+  commentClicked: boolean;
+  commentsNum: number;
+};
+
 export type CommentType = {
   id: number;
   feedId: number;
