@@ -1,55 +1,45 @@
-import React, { useState, useEffect } from "react";
-import axios from "../../api/axios";
+import React, { useState } from "react";
 import CommentItem from "../Feed/CommentItem";
 import * as S from "./style/Comment.style";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { CommentType } from "../../types/feed";
 
-type CommentType = {
-  id: number;
-  feedId: number;
-  createdAt: string;
-  content: string;
-  parent: number;
-  author: {
-    id: number;
-    image: string;
-    nickName: string;
-  };
-  replies?: {};
-};
 type FeedCommentProps = {
   showModal: (commentId: number) => void;
-  comments: CommentType[];
+  commentsData: CommentType[];
   feedId: number;
-  fetchFeedData: () => Promise<void>;
+  addNewComment: (comment: CommentType) => void;
 };
 
 const Comment: React.FC<FeedCommentProps> = ({
-  comments,
+  commentsData,
   showModal,
   feedId,
-  fetchFeedData,
+  addNewComment,
 }) => {
   const axiosPrivate = useAxiosPrivate();
   const [commentInput, setCommentInput] = useState<string>("");
-  const [commentList, setCommentList] = useState<CommentType[]>(comments);
+  const [commentList, setCommentList] = useState<CommentType[]>(commentsData);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCommentInput(event.target.value);
   };
 
-  const submitComments = async (id: number) => {
+  const submitComments = async (feedId: number) => {
     if (!commentInput.trim()) {
       return;
     }
     try {
-      const response = await axiosPrivate.post(`/comments/${id}`, {
+      const response = await axiosPrivate.post(`/comments/${feedId}`, {
         parentId: null,
         content: commentInput,
       });
       setCommentInput("");
       setCommentList([...commentList, response.data.data]);
-    } catch (error) {}
+      addNewComment(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -75,7 +65,6 @@ const Comment: React.FC<FeedCommentProps> = ({
           onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             submitComments(feedId);
-            fetchFeedData();
           }}
         />
       </S.CommentInput>
