@@ -44,7 +44,9 @@ const SignUpComplete = () => {
                 navigation("/home");
               }
             })
-            .catch((error) => {});
+            .catch((error) => {
+              navigation("/login");
+            });
         }}
       >
         로그인 하러가기

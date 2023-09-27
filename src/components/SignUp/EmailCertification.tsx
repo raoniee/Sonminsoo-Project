@@ -31,10 +31,11 @@ const EmailCertification = () => {
       return setEmailValid(false);
     }
     setEmailValid(true);
-
+    setSendCode(() => false);
     try {
       const reponse = await axios.get(`/auth/verification-code?email=${email}`);
-      setSendCode(true);
+      setSendCode(() => true);
+      console.log(reponse);
     } catch (err) {
       console.error(err);
     }

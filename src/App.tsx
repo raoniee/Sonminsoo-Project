@@ -26,8 +26,7 @@ export const UserInfoContext = createContext<
 const App = () => {
   const socket = useSocket();
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  const { checkIsSignIn } = useAuth();
+  const { accessToken, checkIsSignIn } = useAuth();
 
   useEffect(() => {
     const pathname = window.location.pathname;
@@ -44,7 +43,7 @@ const App = () => {
       };
       tryAutoSignIn();
     }
-  }, [checkIsSignIn, dispatch]);
+  }, [accessToken, checkIsSignIn]);
 
   return (
     <UserInfoContext.Provider value={{ state, dispatch }}>
