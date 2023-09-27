@@ -5,7 +5,7 @@ import React, { useContext, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import { UserInfoContext } from "../../App";
+import { UserInfoContext } from "../../Context/UserInfoContext";
 
 const PasswordModify = () => {
   const axiosPrivate = useAxiosPrivate();

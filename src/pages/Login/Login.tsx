@@ -10,8 +10,8 @@ import kakao from "../../assets/images/svg/kakaoTalk.svg";
 import google from "../../assets/images/png/google.png";
 import { kakaoSignInHandler } from "./Oauth.kakao";
 import { googleSignIngHandler } from "./Oauth.google";
-import { UserInfoContext } from "../../App";
 import useGetToken from "../../hooks/useGetToken";
+import { UserInfoContext } from "../../Context/UserInfoContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");

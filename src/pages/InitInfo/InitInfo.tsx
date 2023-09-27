@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import { UserInfoContext } from "../../App";
+import { UserInfoContext } from "../../Context/UserInfoContext";
 import { Button } from "../../elements/Button";
 import useInput from "../../hooks/useInput";
 import * as S from "./style/InitInfo.style";

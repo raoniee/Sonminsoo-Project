@@ -4,7 +4,7 @@ import complete from "../../assets/images/svg/complete.svg";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import axios from "../../api/axios";
 import { useContext } from "react";
-import { UserInfoContext } from "../../App";
+import { UserInfoContext } from "../../Context/UserInfoContext";
 
 const SignUpComplete = () => {
   const dispatch = useContext(UserInfoContext);

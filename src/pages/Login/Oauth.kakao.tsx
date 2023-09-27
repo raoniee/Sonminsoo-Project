@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import { useContext, useEffect } from "react";
-import { UserInfoContext } from "../../App";
+import { UserInfoContext } from "../../Context/UserInfoContext";
 
 export const kakaoSignInHandler = () => {
   const KAKAO_KEY = process.env.REACT_APP_KAKAO_KEY;

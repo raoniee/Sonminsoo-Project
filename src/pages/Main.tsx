@@ -4,7 +4,7 @@ import axios from "../api/axios";
 import background from "../assets/images/svg/Main/Background.svg";
 import title from "../assets/images/svg/Main/title.svg";
 import styled from "styled-components";
-import { UserInfoContext } from "../App";
+import { UserInfoContext } from "../Context/UserInfoContext";
 
 const MainView = styled.div`
   width: 100%;

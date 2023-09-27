@@ -1,37 +1,25 @@
-import { createContext, useEffect, useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import Router from "./Router";
 import { RouterProvider } from "react-router-dom";
 import axios from "./api/axios";
 import useSocket from "./hooks/useSocket";
-import { Socket } from "socket.io-client";
 import Main from "./pages/Main";
 import useAuth from "./hooks/useAuth";
 import reducer from "./Context/Reducer";
-import { userInfo } from "./types/contextUserInfo";
-
-const initialState = {
-  accessToken: "",
-  checkIsSignIn: false,
-  id: 0,
-  image: "",
-  introduction: "",
-  nickName: "",
-};
-
-export const SocketContext = createContext<Socket | undefined>(undefined);
-export const UserInfoContext = createContext<
-  { state: userInfo; dispatch: React.Dispatch<any> } | undefined
->(undefined);
+import { INITUSERINFO } from "./constant/UserInfoInitialState";
+import { SocketContext } from "./Context/SocketContext";
+import { UserInfoContext } from "./Context/UserInfoContext";
 
 const App = () => {
   const socket = useSocket();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, INITUSERINFO);
   const { accessToken, checkIsSignIn } = useAuth();
 
   useEffect(() => {
     const pathname = window.location.pathname;
 
     if (pathname !== "/" && !checkIsSignIn) {
+      console.log("access token", accessToken);
       const tryAutoSignIn = async () => {
         try {
           const res = await axios.get("/auth/auto-sign-in");

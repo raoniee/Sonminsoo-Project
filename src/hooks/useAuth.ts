@@ -1,5 +1,5 @@
 import { useContext, useMemo } from "react";
-import { UserInfoContext } from "../App";
+import { UserInfoContext } from "../Context/UserInfoContext";
 
 const useAuth = () => {
   const dispatch = useContext(UserInfoContext);

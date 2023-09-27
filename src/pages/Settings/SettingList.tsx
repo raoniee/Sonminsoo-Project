@@ -3,7 +3,7 @@ import * as S from "./style/SettingList.style";
 import axios from "../../api/axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
-import { UserInfoContext } from "../../App";
+import { UserInfoContext } from "../../Context/UserInfoContext";
 
 const SettingList = () => {
   const navigation = useNavigate();
