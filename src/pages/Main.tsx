@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import background from "../assets/images/svg/Main/Background.svg";
 import title from "../assets/images/svg/Main/title.svg";
 import styled from "styled-components";
 import { useUserInfoDispatch } from "../hooks/useUserInfo";
+import { AxiosError } from "axios";
 
 const MainView = styled.div`
   width: 100%;
@@ -57,32 +58,34 @@ const Main = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      axios
-        .get("/auth/auto-sign-in")
-        .then(({ headers }) => {
-          dispatch({
-            type: "AUTH",
-            accessToken: headers.authorization,
-          });
-          navigation("/home");
-        })
-        .catch(({ response }) => {
-          // err.status==401 로그아웃
-          if (response.status === 401) {
-            axios
-              .delete("/auth/sign-out")
-              .then((response) => {
-                dispatch({
-                  type: "AUTH",
-                  accessToken: "",
-                });
-              })
-              .catch((error) => {
-                navigation("/login");
-              });
-          }
-        });
+      autoSignIn();
     }, 2000);
+
+    const autoSignIn = async () => {
+      try {
+        const { headers } = await axios.get("/auth/auto-sign-in");
+        dispatch({
+          type: "AUTH",
+          accessToken: headers.authorization,
+        });
+        navigation("/home");
+      } catch (err) {
+        const { response } = err as unknown as AxiosError;
+        if (response?.status === 401) {
+          try {
+            await axios.delete("/auth/sign-out");
+            dispatch({
+              type: "AUTH",
+              accessToken: "",
+            });
+            navigation("/login");
+          } catch (err) {
+            navigation("/login");
+          }
+          navigation("/login");
+        }
+      }
+    };
   }, []);
 
   return (
