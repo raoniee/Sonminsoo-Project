@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
 import { useContext, useEffect } from "react";
-import { UserInfoContext } from "../../App";
+import { useUserInfoDispatch } from "../../hooks/useUserInfo";
 
 export const googleSignIngHandler = () => {
   const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
@@ -13,7 +13,7 @@ export const googleSignIngHandler = () => {
 const OauthGoogle = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useContext(UserInfoContext);
+  const dispatch = useUserInfoDispatch();
 
   const url = new URLSearchParams(location.search);
   const code = url.get("code");
@@ -27,7 +27,7 @@ const OauthGoogle = () => {
         domain,
       })
       .then((res) => {
-        dispatch?.dispatch({
+        dispatch({
           type: "AUTH",
           accessToken: res.headers.authorization,
         });

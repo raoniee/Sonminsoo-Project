@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import { useContext, useEffect } from "react";
-import { UserInfoContext } from "../../App";
+import { useEffect } from "react";
+import { useUserInfoDispatch } from "../../hooks/useUserInfo";
 
 export const kakaoSignInHandler = () => {
   const KAKAO_KEY = process.env.REACT_APP_KAKAO_KEY;
@@ -13,7 +13,7 @@ export const kakaoSignInHandler = () => {
 const OauthKakao = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useContext(UserInfoContext);
+  const dispatch = useUserInfoDispatch();
 
   const code = location.search.replace(/\?code=/i, "");
 
@@ -26,7 +26,7 @@ const OauthKakao = () => {
         domain,
       })
       .then((res) => {
-        dispatch?.dispatch({
+        dispatch({
           type: "AUTH",
           accessToken: res.headers.authorization,
         });

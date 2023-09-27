@@ -1,13 +1,13 @@
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../../api/axios";
-import { UserInfoContext } from "../../App";
 import { Button } from "../../elements/Button";
 import useInput from "../../hooks/useInput";
+import { useUserInfoDispatch } from "../../hooks/useUserInfo";
 import * as S from "./style/InitInfo.style";
 
 const InitInfo = () => {
-  const dispatch = useContext(UserInfoContext);
+  const dispatch = useUserInfoDispatch();
   const navigation = useNavigate();
   const [nickName, setNickName] = useInput("");
   const [introduction, setIntroduction] = useInput("");
@@ -94,7 +94,7 @@ const InitInfo = () => {
                 headers: { "Content-Type": "multipart/form-data" },
               })
               .then((response) => {
-                dispatch?.dispatch({
+                dispatch({
                   type: "AUTH",
                   accessToken: response.headers.authorization,
                 });

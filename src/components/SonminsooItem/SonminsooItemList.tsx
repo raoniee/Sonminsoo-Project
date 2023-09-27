@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useMemo, useState, useCallback } from "react";
 
 import EmptyItem from "./EmptyItem";
 import * as S from "./style/SonminsooItemList.style";

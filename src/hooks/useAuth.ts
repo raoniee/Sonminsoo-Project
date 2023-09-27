@@ -1,12 +1,13 @@
 import { useContext } from "react";
-import { UserInfoContext } from "../App";
+import { userInfoStateContext } from "../Context/UserInfoContext";
 
 const useAuth = () => {
-  const dispatch = useContext(UserInfoContext);
+  const userInfo = useContext(userInfoStateContext);
   console.log("useAuth");
+
   return {
-    accessToken: dispatch?.state.accessToken,
-    checkIsSignIn: dispatch?.state.checkIsSignIn,
+    accessToken: userInfo?.accessToken,
+    checkIsSignIn: userInfo?.checkIsSignIn,
   };
 };
 export default useAuth;

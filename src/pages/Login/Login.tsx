@@ -10,14 +10,14 @@ import kakao from "../../assets/images/svg/kakaoTalk.svg";
 import google from "../../assets/images/png/google.png";
 import { kakaoSignInHandler } from "./Oauth.kakao";
 import { googleSignIngHandler } from "./Oauth.google";
-import { UserInfoContext } from "../../App";
 import useGetToken from "../../hooks/useGetToken";
+import { useUserInfoDispatch } from "../../hooks/useUserInfo";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState(false);
-  const dispatch = useContext(UserInfoContext);
+  const dispatch = useUserInfoDispatch();
   const navigation = useNavigate();
   const token = useGetToken();
   useEffect(() => {
@@ -76,7 +76,7 @@ const Login = () => {
                       navigation("/initInfo");
                     }
                     if (response.status === 201) {
-                      dispatch?.dispatch({
+                      dispatch({
                         type: "AUTH",
                         accessToken: response.headers.authorization,
                       });
