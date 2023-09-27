@@ -63,6 +63,7 @@ export type FeedHeaderProps = {
   author: FeedAuthor;
   fandom: FeedFandom;
   createdAt: string;
+  setIsFeedDelete: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type FeedTextProps = {
@@ -80,6 +81,12 @@ export type CommentBoxProps = {
   feedId: number;
   comments: number;
 };
+export type CommentBtnProps = {
+  commentOpen: () => void;
+  commentClicked: boolean;
+  commentsNum: number;
+};
+
 export type CommentType = {
   id: number;
   feedId: number;

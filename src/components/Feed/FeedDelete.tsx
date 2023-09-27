@@ -6,14 +6,9 @@ import * as S from "../Feed/style/FeedDelete.style";
 type FeedDeleteProps = {
   setIsFeedDelete: React.Dispatch<React.SetStateAction<boolean>>;
   feedId: number | undefined;
-  onFeedDeleted: () => void;
 };
 
-const FeedDelete: React.FC<FeedDeleteProps> = ({
-  setIsFeedDelete,
-  feedId,
-  onFeedDeleted,
-}) => {
+const FeedDelete: React.FC<FeedDeleteProps> = ({ setIsFeedDelete, feedId }) => {
   const navigation = useNavigate();
   const axiosPrivate = useAxiosPrivate();
 
@@ -39,7 +34,6 @@ const FeedDelete: React.FC<FeedDeleteProps> = ({
     try {
       await axiosPrivate.delete(`/feeds/${feedId}`);
       setIsFeedDelete(false);
-      onFeedDeleted();
     } catch (error) {
       alert("삭제실패");
     }

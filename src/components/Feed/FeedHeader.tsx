@@ -9,6 +9,7 @@ const FeedHeader: React.FC<FeedHeaderProps> = ({
   author,
   fandom,
   createdAt,
+  setIsFeedDelete,
 }) => {
   return (
     <S.FeedHeaderContainer>
@@ -22,7 +23,7 @@ const FeedHeader: React.FC<FeedHeaderProps> = ({
           </S.Time>
         </S.ContentWrap>
       </S.HeaderContent>
-      <S.MoreBtn src={more} />
+      <S.MoreBtn src={more} onClick={() => setIsFeedDelete(true)} />
     </S.FeedHeaderContainer>
   );
 };
