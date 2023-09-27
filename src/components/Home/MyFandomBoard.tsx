@@ -4,7 +4,7 @@ import AppAlertModal from "../common/AlertModal/AppAlertModal";
 import FandomCircle from "./FandomCircle";
 import useGetToken from "../../hooks/useGetToken";
 import { useNavigate } from "react-router-dom";
-import { Fandoms } from "../../pages/Home/types/Home.type";
+import { Fandoms } from "../../types/Home.type";
 
 const MyFandomBoard: React.FC<{ fandoms: Fandoms }> = ({ fandoms }) => {
   const navigate = useNavigate();
