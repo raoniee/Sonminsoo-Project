@@ -8,13 +8,13 @@ import { CommentType } from "../../types/feed";
 
 import * as S from "../../pages/Feed/style/Feed.style";
 
-const CommentBox: React.FC<CommentBoxProps> = ({ feedId, comments }) => {
+const CommentBox: React.FC<CommentBoxProps> = ({
+  feedId,
+  comments,
+  showModal,
+}) => {
   const [openComment, setOpenComment] = useState<number | undefined>();
   const [isLoadingComments, setIsLoadingComments] = useState(false);
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [selectedCommentId, setSelectedCommentId] = useState<
-    number | undefined
-  >();
   const [commentsData, setCommentsData] = useState<CommentType[]>([]);
 
   useEffect(() => {
@@ -28,12 +28,6 @@ const CommentBox: React.FC<CommentBoxProps> = ({ feedId, comments }) => {
       setOpenComment(id);
       fetchComments(id);
     }
-  };
-
-  const showModal = (commentId: number) => {
-    setSelectedCommentId(commentId);
-    document.body.style.overflow = "hidden";
-    setModalOpen(true);
   };
 
   const fetchComments = async (feedId?: number) => {
