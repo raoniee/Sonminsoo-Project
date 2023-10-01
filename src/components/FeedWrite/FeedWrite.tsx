@@ -9,54 +9,15 @@ import FeedWriteRegister from "./FeedWriteRegister";
 import * as S from "./style/NewFeed.style";
 import useInput from "../../hooks/useInput";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-export type Data = {
-  id: number;
-  content: string;
-  createdAt: string;
-  author: {
-    id: number;
-    image: string;
-    nickName: string;
-  };
-  fandom: {
-    id: number;
-    fandomName: string;
-  };
-  sonminsuItems: SonminsuItems[];
-  image: string;
-  tags: string[];
-  comments: number;
-  groupName: string;
-  artistName: string;
-};
-export type SonminsuItems = {
-  id: number;
-  originUrl: string;
-  title: string;
-  price: number;
-  imgUrl: string;
-  groupName: string;
-  artistName: string;
-};
-type OptionType = {
-  value: string;
-  label: string;
-  id?: number;
-};
-
-type itemtype = {
-  id: number;
-  imgUrl: string;
-  title: string;
-  price: string;
-};
+import { FeedType } from "../../types/feed";
+import { itemtype, OptionType } from "../../types/feedWrite";
 
 const FeedWrite = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigation = useNavigate();
   const location = useLocation();
 
-  const [feedData, setFeedData] = useState<Data>();
+  const [feedData, setFeedData] = useState<FeedType>();
   const [noticeChecked, setNoticeChecked] = useState<boolean>(false);
   const [contentInput, setContentInput] = useState<string>("");
   const [hashTagInput, handleHashTagChange] = useInput("");
@@ -90,6 +51,7 @@ const FeedWrite = () => {
       isAdmin();
     }
   }, [selectedFandom]);
+
   useEffect(() => {
     if (noticeChecked) {
       setIsFormValid(contentInput.trim() !== "" && !!selectedFandom);

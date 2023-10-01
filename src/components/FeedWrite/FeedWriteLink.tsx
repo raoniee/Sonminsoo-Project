@@ -1,54 +1,12 @@
-import React, { useContext } from "react";
-import styled from "styled-components";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Link from "../../assets/images/svg/ic-link.svg";
-import closeBtn from "../../assets/images/svg/x.svg";
 import * as S from "./style/FeedWriteLink.style";
 
-export type Data = {
-  id: number;
-  content: string;
-  createdAt: string;
-  author: {
-    id: number;
-    image: string;
-    nickName: string;
-  };
-  fandom: {
-    id: number;
-    fandomName: string;
-  };
-  sonminsuItems: SonminsuItems[];
-  image: string;
-  tags: string[];
-  comments: number;
-  groupName: string;
-  artistName: string;
-};
-export type SonminsuItems = {
-  id: number;
-  originUrl: string;
-  title: string;
-  price: number;
-  imgUrl: string;
-  groupName: string;
-  artistName: string;
-};
-type FeedWriteProps = {
-  $updatePage: boolean;
-  setLinkModalClick: React.Dispatch<React.SetStateAction<boolean>>;
-  urlItem: itemtype[];
-  feedData: Data | undefined;
-};
-type itemtype = {
-  id: number;
-  imgUrl: string;
-  title: string;
-  price: string;
-};
+import { FeedWriteLinkProps } from "../../types/feedWrite";
 
-const FeedWriteLink: React.FC<FeedWriteProps> = ({
+const FeedWriteLink: React.FC<FeedWriteLinkProps> = ({
   $updatePage,
   setLinkModalClick,
   urlItem,

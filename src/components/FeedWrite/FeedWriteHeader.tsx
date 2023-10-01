@@ -1,17 +1,12 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import arrow from "../../assets/images/svg/ic-arrow-left.svg";
 import check from "../../assets/images/svg/icon-check.svg";
 import allcheck from "../../assets/images/svg/ic-check.svg";
 import * as S from "./style/FeedWriteHeader.style";
 
-type FeedWriteProps = {
-  $updatePage: boolean;
-  handleHeaderSubmit: () => void;
-  isFormValid: boolean;
-  updateFeed: any;
-  moveToFandom: () => void;
-};
+import { FeedWriteProps } from "../../types/feedWrite";
+
 const FeedWriteHeader: React.FC<FeedWriteProps> = ({
   $updatePage,
   handleHeaderSubmit,

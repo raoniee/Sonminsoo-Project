@@ -1,11 +1,5 @@
-import { useState, useEffect } from "react";
-import styled from "styled-components";
 import * as S from "./style/FeedWriteHashTag.style";
-
-type FeedWriteHashTagProps = {
-  hashTagInput: string;
-  handleHashTagChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import { FeedWriteHashTagProps } from "../../types/feedWrite";
 
 const FeedWriteHashTag: React.FC<FeedWriteHashTagProps> = ({
   hashTagInput,

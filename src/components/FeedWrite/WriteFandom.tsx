@@ -2,18 +2,9 @@ import React, { useState } from "react";
 import Select from "react-select";
 import * as S from "./style/WriteFandom.style";
 
-type FeedWriteProps = {
-  $updatePage: boolean;
-  fandomOptions: OptionType[];
-  setSelectedFandom: (option: OptionType) => void;
-  selectedFandom: OptionType | null | undefined;
-};
-type OptionType = {
-  value: string;
-  label: string;
-  id?: number;
-};
-const WriteFandom: React.FC<FeedWriteProps> = ({
+import { OptionType, FeedWriteFandomProps } from "../../types/feedWrite";
+
+const WriteFandom: React.FC<FeedWriteFandomProps> = ({
   $updatePage,
   fandomOptions,
   setSelectedFandom,

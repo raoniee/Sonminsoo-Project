@@ -1,43 +1,8 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import * as S from "./style/FeedWriteTarget.style";
-export type Data = {
-  id: number;
-  content: string;
-  createdAt: string;
-  author: {
-    id: number;
-    image: string;
-    nickName: string;
-  };
-  fandom: {
-    id: number;
-    fandomName: string;
-  };
-  sonminsuItems: SonminsuItems[];
-  image: string;
-  tags: string[];
-  comments: number;
-  groupName: string;
-  artistName: string;
-};
-export type SonminsuItems = {
-  id: number;
-  originUrl: string;
-  title: string;
-  price: number;
-  imgUrl: string;
-  groupName: string;
-  artistName: string;
-};
-type FeedWriteProps = {
-  $updatePage: boolean;
-  groupInput: string;
-  setGroupInput: React.Dispatch<React.SetStateAction<string>>;
-  artistInput: string;
-  setArtistInput: React.Dispatch<React.SetStateAction<string>>;
-  feedData: Data | undefined;
-};
-const FeedWriteTarget: React.FC<FeedWriteProps> = ({
+import { FeedWriteTargetProps } from "../../types/feedWrite";
+
+const FeedWriteTarget: React.FC<FeedWriteTargetProps> = ({
   $updatePage,
   groupInput,
   setGroupInput,
