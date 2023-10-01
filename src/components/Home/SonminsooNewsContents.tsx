@@ -8,31 +8,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import heart from "../../assets/images/svg/ic-heart.svg";
 import fillheart from "../../assets/images/svg/fillheart.svg";
 import { Item } from "../Feed/style/Item.style";
-
-type NewsType = {
-  id: number;
-  content: string;
-  createdAt: string;
-  author: {
-    id: number;
-    image: string;
-    nickName: string;
-  };
-  fandom: {
-    id: 5;
-    fandomName: string;
-  };
-  sonminsuItems: [];
-  image: string;
-  tags: [];
-  likes: number;
-  isLike: boolean;
-  comments: number;
-};
-type NewsTypeData = NewsType[];
+import { FeedType } from "../../types/feed";
 
 type NewsProps = {
-  item: NewsType;
+  item: FeedType;
 };
 
 const SonminsooNewsContents: React.FC<NewsProps> = ({ item }) => {

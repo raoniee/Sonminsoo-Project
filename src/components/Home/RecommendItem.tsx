@@ -2,30 +2,16 @@ import * as S from "./style/RecommendItem.style";
 import { useNavigate } from "react-router-dom";
 import BookMarkIcon from "../../assets/images/svg/home/bookmarkIcon.svg";
 import ActiveBookMarkIcon from "../../assets/images/svg/home/activebookmarkIcon.svg";
-import BucketListModal from "../../components/common/BucketListModal/BucketListModal";
-import { useState } from "react";
 import useGetToken from "../../hooks/useGetToken";
 import axios from "../../api/axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-type RecommendItem = {
-  id: number;
-  originUrl: string;
-  title: string;
-  price: string;
-  imgUrl: string;
-  groupName: string;
-  artistName: string;
-  isInMyBucket?: {
-    bucketId: number;
-  };
-};
-type bucketList = {
-  id: string;
-  img?: string;
-  bucketName: string;
-}[];
+import {
+  bucketList,
+  sonminsooItemInfo,
+} from "../../pages/SonminsooItem/types/SonminsooItem.type";
+
 type RecommendItemProps = {
-  item: RecommendItem;
+  item: sonminsooItemInfo;
   setModalView: React.Dispatch<React.SetStateAction<boolean>>;
   setBucketList: React.Dispatch<React.SetStateAction<bucketList>>;
   setSelectItem: React.Dispatch<React.SetStateAction<number>>;
@@ -74,9 +60,7 @@ const RecommendItem: React.FC<RecommendItemProps> = ({
                       document.body.style.overflow = "unset";
                       setModalView(false);
                     })
-                    .catch((err) => {
-                      
-                    })
+                    .catch((err) => {})
                 : api
                     .get(`/buckets`)
                     .then(({ data }) => {
@@ -86,9 +70,7 @@ const RecommendItem: React.FC<RecommendItemProps> = ({
                       setBucketList(data.data);
                       setModalView(true);
                     })
-                    .catch((err) => {
-                      
-                    });
+                    .catch((err) => {});
             }}
           />
         </S.RecommendItemTextIconBox>

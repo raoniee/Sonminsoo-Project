@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import * as S from "./style/Home.style";
 
@@ -12,25 +12,61 @@ import BucketListModal from "../../components/common/BucketListModal/BucketListM
 import useGetToken from "../../hooks/useGetToken";
 import axios, { axiosPrivate } from "../../api/axios";
 import { sonminsooItemInfo } from "../SonminsooItem/types/SonminsooItem.type";
-type bucketList = {
-  id: number;
-  img?: string;
-  bucketName: string;
-}[];
+import { Fandoms } from "../../types/Home.type";
+import { bucketList } from "../../components/common/BucketListModal/types/BucketListModal.type";
+import { FeedType } from "../../types/feed";
+
 const Home: React.FC = () => {
   const [modalView, setModalView] = useState(false);
   const [bucketList, setBucketList] = useState<bucketList>([]);
-  const [selectItem, setSelectItem] = useState<number>();
+  const [selectItem, setSelectItem] = useState<number>(0);
+  const [fandomsData, setfandomsData] = useState<Fandoms>([]);
+  const [newsData, setnewsData] = useState<FeedType[]>([]);
+  const [sonminsoosData, setsonminsoosData] = useState<sonminsooItemInfo[]>([]);
+  const [hotFandomData, sethotFandomData] = useState<Fandoms>([]);
 
   const token = useGetToken();
   const api = token ? axiosPrivate : axios;
-  const [data, setData] = useState<sonminsooItemInfo[]>([]);
 
-  const initDataGet = async () => {
-    //TODO: 혜정님 RecommendItemBoard의 initDataGet를 여기서 선언해주고 props로 내려서 RecommendItemBoard에서 사용해주세요
+  useEffect(() => {
+    token && fandomsDataGet();
+    const fetchAxiosData = async () => {
+      await Promise.all([newsDataGet(), sonminsuDataGet(), hotFandomDataGet()]);
+    };
+    fetchAxiosData();
+  }, [token]);
+
+  const fandomsDataGet = async () => {
     try {
-      const res = await api.get("/sonminsu-items");
-      setData(res.data.data);
+      const res = await axiosPrivate.get("/fandoms");
+      setfandomsData(res.data.data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
+  const newsDataGet = async () => {
+    try {
+      const res = await axios.get("/feeds");
+
+      setnewsData(res.data.data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+
+  const sonminsuDataGet = async () => {
+    try {
+      const res = await api.get(`/sonminsu-items?page=1&perPage=6`);
+      setsonminsoosData(res.data.data);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+  const hotFandomDataGet = async () => {
+    try {
+      const res = await axios.get("fandoms/hot");
+      sethotFandomData(res.data.data);
     } catch (error) {
       console.error("Error", error);
     }
@@ -42,16 +78,17 @@ const Home: React.FC = () => {
       <S.HomeContainer>
         <S.HomeBgContainer>
           <HomeHeader />
-          <MyFandomBoard />
+          <MyFandomBoard fandoms={fandomsData} />
         </S.HomeBgContainer>
         <S.HomeBgFlowerContainer>
-          <SonminsooNewsBoard />
+          <SonminsooNewsBoard news={newsData} />
           <RecommendItemBoard
             setModalView={setModalView}
             setBucketList={setBucketList}
             setSelectItem={setSelectItem}
+            sonMinSoosData={sonminsoosData}
           />
-          <PopularFandomBoard />
+          <PopularFandomBoard hotFandom={hotFandomData} />
         </S.HomeBgFlowerContainer>
       </S.HomeContainer>
       {modalView && (
@@ -59,7 +96,7 @@ const Home: React.FC = () => {
           setModalOpen={setModalView}
           bucketList={bucketList}
           itemId={selectItem}
-          fetchData={initDataGet}
+          fetchData={sonminsuDataGet}
         />
       )}
     </S.Container>
