@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import Select from "react-select";
 import * as S from "./style/WriteFandom.style";
-import dropdown from "../../assets/images/svg/ic-arrow-down-14.svg";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 
 type FeedWriteProps = {
   $updatePage: boolean;
