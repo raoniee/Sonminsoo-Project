@@ -51,7 +51,7 @@ type itemtype = {
   price: string;
 };
 
-const NewFeed = () => {
+const FeedWrite = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigation = useNavigate();
   const location = useLocation();
@@ -280,4 +280,4 @@ const NewFeed = () => {
   );
 };
 
-export default NewFeed;
+export default FeedWrite;

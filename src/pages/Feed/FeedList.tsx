@@ -1,18 +1,23 @@
-import { useEffect, useState, useCallback } from "react";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useAuth from "../../hooks/useAuth";
+import { useCallback, useEffect, useState } from "react";
+
 import { FeedsType } from "../../types/feed";
 import * as S from "./style/Feed.style";
+
 import FeedHeaderBar from "../../components/Feed/FeedHeaderBar";
 import FooterNavBar from "../../components/common/FooterNavBar/FooterNavBar";
 import FeedItem from "../../components/Feed/FeedItem";
+
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useAuth from "../../hooks/useAuth";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
-const Feeds = () => {
+const FeedList = () => {
   const auth = useAuth();
   const axiosPrivate = useAxiosPrivate();
+
   const [feedsData, setFeedsData] = useState<FeedsType>([]);
   const [isLoaded, setIsLoaded] = useState(false);
+
   let timerId: NodeJS.Timeout | undefined;
   let count = 10;
 
@@ -79,8 +84,8 @@ const Feeds = () => {
   return (
     <S.FeedContainer>
       <FeedHeaderBar />
-      {feedsData.map((feedData, index) => (
-        <FeedItem feedData={feedData} key={`${feedData.id}-${index}`} />
+      {feedsData.map((feedData) => (
+        <FeedItem key={feedData.id} feedData={feedData} />
       ))}
       <div ref={setTarget} />
       <FooterNavBar />
@@ -88,4 +93,4 @@ const Feeds = () => {
   );
 };
 
-export default Feeds;
+export default FeedList;

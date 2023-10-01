@@ -22,7 +22,7 @@ const FeedWriteHeader: React.FC<FeedWriteProps> = ({
   const navigation = useNavigate();
   const isFandom = () => {
     moveToFandom();
-    navigation("/feed");
+    navigation("/feeds");
   };
   return (
     <S.NewFeedHeader>
