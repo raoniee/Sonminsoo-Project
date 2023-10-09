@@ -80,12 +80,23 @@ PW : 12341234aa
    - 로그인 / 회원가입 페이지
 7. 정충래(백엔드리더/BE)
 
+<<<<<<< HEAD
+=======
+#### **7. 정충래(백엔드리더/BE)**
+
+</br>
+</br>
+
+  
+>>>>>>> 6b3a74efa682b754d12fbf6c8687d4b1f2d3acec
 ## 2. 기술 및 개발 환경
+</br>
 
 ### [ 프로젝트 기간 ]
 
 2023.08.14 ~ 2023.09.01
-
+</br>
+</br>
 ### [ 프로젝트 목표 ]
 
 - 학습한 React와 여러 라이브러리를 활용해 PWA 기반 SPA 웹 어플리케이션 개발
@@ -93,13 +104,19 @@ PW : 12341234aa
        (이미지 중심 소셜 네트워크 서비스)
 
 - 애자일 방법론을 사용하여 협업 역량 강화
+</br>
+</br>
 
 ### [ 사용 기술 ]
 
 - Front-end
+<<<<<<< HEAD
   <img src="https://img.shields.io/badge/표시할이름-#61DAFB?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
 
 <img src="https://img.shields.io/badge/React-#61DAFB?style=for-the-badge&logo=React&logoColor=white">
+=======
+  - React
+>>>>>>> 6b3a74efa682b754d12fbf6c8687d4b1f2d3acec
   - TypeScript
   - Styled-Components
   - Redux-toolkit
@@ -116,23 +133,23 @@ PW : 12341234aa
   - Figma
   - Notion
 
-### [ 컨벤션 ]
+</br>
 
+### [ 컨벤션 ]
 - Git Commit Convention
     <aside>
-    💡 Feat: 새로운 기능 추가
-    Design : CSS, 사용자 UI 디자인 변경
-    Style : 코드포맷, 세미콜론, 개행, 코드 구조, 형태
-    Test : 테스트
+    💡
     
-    Refactor: 코드 리팩토링
-    Fix : 버그 및 오류 수정
-    Remove : 불필요한 파일 삭제
-    
-    Rename : 파일 혹은 폴더명 수정하거나 옮기는 경우
-    Chore : 빌드 업무, 패키지매니저, 폴더트리, 세팅 수정
-    Comment : 필요한 주석 추가 및 변경
-    
+    - Feat: 새로운 기능 추가
+    - Design : CSS, 사용자 UI 디자인 변경
+    - Style : 코드포맷, 세미콜론, 개행, 코드 구조, 형태
+    - Test : 테스트
+    - Refactor: 코드 리팩토링
+    - Fix : 버그 및 오류 수정
+    - Remove : 불필요한 파일 삭제
+    - Rename : 파일 혹은 폴더명 수정하거나 옮기는 경우
+    - Chore : 빌드 업무, 패키지매니저, 폴더트리, 세팅 수정
+    - Comment : 필요한 주석 추가 및 변경
     </aside>
 
 - Code Convention
@@ -213,10 +230,11 @@ PW : 12341234aa
 - 피드 목록
 
 ## 4. 프로젝트 구조(폴더 구조)
+<details>
+<summary> - 디렉토리 구조</summary>
+<div markdown="1">
 
-- 폴더 구조(토글해주세요!)
-
-  ```jsx
+ ```jsx
   📦src
    ┣ 📂Context
    ┣ 📂Routes
@@ -292,6 +310,10 @@ PW : 12341234aa
  ┗ 📜index.tsx
 ```
 
+</div>
+</details>
+ 
+
 - 컴포넌트와 스타일 컴포넌트 구분을 위해 스타일 파일을 분리하였습니다.
 
 ```
@@ -342,7 +364,7 @@ return (
 
 | 🔗손민수템                                                                                                             | 🔗의뢰 | 🔗   |
 | ---------------------------------------------------------------------------------------------------------------------- | ------ | ---- |
-| ![손민수템 (1)](https://github.com/hitzza/ThiefSonMinSoo/assets/103095794/771cc046-32f8-4dfd-9e80-1995d48e5712) |        | 완료 |
+| ![손민수템 (1)](https://github.com/hitzza/ThiefSonMinSoo/assets/103095794/771cc046-32f8-4dfd-9e80-1995d48e5712) |        | 완료 |
 
 ### ⌨️ 채팅
 
