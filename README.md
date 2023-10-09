@@ -4,13 +4,9 @@
 
 ## 서비스 소개
 
----
-
 <img width="599" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 49 17" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/0dd7f0a8-f7dd-4f08-b8c9-975bbe1935cc">
 
 ## 배포 URL
-
----
 
 [당장 손민수](https://kdt-sw-5-2-team11.elicecoding.com/)
 
@@ -18,29 +14,22 @@
 
 ## 계정
 
----
-
 ID : [cslzh4433@naver.com](mailto:cslzh4433@naver.com)
 
 PW : 12341234aa
+
 <img width="140" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 13 00" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/da534a42-aa28-48f2-af3a-6969d71c307e">
 
 ### 배포판과 현재 코드 불일치(이 부분 수정 해야함)
 
----
-
 ## 페르소나
 
----
-
-<img width="331" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 11 40" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/0348e340-d742-4d7d-8d0b-6b9c4804eafe">
+<img width="220" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 11 40" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/0348e340-d742-4d7d-8d0b-6b9c4804eafe">
 
 - K-pop뮤비 시청이 취미인 20대 초반 여성
 - 최애 아이돌의 아이템을 찾기 위해 팬카페 가입중
 
 ## 목차
-
----
 
 [1. 팀 소개(역할 분담)](https://www.notion.so/1-1a7113764ef34d5e953910ebd336ca69?pvs=21)
 
@@ -60,8 +49,6 @@ PW : 12341234aa
 [9. 팀 활동](https://www.notion.so/9-182c032691f7418fab075dacba1db36e?pvs=21)
 
 ## 1. 팀 소개(역할 분담)
-
----
 
 1. 신혜정(팀장/FE)
    - 프로젝트 기획
@@ -94,8 +81,6 @@ PW : 12341234aa
 7. 정충래(백엔드리더/BE)
 
 ## 2. 기술 및 개발 환경
-
----
 
 ### [ 프로젝트 기간 ]
 
@@ -174,8 +159,6 @@ PW : 12341234aa
 
 ## 3. 주요 기능
 
----
-
 ### 🔐 **계정**
 
 - 카카오 **·** 구글 로그인
@@ -228,8 +211,6 @@ PW : 12341234aa
 - 피드 목록
 
 ## 4. 프로젝트 구조(폴더 구조)
-
----
 
 - 폴더 구조(토글해주세요!)
 
@@ -339,8 +320,6 @@ return (
 
 ## 5. UI
 
----
-
 ### 🔐 **계정**
 
 | 🔗로그인                                                                                                     |
@@ -363,15 +342,13 @@ return (
 | ---------- | ---- | --- |
 
 | ![손민수템 (1)](https://github.com/hitzza/ThiefSonMinSoo/assets/103095794/771cc046-32f8-4dfd-9e80-1995d48e5712)
-| | |
+| 이미지|이미지 |
 
 ### ⌨️ 채팅
 
 ### 👩‍💻 마이페이지
 
 ## 6. 페이지 기능
-
----
 
 ### 🔐 **계정**
 
@@ -409,8 +386,6 @@ return (
 
 ## 7. 개선사항
 
----
-
 - Provider Pattern 적용
 - 리렌더링 최적화
 - 쓰로틀링이 적용 된 공용 버튼 컴포넌트 제작
@@ -419,8 +394,6 @@ return (
 - 페이지와 컴포넌트 파일 분리
 
 ## 8. 작업 관리(협업 방법)
-
----
 
 ### [ Notion ]
 
@@ -444,8 +417,6 @@ return (
 ![Untitled](https://github.com/jutrong/sonminsoo-project/assets/113658811/f1ea9ddd-103c-47e7-a950-7aa7690309f8)
 
 ## 9. 팀 활동
-
----
 
 ![Untitled-2](https://github.com/jutrong/sonminsoo-project/assets/113658811/279c8140-cbfa-4c19-98be-e312e6f9183c)
 
