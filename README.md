@@ -97,7 +97,6 @@ PW : 12341234aa
 ### [ 사용 기술 ]
 
 - Front-end
-  <img src="https://img.shields.io/badge/표시할이름-61DAFB?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
 
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
 
@@ -114,6 +113,7 @@ PW : 12341234aa
 <img src="https://img.shields.io/badge/jsonwebtokens-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white">
 
 - 서비스 배포 환경
+
   <img src="https://img.shields.io/badge/openssl-721412?style=for-the-badge&logo=openssl&logoColor=white"> ssl 이거 맞음?
 
   <img src="https://img.shields.io/badge/nginx-009639?style=for-the-badge&logo=nginx&logoColor=white">
