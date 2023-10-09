@@ -1,6 +1,6 @@
 # 당장 손민수
 
-<img width="228" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 09 54" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/c40d939b-9b61-4c43-80c6-ba652d1f0cfd">
+<img width="450" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 09 54" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/c40d939b-9b61-4c43-80c6-ba652d1f0cfd">
 
 ## 서비스 소개
 
@@ -8,7 +8,7 @@
 
 ## 배포 URL
 
-[당장 손민수](https://kdt-sw-5-2-team11.elicecoding.com/)
+[당장 손민수](https://kdt-sw-5-2-team11.elicecoding.com/) : https://kdt-sw-5-2-team11.elicecoding.com
 
 당장 손민수는 390x844 모바일 환경에 최적화되어 있습니다.
 
@@ -31,55 +31,64 @@ PW : 12341234aa
 
 ## 목차
 
-[1. 팀 소개(역할 분담)](https://www.notion.so/1-1a7113764ef34d5e953910ebd336ca69?pvs=21)
+1. 팀 소개(역할 분담)
 
-[2. 기술 및 개발 환경](https://www.notion.so/2-971d9ce35eed4218bb8f8b449c594e54?pvs=21)
+2. 기술 및 개발 환경
 
-[3. 주요 기능](https://www.notion.so/3-ed2a19e8704747168614e415fb1763ca?pvs=21)
+3. 주요 기능
 
-[4. 프로젝트 구조(폴더 구조)](https://www.notion.so/4-7b42190f4e4e4d58a2fc972e531a08de?pvs=21)
+4. 프로젝트 구조(폴더 구조)
 
-[](https://www.notion.so/1bb4547425124c35902f2869c0e82187?pvs=21)
+5. UI
 
-[6. 페이지 기능](https://www.notion.so/6-d1594c516cb24ebb92aa25fcdb568ffd?pvs=21)
+6. 페이지 기능
 
-[7. 개선사항](https://www.notion.so/7-8f214e529cf24fdca2afb61cc016c001?pvs=21)
+7. 개선사항
 
-[8. 작업 관리(협업 방법)](https://www.notion.so/8-c424009ab7c3461fb9f90f37172abebd?pvs=21)
-[9. 팀 활동](https://www.notion.so/9-182c032691f7418fab075dacba1db36e?pvs=21)
+8. 작업 관리(협업 방법)
+
+9. 팀 활동
 
 ## 1. 팀 소개(역할 분담)
 
-1. 신혜정(팀장/FE)
+#### **1. 신혜정(팀장/FE)**
    - 프로젝트 기획
    - 홈 페이지
    - 마이 팬덤 페이지
    - 새 팬덤 만들기, 팬덤 검색
    - 팬덤 상세보기 페이지
    - 타오르는 팬덤 페이지
-2. 최재혁(프론트리더/FE)
+
+#### **2. 최재혁(프론트리더/FE)**
    - 전역 상태관리
    - 커스텀 훅, 공용 컴포넌트 분리 & 제작
    - 로그인 / 회원가입
    - 손민수템 리스트 페이지
    - 설정 페이지
-3. 이주현(팀원/FE)
+
+#### **3. 이주현(팀원/FE)**
    - 피드 페이지
    - 댓글 및 좋아요
    - 손민수 아이템 검색
-4. 용지은(팀원/FE)
+
+#### **4. 용지은(팀원/FE)**
    - 채팅 리스트 페이지
    - 채팅 페이지
    - 이미지 뷰어
    - footer nav
-5. 김라온(팀원/FE)
+
+#### **5. 김라온(팀원/FE)**
    - 의뢰 페이지
    - 마이 페이지
    - 회원가입 페이지
-6. 유종훈(팀원/FE)
-   - 로그인 / 회원가입 페이지
-7. 정충래(백엔드리더/BE)
 
+#### **6. 유종훈(팀원/FE)**
+   - 로그인 / 회원가입 페이지
+
+#### **7. 정충래(백엔드리더/BE)**
+
+
+  
 ## 2. 기술 및 개발 환경
 
 ### [ 프로젝트 기간 ]
