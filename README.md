@@ -1,6 +1,6 @@
 # 당장 손민수
 
-<img width="400" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 09 54" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/c40d939b-9b61-4c43-80c6-ba652d1f0cfd">
+<img width="450" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 09 54" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/c40d939b-9b61-4c43-80c6-ba652d1f0cfd">
 
 ## 서비스 소개
 
@@ -8,7 +8,7 @@
 
 ## 배포 URL
 
-[당장 손민수](https://kdt-sw-5-2-team11.elicecoding.com/)
+[당장 손민수](https://kdt-sw-5-2-team11.elicecoding.com/) : https://kdt-sw-5-2-team11.elicecoding.com
 
 당장 손민수는 390x844 모바일 환경에 최적화되어 있습니다.
 
@@ -25,7 +25,7 @@ PW : 12341234aa
 ## 페르소나
 
 <img width="220" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 11 40" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/0348e340-d742-4d7d-8d0b-6b9c4804eafe">
-
+</br>
 - K-pop뮤비 시청이 취미인 20대 초반 여성
 - 최애 아이돌의 아이템을 찾기 위해 팬카페 가입중
 
