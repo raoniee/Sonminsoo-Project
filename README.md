@@ -100,12 +100,25 @@ PW : 12341234aa
   <img src="https://img.shields.io/badge/표시할이름-61DAFB?style=for-the-badge&logo=기술스택아이콘&logoColor=white">
 
 <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
-  - TypeScript
-  - Styled-Components
-  - Redux-toolkit
-  - Axios
-  - Progressive Web Application ( PWA )
-  - JWT
+
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white">
+
+<img src="https://img.shields.io/badge/Styled-Components-DB7093?style=for-the-badge&logo=Styled-Components&logoColor=white">
+
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+
+<img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white">
+
+<img src="https://img.shields.io/badge/PWA-5A0FC8?style=for-the-badge&logo=PWA&logoColor=white">
+
+<img src="https://img.shields.io/badge/jsonwebtokens-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white">
+
+- TypeScript
+- Styled-Components
+- Redux-toolkit
+- Axios
+- Progressive Web Application ( PWA )
+- JWT
 - 서비스 배포 환경
   - SSL
   - Nginx
