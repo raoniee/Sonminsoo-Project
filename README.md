@@ -1,6 +1,6 @@
 # 당장 손민수
 
-<img width="228" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 09 54" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/c40d939b-9b61-4c43-80c6-ba652d1f0cfd">
+<img width="400" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-10-09%20%EC%98%A4%ED%9B%84%203 09 54" src="https://github.com/jutrong/sonminsoo-project/assets/113658811/c40d939b-9b61-4c43-80c6-ba652d1f0cfd">
 
 ## 서비스 소개
 
