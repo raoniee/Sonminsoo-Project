@@ -226,10 +226,11 @@ PW : 12341234aa
 - 피드 목록
 
 ## 4. 프로젝트 구조(폴더 구조)
+<details>
+<summary> - 디렉토리 구조</summary>
+<div markdown="1">
 
-- 폴더 구조(토글해주세요!)
-
-  ```jsx
+ ```jsx
   📦src
    ┣ 📂Context
    ┣ 📂Routes
@@ -304,6 +305,10 @@ PW : 12341234aa
  ┣ 📜Sonminsoo.route.tsx
  ┗ 📜index.tsx
 ```
+
+</div>
+</details>
+ 
 
 - 컴포넌트와 스타일 컴포넌트 구분을 위해 스타일 파일을 분리하였습니다.
 
